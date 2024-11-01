@@ -1,7 +1,10 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { useHistory } from 'react-router-dom';
 
 function Start() {
+
+  const history = useHistory();
 
   const formSchema = yup.object().shape({
     email: yup.string().email('Must be a valid email').required('Email is required'),
@@ -27,7 +30,7 @@ function Start() {
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: (values) => {
-      buttonSoundPlay.play()
+      // buttonSoundPlay.play()
       fetch('/signupdb', {
         method: 'POST',
         headers: {
@@ -38,9 +41,9 @@ function Start() {
       .then(res => {
         if (res.ok) {
           res.json().then(user => {
-            setUser(user)
+            // setUser(user)
             history.push('/')
-            setValues(user)
+            // setValues(user)
           })
         } else {
           res.json().then(error => {
@@ -51,7 +54,7 @@ function Start() {
             if (error.error.includes('users_username_key')) {
               formik.setErrors({ username: 'Username is taken' });
             }                  
-            setError(error.message)
+            // setError(error.message)
           })
         };
       })
