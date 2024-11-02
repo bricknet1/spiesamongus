@@ -6,7 +6,7 @@ import Start from "./components/Start.js";
 function App() {
   return (
     <div className="App">
-      Main page is displaying.
+      {/* Main page is displaying. */}
       <Switch>
         <Route path="/start" exact>
           <Start />

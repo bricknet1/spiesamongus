@@ -7,28 +7,43 @@ function Start() {
   const history = useHistory();
 
   const formSchema = yup.object().shape({
+    firstName: yup.string().required('First name is required'),
+    lastName: yup.string().required('Last name is required'),
     email: yup.string().email('Must be a valid email').required('Email is required'),
-    username: yup.string().required('Username is required').max(10, "Username can't exceed 10 characters"),
-    password: yup.string().required('Password is required'),
+    phone: yup.string()
+      .required('Phone is required')
+      .matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
+    friendPhone: yup.string()
+      .when("numberOfAgents", {
+        is: '2',
+        then: yup.string()
+          .required('Phone is required')
+          .matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
+        otherwise: yup.string().notRequired(),
+      }),
+    agreeToTerms: yup.boolean().oneOf([true],'Agreeing to the terms and conditions is required'),
+    // password: yup.string().required('Password is required'),
       // .min(5, 'Your password is too short.')
       // .matches(/[a-zA-Z]/, 'Password can only contain letters.'),
-    passwordconfirm: yup
-      .string()
-      .required("Must confirm password.")
-      .oneOf([yup.ref('password'), null], 'Passwords must match')
+    // passwordconfirm: yup
+    //   .string()
+    //   .required("Must confirm password.")
+    //   .oneOf([yup.ref('password'), null], 'Passwords must match')
   });
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
-      phone: '',
       email: '',
-      numberOfAgents: ''
+      phone: '',
+      numberOfAgents: '1',
+      friendPhone: '',
+      agreeToTerms: false
     },
     validationSchema: formSchema,
     validateOnChange: false,
-    validateOnBlur: false,
+    validateOnBlur: true,
     onSubmit: (values) => {
       // buttonSoundPlay.play()
       fetch('/signupdb', {
@@ -61,20 +76,68 @@ function Start() {
     }
   })
 
+  // function toggleFriendPhone() {
+  //   const dropdown = document.getElementById('numberOfAgnets');
+  //   const friendPhone = document.getElementById('friendPhone');
 
+  //   if (dropdown.value === "2") {
+  //     friendPhone.style.display = 'block';
+  //   } else {
+  //     friendPhone.style.display = 'none';
+  //   }
+  // }
 
 
 
 
   return (
     <div>
-      <div>Welcome, Agent.</div>;<div>We have a mission for you.</div>;
-      <div>
-        <div>A ROGUE SPY</div> is currently roaming the area. Use your phone and
-        wits to uncover clues, reveal their plot, and deduce their whereabouts.
-        Adventure and danger will be hiding from you in plain sight!
+
+      <div className='header'>Welcome, Agent.</div>
+      <div className='subheader'>We have a mission for you.</div>
+      <div className='subsubheader'>
+        <span className='rogueSpy'>A ROGUE SPY</span> is currently roaming the area. Use your phone and wits to uncover clues, reveal their plot, and deduce their whereabouts. Adventure and danger will be hiding from you in plain sight!
       </div>
-      ;<div>MISSION SIGN-UP</div>;
+      <div className='signupHeader'>MISSION SIGN-UP</div>
+
+      <form onSubmit={formik.handleSubmit}>
+        <label for="firstName">First name</label><br></br>
+        <input type="text"  name="firstName" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
+        <h3 style={{color:'#4FC9C2'}}> {formik.errors.firstName}</h3>
+
+        <label for="lastName">Last name</label><br></br>
+        <input type="text"  name="lastName" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
+        <h3 style={{color:'#4FC9C2'}}> {formik.errors.lastName}</h3>
+
+        <label for="email">Email</label><br></br>
+        <input type="text"  name="email" value={formik.values.email} onChange={formik.handleChange} /><br></br>
+        <h3 style={{color:'#4FC9C2'}}> {formik.errors.email}</h3>
+
+        <label for="phone">Phone</label><br></br>
+        <input type="tel"  name="phone" value={formik.values.phone} onChange={formik.handleChange} /><br></br>
+        <h3 style={{color:'#4FC9C2'}}> {formik.errors.phone}</h3>
+
+        <label for="numberOfAgents">Number of agents on your mission</label><br></br>
+        <select name="numberOfAgents" id="numberOfAgents" value={formik.values.numberOfAgents} onChange={formik.handleChange} >
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select><br/>The second agent will receive all the texts and clues you receive, but you will be responsible for replying to texts.<br/><br/>
+
+        {formik.values.numberOfAgents === '2' && (
+          <div id="friendPhone">
+            <label for="friendPhone">Friend's Phone Number</label><br></br>
+            <input type="tel"  name="friendPhone" value={formik.values.friendPhone} onChange={formik.handleChange} /><br></br>
+            <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>
+          </div>
+        )}
+
+        <input type="checkbox" name="agreeToTerms" checked={formik.values.agreeToTerms} onChange={formik.handleChange}></input>I have read and agree to the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
+        <h3 style={{color:'#4FC9C2'}}> {formik.errors.agreeToTerms}</h3>
+
+        <br/><br/>
+        <input type='submit' value='Begin Mission' />
+        {/* {error&& <h3 style={{color:'#4FC9C2'}}> {error}</h3>} */}
+      </form>
     </div>
   );
 }
