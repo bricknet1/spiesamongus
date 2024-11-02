@@ -13,22 +13,16 @@ function Start() {
     phone: yup.string()
       .required('Phone is required')
       .matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
-    friendPhone: yup.string()
-      .when("numberOfAgents", {
-        is: '2',
-        then: yup.string()
-          .required('Phone is required')
-          .matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
-        otherwise: yup.string().notRequired(),
-      }),
+    numberOfAgents: yup.string().required('Number of Agents is required'),
+    friendPhone: yup.string().matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
+      // .when("numberOfAgents", {
+      //   is: '2',
+      //   then: yup.string()
+      //     .required('Phone is required')
+      //     .matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
+      //   // otherwise: yup.string().notRequired(),
+      // }),
     agreeToTerms: yup.boolean().oneOf([true],'Agreeing to the terms and conditions is required'),
-    // password: yup.string().required('Password is required'),
-      // .min(5, 'Your password is too short.')
-      // .matches(/[a-zA-Z]/, 'Password can only contain letters.'),
-    // passwordconfirm: yup
-    //   .string()
-    //   .required("Must confirm password.")
-    //   .oneOf([yup.ref('password'), null], 'Passwords must match')
   });
 
   const formik = useFormik({
@@ -45,7 +39,8 @@ function Start() {
     validateOnChange: false,
     validateOnBlur: true,
     onSubmit: (values) => {
-      // buttonSoundPlay.play()
+      console.log("Submitted values:", values);
+
       fetch('/signupdb', {
         method: 'POST',
         headers: {
@@ -75,17 +70,8 @@ function Start() {
       })
     }
   })
+  console.log("Form Values:", formik.values);
 
-  // function toggleFriendPhone() {
-  //   const dropdown = document.getElementById('numberOfAgnets');
-  //   const friendPhone = document.getElementById('friendPhone');
-
-  //   if (dropdown.value === "2") {
-  //     friendPhone.style.display = 'block';
-  //   } else {
-  //     friendPhone.style.display = 'none';
-  //   }
-  // }
 
 
 
@@ -101,23 +87,23 @@ function Start() {
       <div className='signupHeader'>MISSION SIGN-UP</div>
 
       <form onSubmit={formik.handleSubmit}>
-        <label for="firstName">First name</label><br></br>
+        <label htmlFor="firstName">First name</label><br></br>
         <input type="text"  name="firstName" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
         <h3 style={{color:'#4FC9C2'}}> {formik.errors.firstName}</h3>
 
-        <label for="lastName">Last name</label><br></br>
+        <label htmlFor="lastName">Last name</label><br></br>
         <input type="text"  name="lastName" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
         <h3 style={{color:'#4FC9C2'}}> {formik.errors.lastName}</h3>
 
-        <label for="email">Email</label><br></br>
+        <label htmlFor="email">Email</label><br></br>
         <input type="text"  name="email" value={formik.values.email} onChange={formik.handleChange} /><br></br>
         <h3 style={{color:'#4FC9C2'}}> {formik.errors.email}</h3>
 
-        <label for="phone">Phone</label><br></br>
+        <label htmlFor="phone">Phone</label><br></br>
         <input type="tel"  name="phone" value={formik.values.phone} onChange={formik.handleChange} /><br></br>
         <h3 style={{color:'#4FC9C2'}}> {formik.errors.phone}</h3>
 
-        <label for="numberOfAgents">Number of agents on your mission</label><br></br>
+        <label htmlFor="numberOfAgents">Number of agents on your mission</label><br></br>
         <select name="numberOfAgents" id="numberOfAgents" value={formik.values.numberOfAgents} onChange={formik.handleChange} >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -125,11 +111,11 @@ function Start() {
 
         {formik.values.numberOfAgents === '2' && (
           <div id="friendPhone">
-            <label for="friendPhone">Friend's Phone Number</label><br></br>
+            <label htmlFor="friendPhone">Friend's Phone Number</label><br></br>
             <input type="tel"  name="friendPhone" value={formik.values.friendPhone} onChange={formik.handleChange} /><br></br>
-            <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>
           </div>
         )}
+        <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>
 
         <input type="checkbox" name="agreeToTerms" checked={formik.values.agreeToTerms} onChange={formik.handleChange}></input>I have read and agree to the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
         <h3 style={{color:'#4FC9C2'}}> {formik.errors.agreeToTerms}</h3>
