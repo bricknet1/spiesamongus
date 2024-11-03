@@ -6,96 +6,66 @@
   font-style: normal;
 }
 
-html {
-  width: 100%;
+* {
+  outline: 1px solid red; /* Temporarily add an outline to all elements */
 }
 
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 body {
   font-family: 'DIN Neuzeit Grotesk', sans-serif;
-  font-size: 20px;
   background-color: rgb(33,23,76);
   color: white;
   margin: 0;
+  
+}
+
+.pageContent{
+
 }
 
 .header {
-  font-size: 50px;
-  width: 100%;              /* Full width of container */
-  height: 250px;            /* Set the container height */
-  display: flex;            /* Enable flexbox */
-  justify-content: center;  /* Center horizontally */
-  align-items: center;      /* Center vertically */
+  text-align: center;
+  font-size: 12vw;
 }
 
 .subheader {
-  font-size: 38px;
-  width: 100%;              /* Full width of container */
-  height: 150px;            /* Set the container height */
-  display: flex;            /* Enable flexbox */
-  justify-content: center;  /* Center horizontally */
-  align-items: top;      /* Center vertically */
+  text-align: center;
+  font-size: 8vw;
 }
 
 .subsubheader {
-  font-size: 20px;
-  height: 200px;            /* Set the container height */
-  /* display: flex;            Enable flexbox */
-  justify-content: center;  /* Center horizontally */
-  align-items: center;      /* Center vertically */
-  margin: 0 auto;
-  width: 660px;
   text-align: left;
-  align-self: center;
-  left: center;
-  /* display: block; */
+  width: 80vw;
+  margin: 0 auto;
+  font-size: 5vw;
 }
 
 .rogueSpy {
-  font-size: 30px;
+  font-size: 7vw;
 }
 
 .signupHeader {
-  width: 100%;              /* Full width of container */
-  height: 200px;            /* Set the container height */
-  display: flex;            /* Enable flexbox */
-  justify-content: center;  /* Center horizontally */
-  align-items: center;      /* Center vertically */
-  font-size: 60px;
-  /* margin-top: 70px;
-  margin-bottom: 70px; */
   background-color: #ff3700;
-}
-
-.center-container {
+  font-size: 10vw;
+  height: 20vw;
   display: flex;
   flex-direction: column; 
-  align-items: center; 
-  padding-top: 40px;
+  justify-content: center; 
+  align-items: center;
 }
 
 form {
-  width: 474px;
+  width: 80vw;
   padding-bottom: 100px;
+  padding-top: 20px;
+  margin: 0 auto;
 }
 
 label {
   color: #f9df39;
-}
-
-input, select {
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
-  font-size: 20px;
-  border-radius: 50px;
-  border: none;
-  outline: none;
-  padding-left: 20px;
-  box-sizing: border-box;
-  height: 42px;
-  margin-top: 3px;
 }
 
 input:focus, select:focus {
@@ -103,25 +73,18 @@ input:focus, select:focus {
   outline: none;
 }
 
-.nameFieldsGroup {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.input-wrapper {
-  flex-direction: column; 
-  width: 100%; 
-}
-
-.formNameField {
-  height: 42px;
-  width: 100%;
-}
-
 .formField {
-  width: 100%;
+  width: 80vw;
+  height: 13vw;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 7vw;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  box-sizing: border-box;
+  margin-top: 3px;
 }
 
 input[type="checkbox"] {
@@ -130,8 +93,8 @@ input[type="checkbox"] {
 
 .secondAgentText {
   color: #f9df39;
-  justify-content: left;
-  font-size: 24px;
+  text-align: left;
+  font-size: 6.5vw;
   font-style: italic;
 }
 
@@ -170,5 +133,13 @@ input[type="checkbox"]:checked + .checkbox:before {
 .submitButton {
   color: white;
   background-color: #ff3700;
-  width: 236px;
+  width: 60vw;
+  height: 13vw;
+  margin: 0 auto;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 5vw;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  display: block;
 }

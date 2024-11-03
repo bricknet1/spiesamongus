@@ -74,7 +74,7 @@ function Start() {
 
 
   return (
-    <div>
+    <div className='pageContent'>
 
       <div className='header'>Welcome, Agent.</div>
       <div className='subheader'>We have a mission for you.</div>
@@ -83,25 +83,25 @@ function Start() {
       </div>
       <div className='signupHeader'>MISSION SIGN-UP</div>
 
-      <div className="center-container">
+
 
         <form onSubmit={formik.handleSubmit}>
 
-          <div className="nameFieldsGroup">
 
-            <div className="input-wrapper">
+
+
               <label htmlFor="firstName">First name</label><br></br>
-              <input type="text"  name="firstName" className="formNameField" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
+              <input type="text"  name="firstName" className="formField" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
               <h3 style={{color:'#4FC9C2'}}> {formik.errors.firstName}</h3>
-            </div>
 
-            <div className="input-wrapper">
+
+
               <label htmlFor="lastName">Last name</label><br></br>
-              <input type="text"  name="lastName" className="formNameField" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
+              <input type="text"  name="lastName" className="formField" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
               <h3 style={{color:'#4FC9C2'}}> {formik.errors.lastName}</h3>
-            </div>
 
-          </div>
+
+
 
           <label htmlFor="email">Email</label><br></br>
           <input type="text"  name="email" className="formField" value={formik.values.email} onChange={formik.handleChange} /><br></br>
@@ -145,7 +145,7 @@ function Start() {
 
         </form>
 
-      </div>
+      
 
     </div>
   );
