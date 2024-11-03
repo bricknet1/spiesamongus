@@ -69,7 +69,7 @@ body {
   font-size: 7vw;
 }
 
-form {
+.startPageForm {
   width: 80vw;
   padding-bottom: 100px;
   padding-top: 20px;
@@ -193,6 +193,13 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-top: 15vw;
   margin-bottom: 10vw;
   line-height: 7vw;
+}
+
+.opbcPageForm {
+  width: 80vw;
+  padding-bottom: 30px;
+  padding-top: 20px;
+  margin: 0 auto;
 }
 
 .passwordFormField {

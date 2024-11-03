@@ -87,7 +87,7 @@ function Start() {
 
 
 
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="startPageForm">
 
 
 

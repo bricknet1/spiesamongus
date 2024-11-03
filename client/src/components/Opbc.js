@@ -26,7 +26,7 @@ function Opbc() {
 
 
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="opbcPageForm">
 
         <input
           type="text" 
