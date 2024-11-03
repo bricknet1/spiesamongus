@@ -60,10 +60,7 @@ function Start() {
             console.log(error.error);
             if (error.error.includes('users_email_key') || error.error.includes('UNIQUE constraint failed: users.email')) {
               formik.setErrors({ email: 'An account with this email already exists' });
-            }
-            if (error.error.includes('users_username_key')) {
-              formik.setErrors({ username: 'Username is taken' });
-            }                  
+            }                
             // setError(error.message)
           })
         };
@@ -86,44 +83,70 @@ function Start() {
       </div>
       <div className='signupHeader'>MISSION SIGN-UP</div>
 
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="firstName">First name</label><br></br>
-        <input type="text"  name="firstName" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
-        <h3 style={{color:'#4FC9C2'}}> {formik.errors.firstName}</h3>
+      <div className="center-container">
 
-        <label htmlFor="lastName">Last name</label><br></br>
-        <input type="text"  name="lastName" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
-        <h3 style={{color:'#4FC9C2'}}> {formik.errors.lastName}</h3>
+        <form onSubmit={formik.handleSubmit}>
 
-        <label htmlFor="email">Email</label><br></br>
-        <input type="text"  name="email" value={formik.values.email} onChange={formik.handleChange} /><br></br>
-        <h3 style={{color:'#4FC9C2'}}> {formik.errors.email}</h3>
+          <div className="nameFieldsGroup">
 
-        <label htmlFor="phone">Phone</label><br></br>
-        <input type="tel"  name="phone" value={formik.values.phone} onChange={formik.handleChange} /><br></br>
-        <h3 style={{color:'#4FC9C2'}}> {formik.errors.phone}</h3>
+            <div className="input-wrapper">
+              <label htmlFor="firstName">First name</label><br></br>
+              <input type="text"  name="firstName" className="formNameField" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
+              <h3 style={{color:'#4FC9C2'}}> {formik.errors.firstName}</h3>
+            </div>
 
-        <label htmlFor="numberOfAgents">Number of agents on your mission</label><br></br>
-        <select name="numberOfAgents" id="numberOfAgents" value={formik.values.numberOfAgents} onChange={formik.handleChange} >
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select><br/>The second agent will receive all the texts and clues you receive, but you will be responsible for replying to texts.<br/><br/>
+            <div className="input-wrapper">
+              <label htmlFor="lastName">Last name</label><br></br>
+              <input type="text"  name="lastName" className="formNameField" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
+              <h3 style={{color:'#4FC9C2'}}> {formik.errors.lastName}</h3>
+            </div>
 
-        {formik.values.numberOfAgents === '2' && (
-          <div id="friendPhone">
-            <label htmlFor="friendPhone">Friend's Phone Number</label><br></br>
-            <input type="tel"  name="friendPhone" value={formik.values.friendPhone} onChange={formik.handleChange} /><br></br>
           </div>
-        )}
-        <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>
 
-        <input type="checkbox" name="agreeToTerms" checked={formik.values.agreeToTerms} onChange={formik.handleChange}></input>I have read and agree to the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
-        <h3 style={{color:'#4FC9C2'}}> {formik.errors.agreeToTerms}</h3>
+          <label htmlFor="email">Email</label><br></br>
+          <input type="text"  name="email" className="formField" value={formik.values.email} onChange={formik.handleChange} /><br></br>
+          <h3 style={{color:'#4FC9C2'}}> {formik.errors.email}</h3>
 
-        <br/><br/>
-        <input type='submit' value='Begin Mission' />
-        {/* {error&& <h3 style={{color:'#4FC9C2'}}> {error}</h3>} */}
-      </form>
+          <label htmlFor="phone">Phone</label><br></br>
+          <input type="tel"  name="phone" className="formField" value={formik.values.phone} onChange={formik.handleChange} /><br></br>
+          <h3 style={{color:'#4FC9C2'}}> {formik.errors.phone}</h3>
+
+          <label htmlFor="numberOfAgents">Number of agents on your mission</label><br></br>
+          <select name="numberOfAgents" id="numberOfAgents" className="formField" value={formik.values.numberOfAgents} onChange={formik.handleChange} >
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select><br/><br/>
+          
+          <span className="secondAgentText">The second agent will receive all the texts and clues you receive, but you will be responsible for replying to texts.</span><br/><br/>
+
+          {formik.values.numberOfAgents === '2' && (
+            <div id="friendPhone">
+              <label htmlFor="friendPhone">Friend's Phone Number</label><br></br>
+              <input type="tel"  name="friendPhone" className="formField" value={formik.values.friendPhone} onChange={formik.handleChange} /><br></br>
+            </div>
+          )}
+          <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>
+
+          <label>
+            <input 
+              type="checkbox"
+              name="agreeToTerms"
+              checked={formik.values.agreeToTerms}
+              onChange={formik.handleChange} 
+            />
+            <span className="checkbox"></span>
+            I have read and agree to the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
+            <h3 style={{color:'#4FC9C2'}}> {formik.errors.agreeToTerms}</h3>
+          </label>
+
+          <br/><br/>
+          <input type='submit' value='Begin Mission' className="submitButton"/>
+          {/* {error&& <h3 style={{color:'#4FC9C2'}}> {error}</h3>} */}
+
+        </form>
+
+      </div>
+
     </div>
   );
 }

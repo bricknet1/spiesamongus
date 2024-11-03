@@ -9,5 +9,5 @@ Clone repo
 Navigate to client directory
 
 Run these commands:
-npm install
-npm run
+* npm install
+* npm run
