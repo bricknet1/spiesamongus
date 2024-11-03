@@ -76,12 +76,14 @@ function Start() {
   return (
     <div className='pageContent'>
 
-      <div className='header'>Welcome, Agent.</div>
-      <div className='subheader'>We have a mission for you.</div>
-      <div className='subsubheader'>
+      <title>Start Mission | Spies Among Us</title>
+
+      <div className='start-header'>Welcome, Agent.</div>
+      <div className='start-subheader'>We have a mission for you.</div>
+      <div className='start-subsubheader'>
         <span className='rogueSpy'>A ROGUE SPY</span> is currently roaming the area. Use your phone and wits to uncover clues, reveal their plot, and deduce their whereabouts. Adventure and danger will be hiding from you in plain sight!
       </div>
-      <div className='signupHeader'>MISSION SIGN-UP</div>
+      <div className='orangeBar'>MISSION SIGN-UP</div>
 
 
 
@@ -90,28 +92,28 @@ function Start() {
 
 
 
-              <label htmlFor="firstName">First name</label><br></br>
-              <input type="text"  name="firstName" className="formField" value={formik.values.firstName} onChange={formik.handleChange} /><br></br>
+              <label htmlFor="firstName">First name</label><br/>
+              <input type="text"  name="firstName" className="formField" value={formik.values.firstName} onChange={formik.handleChange} /><br/>
               <h3 style={{color:'#4FC9C2'}}> {formik.errors.firstName}</h3>
 
 
 
-              <label htmlFor="lastName">Last name</label><br></br>
-              <input type="text"  name="lastName" className="formField" value={formik.values.lastName} onChange={formik.handleChange} /><br></br>
+              <label htmlFor="lastName">Last name</label><br/>
+              <input type="text"  name="lastName" className="formField" value={formik.values.lastName} onChange={formik.handleChange} /><br/>
               <h3 style={{color:'#4FC9C2'}}> {formik.errors.lastName}</h3>
 
 
 
 
-          <label htmlFor="email">Email</label><br></br>
-          <input type="text"  name="email" className="formField" value={formik.values.email} onChange={formik.handleChange} /><br></br>
+          <label htmlFor="email">Email</label><br/>
+          <input type="text"  name="email" className="formField" value={formik.values.email} onChange={formik.handleChange} /><br/>
           <h3 style={{color:'#4FC9C2'}}> {formik.errors.email}</h3>
 
-          <label htmlFor="phone">Phone</label><br></br>
-          <input type="tel"  name="phone" className="formField" value={formik.values.phone} onChange={formik.handleChange} /><br></br>
+          <label htmlFor="phone">Phone</label><br/>
+          <input type="tel"  name="phone" className="formField" value={formik.values.phone} onChange={formik.handleChange} /><br/>
           <h3 style={{color:'#4FC9C2'}}> {formik.errors.phone}</h3>
 
-          <label htmlFor="numberOfAgents">Number of agents on your mission</label><br></br>
+          <label htmlFor="numberOfAgents">Number of agents on your mission</label><br/>
           <select name="numberOfAgents" id="numberOfAgents" className="formField" value={formik.values.numberOfAgents} onChange={formik.handleChange} >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -121,8 +123,8 @@ function Start() {
 
           {formik.values.numberOfAgents === '2' && (
             <div id="friendPhone">
-              <label htmlFor="friendPhone">Friend's Phone Number</label><br></br>
-              <input type="tel"  name="friendPhone" className="formField" value={formik.values.friendPhone} onChange={formik.handleChange} /><br></br>
+              <label htmlFor="friendPhone">Friend's Phone Number</label><br/>
+              <input type="tel"  name="friendPhone" className="formField" value={formik.values.friendPhone} onChange={formik.handleChange} /><br/>
             </div>
           )}
           <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>

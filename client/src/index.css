@@ -1,3 +1,5 @@
+/* UNIVERSAL PAGE CONTENT */
+
 @font-face {
   font-family: 'DIN Neuzeit Grotesk';
   src: url('./assets/fonts/DINNeuzeitGroteskLT-BoldCond.ttf') format('truetype'),
@@ -11,9 +13,9 @@
   outline: 1px solid red; 
 } */
 
-.App {
-  /* text-align: center; */
-}
+/* .App { 
+  text-align: center;
+} */
 
 body {
   font-family: 'DIN Neuzeit Grotesk', sans-serif;
@@ -23,24 +25,38 @@ body {
   
 }
 
-.pageContent{
-
+.orangeBar {
+  background-color: #ff3700;
+  font-size: 10vw;
+  height: 20vw;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
 }
 
-.header {
+
+
+
+
+
+
+/* START PAGE CONTENT */
+
+.start-header {
   text-align: center;
   font-size: 12vw;
   margin-top: 20vw;
   margin-bottom: 20vw;
 }
 
-.subheader {
+.start-subheader {
   text-align: center;
   font-size: 8vw;
   margin-bottom: 20vw;
 }
 
-.subsubheader {
+.start-subsubheader {
   text-align: left;
   width: 80vw;
   margin: 0 auto;
@@ -51,16 +67,6 @@ body {
 
 .rogueSpy {
   font-size: 7vw;
-}
-
-.signupHeader {
-  background-color: #ff3700;
-  font-size: 10vw;
-  height: 20vw;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;
 }
 
 form {
@@ -92,7 +98,7 @@ input:focus, select:focus {
   padding-left: 5vw;
   padding-right: 5vw;
   box-sizing: border-box;
-  margin-top: 3px;
+  margin-top: 1vw;
 }
 
 input[type="checkbox"] {
@@ -150,7 +156,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   color: #f9df39;
 }
 
-
 .submitButton {
   color: white;
   background-color: #ff3700;
@@ -163,4 +168,56 @@ input[type="checkbox"]:checked + .checkbox:before {
   border: none;
   outline: none;
   display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* OPBC PAGE CONTENT */
+
+.opbc-subheader {
+  text-align: left;
+  width: 90vw;
+  margin: 0 auto;
+  font-size: 6vw;
+  margin-top: 15vw;
+  margin-bottom: 10vw;
+  line-height: 7vw;
+}
+
+.passwordFormField {
+  width: 53vw;
+  height: 13vw;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 7vw;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  box-sizing: border-box;
+  margin-top: 1vw;
+  margin-right: 2vw;
+}
+
+.passwordButton {
+  color: white;
+  background-color: #ff3700;
+  width: 25vw;
+  height: 13vw;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 7vw;
+  border-radius: 50px;
+  border: none;
+  outline: none;
 }

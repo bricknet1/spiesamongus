@@ -1,8 +1,10 @@
 function Myprofile() {
 
   return (
-    <div>
-      MY PROFILE
+    <div className='pageContent'>
+
+      <title>My Profile (Agent Papyrus)</title>
+
     </div>
   );
 }
