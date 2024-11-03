@@ -18,6 +18,9 @@ function App() {
         <Route path="/Myprofile" exact>
           <Myprofile />
         </Route>
+        <Route path="/" exact>
+          <div>MAIN LANDING PAGE</div>
+        </Route>
       </Switch>
     </div>
   );
