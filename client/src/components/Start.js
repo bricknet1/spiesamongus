@@ -135,7 +135,7 @@ function Start() {
               onChange={formik.handleChange} 
             />
             <span className="checkbox"></span>
-            I have read and agree to the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.
+            <span className="checkboxLabel">I have read and agree to <br/>the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.</span>
             <h3 style={{color:'#4FC9C2'}}> {formik.errors.agreeToTerms}</h3>
           </label>
 

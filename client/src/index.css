@@ -29,11 +29,14 @@ body {
 .header {
   text-align: center;
   font-size: 12vw;
+  margin-top: 20vw;
+  margin-bottom: 20vw;
 }
 
 .subheader {
   text-align: center;
   font-size: 8vw;
+  margin-bottom: 20vw;
 }
 
 .subsubheader {
@@ -41,6 +44,8 @@ body {
   width: 80vw;
   margin: 0 auto;
   font-size: 5vw;
+  margin-bottom: 20vw;
+  line-height: 7vw;
 }
 
 .rogueSpy {
@@ -66,6 +71,8 @@ form {
 
 label {
   color: #f9df39;
+  font-size: 5vw;
+  padding: 6vw;
 }
 
 input:focus, select:focus {
@@ -129,6 +136,19 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 18px;
   color: black;
 }
+
+.checkboxLabel {
+  font-size: 5vw;
+}
+
+.checkboxLabel a:visited {
+    color: white;
+}
+
+.checkboxLabel a {
+  color: #f9df39;
+}
+
 
 .submitButton {
   color: white;
