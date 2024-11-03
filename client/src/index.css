@@ -6,9 +6,10 @@
   font-style: normal;
 }
 
-* {
-  outline: 1px solid red; /* Temporarily add an outline to all elements */
-}
+/* Temporarily add an outline to all elements */
+/* * {
+  outline: 1px solid red; 
+} */
 
 .App {
   /* text-align: center; */
@@ -108,13 +109,13 @@ input[type="checkbox"] {
 .checkbox {
   display: inline-block;
   background-color: white;
-  width: 20px; 
-  height: 20px; 
+  width: 8vw; 
+  height: 8vw; 
   border-radius: 50px; 
   position: relative;
-  top: 2px;
+  top: 2vw;
   cursor: pointer; 
-  margin-right: 10px;
+  margin-right: 3vw;
 }
 
 .checkbox:after {
@@ -131,9 +132,9 @@ input[type="checkbox"]:checked + .checkbox:after {
 input[type="checkbox"]:checked + .checkbox:before {
   content: '✔';
   position: absolute;
-  top: -2px;
-  left: 3px;
-  font-size: 18px;
+  top: -.75vw;
+  left: 1.1vw;
+  font-size: 7vw;
   color: black;
 }
 
@@ -157,7 +158,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   height: 13vw;
   margin: 0 auto;
   font-family: 'DIN Neuzeit Grotesk', sans-serif;
-  font-size: 5vw;
+  font-size: 7vw;
   border-radius: 50px;
   border: none;
   outline: none;

@@ -128,6 +128,7 @@ function Start() {
           <h3 style={{color:'#4FC9C2'}}> {formik.errors.friendPhone}</h3>
 
           <label>
+          <div style={{ display: 'flex', alignItems: 'flex-start' }}>
             <input 
               type="checkbox"
               name="agreeToTerms"
@@ -136,6 +137,7 @@ function Start() {
             />
             <span className="checkbox"></span>
             <span className="checkboxLabel">I have read and agree to <br/>the <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a>.</span>
+            </div>
             <h3 style={{color:'#4FC9C2'}}> {formik.errors.agreeToTerms}</h3>
           </label>
 
