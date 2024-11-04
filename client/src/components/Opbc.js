@@ -44,7 +44,7 @@ function Opbc() {
 
       {submittedPassword==="test" && <div className='orangeBar'>test successful</div>}
       {submittedPassword==="test2" && <div className='orangeBar'>test 2 successful</div>}
-      {submittedPassword==="test3" && <div className='orangeBar'>test 3 successful</div>}
+      {submittedPassword==="egregious" && <div className='orangeBar'>egregious</div>}
 
 
     </div>
