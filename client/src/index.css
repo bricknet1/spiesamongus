@@ -228,3 +228,40 @@ input[type="checkbox"]:checked + .checkbox:before {
   border: none;
   outline: none;
 }
+
+.wrongPassword {
+  font-size: 10vw;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.papyrusheadshake3 {
+  width: 60vw;
+}
+
+.rightPassword {
+  font-size: 7vw;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.opbcimage {
+  margin: 0 auto;
+  width: 85vw;
+  border: 5px solid #f9df39; 
+}
+
+.killOrder {
+  font-size: 10vw;
+}
+
+.describeCall {
+  margin: 0 auto;
+  width: 90vw;
+  font-style: italic;
+}
+
+.video {
+  border: 5px solid #ff3700;
+  width: 69vw;
+}
