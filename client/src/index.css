@@ -272,3 +272,37 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 100%;
   height: 53.5vw;
 }
+
+.orangeLine {
+  margin: 0 auto;
+  border: 5px solid #ff3700;
+  height: 0vw;
+  width: 25vw;
+  border-radius: 50px;
+}
+
+.transcript {
+  margin: 0 auto;
+  width: 95vw;
+}
+
+.leslieDialog {
+  color: #f9df39;
+  height: 20vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.dialog {
+  text-align: left;
+  font-size: 6vw;
+}
+
+.papyrusDialog {
+  color: #ff3700;
+  height: 20vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
