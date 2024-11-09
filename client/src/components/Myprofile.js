@@ -23,6 +23,8 @@ function Myprofile() {
   const [searchTerm, setSearchTerm] = useState('');
   const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
 
+  const acceptableSearchTerms = ['LESLIE', 'DYLAN', 'MARBLE', 'MDS', 'MARBLE DANGER SIGNAL', 'OBELISK', 'PAPYRUS', 'REAMER', 'OPERATION BC', 'OPERATION BUBONIC CURTSY', 'ROOKIE', 'SHALE', '']
+
   function handleSubmit(e) {
     e.preventDefault();
     const valueCaps = searchTerm.toUpperCase()
@@ -91,20 +93,22 @@ function Myprofile() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
 
-            <button type="submit" className="passwordButton">Enter</button>
+            <button type="submit" className="passwordButton">Search</button>
 
           </form>
 
           {submittedSearchTerm === "" && <div></div>}
           {submittedSearchTerm === "DYLAN" && <SearchDylan />}
-          {submittedSearchTerm === "MDS" || submittedSearchTerm === "MARBLE DANGER SIGNAL" && <SearchMDS />}
+          {submittedSearchTerm === "LESLIE" && <SearchLeslie />}
+          {(submittedSearchTerm === "MDS" || submittedSearchTerm === "MARBLE DANGER SIGNAL") && <SearchMDS />}
           {submittedSearchTerm === "MARBLE" && <SearchMarble />}
           {submittedSearchTerm === "OBELISK" && <SearchObelisk />}
           {submittedSearchTerm === "PAPYRUS" && <SearchPapyrus />}
           {submittedSearchTerm === "REAMER" && <SearchReamer />}
-          {submittedSearchTerm === "OPERATION BC" || submittedSearchTerm === "OPERATION BUBONIC CURTSY" && <SearchOPBC />}
+          {(submittedSearchTerm === "OPERATION BC" || submittedSearchTerm === "OPERATION BUBONIC CURTSY") && <SearchOPBC />}
           {submittedSearchTerm === "ROOKIE" && <SearchRookie />}
           {submittedSearchTerm === "SHALE" && <SearchShale />}
+          {!acceptableSearchTerms.includes(submittedSearchTerm) && <div><div class="orangeLine"/><div className='myprofile-header'>No Files Found for '{submittedSearchTerm}'</div><div class="orangeLine"/></div>}
           
 
       </div>

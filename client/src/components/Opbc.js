@@ -100,7 +100,7 @@ function Opbc() {
                 <div className="papyrusDialog">PAPYRUS:</div>
                 <div className="dialog">*Sighs* Did either of them file a best friends form for me?</div>
                 <div className="leslieDialog">LESLIE:</div>
-                <div className="dialog">Merble did. Shale filed... a different form.</div>
+                <div className="dialog">Marble did. Shale filed... a different form.</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
                 <div className="dialog">Remove them both. Submit the kill order. They both refused a mission.</div>
                 <div className="leslieDialog">LESLIE:</div>

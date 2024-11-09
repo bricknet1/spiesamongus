@@ -458,3 +458,50 @@ input[type="checkbox"]:checked + .checkbox:before {
   height: 60vw; /* Make larger than wrapper to focus on a section */
   transform: translateY(0vw) translateX(0vw); /* Adjust to position the focus area */
 }
+
+.polaroid {
+  width: 70vw;
+  transform: rotate(15deg);
+  display: block;
+  margin: 0 auto;
+  margin-top: 10vw;
+  margin-bottom: 10vw;
+}
+
+.searchHeading {
+  font-size: 10vw;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10vw;
+}
+
+.searchBody {
+  font-size: 6vw;
+  margin: 0 auto;
+  text-align: left;
+  width: 90vw;
+  margin-bottom: 10vw;
+}
+
+.otherSearchImage {
+  width: 85vw;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10vw;
+  margin-bottom: 10vw;
+  border: #f9df39 1.5vw solid; 
+}
+
+.transcriptButton {
+  font-size: 7vw;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.shaleDialog {
+  color: rgb(2, 91, 13);
+  height: 20vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
