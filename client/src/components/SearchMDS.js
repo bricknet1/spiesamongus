@@ -1,44 +1,24 @@
-import dylanPic from '../assets/pictures/Dylan Polaroid.png';
+import marbleSignalPic from '../assets/pictures/MDS 11.20.23.jpg';
 
 
 function SearchMDS() {
 
   return (
     <div>
-      <div className='greenBar'>AGENT DYLAN FILES</div>
-
-      <div className='searchHeading'>Agent Dylan Profile Photo</div>
-
-      <img src={dylanPic} className="polaroid" alt="Agent Dylan" />
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>CURRENT ROLE</div>
+      <div className='greenBar'>MDS FILES</div>
 
       <div className='searchBody'>
-        Employed at Agency Nov 2017 - Ongoing
         <br/>
-        First Assistant to Agent Papyrus
+        Invented by former  agent / current traitor Marble, the <u>Marble Danger Signal</u> is a method for agents to secretly indicate they are in danger.
         <br/>
         <br/>
-        Also acts as the ****** for use in *******, ****** *******.
+        To properly use it, agents should display only two fingers, whether by holding something or gesturing.
+        <br/>
       </div>
 
-      <div class="orangeLine"/>
+      <div className='searchHeading'>Examples of the MDS in use:</div>
 
-      <div className='searchHeading'>EDUCATION</div>
-
-      <div className='searchBody'>
-        Majored in Attacking with a thesis on subtlety and pain. Minored in torture.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>WORK EXPERIENCE</div>
-
-      <div className='searchBody'>
-        Excelled in combatant tracking and hunting during the ***** campaign of the war in ***********.
-      </div>
+      <img src={marbleSignalPic} className="otherSearchImage" alt="Three agents using a 2-finger signal" />
 
     </div>
   )

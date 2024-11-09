@@ -1,43 +1,14 @@
-import dylanPic from '../assets/pictures/Dylan Polaroid.png';
-
-
 function SearchOPBC() {
 
   return (
     <div>
-      <div className='greenBar'>AGENT DYLAN FILES</div>
-
-      <div className='searchHeading'>Agent Dylan Profile Photo</div>
-
-      <img src={dylanPic} className="polaroid" alt="Agent Dylan" />
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>CURRENT ROLE</div>
+      <div className='greenBar'>BUBONIC CURTSY FILES</div>
 
       <div className='searchBody'>
-        Employed at Agency Nov 2017 - Ongoing
         <br/>
-        First Assistant to Agent Papyrus
-        <br/>
-        <br/>
-        Also acts as the ****** for use in *******, ****** *******.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>EDUCATION</div>
-
-      <div className='searchBody'>
-        Majored in Attacking with a thesis on subtlety and pain. Minored in torture.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>WORK EXPERIENCE</div>
-
-      <div className='searchBody'>
-        Excelled in combatant tracking and hunting during the ***** campaign of the war in ***********.
+        Operation Bubonic Curtsy mission files have been deemed CLASSIFED on the grounds that they make Agent Papyrus look... not great.
+        <br/><br/>
+        They can be found <a style={{color:'#f9df39'}} href='./opbc' target='_blank'>here</a>. (password required). Only Agent Papyrus has this password, which he keeps in his office.
       </div>
 
     </div>

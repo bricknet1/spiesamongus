@@ -1,43 +1,16 @@
-import dylanPic from '../assets/pictures/Dylan Polaroid.png';
+
 
 
 function SearchObelisk() {
 
   return (
     <div>
-      <div className='greenBar'>AGENT DYLAN FILES</div>
-
-      <div className='searchHeading'>Agent Dylan Profile Photo</div>
-
-      <img src={dylanPic} className="polaroid" alt="Agent Dylan" />
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>CURRENT ROLE</div>
+      <div className='greenBar'>OBELISK FILES</div>
 
       <div className='searchBody'>
-        Employed at Agency Nov 2017 - Ongoing
         <br/>
-        First Assistant to Agent Papyrus
-        <br/>
-        <br/>
-        Also acts as the ****** for use in *******, ****** *******.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>EDUCATION</div>
-
-      <div className='searchBody'>
-        Majored in Attacking with a thesis on subtlety and pain. Minored in torture.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>WORK EXPERIENCE</div>
-
-      <div className='searchBody'>
-        Excelled in combatant tracking and hunting during the ***** campaign of the war in ***********.
+        Agent Papyrus claims he found this sentient statue in the great white desert of the Sahara. Official Agency records indicate it was invented in the 90s using stolen software from several competing search companies.
+        <br /><br />It is Agency policy to follow the Obelisk's <a style={{color:'#f9df39'}} target='_blank' href='./obeliskterms'>terms and conditions.</a><br />
       </div>
 
     </div>
