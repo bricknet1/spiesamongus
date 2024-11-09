@@ -36,6 +36,70 @@ body {
 }
 
 
+.pageContent {
+  padding-bottom: 20vw;
+}
+
+
+
+
+
+
+
+
+/* LESLIE FOOTER */
+
+.leslieFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(33,23,76);
+  color: #fff;
+  padding: 1rem 0;
+  height: 20vw;
+}
+
+.leslieFooterContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.leslieFooterPicWrapper {
+  width: 30vw;
+  height: 17vw;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1vw;
+  margin-left: 1vw;
+  border: #f9df39 1vw solid; 
+  ;
+}
+
+.leslieFooterPic {
+  width: auto;
+  height: 30vw; /* Make larger than wrapper to focus on a section */
+  transform: translateY(4vw) translateX(3.5vw); /* Adjust to position the focus area */
+}
+
+.leslieFooterText {
+  font-size: 6vw;
+}
+
+.textLeslieLink {
+  color: #f9df39;
+  font-size: 7vw;
+}
+
+
+
+
+
+
 
 
 
@@ -284,6 +348,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 .transcript {
   margin: 0 auto;
   width: 95vw;
+  margin-bottom: 20vw;
 }
 
 .leslieDialog {
