@@ -1,5 +1,18 @@
 import LeslieFooter from "./LeslieFooter.js";
+import SearchDylan from "./SearchDylan.js";
+import SearchLeslie from "./SearchLeslie.js";
+import SearchMarble from "./SearchMarble.js";
+import SearchMDS from "./SearchMDS.js";
+import SearchObelisk from "./SearchObelisk.js";
+import SearchOPBC from "./SearchOPBC.js";
+import SearchPapyrus from "./SearchPapyrus.js";
+import SearchReamer from "./SearchReamer.js";
+import SearchRookie from "./SearchRookie.js";
+import SearchShale from "./SearchShale.js";
+
 import papyrusPic from '../assets/pictures/Papyrus Portrait with medal 12.5.23.jpg';
+import filesPic from '../assets/pictures/Files.jpg';
+
 import { useState } from 'react';
 
 
@@ -7,6 +20,15 @@ function Myprofile() {
 
   const [missionToggled, setMissionToggled] = useState(false);
   const [lunchToggled, setLunchToggled] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const valueCaps = searchTerm.toUpperCase()
+    console.log("Submitted value:", valueCaps);
+    setSubmittedSearchTerm(valueCaps)
+  }
 
   return (
     <div>
@@ -52,6 +74,38 @@ function Myprofile() {
         <div className='missionHistoryText'>Agent Papyrus, click <a style={{color:'#f9df39'}} href='./myhistory'>here</a> to review your past missions. Most of this information won't help you with today's mission, but we understand you like to reminisce.</div>
 
         <div className='greenBar'>HR DATABASE</div>
+
+        <div className="filesPicWrapper">
+          <img src={filesPic} className="filesPic" alt="Files" />
+        </div>
+
+        <div className='missionHistoryText'>For company records, enter the subject matter here and we will pull up the relevant files:</div>
+
+        <form onSubmit={handleSubmit} className="opbcPageForm">
+
+            <input
+              type="text" 
+              name="searchTerm"
+              className="passwordFormField"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+
+            <button type="submit" className="passwordButton">Enter</button>
+
+          </form>
+
+          {submittedSearchTerm === "" && <div></div>}
+          {submittedSearchTerm === "DYLAN" && <SearchDylan />}
+          {submittedSearchTerm === "MDS" || submittedSearchTerm === "MARBLE DANGER SIGNAL" && <SearchMDS />}
+          {submittedSearchTerm === "MARBLE" && <SearchMarble />}
+          {submittedSearchTerm === "OBELISK" && <SearchObelisk />}
+          {submittedSearchTerm === "PAPYRUS" && <SearchPapyrus />}
+          {submittedSearchTerm === "REAMER" && <SearchReamer />}
+          {submittedSearchTerm === "OPERATION BC" || submittedSearchTerm === "OPERATION BUBONIC CURTSY" && <SearchOPBC />}
+          {submittedSearchTerm === "ROOKIE" && <SearchRookie />}
+          {submittedSearchTerm === "SHALE" && <SearchShale />}
+          
 
       </div>
 

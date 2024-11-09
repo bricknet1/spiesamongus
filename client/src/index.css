@@ -435,7 +435,26 @@ input[type="checkbox"]:checked + .checkbox:before {
 .missionHistoryText {
   margin: 0 auto;
   width: 90vw;
-  font-size: 6vw;
+  font-size: 6.5vw;
   margin-bottom: 6vw;
   margin-top: 6vw;
+}
+
+.filesPicWrapper {
+  width: 80vw;
+  height: 50vw;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #f9df39 2.5vw solid; 
+  margin: 0 auto;
+  margin-top: 5vw;
+}
+
+.filesPic {
+  width: auto;
+  height: 60vw; /* Make larger than wrapper to focus on a section */
+  transform: translateY(0vw) translateX(0vw); /* Adjust to position the focus area */
 }
