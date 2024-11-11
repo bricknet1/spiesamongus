@@ -1,43 +1,26 @@
-import dylanPic from '../assets/pictures/Dylan Polaroid.png';
-
+import shalePic from '../assets/pictures/Shale Polaroid full size.png';
+import shaleAchievementPic from '../assets/pictures/Notable Achievement Shale 11.21.23.jpg';
 
 function SearchShale() {
 
   return (
     <div>
-      <div className='greenBar'>AGENT DYLAN FILES</div>
+      <div className='greenBar'>AGENT SHALE FILES</div>
 
-      <div className='searchHeading'>Agent Dylan Profile Photo</div>
+      <div className='searchHeading'>Agent Shale Profile Photo</div>
 
-      <img src={dylanPic} className="polaroid" alt="Agent Dylan" />
+      <img src={shalePic} className="polaroid" alt="Agent Shale" />
 
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>CURRENT ROLE</div>
-
-      <div className='searchBody'>
-        Employed at Agency Nov 2017 - Ongoing
-        <br/>
-        First Assistant to Agent Papyrus
-        <br/>
-        <br/>
-        Also acts as the ****** for use in *******, ****** *******.
-      </div>
+      <div style={{textAlign: 'center', fontSize: '6vw'}}>Actual name: <i>Claudia Ripper</i>.<br/><br/></div>
 
       <div class="orangeLine"/>
 
-      <div className='searchHeading'>EDUCATION</div>
+      <div className='searchHeading'>Agent Shale Notable Achievement</div>
+
+      <img src={shaleAchievementPic} className="otherSearchImage" alt="Achievement Document" />
 
       <div className='searchBody'>
-        Majored in Attacking with a thesis on subtlety and pain. Minored in torture.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>WORK EXPERIENCE</div>
-
-      <div className='searchBody'>
-        Excelled in combatant tracking and hunting during the ***** campaign of the war in ***********.
+        Operation Bubonic Curtsy mission files can be found under "My Mission History." (password required)
       </div>
 
     </div>

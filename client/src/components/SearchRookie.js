@@ -1,43 +1,21 @@
-import dylanPic from '../assets/pictures/Dylan Polaroid.png';
+import rookiePic from '../assets/pictures/Rookie Polaroid.png';
 
 
 function SearchRookie() {
 
   return (
     <div>
-      <div className='greenBar'>AGENT DYLAN FILES</div>
+      <div className='greenBar'>AGENT ROOKIE FILES</div>
 
-      <div className='searchHeading'>Agent Dylan Profile Photo</div>
+      <div className='searchHeading'>Profile Photo missing</div>
 
-      <img src={dylanPic} className="polaroid" alt="Agent Dylan" />
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>CURRENT ROLE</div>
-
-      <div className='searchBody'>
-        Employed at Agency Nov 2017 - Ongoing
-        <br/>
-        First Assistant to Agent Papyrus
-        <br/>
-        <br/>
-        Also acts as the ****** for use in *******, ****** *******.
-      </div>
+      <img src={rookiePic} className="polaroid" alt="Agent Rookie" />
 
       <div class="orangeLine"/>
 
-      <div className='searchHeading'>EDUCATION</div>
-
       <div className='searchBody'>
-        Majored in Attacking with a thesis on subtlety and pain. Minored in torture.
-      </div>
-
-      <div class="orangeLine"/>
-
-      <div className='searchHeading'>WORK EXPERIENCE</div>
-
-      <div className='searchBody'>
-        Excelled in combatant tracking and hunting during the ***** campaign of the war in ***********.
+        <br/>
+        Agent Rookie is a highly sought after recruit with reams of potential. Their lack of experience currently makes them expendable but we will reconsider after the conclusion of Operation Filthy Laundry. 
       </div>
 
     </div>
