@@ -119,7 +119,7 @@ function Myprofile() {
 
         <div className='greenBar'>MY MISSION HISTORY</div>
 
-        <div className='missionHistoryText'>Agent Papyrus, click <a style={{color:'#f9df39'}} href='./myhistory'>here</a> to review your past missions. Most of this information won't help you with today's mission, but we understand you like to reminisce.</div>
+        <div className='missionHistoryText'>Agent Papyrus, click <a style={{color:'#f9df39'}} href='./myhistory' target="_blank">here</a> to review your past missions. Most of this information won't help you with today's mission, but we understand you like to reminisce.</div>
 
         <div className='greenBar'>HR DATABASE</div>
 
@@ -154,7 +154,7 @@ function Myprofile() {
           {["OPERATION BC", "OPERATION BUBONIC CURTSY", "BUBONIC CURTSY", "BUBONIC CURTSEY", "BUBONIC CURTAY", "OPERATIONBC", "OPBC", "OP BC"].includes(submittedSearchTerm) && <SearchOPBC />}
           {submittedSearchTerm === "ROOKIE" && <SearchRookie />}
           {["SHALE", "SHAKE"].includes(submittedSearchTerm) && <SearchShale />}
-          {!acceptableSearchTerms.includes(submittedSearchTerm) && <div><div class="orangeLine"/><div className='myprofile-header'>No Files Found for '{submittedSearchTerm}'</div><div class="orangeLine"/></div>}
+          {!acceptableSearchTerms.includes(submittedSearchTerm) && <div><div class="orangeLine"/><div className='myprofile-header'>No Files Found for '{submittedSearchTerm}'</div></div>}
           
 
       </div>

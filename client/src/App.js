@@ -1,8 +1,11 @@
 import { Route, Switch } from "react-router-dom";
 
-import Start from "./components/Start.js";
-import Opbc from "./components/Opbc.js";
+import Myhistory from "./components/Myhistory.js";
 import Myprofile from "./components/Myprofile.js";
+import ObeliskTerms from "./components/ObeliskTerms.js";
+import Opbc from "./components/Opbc.js";
+import Start from "./components/Start.js";
+import Terms from "./components/Terms.js";
 
 function App() {
   return (
@@ -28,9 +31,9 @@ function App() {
         <Route path="/myprofile" exact>
           <Myprofile />
         </Route>
-        {/* <Route path="/myhistory" exact>
+        <Route path="/myhistory" exact>
           <Myhistory />
-        </Route> */}
+        </Route>
         {/* <Route path="/marble" exact>
           <Marble />
         </Route> */}
@@ -39,6 +42,9 @@ function App() {
         </Route> */}
         <Route path="/opbc" exact>
           <Opbc />
+        </Route>
+        <Route path="/obeliskterms" exact>
+          <ObeliskTerms />
         </Route>
         {/* <Route path="/debrief" exact>
           <Debrief />
@@ -59,9 +65,9 @@ function App() {
         {/* <Route path="/privacy" exact>
           <Privacy />
         </Route> */}
-        {/* <Route path="/terms" exact>
+        <Route path="/terms" exact>
           <Terms />
-        </Route> */}
+        </Route>
         {/* <Route path="/payment" exact>
           <Payment />
         </Route> */}
