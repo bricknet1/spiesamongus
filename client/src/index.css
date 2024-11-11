@@ -505,3 +505,27 @@ input[type="checkbox"]:checked + .checkbox:before {
   align-items: flex-end;
   justify-content: center;
 }
+
+.myprofileDropdown {
+  font-size: 7vw;
+  margin-bottom: 10vw;
+  margin-top: 10vw;
+  width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.myProfileDropdownImage {
+  width: 85vw;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10vw;
+  margin-bottom: 10vw;
+}
+
+.myprofileDropdownText {
+  font-size: 6vw;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}

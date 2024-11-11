@@ -12,6 +12,8 @@ import SearchShale from "./SearchShale.js";
 
 import papyrusPic from '../assets/pictures/Papyrus Portrait with medal 12.5.23.jpg';
 import filesPic from '../assets/pictures/Files.jpg';
+import laundryPic from '../assets/pictures/laundry no bg.png';
+import banhmiPic from '../assets/pictures/banh mi.jpg';
 
 import { useState } from 'react';
 
@@ -53,23 +55,67 @@ function Myprofile() {
         <div 
           className='myprofileDropdown' 
           onClick={() => setMissionToggled(!missionToggled)} 
-          style={{ cursor: 'pointer'}}>
-          Today's Mission CLASSIFIED (Click to declassify)
-          {missionToggled===false && <span>▼</span>}
-          {missionToggled===true && <span style={{ display: 'inline-block', transform: 'rotate(180deg)', 'margin-bottom': '20vw' }}>▼</span>}
+          style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <span>Today's Mission CLASSIFIED (Click to declassify)</span>
+          <span style={{ 
+            transform: missionToggled ? 'rotate(180deg)' : 'rotate(0deg)', 
+            transition: 'transform 0.3s ease' 
+            }}>
+            ▼
+          </span>
         </div>
+        {missionToggled===true && <div style={{ marginTop: '20px' }}>
+          <img src={laundryPic} className="myProfileDropdownImage" alt="Dirty Laundry" />
+          <div className="myprofileDropdownText">
+            <u>OPERATION FILTHY LAUNDRY</u><br/>
+            <br/>
+            Agent Papyrus,<br/>
+            <br/>
+            We're so sorry it has come to this.<br/>
+            <br/>
+            Your mission: Apprehend your former student, Agent Marble, and bring them to justice.<br/>
+            <br/>
+            On that despicable day, they betrayed their country. They betrayed you. But most importantly, they betrayed our agency. And now, five years later, we're finally going to pay them back.<br/>
+            <br/>
+            <u>YOUR MISSION DETAILS (AGENT PAPYRUS)</u><br/>
+            <br/>
+            You will be on a window stake out while your new student / agent Rookie works the field.<br/>
+            <br/>
+            Lunch will be provided for you. Agent Rookie will not receive lunch so please don't brag about your lunch to them.<br/>
+            <br/>
+            Finally, we hope it goes without saying to never share your password.<br/>
+            <br/>
+            <u>***INFORMATION TO SHARE WITH AGENT ROOKIE BELOW***</u><br/>
+            <br/>
+            Our below average code-breaking team is sifting through data on Marble but currently they can only confirm they are wearing <u>jeans</u> and an <u>animal necklace</u>.<br/>
+            <br/>
+          </div>
+        </div>}
 
         <div class="thinOrangeLine"/>
 
         <div className='myprofileDropdown' 
           onClick={() => setLunchToggled(!lunchToggled)} 
-          style={{ cursor: 'pointer'}}>
+          style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           Today's Lunch Special
-          {lunchToggled===false && <span>▼</span>}
-          {lunchToggled===true && <span style={{ display: 'inline-block', transform: 'rotate(180deg)', 'margin-bottom': '20vw' }}>▼</span>}
+          <span style={{ 
+            transform: lunchToggled ? 'rotate(180deg)' : 'rotate(0deg)', 
+            transition: 'transform 0.3s ease' 
+            }}>
+            ▼
+          </span>
         </div>
+        {lunchToggled===true && <div style={{ marginTop: '20px' }}>
+          <div className="myprofileDropdownText">
+            <i>Bahn Mi</i><br/>
+            Choose one: Chicken, Beef, Tofu.<br/>
+            <br/>
+            Comes with: pickled carrots & daikon, cucumber, red onion, cilantro, miso spread, and spicy mayo
+          </div>
+          <img src={banhmiPic} className="myProfileDropdownImage" alt="Banh Mi" />
+        </div>}
 
-        <div class="thinOrangeLine"/>
+        <div class="thinOrangeLine"/><br/><br/><br/>
 
         <div className='greenBar'>MY MISSION HISTORY</div>
 
