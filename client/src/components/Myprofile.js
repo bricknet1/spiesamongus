@@ -146,14 +146,14 @@ function Myprofile() {
           {submittedSearchTerm === "" && <div></div>}
           {submittedSearchTerm === "DYLAN" && <SearchDylan />}
           {submittedSearchTerm === "LESLIE" && <SearchLeslie />}
-          {(submittedSearchTerm === "MDS" || submittedSearchTerm === "MARBLE DANGER SIGNAL") && <SearchMDS />}
+          {["MDS", "MARBLE DANGER SIGNAL", "MD SIGNAL"].includes(submittedSearchTerm) && <SearchMDS />}
           {submittedSearchTerm === "MARBLE" && <SearchMarble />}
           {submittedSearchTerm === "OBELISK" && <SearchObelisk />}
-          {submittedSearchTerm === "PAPYRUS" && <SearchPapyrus />}
+          {["PAPYRUS", "PAPRYS"].includes(submittedSearchTerm) && <SearchPapyrus />}
           {submittedSearchTerm === "REAMER" && <SearchReamer />}
-          {(submittedSearchTerm === "OPERATION BC" || submittedSearchTerm === "OPERATION BUBONIC CURTSY") && <SearchOPBC />}
+          {["OPERATION BC", "OPERATION BUBONIC CURTSY", "BUBONIC CURTSY", "BUBONIC CURTSEY", "BUBONIC CURTAY", "OPERATIONBC", "OPBC", "OP BC"].includes(submittedSearchTerm) && <SearchOPBC />}
           {submittedSearchTerm === "ROOKIE" && <SearchRookie />}
-          {submittedSearchTerm === "SHALE" && <SearchShale />}
+          {["SHALE", "SHAKE"].includes(submittedSearchTerm) && <SearchShale />}
           {!acceptableSearchTerms.includes(submittedSearchTerm) && <div><div class="orangeLine"/><div className='myprofile-header'>No Files Found for '{submittedSearchTerm}'</div><div class="orangeLine"/></div>}
           
 
