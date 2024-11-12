@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Myhistory from "./components/Myhistory.js";
 import Myprofile from "./components/Myprofile.js";
+import NotFound from "./components/NotFound.js";
 import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
 import Start from "./components/Start.js";
@@ -74,6 +75,10 @@ function App() {
         {/* <Route path="/private" exact>
           <Private />
         </Route> */}
+
+        <Route path="*">
+          <NotFound />
+        </Route>
 
       </Switch>
     </div>
