@@ -2,10 +2,16 @@
 
 @font-face {
   font-family: 'DIN Neuzeit Grotesk';
-  src: url('./assets/fonts/DINNeuzeitGroteskLT-BoldCond.ttf') format('truetype'),
-       url('./assets/fonts/DINNeuzeitGroteskLT-Light.ttf') format('truetype');
+  src: url('./assets/fonts/DINNeuzeitGroteskLT-Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Neuzeit Grotesk';
+  src: url('./assets/fonts/DINNeuzeitGroteskLT-BoldCond.ttf') format('truetype');
+  font-weight: bold;
+  font-style: bold;
 }
 
 /* Temporarily add an outline to all elements */
@@ -22,7 +28,12 @@ body {
   background-color: rgb(33,23,76);
   color: white;
   margin: 0;
-  
+  font-weight: bold;
+  font-style: bold;
+}
+
+strong {
+  text-shadow: 1.25px 0 0 currentColor;
 }
 
 .orangeBar {
@@ -188,6 +199,7 @@ input:focus, select:focus {
   padding-right: 5vw;
   box-sizing: border-box;
   margin-top: 1vw;
+  font-weight: bold;
 }
 
 input[type="checkbox"] {
@@ -257,6 +269,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   border: none;
   outline: none;
   display: block;
+  font-weight: bold;
 }
 
 
@@ -304,6 +317,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   box-sizing: border-box;
   margin-top: 1vw;
   margin-right: 2vw;
+  font-weight: bold;
 }
 
 .passwordButton {
@@ -316,6 +330,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   border-radius: 50px;
   border: none;
   outline: none;
+  font-weight: bold;
 }
 
 .wrongPassword {
@@ -499,7 +514,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .shaleDialog {
-  color: rgb(2, 91, 13);
+  color: #025B0D;
   height: 20vw;
   display: flex;
   align-items: flex-end;
@@ -524,8 +539,9 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .myprofileDropdownText {
-  font-size: 6vw;
+  font-size: 5vw;
   width: 80vw;
   margin-left: 10vw;
   margin-right: 10vw;
+  font-weight: normal;
 }

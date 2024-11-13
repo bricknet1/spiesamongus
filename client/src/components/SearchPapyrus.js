@@ -18,7 +18,7 @@ function SearchPapyrus() {
       <div className='searchHeading'>Anonymous Form</div>
 
       <div className='searchBody' style={{textAlign: 'center'}}>
-        (Six years ago)
+        (six years ago)
       </div>
 
       <img src={suggestionPic} className="otherSearchImage" alt="Suggestion Box Form" />

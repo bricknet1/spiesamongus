@@ -11,7 +11,7 @@ function SearchShale() {
 
       <img src={shalePic} className="polaroid" alt="Agent Shale" />
 
-      <div style={{textAlign: 'center', fontSize: '6vw'}}>Actual name: <i>Claudia Ripper</i>.<br/><br/></div>
+      <div style={{textAlign: 'center', fontSize: '6vw'}}>Actual name: <strong>Claudia Ripper</strong>.<br/><br/></div>
 
       <div class="orangeLine"/>
 

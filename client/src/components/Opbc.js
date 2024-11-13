@@ -12,11 +12,12 @@ function Opbc() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Submitted value:", password);
-    setSubmittedPassword(password)
+    const valueCaps = password.toUpperCase()
+    console.log("Submitted value:", valueCaps);
+    setSubmittedPassword(valueCaps)
   }
 
-
+  const validPasswords = ['EGREGIOUS', 'EGREGOUS']
 
 
   return (
@@ -27,7 +28,7 @@ function Opbc() {
 
         <div className='orangeBar'>OPERATION BUBONIC CURTSY</div>
 
-        {(submittedPassword !== "egregious" || submittedPassword === "") && <div>
+        {(!validPasswords.includes(submittedPassword) || submittedPassword === "") && <div>
 
           <div className='opbc-subheader'>WARNING! Classified files. Enter password to continue.</div>
 
@@ -49,13 +50,13 @@ function Opbc() {
 
         {submittedPassword==="" && <div></div>}
 
-        {(submittedPassword !== "egregious" && submittedPassword !== "") && 
+        {(!validPasswords.includes(submittedPassword) && submittedPassword !== "") && 
           <div className='wrongPassword'>Wrong password.<br/>Entry denied!<br/>
             <img src={papyrusheadshake3} alt="Papyrus shaking his head" className="papyrusheadshake3"/>
           </div>
         }
 
-        {submittedPassword==="egregious" && 
+        {validPasswords.includes(submittedPassword) && 
           <div className='rightPassword'>
             <br/>
             <img src={opbcimage} alt="Secret Document" className="opbcimage"/>
@@ -75,14 +76,14 @@ function Opbc() {
             </div>
             <br/>
             <br/>
-            <div class="orangeLine"/>
+            <div className="orangeLine"/>
             <br/>
             <br/>
             <span 
               onClick={() => setTranscriptToggled(!transcriptToggled)} 
               style={{ cursor: 'pointer'}}>
               {transcriptToggled===true && <span>▼</span>}
-              {transcriptToggled===false && <span style={{ display: 'inline-block', transform: 'rotate(-90deg)', 'margin-bottom': '20vw' }}>▼</span>}
+              {transcriptToggled===false && <span style={{ display: 'inline-block', transform: 'rotate(-90deg)', marginBottom: '20vw' }}>▼</span>}
               Or click here to read the transcript
             </span>
             {transcriptToggled===true && 
@@ -90,21 +91,21 @@ function Opbc() {
                 <div className="leslieDialog">LESLIE:</div>
                 <div className="dialog">Oh, hiya there Mr. P!</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
-                <div className="dialog">Ah. Leslie. Uhh. I need to place a kill order on Agents Marble and Shale.</div>
+                <div className="dialog">Ah. Leslie. Uhh. I need to place a <strong><u>kill order</u></strong> on <u><strong>Agents Marble and Shale.</strong></u></div>
                 <div className="leslieDialog">LESLIE:</div>
                 <div className="dialog">Oh boy.</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
                 <div className="dialog">Yep.</div>
                 <div className="leslieDialog">LESLIE:</div>
-                <div className="dialog">I see here we have on file a “best friends” form that you submitted... naming... both of them. Would you like me to remove them as your best friends?</div>
+                <div className="dialog">I see here we have on file a "best friends" form that you submitted... naming... both of them. Would you like me to remove them as your best friends?</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
-                <div className="dialog">*Sighs* Did either of them file a best friends form for me?</div>
+                <div className="dialog"><i>*Sighs*</i> Did either of them file a best friends form for me?</div>
                 <div className="leslieDialog">LESLIE:</div>
                 <div className="dialog">Marble did. Shale filed... a different form.</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
-                <div className="dialog">Remove them both. Submit the kill order. They both refused a mission.</div>
+                <div className="dialog">Remove them both. Submit the kill order. <strong><u>They both refused a mission</u></strong>.</div>
                 <div className="leslieDialog">LESLIE:</div>
-                <div className="dialog">Roger that. Operation BC. That was a tough one.</div>
+                <div className="dialog">Roger that. <strong><u>Operation BC</u></strong>. That was a tough one.</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
                 <div className="dialog">Yep.</div>
                 <div className="leslieDialog">LESLIE:</div>
@@ -119,7 +120,7 @@ function Opbc() {
                 <div className="dialog">Ain't that a hoot! You have fun now.</div>
                 <div className="papyrusDialog">PAPYRUS:</div>
                 <div className="dialog">Click.</div>
-                <div className="leslieDialog">*END OF CALL*</div>
+                <div className="leslieDialog" style={{ color: '#ffffff'}}>*END OF CALL*</div>
               </div>
             }
           </div>

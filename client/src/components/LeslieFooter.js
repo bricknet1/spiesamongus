@@ -4,7 +4,7 @@ function LeslieFooter() {
 
   return (
     <div className='leslieFooter'>
-      <div class="orangeLine"/>
+      <div className="orangeLine"/>
       <div className="leslieFooterContent">
         <div className="leslieFooterPicWrapper">
           <img src={lesliePic} className="leslieFooterPic" alt="Agent Leslie" />

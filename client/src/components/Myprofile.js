@@ -25,7 +25,7 @@ function Myprofile() {
   const [searchTerm, setSearchTerm] = useState('');
   const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
 
-  const acceptableSearchTerms = ['LESLIE', 'DYLAN', 'MARBLE', 'MDS', 'MARBLE DANGER SIGNAL', 'OBELISK', 'PAPYRUS', 'REAMER', 'OPERATION BC', 'OPERATION BUBONIC CURTSY', 'ROOKIE', 'SHALE', '']
+  const acceptableSearchTerms = ['LESLIE', 'DYLAN', 'MARBLE', "MDS", "MARBLE DANGER SIGNAL", "MD SIGNAL", 'OBELISK', "PAPYRUS", "PAPRYS", 'REAMER', "OPERATION BC", "OPERATION BUBONIC CURTSY", "BUBONIC CURTSY", "BUBONIC CURTSEY", "BUBONIC CURTAY", "OPERATIONBC", "OPBC", "OP BC", 'ROOKIE', 'SHALE', 'SHAKE', '']
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -66,8 +66,8 @@ function Myprofile() {
         </div>
         {missionToggled===true && <div style={{ marginTop: '20px' }}>
           <img src={laundryPic} className="myProfileDropdownImage" alt="Dirty Laundry" />
-          <div className="myprofileDropdownText">
-            <u>OPERATION FILTHY LAUNDRY</u><br/>
+          <div className="myprofileDropdownText" >
+            <u style={{fontWeight: "bold", fontSize: "6vw"}}>OPERATION FILTHY LAUNDRY</u><br/>
             <br/>
             Agent Papyrus,<br/>
             <br/>
@@ -77,7 +77,7 @@ function Myprofile() {
             <br/>
             On that despicable day, they betrayed their country. They betrayed you. But most importantly, they betrayed our agency. And now, five years later, we're finally going to pay them back.<br/>
             <br/>
-            <u>YOUR MISSION DETAILS (AGENT PAPYRUS)</u><br/>
+            <u style={{fontWeight: "bold", fontSize: "6vw"}}>YOUR MISSION DETAILS (AGENT PAPYRUS)</u><br/>
             <br/>
             You will be on a window stake out while your new student / agent Rookie works the field.<br/>
             <br/>
@@ -85,9 +85,9 @@ function Myprofile() {
             <br/>
             Finally, we hope it goes without saying to never share your password.<br/>
             <br/>
-            <u>***INFORMATION TO SHARE WITH AGENT ROOKIE BELOW***</u><br/>
+            <u style={{fontWeight: "bold", fontSize: "6vw"}}>***INFORMATION TO SHARE WITH AGENT ROOKIE BELOW***</u><br/>
             <br/>
-            Our below average code-breaking team is sifting through data on Marble but currently they can only confirm they are wearing <u>jeans</u> and an <u>animal necklace</u>.<br/>
+            Our below average code-breaking team is sifting through data on Marble but currently they can only confirm they are wearing <u style={{fontWeight: "bold", fontSize: "6vw"}}>jeans</u> and an <u style={{fontWeight: "bold", fontSize: "6vw"}}>animal necklace</u>.<br/>
             <br/>
           </div>
         </div>}
@@ -107,7 +107,7 @@ function Myprofile() {
         </div>
         {lunchToggled===true && <div style={{ marginTop: '20px' }}>
           <div className="myprofileDropdownText">
-            <i>Bahn Mi</i><br/>
+            <b style={{ fontSize: "6vw"}}>Bahn Mi</b><br/>
             Choose one: Chicken, Beef, Tofu.<br/>
             <br/>
             Comes with: pickled carrots & daikon, cucumber, red onion, cilantro, miso spread, and spicy mayo

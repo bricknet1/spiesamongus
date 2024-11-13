@@ -9,7 +9,7 @@ function SearchMDS() {
 
       <div className='searchBody'>
         <br/>
-        Invented by former  agent / current traitor Marble, the <u>Marble Danger Signal</u> is a method for agents to secretly indicate they are in danger.
+        Invented by former  agent / current traitor Marble, the <strong>Marble Danger Signal</strong> is a method for agents to secretly indicate they are in danger.
         <br/>
         <br/>
         To properly use it, agents should display only two fingers, whether by holding something or gesturing.
