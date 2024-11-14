@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import papyrusheadshake3 from '../assets/pictures/Papyrusheadshake3.gif';
 import opbcimage from '../assets/pictures/Operation Bubonic Curtsy 3.20.24.jpg'
 import opbcvideo from '../assets/videos/Papyrus Leslie Phone Call Video 3.29.24.mp4'
@@ -9,13 +9,29 @@ function Opbc() {
   const [password, setPassword] = useState('');
   const [submittedPassword, setSubmittedPassword] = useState('');
   const [transcriptToggled, setTranscriptToggled] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const valueCaps = password.toUpperCase()
+    const valueCaps = password.toUpperCase();
     console.log("Submitted value:", valueCaps);
-    setSubmittedPassword(valueCaps)
+    setSubmittedPassword(valueCaps);
+
+    if (validPasswords.includes(valueCaps)) {
+      setIsAnimating(true);
+      setPassword('Success!');
+    }
   }
+
+  useEffect(() => {
+    if (isAnimating) {
+      const timer = setTimeout(() => {
+        setIsAnimating(false); // End animation
+        setPassword(''); // Clear input field after animation
+      }, 1000); // Reset after 1 second
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating]);
 
   const validPasswords = ['EGREGIOUS', 'EGREGOUS']
 
@@ -28,7 +44,7 @@ function Opbc() {
 
         <div className='orangeBar'>OPERATION BUBONIC CURTSY</div>
 
-        {(!validPasswords.includes(submittedPassword) || submittedPassword === "") && <div>
+        {(!validPasswords.includes(submittedPassword) || submittedPassword === "" || isAnimating === true) && <div>
 
           <div className='opbc-subheader'>WARNING! Classified files. Enter password to continue.</div>
 
@@ -37,7 +53,7 @@ function Opbc() {
             <input
               type="text" 
               name="password"
-              className="passwordFormField"
+              className={`passwordFormField ${isAnimating ? 'animateInput' : ''}`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -56,7 +72,7 @@ function Opbc() {
           </div>
         }
 
-        {validPasswords.includes(submittedPassword) && 
+        {(validPasswords.includes(submittedPassword) && isAnimating !== true) &&
           <div className='rightPassword'>
             <br/>
             <img src={opbcimage} alt="Secret Document" className="opbcimage"/>
@@ -88,37 +104,37 @@ function Opbc() {
             </span>
             {transcriptToggled===true && 
               <div className="transcript">
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Oh, hiya there Mr. P!</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Ah. Leslie. Uhh. I need to place a <strong><u>kill order</u></strong> on <u><strong>Agents Marble and Shale.</strong></u></div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Oh boy.</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Yep.</div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">I see here we have on file a "best friends" form that you submitted... naming... both of them. Would you like me to remove them as your best friends?</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog"><i>*Sighs*</i> Did either of them file a best friends form for me?</div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Marble did. Shale filed... a different form.</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Remove them both. Submit the kill order. <strong><u>They both refused a mission</u></strong>.</div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Roger that. <strong><u>Operation BC</u></strong>. That was a tough one.</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Yep.</div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Do you and the kids have any Christmas plans?</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Click.</div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Hello? Hello? Did you hang up?</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">We're seeing the Adam Sandler movie Click at their mother's. It's their favorite movie.</div>
-                <div className="leslieDialog">LESLIE:</div>
+                <div className="leslieDialog">LESLIE</div>
                 <div className="dialog">Ain't that a hoot! You have fun now.</div>
-                <div className="papyrusDialog">PAPYRUS:</div>
+                <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Click.</div>
                 <div className="leslieDialog" style={{ color: '#ffffff'}}>*END OF CALL*</div>
               </div>

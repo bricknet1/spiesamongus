@@ -59,35 +59,35 @@ function SearchMarble() {
           <div className="transcript">
             <br/>
             <div className="dialog" style={{ fontStyle: 'italic'}}>Transcript of call between Agent PAPYRUS and former agent/traitor SHALE.</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">Shale?? You have a lot of guts calling me right now! You refused a mission, you're on the run, and I'm currently tracking your phone call. I'll have your location in 30 seconds.</div>
-            <div className="papyrusDialog">SHALE:</div>
-            <div className="dialog">Rack off Papyrus. I'm calling you as a courtesy.  Stay away from me and stay away from Marble. We will never agree to execute <strong>Operation Bubonic Curtsy</strong>.</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="papyrusDialog">SHALE</div>
+            <div className="dialog">Rack off Papyrus. I'm calling you as a courtesy.  Stay away from me and stay away from Marble. We will never agree to execute <strong><u>Operation Bubonic Curtsy</u></strong>.</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">Anngh, wrong. Guess what, Koala-Breath. Marble signed that mission.</div>
-            <div className="papyrusDialog">SHALE:</div>
+            <div className="papyrusDialog">SHALE</div>
             <div className="dialog">You're full of it.</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">Pull up the Op BC file.</div>
-            <div className="papyrusDialog">SHALE:</div>
+            <div className="papyrusDialog">SHALE</div>
             <div className="dialog">I can't. I don't know the password.</div>
-            <div className="leslieDialog">PAPYRUS:</div>
-            <div className="dialog">Guess you'll have to trust me then: <strong>Marble, your former partner, agreed to do the most evil mission in agency history</strong>.</div>
-            <div className="papyrusDialog">SHALE:</div>
+            <div className="leslieDialog">PAPYRUS</div>
+            <div className="dialog">Guess you'll have to trust me then: <strong><u>Marble, your former partner, agreed to do the most evil mission in agency history</u></strong>.</div>
+            <div className="papyrusDialog">SHALE</div>
             <div className="dialog">Crikey. I'll never forgive Marble.</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">And guess what? It's been 30 seconds. You're toast.</div>
-            <div className="papyrusDialog">SHALE:</div>
+            <div className="papyrusDialog">SHALE</div>
             <div className="dialog">Bugger.</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">Leslie, you trace the call? Where's she located?</div>
-            <div className="shaleDialog">LESLIE:</div>
+            <div className="shaleDialog">LESLIE</div>
             <div className="dialog">Yes, she's... oh my god she's in your office bathroom!</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">What??? Wait. Did you trace her number or my number?</div>
-            <div className="shaleDialog">LESLIE:</div>
+            <div className="shaleDialog">LESLIE</div>
             <div className="dialog">Hold on a sec. Are you calling me from your bathroom?</div>
-            <div className="leslieDialog">PAPYRUS:</div>
+            <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">No, goodbye.</div>
             <div className="leslieDialog" style={{ color: '#ffffff'}}>*END OF CALL*</div>
           </div>

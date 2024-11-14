@@ -25,7 +25,7 @@ function Myprofile() {
   const [searchTerm, setSearchTerm] = useState('');
   const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
 
-  const acceptableSearchTerms = ['LESLIE', 'DYLAN', 'MARBLE', "MDS", "MARBLE DANGER SIGNAL", "MD SIGNAL", 'OBELISK', "PAPYRUS", "PAPRYS", 'REAMER', "OPERATION BC", "OPERATION BUBONIC CURTSY", "BUBONIC CURTSY", "BUBONIC CURTSEY", "BUBONIC CURTAY", "OPERATIONBC", "OPBC", "OP BC", 'ROOKIE', 'SHALE', 'SHAKE', '']
+  const acceptableSearchTerms = ['LESLIE', 'DYLAN', 'MARBLE', "MDS", "MARBLE DANGER SIGNAL", "MD SIGNAL", 'OBELISK', "PAPYRUS", "PAPRYS", "PAPYRS", 'REAMER', "OPERATION BC", "OPERATION BUBONIC CURTSY", "BUBONIC CURTSY", "BUBONIC CURTSEY", "BUBONIC CURTAY", "OPERATIONBC", "OPBC", "OP BC", 'ROOKIE', 'SHALE', 'SHAKE', '']
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -87,7 +87,7 @@ function Myprofile() {
             <br/>
             <u style={{fontWeight: "bold", fontSize: "6vw"}}>***INFORMATION TO SHARE WITH AGENT ROOKIE BELOW***</u><br/>
             <br/>
-            Our below average code-breaking team is sifting through data on Marble but currently they can only confirm they are wearing <u style={{fontWeight: "bold", fontSize: "6vw"}}>jeans</u> and an <u style={{fontWeight: "bold", fontSize: "6vw"}}>animal necklace</u>.<br/>
+            Our below average code-breaking team is sifting through data on Marble but currently they can only confirm they are wearing <u><strong style={{fontWeight: "normal"}}>jeans</strong></u> and an <u><strong style={{fontWeight: "normal"}}>animal necklace</strong></u>.<br/>
             <br/>
           </div>
         </div>}
@@ -149,7 +149,7 @@ function Myprofile() {
           {["MDS", "MARBLE DANGER SIGNAL", "MD SIGNAL"].includes(submittedSearchTerm) && <SearchMDS />}
           {submittedSearchTerm === "MARBLE" && <SearchMarble />}
           {submittedSearchTerm === "OBELISK" && <SearchObelisk />}
-          {["PAPYRUS", "PAPRYS"].includes(submittedSearchTerm) && <SearchPapyrus />}
+          {["PAPYRUS", "PAPRYS", "PAPYRS"].includes(submittedSearchTerm) && <SearchPapyrus />}
           {submittedSearchTerm === "REAMER" && <SearchReamer />}
           {["OPERATION BC", "OPERATION BUBONIC CURTSY", "BUBONIC CURTSY", "BUBONIC CURTSEY", "BUBONIC CURTAY", "OPERATIONBC", "OPBC", "OP BC"].includes(submittedSearchTerm) && <SearchOPBC />}
           {submittedSearchTerm === "ROOKIE" && <SearchRookie />}

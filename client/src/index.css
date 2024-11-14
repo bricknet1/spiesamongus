@@ -318,7 +318,18 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-top: 1vw;
   margin-right: 2vw;
   font-weight: bold;
+  transition: transform 0.3s ease;
 }
+
+.passwordFormField.animateInput {
+  background-color: yellow;
+  color: rgb(33,23,76);
+  font-weight: bold;
+  transform: scale(1.1);
+  transition: background-color 1s ease, transform 1s ease;
+  text-align: center;
+}
+
 
 .passwordButton {
   color: white;
@@ -514,7 +525,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .shaleDialog {
-  color: #025B0D;
+  color: #128d21;
   height: 20vw;
   display: flex;
   align-items: flex-end;
@@ -544,4 +555,5 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-left: 10vw;
   margin-right: 10vw;
   font-weight: normal;
+  line-height: 10vw;
 }
