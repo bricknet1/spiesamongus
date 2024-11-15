@@ -557,3 +557,42 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-weight: normal;
   line-height: 10vw;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TERMS CONTENT */
+
+.termsHeading {
+  font-size: 10vw;
+  width: 95vw;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10vw;
+  margin-bottom: 10vw;
+}
+
+.termsOL {
+  font-size: 8vw;
+  width: 85vw;
+  margin: 0 auto;
+}
+
+.termsUL {
+  font-size: 4.5vw;
+  font-weight: normal;
+  width: 79vw;
+  line-height: 8vw;
+}
