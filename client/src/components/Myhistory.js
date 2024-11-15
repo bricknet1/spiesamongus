@@ -1,4 +1,4 @@
-import notepadPic from '../assets/pictures/Files.jpg';
+import notepadPic from '../assets/pictures/personal notes.jpg';
 
 import { useState } from 'react';
 
