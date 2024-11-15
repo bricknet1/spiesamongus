@@ -123,8 +123,8 @@ function Myprofile() {
 
         <div className='greenBar'>HR DATABASE</div>
 
-        <div className="filesPicWrapper">
-          <img src={filesPic} className="filesPic" alt="Files" />
+        <div className="ovalPicWrapper">
+          <img src={filesPic} className="ovalPic" alt="Files" />
         </div>
 
         <div className='missionHistoryText'>For company records, enter the subject matter here and we will pull up the relevant files:</div>

@@ -77,6 +77,25 @@ strong {
   padding-bottom: 40vw;
 }
 
+.ovalPicWrapper {
+  width: 80vw;
+  height: 50vw;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #f9df39 2.5vw solid; 
+  margin: 0 auto;
+  margin-top: 5vw;
+}
+
+.ovalPic {
+  width: auto;
+  height: 60vw; /* Make larger than wrapper to focus on a section */
+  transform: translateY(0vw) translateX(0vw); /* Adjust to position the focus area */
+}
+
 
 
 
@@ -466,25 +485,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-top: 6vw;
 }
 
-.filesPicWrapper {
-  width: 80vw;
-  height: 50vw;
-  overflow: hidden;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: #f9df39 2.5vw solid; 
-  margin: 0 auto;
-  margin-top: 5vw;
-}
-
-.filesPic {
-  width: auto;
-  height: 60vw; /* Make larger than wrapper to focus on a section */
-  transform: translateY(0vw) translateX(0vw); /* Adjust to position the focus area */
-}
-
 .polaroid {
   width: 70vw;
   transform: rotate(15deg);
@@ -595,4 +595,62 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-weight: normal;
   width: 79vw;
   line-height: 8vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* MY HISTORY CONTENT */
+
+.myHistoryHeading {
+  margin: 0 auto;
+  width: 80vw;
+  font-size: 7vw;
+  margin-bottom: 6vw;
+  margin-top: 6vw;
+}
+
+.myHistoryDropdown {
+  font-size: 6vw;
+  margin-bottom: 10vw;
+  margin-top: 10vw;
+  width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.myHistoryDropdownText {
+  font-size: 5vw;
+  width: 86vw;
+  margin-left: 7vw;
+  margin-right: 7vw;
+  font-weight: normal;
+  line-height: 7vw;
+  font-style: italic;
+  margin-bottom: 10vw;
+}
+
+.myHistoryDropdownTextSpecial {
+  font-size: 5vw;
+  width: 86vw;
+  margin-left: 7vw;
+  margin-right: 7vw;
+  font-weight: normal;
+  line-height: 7vw;
+  font-style: italic;
+  margin-bottom: 10vw;
+  text-align: center;
+}
+
+.myHistoryFooter {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 15vw;
 }
