@@ -575,26 +575,32 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 /* TERMS CONTENT */
 
-.termsHeading {
-  font-size: 10vw;
+.termsContainer {
   width: 95vw;
   margin: 0 auto;
+}
+
+.termsHeading {
+  font-size: 8vw;
+  /* width: 95vw; */
+  /* margin: 0 auto; */
   text-align: center;
   margin-top: 10vw;
   margin-bottom: 10vw;
 }
 
 .termsOL {
-  font-size: 8vw;
-  width: 85vw;
-  margin: 0 auto;
+  font-size: 6vw;
+  /* width: 85vw; */
+  /* margin: 0 auto; */
 }
 
 .termsUL {
-  font-size: 4.5vw;
+  font-size: 4vw;
   font-weight: normal;
-  width: 79vw;
-  line-height: 8vw;
+  /* width: 79vw; */
+  line-height: 6vw;
+  margin-right: 5vw;
 }
 
 

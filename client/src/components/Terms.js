@@ -8,7 +8,7 @@ function Terms() {
 
       <div className='orangeBar'>TERMS & CONDITIONS</div>
 
-      <div>
+      <div className='termsContainer'>
 
         <div className='termsHeading'>Participant Agreement and Release of Liability Waiver</div>
 
@@ -73,8 +73,8 @@ function Terms() {
 
       </div>
       <div style={{ fontSize: '5vw', textAlign: 'center', marginTop: '20vw', marginBottom: '10vw'}}>
-        <a href='https://www.instagram.com/spiesamong' target='_blank'><img src={instagram} style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
-        <div>2024 Interactive Escapes</div>
+        <a href='https://www.instagram.com/spiesamong' target='_blank' rel="noreferrer"><img src={instagram} alt="Instagram" style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
+        <div style={{fontWeight: "normal"}}>2024 Interactive Escapes</div>
       </div>
 
     </div>
