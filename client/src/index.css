@@ -610,6 +610,21 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 
 
+/* OBELISK TERMS CONTENT */
+
+.yellowBar {
+  background-color: rgb(249, 223, 57);
+  color: black;
+  font-size: 10vw;
+  height: 30vw;
+  text-align: center;
+  padding-top: 10vw;
+}
+
+
+
+
+
 
 
 
