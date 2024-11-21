@@ -7,6 +7,7 @@ import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
 import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
+import TheMission from "./components/TheMission.js";
 
 function App() {
   return (
@@ -26,9 +27,9 @@ function App() {
         {/* <Route path="/yourmission" exact>
           <Yourmission />
         </Route> */}
-        {/* <Route path="/themission" exact>
-          <Themission />
-        </Route> */}
+        <Route path="/themission" exact>
+          <TheMission />
+        </Route>
         <Route path="/myprofile" exact>
           <Myprofile />
         </Route>

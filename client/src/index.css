@@ -675,3 +675,42 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: center;
   margin-top: 15vw;
 }
+
+
+
+
+
+
+
+
+
+
+/* THE MISSION CONTENT */
+
+.mission-header {
+  text-align: center;
+  font-size: 12vw;
+  margin-top: 20vw;
+  margin-bottom: 20vw;
+}
+
+.mission-subheader {
+  text-align: center;
+  font-size: 8vw;
+  margin-bottom: 20vw;
+  line-height: 13vw;
+  
+}
+
+.mission-subsubheader {
+  text-align: left;
+  width: 80vw;
+  margin: 0 auto;
+  font-size: 5vw;
+  margin-bottom: 20vw;
+  /* line-height: 7vw; */
+}
+
+.mission-emphasis {
+  font-size: 8vw;
+}
