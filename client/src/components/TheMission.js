@@ -1,6 +1,5 @@
-import papyrusheadshake3 from '../assets/pictures/Papyrusheadshake3.gif';
-import opbcimage from '../assets/pictures/Operation Bubonic Curtsy 3.20.24.jpg'
-import opbcvideo from '../assets/videos/Papyrus Leslie Phone Call Video 3.29.24.mp4'
+import marblePic from '../assets/pictures/Marble Polaroid.png';
+
 import LeslieFooter from "./LeslieFooter.js";
 
 function TheMission() {
@@ -14,33 +13,68 @@ function TheMission() {
         <div className='orangeBar'>OPERATION FILTHY LAUNDRY</div>
 
         <div className='mission-header'>Hello Agent Rookie.</div>
-        <div className='mission-subheader'>
-          FIVE YEARS AGO,<br/>
-          <span className='mission-subsubheader'>
-            a brilliant up-and-coming Agent<br/>
-            (not unlike youself)<br/>
-            chose to <span className='mission-emphasis'>BETRAY</span> the Agency.<br/>
-            <br/>
-            That person's name?<br/>
-          </span>
-          AGENT MARBLE<br/>
-          <span className='mission-subsubheader'>
-            They are now a rogue spy trying to hold a secret meeting nearby.<br/>
-            <br/>
-            You're here to stop them.<br/>
-            <br/>
-            You have <span className='mission-emphasis'>90 minutes</span> to complete your mission.<br/>
-            <br/>
-          </span>
+        <div className='mission-subheader'><span className='mission-emphasis'>FIVE YEARS AGO,</span></div><br/>
+        <div className='mission-subheader'>a brilliant up-and-coming Agent</div><br/>
+        <div className='mission-subheader'>(not unlike youself)</div><br/>
+        <div className='mission-subheader'>chose to <span className='mission-emphasis'>BETRAY</span> the Agency.</div><br/>
+        <br/>
+        <div className='mission-subheader'>That person's name?</div><br/>
+        <div className='mission-subheader'><span className='mission-emphasis'>AGENT MARBLE</span></div><br/>
+        <div className='mission-subheader'>They are now a rogue spy trying to hold a secret meeting nearby.</div><br/>
+        <br/>
+        <div className='mission-subheader'>You're here to stop them.</div><br/>
+        <br/>
+        <div className='mission-subheader'>You have <span className='mission-emphasis'>90 minutes</span> to complete your mission.</div><br/>
+        <br/>
+        <br/>
+        
+        <div className='orangeBar'>MISSION DETAILS</div>
+        <br/>
+        <br/>
 
-
-
-
-        </div>
         <div className='mission-subsubheader'>
-          <span className='mission-emphasis'>A ROGUE SPY</span> is currently roaming the area. Use your phone and wits to uncover clues, reveal their plot, and deduce their whereabouts. Adventure and danger will be hiding from you in plain sight!
+
+          <span className='mission-emphasis'>1. TRACK DOWN AGENT MARBLE.</span> If found, do not engage.
+
+          <img src={marblePic} className="mission-polaroid" alt="Agent Marble" />
+
+          <span className='mission-emphasis'>2. STAY UNDERCOVER and STICK TOGETHER.</span> This area is a hive of spies and you do not want to draw attention to yourself or your targets. Act like you are normal shoppers at all times.<br/>
+
+          <div className="ovalPicWrapper">
+            <img src={marblePic} className="ovalPic" alt="Women in a mall" />
+          </div>
+          <br/>
+          <br/>
+
+          <span className='mission-emphasis'>3. AVOID THESE WORDS:</span> Texting the words STOP or UNSUBSCRIBE will abruptly end your mission.<br/>
+          <br/>
+
+          <div className="orangeLine"/><br/>
+          <br/>
+
+          <span className='mission-emphasis'><u>4. DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
+
+          <img src={marblePic} className="missionPhonePic" alt="Telephone" />
+
+          <span className='mission-emphasis'>5. USE YOUR OWN PHONE.</span> Each agent should read texts and go to websites on their own phone. Share any information you discover! Only your partner can respond to texts, but you will need to use your phone to click on sites, fill out information, and answer phone calls as they come in!<br/>
+          <br/>
+
+          <div className="orangeLine"/><br/>
+          <br/>
+
+          <span className='mission-emphasis'>6. TO BEGIN,</span> cross the street and walk to the <span className='mission-emphasis'>RED BELL TOWER</span>.
+
+          <div className="ovalPicWrapperVert">
+            <img src={marblePic} className="ovalPicVert" alt="The path forward" />
+          </div>
+          <br/>
+          <br/>
+
+          <span className='mission-emphasis'>7. Once you are there, tell your partner to text <span style={{ color: '#f9DF39'}}>READY FOR DANGER</span> to Agent Papyrus.</span>
         </div>
-      <div className='orangeBar'>MISSION DETAILS</div>
+
+
+
 
 
       </div>

@@ -96,6 +96,25 @@ strong {
   transform: translateY(0vw) translateX(0vw); /* Adjust to position the focus area */
 }
 
+.ovalPicWrapperVert {
+  width: 80vw;
+  height: 90vw;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #f9df39 2.5vw solid; 
+  margin: 0 auto;
+  margin-top: 5vw;
+}
+
+.ovalPicVert {
+  width: auto;
+  height: 100vw; 
+  transform: translateY(0vw) translateX(0vw); 
+}
+
 
 
 
@@ -690,27 +709,42 @@ input[type="checkbox"]:checked + .checkbox:before {
 .mission-header {
   text-align: center;
   font-size: 12vw;
-  margin-top: 20vw;
-  margin-bottom: 20vw;
+  margin-top: 5vw;
+  margin-bottom: 10vw;
 }
 
 .mission-subheader {
   text-align: center;
-  font-size: 8vw;
-  margin-bottom: 20vw;
-  line-height: 13vw;
-  
+  width: 90vw;
+  margin: 0 auto;
+  font-size: 5vw;
 }
 
 .mission-subsubheader {
   text-align: left;
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   font-size: 5vw;
-  margin-bottom: 20vw;
-  /* line-height: 7vw; */
+  /* margin-bottom: 20vw; */
+  line-height: 10vw;
 }
 
 .mission-emphasis {
-  font-size: 8vw;
+  font-size: 7vw;
+}
+
+.mission-polaroid {
+  width: 80vw;
+  transform: rotate(-5deg);
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10vw;
+}
+
+.missionPhonePic {
+  width: 40vw;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10vw;
+  margin-bottom: 10vw;
 }
