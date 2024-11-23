@@ -8,6 +8,7 @@ import Opbc from "./components/Opbc.js";
 import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
+import YourUpdatedMission from "./components/YourUpdatedMission.js";
 
 function App() {
   return (
@@ -39,9 +40,9 @@ function App() {
         {/* <Route path="/marble" exact>
           <Marble />
         </Route> */}
-        {/* <Route path="/yourupdatedmission" exact>
-          <Yourupdatedmission />
-        </Route> */}
+        <Route path="/yourupdatedmission" exact>
+          <YourUpdatedMission />
+        </Route>
         <Route path="/opbc" exact>
           <Opbc />
         </Route>
