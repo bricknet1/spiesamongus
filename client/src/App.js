@@ -6,6 +6,7 @@ import Myprofile from "./components/Myprofile.js";
 import NotFound from "./components/NotFound.js";
 import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
+import Privacy from "./components/Privacy.js";
 import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
@@ -66,9 +67,9 @@ function App() {
         <Route path="/" exact>
           <div>MAIN LANDING PAGE</div>
         </Route>
-        {/* <Route path="/privacy" exact>
+        <Route path="/privacy" exact>
           <Privacy />
-        </Route> */}
+        </Route>
         <Route path="/terms" exact>
           <Terms />
         </Route>

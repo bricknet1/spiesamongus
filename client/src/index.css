@@ -786,3 +786,29 @@ input[type="checkbox"]:checked + .checkbox:before {
   /* transform: translateY(0vw) translateX(0vw); */
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CONFIRMED CONTENT */
+
+.confirmedDropdownText {
+  font-size: 4.5vw;
+  width: 86vw;
+  margin-left: 7vw;
+  margin-right: 7vw;
+  font-weight: normal;
+  line-height: 7vw;
+  margin-bottom: 10vw;
+}
