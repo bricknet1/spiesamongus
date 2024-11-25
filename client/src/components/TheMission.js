@@ -1,7 +1,7 @@
 import marblePic from '../assets/pictures/Marble Polaroid.png';
-import mallPic from '../assets/pictures/Marble Polaroid.png';
-import phonePic from '../assets/pictures/Marble Polaroid.png';
-import pathPic from '../assets/pictures/Marble Polaroid.png';
+import mallPic from '../assets/pictures/Undercover shoppers.jpg';
+import phonePic from '../assets/pictures/Phone ringing no bg.png';
+import pathPic from '../assets/pictures/Bell-Tower-Directions.gif';
 
 import LeslieFooter from "./LeslieFooter.js";
 
@@ -44,7 +44,7 @@ function TheMission() {
           <span className='mission-emphasis'>2. STAY UNDERCOVER and STICK TOGETHER.</span> This area is a hive of spies and you do not want to draw attention to yourself or your targets. Act like you are normal shoppers at all times.<br/>
 
           <div className="ovalPicWrapper">
-            <img src={mallPic} className="ovalPic" alt="Women in a mall" />
+            <img src={mallPic} className="ovalPic-mall" alt="Women in a mall" />
           </div>
           <br/>
           <br/>

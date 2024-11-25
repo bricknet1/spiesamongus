@@ -749,6 +749,11 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-bottom: 10vw;
 }
 
+.ovalPic-mall {
+  width: auto;
+  height: 80vw; /* Make larger than wrapper to focus on a section */
+  transform: translateY(0vw) translateX(-20vw); /* Adjust to position the focus area */
+}
 
 
 
@@ -760,12 +765,11 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 
 
-
-/* THE MISSION CONTENT */
+/* YOUR UPDATED MISSION CONTENT */
 
 .updatedMission-map-wrapper {
   width: 85vw;
-  height: 110vw;
+  height: 109vw;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -777,7 +781,8 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .updatedMission-map {
-  width: 95vw;
+  width: 85vw;
   /* height: 60vw; */
   /* transform: translateY(0vw) translateX(0vw); */
 }
+

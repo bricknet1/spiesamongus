@@ -1,4 +1,4 @@
-import mapPic from '../assets/pictures/Marble Polaroid.png';
+import mapPic from '../assets/pictures/MarblePath5.7.24.gif';
 
 import LeslieFooter from "./LeslieFooter.js";
 
