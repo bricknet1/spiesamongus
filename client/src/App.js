@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
+import Confirmed from "./components/Confirmed.js";
 import Myhistory from "./components/Myhistory.js";
 import Myprofile from "./components/Myprofile.js";
 import NotFound from "./components/NotFound.js";
@@ -19,9 +20,9 @@ function App() {
         <Route path="/start" exact>
           <Start />
         </Route>
-        {/* <Route path="/confirmed" exact>
+        <Route path="/confirmed" exact>
           <Confirmed />
-        </Route> */}
+        </Route>
         {/* <Route path="/mission" exact>
           <Mission />
         </Route> */}
