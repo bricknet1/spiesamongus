@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import Confirmed from "./components/Confirmed.js";
+import Mission from "./components/Mission.js";
 import Myhistory from "./components/Myhistory.js";
 import Myprofile from "./components/Myprofile.js";
 import NotFound from "./components/NotFound.js";
@@ -10,6 +11,7 @@ import Privacy from "./components/Privacy.js";
 import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
+import YourMission from "./components/YourMission.js";
 import YourUpdatedMission from "./components/YourUpdatedMission.js";
 
 function App() {
@@ -24,12 +26,12 @@ function App() {
         <Route path="/confirmed" exact>
           <Confirmed />
         </Route>
-        {/* <Route path="/mission" exact>
+        <Route path="/mission" exact>
           <Mission />
-        </Route> */}
-        {/* <Route path="/yourmission" exact>
-          <Yourmission />
-        </Route> */}
+        </Route>
+        <Route path="/yourmission" exact>
+          <YourMission />
+        </Route>
         <Route path="/themission" exact>
           <TheMission />
         </Route>
