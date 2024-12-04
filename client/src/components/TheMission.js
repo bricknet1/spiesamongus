@@ -3,6 +3,8 @@ import mallPic from '../assets/pictures/Undercover shoppers.jpg';
 import phonePic from '../assets/pictures/Phone ringing no bg.png';
 import pathPic from '../assets/pictures/Bell-Tower-Directions.gif';
 
+import VCF from '../assets/Agent Papyrus site.vcf';
+
 import LeslieFooter from "./LeslieFooter.js";
 
 function TheMission() {
@@ -55,7 +57,7 @@ function TheMission() {
           <div className="orangeLine"/><br/>
           <br/>
 
-          <span className='mission-emphasis'><u>4. DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
+          <span className='mission-emphasis'>4. <u><a href={VCF} target="_blank" style={{color: "white"}}>DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</a></u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
 
           <img src={phonePic} className="missionPhonePic" alt="Telephone" />
 

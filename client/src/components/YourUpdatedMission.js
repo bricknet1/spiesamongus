@@ -31,7 +31,9 @@ function YourUpdatedMission() {
           <span className='mission-emphasis'>1. STAY UNDERCOVER.</span> Do not draw attention to yourself or your target. Act like you are a normal shopper at all times.<br/>
           <br/>
 
+          <br/>
           <div className="orangeLine"/><br/>
+          <br/>
 
           <span className='mission-emphasis'>2. TRACK DOWN AGENT MARBLE.</span> If found:<br/>
 
@@ -48,17 +50,23 @@ function YourUpdatedMission() {
           If they do not respond with these words, IT IS NOT MARBLE. Walk away and keep looking.<br/>
           <br/>
 
+          <br/>
           <div className="orangeLine"/><br/>
+          <br/>
 
           <span className='mission-emphasis'>3. MARBLE WILL GIVE YOU SOMETHING.</span><br/>
           <br/>
 
+          <br/>
           <div className="orangeLine"/><br/>
+          <br/>
 
           <span className='mission-emphasis'>4. SAY THANKS AND WALK AWAY.</span> Do not follow as that will spook Marble.<br/>
           <br/>
 
+          <br/>
           <div className="orangeLine"/><br/>
+          <br/>
           
           <span className='mission-emphasis'>5. TEXT AGENT PAPYRUS A DESCRIPTION OF WHAT MARBLE GAVE YOU.</span><br/>
           <br/>

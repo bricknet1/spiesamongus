@@ -23,6 +23,9 @@ function Confirmed() {
 
   return (
     <div className="pageContent" style={{paddingBottom:'10vw'}}>
+
+      <title>Mission Confirmed | Spies Among Us</title>
+
       <div className='orangeBar'>MISSION: CONFIRMED</div>
 
       <div style={{alignContent: 'center', textAlign: 'center'}}>
