@@ -3,7 +3,7 @@ import mallPic from '../assets/pictures/Undercover shoppers.jpg';
 import phonePic from '../assets/pictures/Phone ringing no bg.png';
 import pathPic from '../assets/pictures/Bell-Tower-Directions.gif';
 
-import VCF from '../assets/Agent Papyrus site.vcf';
+import VCF from '../assets/Agent Papyrus Contact.vcf';
 
 import LeslieFooter from "./LeslieFooter.js";
 
@@ -57,11 +57,11 @@ function YourMission() {
           <div className="orangeLine"/><br/>
           <br/>
 
-          <span className='mission-emphasis'>4. <u><a href={VCF} target="_blank" style={{color: "white"}}>DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</a></u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
+          <span className='mission-emphasis'>4. <u><a href={VCF} target="_blank" download="Agent Papyrus Contact.vcf" style={{color: "white"}}>DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</a></u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
 
           <img src={phonePic} className="missionPhonePic" alt="Telephone" />
 
-          <span className='mission-emphasis'>5. USE YOUR OWN PHONE.</span> Each agent should read texts and go to websites on their own phone. Share any information you discover! Only your partner can respond to texts, but you will need to use your phone to click on sites, fill out information, and answer phone calls as they come in!<br/>
+          <span className='mission-emphasis'>5. USE YOUR OWN PHONE.</span> Each agent should read texts and go to websites on their own phone. Share any information you discover! Only you, the primary agent, can respond to texts, but make sure your partner uses their phone to click on sites, fill out information, and answer phone calls!<br/>
           <br/>
 
           <div className="orangeLine"/><br/>
@@ -75,7 +75,8 @@ function YourMission() {
           <br/>
           <br/>
 
-          <span className='mission-emphasis'>7. Once you are there, tell your partner to text <span style={{ color: '#f9DF39'}}>READY FOR DANGER</span> to Agent Papyrus.</span>
+          <span className='mission-emphasis'>7. Once you are there, ask your partner what SECRET MESSAGE you need to text to:<br/><br/></span>
+          <div style={{ fontSize:"10vw", textAlign:"center"}}><a target="_parent" href="sms:+18776641821" style={{ color: '#f9DF39'}}><u>Agent Papyrus</u></a></div>
         </div>
 
 
