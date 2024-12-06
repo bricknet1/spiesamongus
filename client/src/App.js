@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import Confirmed from "./components/Confirmed.js";
+import Debrief from "./components/Debrief.js";
 import Mission from "./components/Mission.js";
 import Myhistory from "./components/Myhistory.js";
 import Myprofile from "./components/Myprofile.js";
@@ -53,9 +54,9 @@ function App() {
         <Route path="/obeliskterms" exact>
           <ObeliskTerms />
         </Route>
-        {/* <Route path="/debrief" exact>
+        <Route path="/debrief" exact>
           <Debrief />
-        </Route> */}
+        </Route>
 
         {/* ADMIN PAGES */}
         {/* <Route path="/bypass" exact>
