@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
+import Marble from "./components/Marble.js";
 import Mission from "./components/Mission.js";
 import Myhistory from "./components/Myhistory.js";
 import Myprofile from "./components/Myprofile.js";
@@ -42,9 +43,9 @@ function App() {
         <Route path="/myhistory" exact>
           <Myhistory />
         </Route>
-        {/* <Route path="/marble" exact>
+        <Route path="/marble" exact>
           <Marble />
-        </Route> */}
+        </Route>
         <Route path="/yourupdatedmission" exact>
           <YourUpdatedMission />
         </Route>

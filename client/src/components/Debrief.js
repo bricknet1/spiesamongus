@@ -306,7 +306,7 @@ function Debrief() {
               <div>
                 <img src={victoriaPic} className="debrief-headshot"/>
                 <div className='debrief-bio'>
-                  Victoria Strange is an actor, director, & model best known for her portrayals of scream queens throughout the indie horror world (Las Vegas Frankenstein, Murder Van, Slaughter on the Set) as femme fatales across the burgeoning vertical drama-verse (Sleeping Handsome, Entrapping The Heart of a Billionaire) and her work within American Immersion Theater's LA company. When not performing across stage & screen (or the streets of Little Tokyo!) she can be found suspended on aerial silks, or tucked inside a personal fortress of books alongside her cats. Reach out via Instagram @victoriavstrange to chat about overlooked film soundtracks, climate justice, or your next great performance idea.
+                  Victoria Strange is an actor, director, & model best known for her portrayals of scream queens throughout the indie horror world (<i>Las Vegas Frankenstein, Murder Van, Slaughter on the Set</i>) as femme fatales across the burgeoning vertical drama-verse (<i>Sleeping Handsome, Entrapping The Heart of a Billionaire</i>) and her work within American Immersion Theater's LA company. When not performing across stage & screen (or the streets of Little Tokyo!) she can be found suspended on aerial silks, or tucked inside a personal fortress of books alongside her cats. Reach out via Instagram @victoriavstrange to chat about overlooked film soundtracks, climate justice, or your next great performance idea.
                 </div>
               </div>
             }
