@@ -859,3 +859,41 @@ input[type="checkbox"]:checked + .checkbox:before {
   border-left-color: rgb(2, 97, 255);
   padding-inline-start: 8vw;
 }
+
+.debrief-victoria {
+  width: 60vw;
+  transform: rotate(-5deg);
+  display: block;
+  margin-left: 10vw;
+  margin-bottom: 10vw;
+}
+
+.debrief-james {
+  width: 60vw;
+  transform: rotate(15deg);
+  display: block;
+  margin-left: 25vw;
+  margin-bottom: 10vw;
+}
+
+.debrief-headshot {
+  width: 90vw;
+  display: block;
+  margin: 0 auto;
+  margin-top: 12vw;
+}
+
+.debrief-bio {
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 1vw;
+  font-size: 7vw;
+  font-family: cormorantgaramond-light, cormorantgaramond, "cormorant garamond", serif;
+  font-weight: normal;
+  line-height: 10vw;
+  margin-bottom: 40vw;
+}
+
+.no-scroll {
+  overflow: hidden;
+}

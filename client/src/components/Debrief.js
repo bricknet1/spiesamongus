@@ -1,6 +1,9 @@
-import notepadPic from '../assets/pictures/personal notes.jpg';
+import victoriaPic from '../assets/pictures/Marble Polaroid.png';
+import jamesPic from '../assets/pictures/Marble Polaroid.png';
+import victoriaPolaroid from '../assets/pictures/Marble Polaroid.png';
+import jamesPolaroid from '../assets/pictures/Marble Polaroid.png';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function Debrief() {
@@ -10,6 +13,28 @@ function Debrief() {
   const [threeToggled, setThreeToggled] = useState(false);
   const [fourToggled, setFourToggled] = useState(false);
   const [fiveToggled, setFiveToggled] = useState(false);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const handleImageClick = (content) => {
+    setModalContent(content);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setModalContent(null);
+  };
+
+  useEffect(() => {
+    if (modalVisible) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+    return () => document.body.classList.remove('no-scroll'); // Cleanup on unmount
+  }, [modalVisible]);
 
 
   return (
@@ -214,9 +239,166 @@ function Debrief() {
 
       <div className='orangeBar'>CREDITS</div>
 
+      <div className="debrief-main-text">
 
+      AGENT MARBLE<br/>
+      (tap image to reveal)</div>
 
+      <img
+        src={victoriaPolaroid}
+        className="debrief-victoria"
+        alt="Victoria Strange"
+        onClick={() => handleImageClick('Victoria')}
+        style={{ cursor: 'pointer' }}
+      />
+      <img
+        src={jamesPolaroid}
+        className="debrief-james"
+        alt="James Jelin"
+        onClick={() => handleImageClick('James')}
+        style={{ cursor: 'pointer' }}
+      />
 
+      {modalVisible && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+            overflow: 'auto'
+          }}
+        >
+          <div
+            style={{
+              background: '#21174C',
+              // padding: '20px',
+              // position: 'relative',
+              width: '100%',
+              height: '100%',
+              overflowY: 'auto'
+            }}
+          >
+            <button
+              onClick={closeModal}
+              style={{
+                position: 'absolute',
+                top: '1vw',
+                right: '1vw',
+                background: 'transparent',
+                border: 'none',
+                fontSize: '15vw',
+                cursor: 'pointer',
+                color: 'white'
+              }}
+            >
+              &times;
+            </button>
+            {modalContent==='Victoria' && 
+              <div>
+                <img src={victoriaPic} className="debrief-headshot"/>
+                <div className='debrief-bio'>
+                  Victoria Strange is an actor, director, & model best known for her portrayals of scream queens throughout the indie horror world (Las Vegas Frankenstein, Murder Van, Slaughter on the Set) as femme fatales across the burgeoning vertical drama-verse (Sleeping Handsome, Entrapping The Heart of a Billionaire) and her work within American Immersion Theater's LA company. When not performing across stage & screen (or the streets of Little Tokyo!) she can be found suspended on aerial silks, or tucked inside a personal fortress of books alongside her cats. Reach out via Instagram @victoriavstrange to chat about overlooked film soundtracks, climate justice, or your next great performance idea.
+                </div>
+              </div>
+            }
+
+            {modalContent==='James' && 
+              <div>
+                <img src={jamesPic} className="debrief-headshot"/>
+                <div className='debrief-bio'>
+                  James Jelin is a Hollywood-based improviser, actor, comedian, and drag queen. He performs at UCB with House team Local Tycoon and co-hosts UCB's Drag Lip Sync Competition. His training also includes Groundlings, Doug Warhit's Scene Study, The Commercial Class, Character Study with SNL's John Milhiser, and a degree in Theater from Bowdoin College. You can catch him in USATV's upcoming series Second Chances. On the side, James runs social media and fundraising programs for progressive political campaigns.
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      )}
+
+      <div className="orangeLine"/>
+
+        Agent Shale Voice Work
+
+        Tosca Minotto
+        
+        Agent Shale Model
+
+        Kitty Medina
+        ​
+        Agent Leslie Voice Work
+
+        Jo Scott
+        ​
+        Agent Papyrus Voice Work
+
+        Prescott Gadd
+        
+        Agent Papyrus Model
+
+        Peter Scott
+
+      <div className="orangeLine"/>
+
+        Created by
+
+        Prescott Gadd
+
+        Operations by
+
+        Jen Staben
+
+        Art and Design by
+
+        Curtiss Calleo
+
+        Special thanks to​
+
+        William O'Connell / Subtext Game
+        for tech advice
+
+      <div className="orangeLine"/>
+
+        Thank you to our playtesters...
+​
+        John Anderson
+        Molly Anderson
+        Benjamin Berk
+        Brian Biancardi
+        Serena Bright
+        Becky Cumberland
+        Marlee Delia
+        Annie Donley
+        Rachel Donley
+        Valerie Gansel
+        Alex Haney
+        Tim Heurlin
+        Tommy Honton
+        Kevin Horst
+        Jared Jeffries
+        James Jelin
+        Tim Lamphier
+        Phil Meister
+        Geremy Mumenthaler
+        Jeff Murdoch
+        Anne Nemer
+        Jordan Nomura
+        Erin Rein
+        James Ross
+        Kate Ross
+        Louis Ross
+        Tyler Samples
+        Harold Scissors
+        Christine Shedd-Thompson
+        Jen Staben
+        Victoria Strange
+        Meaghan Strickland
+        Nina Zhao
 
 
 
