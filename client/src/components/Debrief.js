@@ -2,6 +2,8 @@ import victoriaPic from '../assets/pictures/Marble Polaroid.png';
 import jamesPic from '../assets/pictures/Marble Polaroid.png';
 import victoriaPolaroid from '../assets/pictures/Marble Polaroid.png';
 import jamesPolaroid from '../assets/pictures/Marble Polaroid.png';
+import instagram from '../assets/pictures/instagram.webp';
+import facebook from '../assets/pictures/facebook.webp';
 
 import { useState, useEffect } from 'react';
 
@@ -322,127 +324,102 @@ function Debrief() {
       )}
 
       <div className="orangeLine"/>
-
-        Agent Shale Voice Work
-
-        Tosca Minotto
-        
-        Agent Shale Model
-
-        Kitty Medina
-        ​
-        Agent Leslie Voice Work
-
-        Jo Scott
-        ​
-        Agent Papyrus Voice Work
-
-        Prescott Gadd
-        
-        Agent Papyrus Model
-
-        Peter Scott
+      <br/>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Agent Shale Voice Work</div>
+      <div className="debrief-names"><a href='https://www.thetarotnerd.com/' target="_blank" style={{color: 'white'}}>Tosca Minotto</a></div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Agent Shale Model</div>
+      <div className="debrief-names"><a href='https://www.campdouttents.com/about' target="_blank" style={{color: 'white'}}>Kitty Medina</a></div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Agent Leslie Voice Work</div>
+      <div className="debrief-names"><a href='https://www.instagram.com/momstomppodcast/?hl=en' target="_blank" style={{color: 'white'}}>Jo Scott</a></div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Agent Papyrus Voice Work</div>
+      <div className="debrief-names">Prescott Gadd</div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Agent Papyrus Model</div>
+      <div className="debrief-names">Peter Scott</div>
+      <br/>
+      <br/>
+      <br/>
+      <div className="orangeLine"/>
+      <br/>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Created by</div>
+      <div className="debrief-names">Prescott Gadd</div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Operations by</div>
+      <div className="debrief-names">Jen Staben</div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Art and Design by</div>
+      <div className="debrief-names"><a href='https://ccalleo.com/' target="_blank" style={{color: 'white'}}>Curtiss Calleo</a></div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Special thanks to</div>
+      <div className="debrief-names"><a href='https://williamoconnell.me/' target="_blank" style={{color: 'white'}}>William O'Connell / Subtext Game</a></div>
+      <div className="debrief-titles">for tech advice</div>
+      <br/>
+      <br/>
+      <br/>
 
       <div className="orangeLine"/>
 
-        Created by
-
-        Prescott Gadd
-
-        Operations by
-
-        Jen Staben
-
-        Art and Design by
-
-        Curtiss Calleo
-
-        Special thanks to​
-
-        William O'Connell / Subtext Game
-        for tech advice
-
-      <div className="orangeLine"/>
-
-        Thank you to our playtesters...
-​
-        John Anderson
-        Molly Anderson
-        Benjamin Berk
-        Brian Biancardi
-        Serena Bright
-        Becky Cumberland
-        Marlee Delia
-        Annie Donley
-        Rachel Donley
-        Valerie Gansel
-        Alex Haney
-        Tim Heurlin
-        Tommy Honton
-        Kevin Horst
-        Jared Jeffries
-        James Jelin
-        Tim Lamphier
-        Phil Meister
-        Geremy Mumenthaler
-        Jeff Murdoch
-        Anne Nemer
-        Jordan Nomura
-        Erin Rein
-        James Ross
-        Kate Ross
-        Louis Ross
-        Tyler Samples
-        Harold Scissors
-        Christine Shedd-Thompson
-        Jen Staben
-        Victoria Strange
-        Meaghan Strickland
+      <div className="debrief-names">
+        <br/>
+        Thank you to our playtesters...<br/>
+        <br/>
+        John Anderson<br/>
+        Molly Anderson<br/>
+        Benjamin Berk<br/>
+        Brian Biancardi<br/>
+        Serena Bright<br/>
+        Becky Cumberland<br/>
+        Marlee Delia<br/>
+        Annie Donley<br/>
+        Rachel Donley<br/>
+        Valerie Gansel<br/>
+        Alex Haney<br/>
+        Tim Heurlin<br/>
+        Tommy Honton<br/>
+        Kevin Horst<br/>
+        Jared Jeffries<br/>
+        James Jelin<br/>
+        Tim Lamphier<br/>
+        Phil Meister<br/>
+        Geremy Mumenthaler<br/>
+        Jeff Murdoch<br/>
+        Anne Nemer<br/>
+        Jordan Nomura<br/>
+        Erin Rein<br/>
+        James Ross<br/>
+        Kate Ross<br/>
+        Louis Ross<br/>
+        Tyler Samples<br/>
+        Harold Scissors<br/>
+        Christine Shedd-Thompson<br/>
+        Jen Staben<br/>
+        Victoria Strange<br/>
+        Meaghan Strickland<br/>
         Nina Zhao
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* <div className="ovalPicWrapper">
-        <img src={notepadPic} className="ovalPic" alt="notepad" />
       </div>
 
-      <div className='myHistoryHeading'>Agent Papyrus, click on a mission below to see your personal notes.</div> */}
 
       
       
-
+      <div style={{ fontSize: '5vw', textAlign: 'center', marginTop: '30vw'}}>
+        <a href='https://www.instagram.com/spiesamong' target='_blank' rel="noreferrer"><img src={instagram} alt="Instagram" style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
+        <a href='https://www.facebook.com/spiesamong' target='_blank' rel="noreferrer"><img src={facebook} alt="Facebook" style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
+        <div style={{fontWeight: "normal"}}>2024 Interactive Escapes</div>
+      </div>
 
     </div>
   )

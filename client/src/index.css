@@ -897,3 +897,19 @@ input[type="checkbox"]:checked + .checkbox:before {
 .no-scroll {
   overflow: hidden;
 }
+
+.debrief-names {
+  text-align: center;
+  font-size: 7.5vw;
+  margin-left: 5vw;
+  width: 90vw;
+}
+
+.debrief-titles {
+  text-align: center;
+  font-size: 4.5vw;
+  margin-left: 5vw;
+  width: 90vw;
+  font-weight: normal;
+  line-height: 10vw;
+}
