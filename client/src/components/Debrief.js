@@ -1,7 +1,7 @@
-import victoriaPic from '../assets/pictures/Marble Polaroid.png';
-import jamesPic from '../assets/pictures/Marble Polaroid.png';
-import victoriaPolaroid from '../assets/pictures/Marble Polaroid.png';
-import jamesPolaroid from '../assets/pictures/Marble Polaroid.png';
+import victoriaPic from '../assets/pictures/Victoria Strange.png';
+import jamesPic from '../assets/pictures/James Jelin Headshot.jpg';
+import victoriaPolaroid from '../assets/pictures/Polaroid - Victoria Strange.png';
+import jamesPolaroid from '../assets/pictures/Polaroid - James Jelin.png';
 import instagram from '../assets/pictures/instagram.webp';
 import facebook from '../assets/pictures/facebook.webp';
 
