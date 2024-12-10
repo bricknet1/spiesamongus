@@ -3,12 +3,11 @@ import { useState } from "react";
 import LeslieFooter from "./LeslieFooter.js";
 
 function Marble() {
-  const [selectedLetter, setSelectedLetter] = useState(null); // Store both value and ID
-  const [puzzleWords, setPuzzleWords] = useState({
+  const initialPuzzleWords = {
     swan: "_W__",
     necklace: "__C__AC_",
-  });
-  const [availableLetters, setAvailableLetters] = useState([
+  };
+  const initialAvailableLetters = [
     { letter: "R", id: 0 },
     { letter: "E", id: 1 },
     { letter: "U", id: 2 },
@@ -44,7 +43,10 @@ function Marble() {
     { letter: "N", id: 32 },
     { letter: "E", id: 33 },
     { letter: "L", id: 34 },
-  ]);
+  ]
+  const [selectedLetter, setSelectedLetter] = useState(null); // Store both value and ID
+  const [puzzleWords, setPuzzleWords] = useState(initialPuzzleWords);
+  const [availableLetters, setAvailableLetters] = useState(initialAvailableLetters);
 
   function handleLetterSelect(e) {
     e.preventDefault();
@@ -86,6 +88,47 @@ function Marble() {
       setSelectedLetter(null); // Clear the selected letter
     }
   }
+
+  function resetUnsolvedWords() {
+    setPuzzleWords((prevWords) => {
+      const resetWords = {};
+      const usedLetters = []; // Track letters in unsolved words for resetting
+  
+      for (const [word, value] of Object.entries(prevWords)) {
+        if (value !== word.toUpperCase()) {
+          // Reset only unsolved words and collect used letters
+          const initialWord = initialPuzzleWords[word];
+          resetWords[word] = initialWord;
+  
+          // Collect letters from the unsolved word
+          for (let i = 0; i < value.length; i++) {
+            if (value[i] !== "_" && initialWord[i] === "_") {
+              usedLetters.push(value[i]);
+            }
+          }
+        } else {
+          resetWords[word] = value; // Keep solved words as they are
+        }
+      }
+  
+      // Merge unsolved word letters into available letters
+      setAvailableLetters((prevAvailable) => {
+        const resetLetters = usedLetters.map((letter) => {
+          // Find a unique ID for each used letter
+          const match = initialAvailableLetters.find(
+            (l) => l.letter === letter && !prevAvailable.some((a) => a.id === l.id)
+          );
+          return match || null; // Ensure we only add valid matches
+        }).filter(Boolean); // Remove nulls
+  
+        return [...prevAvailable, ...resetLetters];
+      });
+  
+      return resetWords;
+    });
+  }
+  
+  
 
   return (
     <div className="pageContent">
@@ -148,6 +191,24 @@ function Marble() {
           {item.letter}
         </button>
       ))}
+
+      <br/>
+
+      <button
+        onClick={resetUnsolvedWords}
+        className="resetButton"
+        style={{
+          backgroundColor: "red",
+          color: "white",
+          padding: "10px 20px",
+          borderRadius: "5px",
+          marginTop: "20px",
+          cursor: "pointer",
+        }}
+      >
+        Reset Letters
+      </button>
+
       <LeslieFooter />
     </div>
   );
