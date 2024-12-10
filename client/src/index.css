@@ -913,3 +913,28 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-weight: normal;
   line-height: 10vw;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MARBLE PUZZLE */
+
+.marbleButton {
+  width: 10vw;
+  height: 10vw;
+}
