@@ -6,6 +6,16 @@ function Marble() {
   const initialPuzzleWords = {
     swan: "_W__",
     necklace: "__C__AC_",
+    marble: "M___LE",
+    danger: "D____R",
+    signal: "S____L",
+    vui: "V__",
+    ve: "V_",
+    cup: "__P",
+    blue: "___E",
+    jeans: "J__NS",
+    black: "_____",
+    hat: "_AT"
   };
   const initialAvailableLetters = [
     { letter: "R", id: 0 },
@@ -177,14 +187,204 @@ function Marble() {
       ))}
 
       <br />
+
+      {/* Render buttons for MARBLE */}
+      {puzzleWords.marble.split("").map((char, index) => (
+        <button
+          key={`marble-${index}`}
+          data-word="marble"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.marble === "MARBLE" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for DANGER */}
+      {puzzleWords.danger.split("").map((char, index) => (
+        <button
+          key={`danger-${index}`}
+          data-word="danger"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.danger === "DANGER" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for SIGNAL */}
+      {puzzleWords.signal.split("").map((char, index) => (
+        <button
+          key={`signal-${index}`}
+          data-word="signal"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.signal === "SIGNAL" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for VUI */}
+      {puzzleWords.vui.split("").map((char, index) => (
+        <button
+          key={`vui-${index}`}
+          data-word="vui"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.vui === "VUI" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for VE */}
+      {puzzleWords.ve.split("").map((char, index) => (
+        <button
+          key={`ve-${index}`}
+          data-word="ve"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.ve === "VE" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for BLUE */}
+      {puzzleWords.blue.split("").map((char, index) => (
+        <button
+          key={`blue-${index}`}
+          data-word="blue"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.blue === "BLUE" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+      
+      <br />
+
+      {/* Render buttons for JEANS */}
+      {puzzleWords.jeans.split("").map((char, index) => (
+        <button
+          key={`jeans-${index}`}
+          data-word="jeans"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.jeans === "JEANS" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for BLACK */}
+      {puzzleWords.black.split("").map((char, index) => (
+        <button
+          key={`black-${index}`}
+          data-word="black"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.black === "BLACK" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+      <br />
+
+      {/* Render buttons for HAT */}
+      {puzzleWords.hat.split("").map((char, index) => (
+        <button
+          key={`hat-${index}`}
+          data-word="hat"
+          data-index={index}
+          onClick={char === "_" ? handleLetterPlacement : null}
+          disabled={char !== "_"}
+          style={{
+            backgroundColor: puzzleWords.hat === "HAT" ? "yellow" : "white",
+            color: "black",
+            cursor: char !== "_" ? "not-allowed" : "pointer",
+          }}
+          className="marbleButton"
+        >
+          {char}
+        </button>
+      ))}
+
+
+      <br />
       <br />
 
       {/* Render available letters */}
-      {availableLetters.map((item) => (
+      {availableLetters.map((item, index) => (
         <button
-          key={item.id} // Unique key
+          key={`${item.id}-${item.letter}-${index}`} // Combine id and letter for uniqueness
           value={item.letter}
-          data-id={item.id} // Pass unique ID
+          data-id={item.id}
           onClick={handleLetterSelect}
           className="marbleButton"
         >
@@ -192,7 +392,7 @@ function Marble() {
         </button>
       ))}
 
-      <br/>
+      {/* <br/> */}
 
       <button
         onClick={resetUnsolvedWords}
@@ -200,10 +400,11 @@ function Marble() {
         style={{
           backgroundColor: "red",
           color: "white",
-          padding: "10px 20px",
+          // padding: "10px 20px",
           borderRadius: "5px",
-          marginTop: "20px",
+          // marginTop: "20px",
           cursor: "pointer",
+          height: "10vw"
         }}
       >
         Reset Letters
