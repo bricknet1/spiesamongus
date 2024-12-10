@@ -49,7 +49,7 @@ function Debrief() {
         <br/>
         We are still tweaking this new show so we appreciate all feedback as we improve it.<br/>
         <br/>
-        Please tell us about your experience <a href="https://forms.gle/46bRLZ4QmdgKmGYW6" target="_blank" rel="noreferrer noopener" style={{color: '#f9DF39'}}>here</a>.
+        Please tell us about your experience <a href="https://forms.gle/46bRLZ4QmdgKmGYW6" target="_blank" rel="noreferrer" style={{color: '#f9DF39'}}>here</a>.
       </div>
 
       <div className='orangeBar'>LOCAL RECS</div>
@@ -72,13 +72,13 @@ function Debrief() {
       </div>
       {oneToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/Qr8EMq6z15iatjpr8" rel="noopener" className="debrief-link">MIDORI MATCHA</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/Qr8EMq6z15iatjpr8" rel="noreferrer" className="debrief-link">MIDORI MATCHA</a><br/>
           <i>They take matcha VERY seriously</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Matcha Latte</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6" rel="noopener" className="debrief-link">HONEYMEE</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6" rel="noreferrer" className="debrief-link">HONEYMEE</a><br/>
           <i>Lots of delicious drinks and ice creams</i><br/>
           <br/>
           What to order?
@@ -102,19 +102,19 @@ function Debrief() {
       </div>
       {twoToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/b6rM8sWXJFDSCdD88" rel="noopener" className="debrief-link">BANDIT CHOW MEIN</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/b6rM8sWXJFDSCdD88" rel="noreferrer" className="debrief-link">BANDIT CHOW MEIN</a><br/>
           <i>You walked by this food truck a few times today. It is delicious!</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Red Oil Chicken Chow Mein</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/uvb3fGM854rRdU2k9" rel="noopener" className="debrief-link">BUNGRAZE</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/uvb3fGM854rRdU2k9" rel="noreferrer" className="debrief-link">BUNGRAZE</a><br/>
           <i>They have fresh focaccia dough that they throw into the oven  only after you order. Makes for an incredible burger bun!</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Super Smash Burger</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/sf2aSv89ck3TNfUx7" rel="noopener" className="debrief-link">NIJIYA MARKET</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/sf2aSv89ck3TNfUx7" rel="noreferrer" className="debrief-link">NIJIYA MARKET</a><br/>
           <i>This is the very market you first discovered with the golden statues on the roof! They have everything you could want from a Japanese market.</i><br/>
           <br/>
           What to order?
@@ -138,13 +138,13 @@ function Debrief() {
       </div>
       {threeToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/MBAcx7Ki7EVEdE3T6" rel="noopener" className="debrief-link">WOLF AND CRANE</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/MBAcx7Ki7EVEdE3T6" rel="noreferrer" className="debrief-link">WOLF AND CRANE</a><br/>
           <i>Probably the closest rec to you if you just finished the mission. Huge selection of Japanese whiskies and tasty cocktails.</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Beets by Wolf</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/NMrXQfNq6XY7Kbzq7" rel="noopener" className="debrief-link">THE MERMAID</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/NMrXQfNq6XY7Kbzq7" rel="noreferrer" className="debrief-link">THE MERMAID</a><br/>
           <i>Tiki dive bar with refreshing drinks!</i><br/>
           <br/>
           What to order?
@@ -168,19 +168,19 @@ function Debrief() {
       </div>
       {fourToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/oz9gK5bfa8Z5gzuWA" rel="noopener" className="debrief-link">SOMISOMI</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/oz9gK5bfa8Z5gzuWA" rel="noreferrer" className="debrief-link">SOMISOMI</a><br/>
           <i>Specializing in Taiyaki: freshly grilled dough in the shape of a fish. Pick a filling that sounds good to you.</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Nutella Taiyaki</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/CzX9pYJhDZ97y4156" rel="noopener" className="debrief-link">MIDORI MATCHA CAFE</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/CzX9pYJhDZ97y4156" rel="noreferrer" className="debrief-link">MIDORI MATCHA CAFE</a><br/>
           <i>They take matcha VERY seriously</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Matcha Swirl Soft Serve</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6" rel="noopener" className="debrief-link">HONEYMEE</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6" rel="noreferrer" className="debrief-link">HONEYMEE</a><br/>
           <i>Lots of delicious drinks and ice creams</i><br/>
           <br/>
           What to order?
@@ -204,25 +204,25 @@ function Debrief() {
       </div>
       {fiveToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/y2ArQaL7bTpSu3Vv7" rel="noopener" className="debrief-link">IZAKAYA GAZEN</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/y2ArQaL7bTpSu3Vv7" rel="noreferrer" className="debrief-link">IZAKAYA GAZEN</a><br/>
           <i>Huge menu, great sake list. Everything from sushi to shabu shabu to noodles.</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Signature Tofu Sampler</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/wHAwj2jXGbWjSH7P6" rel="noopener" className="debrief-link">SHIN-SEN-GUMI HAKATA RAMEN</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/wHAwj2jXGbWjSH7P6" rel="noreferrer" className="debrief-link">SHIN-SEN-GUMI HAKATA RAMEN</a><br/>
           <i>Great ramen with lots of topping options</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Spicy Hakata Dandan Men Ramen</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/hcLXCQqZzFNmWeNV9" rel="noopener" className="debrief-link">BADMAASH</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/hcLXCQqZzFNmWeNV9" rel="noreferrer" className="debrief-link">BADMAASH</a><br/>
           <i>Classic Indian menu spruced up with inventive fusion items</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Goan Pork Curry</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/S2jq33aQDnA8NxZy7" rel="noopener" className="debrief-link">RAKKAN RAMEN</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/S2jq33aQDnA8NxZy7" rel="noreferrer" className="debrief-link">RAKKAN RAMEN</a><br/>
           <i>Offers yummy Vegetarian & Vegan Ramen</i><br/>
           <br/>
           What to order?
@@ -304,7 +304,7 @@ function Debrief() {
             </button>
             {modalContent==='Victoria' && 
               <div>
-                <img src={victoriaPic} className="debrief-headshot"/>
+                <img src={victoriaPic} className="debrief-headshot" alt="Victoria Strange"/>
                 <div className='debrief-bio'>
                   Victoria Strange is an actor, director, & model best known for her portrayals of scream queens throughout the indie horror world (<i>Las Vegas Frankenstein, Murder Van, Slaughter on the Set</i>) as femme fatales across the burgeoning vertical drama-verse (<i>Sleeping Handsome, Entrapping The Heart of a Billionaire</i>) and her work within American Immersion Theater's LA company. When not performing across stage & screen (or the streets of Little Tokyo!) she can be found suspended on aerial silks, or tucked inside a personal fortress of books alongside her cats. Reach out via Instagram @victoriavstrange to chat about overlooked film soundtracks, climate justice, or your next great performance idea.
                 </div>
@@ -313,7 +313,7 @@ function Debrief() {
 
             {modalContent==='James' && 
               <div>
-                <img src={jamesPic} className="debrief-headshot"/>
+                <img src={jamesPic} className="debrief-headshot" alt="James Jelin"/>
                 <div className='debrief-bio'>
                   James Jelin is a Hollywood-based improviser, actor, comedian, and drag queen. He performs at UCB with House team Local Tycoon and co-hosts UCB's Drag Lip Sync Competition. His training also includes Groundlings, Doug Warhit's Scene Study, The Commercial Class, Character Study with SNL's John Milhiser, and a degree in Theater from Bowdoin College. You can catch him in USATV's upcoming series Second Chances. On the side, James runs social media and fundraising programs for progressive political campaigns.
                 </div>
@@ -328,15 +328,15 @@ function Debrief() {
       <br/>
       <br/>
       <div className="debrief-titles">Agent Shale Voice Work</div>
-      <div className="debrief-names"><a href='https://www.thetarotnerd.com/' target="_blank" style={{color: 'white'}}>Tosca Minotto</a></div>
+      <div className="debrief-names"><a href='https://www.thetarotnerd.com/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Tosca Minotto</a></div>
       <br/>
       <br/>
       <div className="debrief-titles">Agent Shale Model</div>
-      <div className="debrief-names"><a href='https://www.campdouttents.com/about' target="_blank" style={{color: 'white'}}>Kitty Medina</a></div>
+      <div className="debrief-names"><a href='https://www.campdouttents.com/about' target="_blank" rel="noreferrer" style={{color: 'white'}}>Kitty Medina</a></div>
       <br/>
       <br/>
       <div className="debrief-titles">Agent Leslie Voice Work</div>
-      <div className="debrief-names"><a href='https://www.instagram.com/momstomppodcast/?hl=en' target="_blank" style={{color: 'white'}}>Jo Scott</a></div>
+      <div className="debrief-names"><a href='https://www.instagram.com/momstomppodcast/?hl=en' target="_blank" rel="noreferrer" style={{color: 'white'}}>Jo Scott</a></div>
       <br/>
       <br/>
       <div className="debrief-titles">Agent Papyrus Voice Work</div>
@@ -361,11 +361,11 @@ function Debrief() {
       <br/>
       <br/>
       <div className="debrief-titles">Art and Design by</div>
-      <div className="debrief-names"><a href='https://ccalleo.com/' target="_blank" style={{color: 'white'}}>Curtiss Calleo</a></div>
+      <div className="debrief-names"><a href='https://ccalleo.com/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Curtiss Calleo</a></div>
       <br/>
       <br/>
       <div className="debrief-titles">Special thanks to</div>
-      <div className="debrief-names"><a href='https://williamoconnell.me/' target="_blank" style={{color: 'white'}}>William O'Connell / Subtext Game</a></div>
+      <div className="debrief-names"><a href='https://williamoconnell.me/' target="_blank" rel="noreferrer" style={{color: 'white'}}>William O'Connell / Subtext Game</a></div>
       <div className="debrief-titles">for tech advice</div>
       <br/>
       <br/>

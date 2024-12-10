@@ -11,7 +11,7 @@ function LeslieFooter() {
         </div>
 
         <div className="leslieFooterText">
-          Having a catastrophic issue with your mission? Text <a className='textLeslieLink' target="_blank" href="sms:+18778477437"><u>Agent Leslie</u></a> for help!
+          Having a catastrophic issue with your mission? Text <a className='textLeslieLink' target="_blank" rel="noreferrer" href="sms:+18778477437"><u>Agent Leslie</u></a> for help!
         </div>
       </div>
     </div>

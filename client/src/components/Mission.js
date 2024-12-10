@@ -57,7 +57,7 @@ function Mission() {
           <div className="orangeLine"/><br/>
           <br/>
 
-          <span className='mission-emphasis'>4. <u><a href={VCF} target="_blank" download="Agent Papyrus Contact.vcf" style={{color: "white"}}>DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</a></u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
+          <span className='mission-emphasis'>4. <u><a href={VCF} target="_blank" rel="noreferrer" download="Agent Papyrus Contact.vcf" style={{color: "white"}}>DOWNLOAD THIS CONTACT FILE TO YOUR PHONE</a></u> and follow your phone's instructions to import them into your contacts. Failure to do this will make your mission VERY confusing.</span>
 
           <img src={phonePic} className="missionPhonePic" alt="Telephone" />
 
