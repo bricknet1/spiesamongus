@@ -934,7 +934,70 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 /* MARBLE PUZZLE */
 
+.puzzleContainer {
+  width: 90vw;
+  display: block;
+  margin: 0 auto;
+}
+
 .marbleButton {
-  width: 10vw;
+  width: 8vw;
+  height: 8vw;
+  font-size: 4.5vw;
+  
+}
+
+.resetButton {
+  background-color: #FF3700;
+  color: white;
+  /* padding: 10px 20px; */
+  border-radius: 20px;
+  /* margin-top: 20px; */
+  cursor: pointer;
   height: 10vw;
+  width: 40vw;
+}
+
+.marbleIs {
+  color: #F9DF39;
+  margin-top: 2vw;
+  font-size: 5vw;
+}
+
+.swanNecklaceContainer {
+  /* justify-items: center; */
+}
+
+.MDSVVCFlex {
+  display: flex;
+}
+
+.MDSContainer {
+  width: 60vw;
+}
+
+.vuiVeCupContainer {
+  width: 30vw;
+}
+
+.clothingFlex {
+  display: flex;
+}
+
+.blueJeansContainer {
+  width: 45vw;
+}
+
+.blackHatContainer {
+  width: 45vw;
+}
+
+.marbleInstructions {
+  font-size: 7vw;
+  text-align: center;
+}
+
+.lettersContainer {
+  width: 60vw;
+  margin-left: 15vw;
 }
