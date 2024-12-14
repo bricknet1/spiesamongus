@@ -935,24 +935,28 @@ input[type="checkbox"]:checked + .checkbox:before {
 /* MARBLE PUZZLE */
 
 .puzzleContainer {
-  width: 90vw;
+  width: 95vw;
   display: block;
   margin: 0 auto;
 }
 
 .marbleButton {
-  width: 8vw;
-  height: 8vw;
+  width: 9vw;
+  height: 9vw;
   font-size: 4.5vw;
   
+}
+
+.resetButtonContainer {
+  width: 40vw;
+  display: block;
+  margin: 0 auto;
 }
 
 .resetButton {
   background-color: #FF3700;
   color: white;
-  /* padding: 10px 20px; */
   border-radius: 20px;
-  /* margin-top: 20px; */
   cursor: pointer;
   height: 10vw;
   width: 40vw;
@@ -965,7 +969,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .swanNecklaceContainer {
-  /* justify-items: center; */
+  width: 95vw;
 }
 
 .MDSVVCFlex {
@@ -978,6 +982,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 .vuiVeCupContainer {
   width: 30vw;
+  margin-left: 5vw;
 }
 
 .clothingFlex {
@@ -990,6 +995,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 .blackHatContainer {
   width: 45vw;
+  margin-left: 5vw;
 }
 
 .marbleInstructions {
@@ -998,6 +1004,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .lettersContainer {
-  width: 60vw;
-  margin-left: 15vw;
+  width: 63vw;
+  display: block;
+  margin: 0 auto;
 }

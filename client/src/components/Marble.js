@@ -455,7 +455,8 @@ function Marble() {
 
         <br/>
         
-        <div style={{marginLeft: '25vw'}}>
+
+        <div className="resetButtonContainer">
           <button
             onClick={resetUnsolvedWords}
             className="resetButton"
@@ -463,6 +464,7 @@ function Marble() {
             Reset Letters
           </button>
         </div>
+
 
       </div>
 
