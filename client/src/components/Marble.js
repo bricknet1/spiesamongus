@@ -156,7 +156,7 @@ function Marble() {
   
 
   return (
-    <div className="pageContent" style={{paddingBottom: '0vw'}}>
+    <div className="pageContent">
       <div className="orangeBar" style={{height: '13vw'}}>Agent Marble is ...</div>
 
       <div className="puzzleContainer">
