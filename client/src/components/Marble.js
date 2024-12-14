@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import LeslieFooter from "./LeslieFooter.js";
 
@@ -57,6 +57,15 @@ function Marble() {
   const [selectedLetter, setSelectedLetter] = useState(null); // Store both value and ID
   const [puzzleWords, setPuzzleWords] = useState(initialPuzzleWords);
   const [availableLetters, setAvailableLetters] = useState(initialAvailableLetters);
+  const [isBorderVisible, setIsBorderVisible] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsBorderVisible((prev) => !prev); // Toggle border visibility
+    }, 1000); // 1-second interval
+
+    return () => clearInterval(interval); // Clean up interval on component unmount
+  }, []);
 
   function handleLetterSelect(e) {
     e.preventDefault();
@@ -138,6 +147,12 @@ function Marble() {
     });
   }
   
+
+  function areAllWordsSolved() {
+    return Object.entries(puzzleWords).every(
+      ([word, value]) => value === word.toUpperCase()
+    );
+  }
   
 
   return (
@@ -428,30 +443,46 @@ function Marble() {
 
         <br />
 
-        <div className="marbleInstructions">Tap a letter below and then tap the space where it belongs above!</div>
+        {areAllWordsSolved() ? (
+          <div className="marbleInstructions">SUCCESS!</div>
+        ) : (
+          <div className="marbleInstructions">Tap a letter below and then tap the space where it belongs above!</div>
+        )}
 
         <br />
 
-        <div className="lettersContainer">
 
-          {/* Render available letters */}
-          {availableLetters.map((item, index) => (
-            <button
-              key={`${item.id}-${item.letter}-${index}`} // Combine id and letter for uniqueness
-              value={item.letter}
-              data-id={item.id}
-              onClick={handleLetterSelect}
-              className="marbleButton"
-              style={{
-                backgroundColor: selectedLetter?.id === item.id ? "grey" : "white",
-                color: selectedLetter?.id === item.id ? "white" : "black",
-              }}
-            >
-              {item.letter}
-            </button>
-          ))}
 
-        </div>
+        {areAllWordsSolved() ? (
+          <div 
+            className="marbleCompletionMessage"
+            style={{
+              border: isBorderVisible ? "2px solid red" : "2px solid transparent", // Apply border conditionally
+              padding: "10px", // Optional: Adjust spacing for better appearance
+            }}>
+            NOW TEXT PAPYRUS<br/>"READY FOR ACTION"
+          </div>
+        ) : (
+          <div className="lettersContainer">
+            {availableLetters.map((item, index) => (
+              <button
+                key={`${item.id}-${item.letter}-${index}`}
+                value={item.letter}
+                data-id={item.id}
+                onClick={handleLetterSelect}
+                className="marbleButton"
+                style={{
+                  backgroundColor: selectedLetter?.id === item.id ? "grey" : "white",
+                  color: selectedLetter?.id === item.id ? "white" : "black",
+                }}
+              >
+                {item.letter}
+              </button>
+            ))}
+          </div>
+        )}
+
+
 
         <br/>
         

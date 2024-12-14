@@ -1008,3 +1008,11 @@ input[type="checkbox"]:checked + .checkbox:before {
   display: block;
   margin: 0 auto;
 }
+
+.marbleCompletionMessage {
+  display: block;
+  margin: 0 auto;
+  color: #F9DF39;
+  text-align: center;
+  font-size: 10vw;
+}
