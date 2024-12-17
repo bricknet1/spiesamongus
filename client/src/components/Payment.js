@@ -3,7 +3,7 @@ import SocialFooter from "./SocialFooter.js";
 
 import SAUPic from '../assets/pictures/animatedSpiesLogo.gif';
 
-function Confirmed() {
+function Payment() {
 
   return (
     <div className="pageContent" style={{paddingBottom:'10vw'}}>
@@ -37,4 +37,4 @@ function Confirmed() {
   )
 }
 
-export default Confirmed;
+export default Payment;

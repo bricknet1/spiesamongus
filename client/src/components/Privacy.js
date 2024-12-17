@@ -1,4 +1,4 @@
-import instagram from '../assets/pictures/instagram.webp';
+import SocialFooter from "./SocialFooter.js";
 
 function Privacy() {
 
@@ -60,11 +60,7 @@ function Privacy() {
 
         </div>
 
-        <div style={{ fontSize: '5vw', textAlign: 'center', marginTop: '20vw', marginBottom: '10vw'}}>
-          <a href='https://www.instagram.com/spiesamong' target='_blank' rel="noreferrer"><img src={instagram} alt="Instagram" style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
-          <div style={{fontWeight: "normal"}}>2024 Interactive Escapes</div>
-        </div>
-
+        <SocialFooter/>
 
     </div>
   )

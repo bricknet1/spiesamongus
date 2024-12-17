@@ -1,9 +1,9 @@
+import SocialFooter from "./SocialFooter.js";
+
 import victoriaPic from '../assets/pictures/Victoria Strange.png';
 import jamesPic from '../assets/pictures/James Jelin Headshot.jpg';
 import victoriaPolaroid from '../assets/pictures/Polaroid - Victoria Strange.png';
 import jamesPolaroid from '../assets/pictures/Polaroid - James Jelin.png';
-import instagram from '../assets/pictures/instagram.webp';
-import facebook from '../assets/pictures/facebook.webp';
 
 import { useState, useEffect } from 'react';
 
@@ -86,7 +86,7 @@ function Debrief() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='debriefDropdown' 
@@ -122,7 +122,7 @@ function Debrief() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='debriefDropdown' 
@@ -152,7 +152,7 @@ function Debrief() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='debriefDropdown' 
@@ -188,7 +188,7 @@ function Debrief() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='debriefDropdown' 
@@ -231,7 +231,7 @@ function Debrief() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <br/>
       <br/>
@@ -415,11 +415,7 @@ function Debrief() {
 
       
       
-      <div style={{ fontSize: '5vw', textAlign: 'center', marginTop: '30vw'}}>
-        <a href='https://www.instagram.com/spiesamong' target='_blank' rel="noreferrer"><img src={instagram} alt="Instagram" style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
-        <a href='https://www.facebook.com/spiesamong' target='_blank' rel="noreferrer"><img src={facebook} alt="Facebook" style={{ width: '10vw', marginBottom: '0', paddingBottom: '0'}}></img></a>
-        <div style={{fontWeight: "normal"}}>2024 Interactive Escapes</div>
-      </div>
+      <SocialFooter/>
 
     </div>
   )

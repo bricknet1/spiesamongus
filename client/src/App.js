@@ -9,6 +9,7 @@ import Myprofile from "./components/Myprofile.js";
 import NotFound from "./components/NotFound.js";
 import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
+import Payment from "./components/Payment.js";
 import Privacy from "./components/Privacy.js";
 import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
@@ -77,9 +78,9 @@ function App() {
         <Route path="/terms" exact>
           <Terms />
         </Route>
-        {/* <Route path="/payment" exact>
+        <Route path="/payment" exact>
           <Payment />
-        </Route> */}
+        </Route>
         {/* <Route path="/private" exact>
           <Private />
         </Route> */}
