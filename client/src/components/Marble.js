@@ -67,6 +67,23 @@ function Marble() {
     return () => clearInterval(interval); // Clean up interval on component unmount
   }, []);
 
+  useEffect(() => {
+    const savedPuzzleWords = JSON.parse(localStorage.getItem("puzzleWords"));
+    const savedAvailableLetters = JSON.parse(localStorage.getItem("availableLetters"));
+    
+    if (savedPuzzleWords) {
+      setPuzzleWords(savedPuzzleWords);
+    }
+    if (savedAvailableLetters) {
+      setAvailableLetters(savedAvailableLetters);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("puzzleWords", JSON.stringify(puzzleWords));
+    localStorage.setItem("availableLetters", JSON.stringify(availableLetters));
+  }, [puzzleWords, availableLetters]);
+
   function handleLetterSelect(e) {
     e.preventDefault();
     const { value, dataset } = e.target;
@@ -598,8 +615,6 @@ export default Marble;
 // o   Highlight a box. Tap a letter in the pool and it sends it to that box. The next box is now highlighted. This way you can quickly type in a full word if you know it
 
 // o   Tapping a placed letter (that is part of an unsolved word) should return it to the pool
-
-// o   Per user feedback from when I first made the puzzle, refreshing the page should not reset the puzzle. Need to save the progress.
 
 // ·       Visual
 
