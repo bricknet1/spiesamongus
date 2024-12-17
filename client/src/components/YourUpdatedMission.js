@@ -8,7 +8,7 @@ function YourUpdatedMission() {
     <div>
       <div className='pageContent'>
 
-        <title>Your Mission</title>
+        <title>Your Updated Mission</title>
 
         <div className='orangeBar'>OPERATION FILTHY LAUNDRY</div>
 

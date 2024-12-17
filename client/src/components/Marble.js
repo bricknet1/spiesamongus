@@ -172,6 +172,7 @@ function Marble() {
 
   return (
     <div className="pageContent">
+      <title>Agent Marble Physical Description</title>
       <div className="orangeBar" style={{height: '13vw'}}>Agent Marble is ...</div>
 
       <div className="puzzleContainer">

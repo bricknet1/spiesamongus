@@ -1,28 +1,35 @@
 import Questions from "./Questions.js";
 import SocialFooter from "./SocialFooter.js";
 
-import SAUPic from '../assets/pictures/animatedSpiesLogo.gif';
-
 function Payment() {
 
   return (
     <div className="pageContent" style={{paddingBottom:'10vw'}}>
 
-      <title>Mission Confirmed | Spies Among Us</title>
+      <title>Payment Page | Spies Among Us</title>
 
-      <div className='orangeBar'>MISSION: CONFIRMED</div>
+      <div className='orangeBar'>PAYMENT PAGE</div>
 
-      <div style={{alignContent: 'center', textAlign: 'center'}}>
+      <div style={{alignContent: 'center', textAlign: 'center', display: 'block', margin: '0 auto', width: '90vw'}}>
 
         <br/>
         <br/>
         <br/>
-        <div style={{fontSize: '8vw'}}>You will receive a text with instructions shortly.</div>
+        <div style={{fontSize: '7vw', fontStyle: 'italic'}}>Click the "Get Tickets" button to go to out payment page where you can select your quantity of tickets.</div>
         <br/>
         <br/>
         <br/>
 
-        <img src={SAUPic} alt="Spies Among Us" style={{ width: '85vw'}} />
+      </div>
+
+      <div className='orangeBar'>GENERAL PAYMENTS</div>
+
+      <div style={{alignContent: 'center', textAlign: 'center', display: 'block', margin: '0 auto', width: '90vw'}}>
+
+        <br/>
+        <br/>
+        <br/>
+        <div style={{fontSize: '7vw', fontStyle: 'italic'}}>Enter the requested amount and click pay to go to the checkout page.</div>
         <br/>
         <br/>
         <br/>

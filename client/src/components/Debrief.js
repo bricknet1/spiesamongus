@@ -42,6 +42,8 @@ function Debrief() {
   return (
     <div className="pageContent">
 
+      <title>Debrief & Credits</title>
+
       <div className='orangeBar'>MISSION DEBRIEF</div>
 
       <div className="debrief-main-text">

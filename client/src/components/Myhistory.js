@@ -19,6 +19,7 @@ function Myhistory() {
 
   return (
     <div className="pageContent">
+      <title>My Mission History (Agent Papyrus)</title>
       <div className='greenBar'>MY MISSION HISTORY</div>
 
       <div className="ovalPicWrapper">
