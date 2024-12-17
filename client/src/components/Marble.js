@@ -179,7 +179,7 @@ function Marble() {
 
         <div className="swanNecklaceContainer">
 
-          <div className="marbleIs">...wearing a...</div>
+          <div className={(puzzleWords.swan === "SWAN" || puzzleWords.necklace === "NECKLACE") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
 
           {/* Render buttons for SWAN */}
           {puzzleWords.swan.split("").map((char, index) => (
@@ -227,7 +227,7 @@ function Marble() {
 
           <div className="MDSContainer">
 
-            <div className="marbleIs">...showing the...</div>
+            <div className={(puzzleWords.marble === "MARBLE" || puzzleWords.danger === "DANGER" || puzzleWords.signal === "SIGNAL") ? "marbleIsSolved" : "marbleIs"}>...showing the...</div>
 
             {/* Render buttons for MARBLE */}
             {puzzleWords.marble.split("").map((char, index) => (
@@ -294,7 +294,7 @@ function Marble() {
 
           <div className="vuiVeCupContainer">
 
-            <div className="marbleIs">...holding a...</div>
+            <div className={(puzzleWords.vui === "VUI" || puzzleWords.ve === "VE" || puzzleWords.cup === "CUP") ? "marbleIsSolved" : "marbleIs"}>...holding a...</div>
 
             {/* Render buttons for VUI */}
             {puzzleWords.vui.split("").map((char, index) => (
@@ -365,7 +365,7 @@ function Marble() {
 
           <div className="blueJeansContainer">
 
-            <div className="marbleIs">...wearing...</div>
+            <div className={(puzzleWords.blue === "BLUE" || puzzleWords.jeans === "JEANS") ? "marbleIsSolved" : "marbleIs"}>...wearing...</div>
 
             {/* Render buttons for BLUE */}
             {puzzleWords.blue.split("").map((char, index) => (
@@ -411,7 +411,7 @@ function Marble() {
 
           <div className="blackHatContainer">
 
-            <div className="marbleIs">...wearing a...</div>
+            <div className={(puzzleWords.black === "BLACK" || puzzleWords.hat === "HAT") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
 
             {/* Render buttons for BLACK */}
             {puzzleWords.black.split("").map((char, index) => (
@@ -524,3 +524,31 @@ function Marble() {
 }
 
 export default Marble;
+
+
+
+
+
+
+
+
+
+// ·       UI
+
+// o   Highlight a box. Tap a letter in the pool and it sends it to that box. The next box is now highlighted. This way you can quickly type in a full word if you know it
+
+// o   Tapping a placed letter (that is part of an unsolved word) should return it to the pool
+
+// o   Per user feedback from when I first made the puzzle, refreshing the page should not reset the puzzle. Need to save the progress.
+
+// ·       Visual
+
+// o   Put answers back in the original format, with the yellow man behind them.
+
+// o   Make the instructions disappear after you move your first letter (gives us more real estate to work with on the site)
+
+// o   Make the original, locked in letters white with no box. When you solve a word, the guessing boxes disappear and the word is now spelled out in yellow (as it is in the current live site)
+
+// §  When the word becomes yellow, add a transition effect (as it is in the current live site)
+
+// §  When you get a word correct directly under a prompt line, it changes the prompt line to white, such as “…showing the…” changing to white if you put in “marble” (as it is in the current live site)

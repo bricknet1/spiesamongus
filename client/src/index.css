@@ -968,6 +968,12 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 5vw;
 }
 
+.marbleIsSolved {
+  color: white;
+  margin-top: 2vw;
+  font-size: 5vw;
+}
+
 .swanNecklaceContainer {
   width: 95vw;
 }
@@ -1031,7 +1037,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 /* PRIVATE PAGE */
 
-.privateEventsList {}
+/* .privateEventsList {} */
 
 .privateEventsListItem {
   font-size: 7vw;
