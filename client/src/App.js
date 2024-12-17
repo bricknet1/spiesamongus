@@ -11,6 +11,7 @@ import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
 import Payment from "./components/Payment.js";
 import Privacy from "./components/Privacy.js";
+import Private from "./components/Private.js";
 import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
@@ -81,9 +82,9 @@ function App() {
         <Route path="/payment" exact>
           <Payment />
         </Route>
-        {/* <Route path="/private" exact>
+        <Route path="/private" exact>
           <Private />
-        </Route> */}
+        </Route>
 
         <Route path="*">
           <NotFound />

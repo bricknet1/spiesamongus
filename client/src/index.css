@@ -1016,3 +1016,96 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: center;
   font-size: 10vw;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PRIVATE PAGE */
+
+.privateEventsList {}
+
+.privateEventsListItem {
+  font-size: 7vw;
+  /* width: 79vw; */
+  line-height: 9vw;
+  /* margin-right: 5vw; */
+  text-align: left;
+}
+
+.privatePageForm {
+  width: 90vw;
+  padding-bottom: 30px;
+  padding-top: 20px;
+  margin: 0 auto;
+  background-color: #F9DF39;
+  border-radius: 25px;
+}
+
+.privatePageFormField {
+  width: 80vw;
+  height: 13vw;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 7vw;
+  border-radius: 17px;
+  border: none;
+  outline: none;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  box-sizing: border-box;
+  margin-top: 1vw;
+  font-weight: bold;
+  background-color: #21174C;
+  color: #FF3700;
+}
+
+.privatePageFormFieldLarge {
+  width: 80vw;
+  height: 39vw;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 7vw;
+  border-radius: 17px;
+  border: none;
+  outline: none;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  box-sizing: border-box;
+  margin-top: 1vw;
+  font-weight: bold;
+  background-color: #21174C;
+  color: #FF3700;
+  overflow-y: auto;       /* Scroll vertically if content overflows */
+  white-space: pre-wrap;  /* Preserve whitespace and wrap text to next line */
+  word-wrap: break-word;  /* Break long words onto the next line */
+  resize: none;           /* Disable manual resizing */
+}
+
+
+.privatePageSubmitButton {
+  color: white;
+  background-color: #ff3700;
+  width: 80vw;
+  height: 13vw;
+  margin: 0 auto;
+  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-size: 7vw;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  display: block;
+  font-weight: bold;
+}
+
+.privatePageLabel {
+  color: #21174C;
+  font-size: 5vw;
+  padding: 6vw;
+}
