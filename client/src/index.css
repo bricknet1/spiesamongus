@@ -944,7 +944,43 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 9vw;
   height: 9vw;
   font-size: 4.5vw;
-  
+  color: black;
+  cursor: pointer;
+  background-color: white;
+}
+
+.lockedLetter {
+  width: 9vw;
+  height: 9vw;
+  font-size: 4.5vw;
+  color: white;
+  cursor: not-allowed;
+  background-color: #21174C;
+  border: none;
+}
+
+@keyframes growShrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5); /* Grow slightly */
+  }
+  100% {
+    transform: scale(1); /* Shrink back to normal */
+  }
+}
+
+.solvedWordLetter {
+  border: none;
+  width: 9vw;
+  height: 9vw;
+  font-size: 4.5vw;
+  color: #F9DF39;
+  cursor: not-allowed;
+  background-color: transparent;
+  animation: growShrink 2s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .resetButtonContainer {
