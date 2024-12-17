@@ -132,16 +132,31 @@ function Marble() {
   
       // Merge unsolved word letters into available letters
       setAvailableLetters((prevAvailable) => {
+        // setrack the ids of letters that have been added to resetLetters
+        const addedIds = new Set(prevAvailable.map((a) => a.id));
+        
         const resetLetters = usedLetters.map((letter) => {
-          // Find a unique ID for each used letter
+          // Find a unique ID for each used letter, ensuring we haven't already added that ID
           const match = initialAvailableLetters.find(
-            (l) => l.letter === letter && !prevAvailable.some((a) => a.id === l.id)
+            (l) =>
+              l.letter === letter && 
+              !addedIds.has(l.id) && // Check if this id has already been added
+              !prevAvailable.some((a) => a.id === l.id) // Also check if the id exists in prevAvailable
           );
+          
+          if (match) {
+            // Add the match id to the addedIds set
+            addedIds.add(match.id);
+          }
+      
           return match || null; // Ensure we only add valid matches
         }).filter(Boolean); // Remove nulls
-  
+      
+        console.log("reset letters: ", resetLetters);
+        console.log("available letters: ", availableLetters);
         return [...prevAvailable, ...resetLetters];
       });
+      
   
       return resetWords;
     });
