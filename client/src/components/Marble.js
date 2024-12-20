@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import LeslieFooter from "./LeslieFooter.js";
 
+import yellowMan from '../assets/pictures/stickfigureyellowwalk.png';
+
 function Marble() {
   const initialPuzzleWords = {
     swan: "_W__",
@@ -194,65 +196,125 @@ function Marble() {
 
       <div className="puzzleContainer">
 
-        <div className="swanNecklaceContainer">
+        <div className="topRowFlex">
 
-          <div className={(puzzleWords.swan === "SWAN" || puzzleWords.necklace === "NECKLACE") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
+          <div className="swanNecklaceContainer">
 
-          {/* Render buttons for SWAN */}
-          {puzzleWords.swan.split("").map((char, index) => {
-            const isLockedLetter = initialPuzzleWords.swan[index] !== "_"; // Check if the letter was pre-provided
-            const wordIsSolved = puzzleWords.swan === "SWAN";
-            return (
-              <button
-                key={`swan-${index}`}
-                data-word="swan"
-                data-index={index}
-                onClick={char === "_" ? handleLetterPlacement : null}
-                disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
-                className={
-                  wordIsSolved
-                    ? "solvedWordLetter" // Highest priority when word is solved
-                    : isLockedLetter
-                    ? "lockedLetter" // Pre-provided letters
-                    : "marbleButton" // Default for user-interactable letters
-                }
-              >
-                {char}
-              </button>
-            );
-          })}
+            <div className={(puzzleWords.swan === "SWAN" || puzzleWords.necklace === "NECKLACE") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
 
-          <br />
+            {/* Render buttons for SWAN */}
+            {puzzleWords.swan.split("").map((char, index) => {
+              const isLockedLetter = initialPuzzleWords.swan[index] !== "_"; // Check if the letter was pre-provided
+              const wordIsSolved = puzzleWords.swan === "SWAN";
+              return (
+                <button
+                  key={`swan-${index}`}
+                  data-word="swan"
+                  data-index={index}
+                  onClick={char === "_" ? handleLetterPlacement : null}
+                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  className={
+                    wordIsSolved
+                      ? "solvedWordLetter" // Highest priority when word is solved
+                      : isLockedLetter
+                      ? "lockedLetter" // Pre-provided letters
+                      : "marbleButton" // Default for user-interactable letters
+                  }
+                >
+                  {char}
+                </button>
+              );
+            })}
 
-          {/* Render buttons for NECKLACE */}
-          {puzzleWords.necklace.split("").map((char, index) => {
-            const isLockedLetter = initialPuzzleWords.necklace[index] !== "_"; // Check if the letter was pre-provided
-            const wordIsSolved = puzzleWords.necklace === "NECKLACE";
-            return (
-              <button
-                key={`necklace-${index}`}
-                data-word="necklace"
-                data-index={index}
-                onClick={char === "_" ? handleLetterPlacement : null}
-                disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
-                className={
-                  wordIsSolved
-                    ? "solvedWordLetter" // Highest priority when word is solved
-                    : isLockedLetter
-                    ? "lockedLetter" // Pre-provided letters
-                    : "marbleButton" // Default for user-interactable letters
-                }
-              >
-                {char}
-              </button>
-            );
-          })}
+            <br />
 
+            {/* Render buttons for NECKLACE */}
+            {puzzleWords.necklace.split("").map((char, index) => {
+              const isLockedLetter = initialPuzzleWords.necklace[index] !== "_"; // Check if the letter was pre-provided
+              const wordIsSolved = puzzleWords.necklace === "NECKLACE";
+              return (
+                <button
+                  key={`necklace-${index}`}
+                  data-word="necklace"
+                  data-index={index}
+                  onClick={char === "_" ? handleLetterPlacement : null}
+                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  className={
+                    wordIsSolved
+                      ? "solvedWordLetter" // Highest priority when word is solved
+                      : isLockedLetter
+                      ? "lockedLetter" // Pre-provided letters
+                      : "marbleButton" // Default for user-interactable letters
+                  }
+                >
+                  {char}
+                </button>
+              );
+            })}
+
+          </div>
+
+          <div className="blackHatContainer">
+
+            <div className={(puzzleWords.black === "BLACK" || puzzleWords.hat === "HAT") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
+
+            {/* Render buttons for BLACK */}
+            {puzzleWords.black.split("").map((char, index) => {
+              const isLockedLetter = initialPuzzleWords.black[index] !== "_"; // Check if the letter was pre-provided
+              const wordIsSolved = puzzleWords.black === "BLACK";
+              return (
+                <button
+                  key={`black-${index}`}
+                  data-word="black"
+                  data-index={index}
+                  onClick={char === "_" ? handleLetterPlacement : null}
+                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  className={
+                    wordIsSolved
+                      ? "solvedWordLetter" // Highest priority when word is solved
+                      : isLockedLetter
+                      ? "lockedLetter" // Pre-provided letters
+                      : "marbleButton" // Default for user-interactable letters
+                  }
+                >
+                  {char}
+                </button>
+              );
+            })}
+
+            <br />
+
+            {/* Render buttons for HAT */}
+            {puzzleWords.hat.split("").map((char, index) => {
+              const isLockedLetter = initialPuzzleWords.hat[index] !== "_"; // Check if the letter was pre-provided
+              const wordIsSolved = puzzleWords.hat === "HAT";
+              return (
+                <button
+                  key={`hat-${index}`}
+                  data-word="hat"
+                  data-index={index}
+                  onClick={char === "_" ? handleLetterPlacement : null}
+                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  className={
+                    wordIsSolved
+                      ? "solvedWordLetter" // Highest priority when word is solved
+                      : isLockedLetter
+                      ? "lockedLetter" // Pre-provided letters
+                      : "marbleButton" // Default for user-interactable letters
+                  }
+                >
+                  {char}
+                </button>
+              );
+            })}
+
+          </div>
+        
         </div>
 
         <div className="MDSVVCFlex">
 
-          <div className="MDSContainer">
+          <div className="leftSideContainer">
 
             <div className={(puzzleWords.marble === "MARBLE" || puzzleWords.danger === "DANGER" || puzzleWords.signal === "SIGNAL") ? "marbleIsSolved" : "marbleIs"}>...showing the...</div>
 
@@ -332,9 +394,7 @@ function Marble() {
               );
             })}
 
-          </div>
-
-          <div className="vuiVeCupContainer">
+            <br/>
 
             <div className={(puzzleWords.vui === "VUI" || puzzleWords.ve === "VE" || puzzleWords.cup === "CUP") ? "marbleIsSolved" : "marbleIs"}>...holding a...</div>
 
@@ -362,7 +422,7 @@ function Marble() {
               );
             })}
 
-            <br />
+            <button className="lockedLetter"></button>
 
             {/* Render buttons for VE */}
             {puzzleWords.ve.split("").map((char, index) => {
@@ -413,14 +473,6 @@ function Marble() {
                 </button>
               );
             })}
-
-          </div>
-
-        </div>
-
-        <div className="clothingFlex">
-
-          <div className="blueJeansContainer">
 
             <div className={(puzzleWords.blue === "BLUE" || puzzleWords.jeans === "JEANS") ? "marbleIsSolved" : "marbleIs"}>...wearing...</div>
 
@@ -476,61 +528,7 @@ function Marble() {
 
           </div>
 
-          <div className="blackHatContainer">
-
-            <div className={(puzzleWords.black === "BLACK" || puzzleWords.hat === "HAT") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
-
-            {/* Render buttons for BLACK */}
-            {puzzleWords.black.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.black[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.black === "BLACK";
-              return (
-                <button
-                  key={`black-${index}`}
-                  data-word="black"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            {/* Render buttons for HAT */}
-            {puzzleWords.hat.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.hat[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.hat === "HAT";
-              return (
-                <button
-                  key={`hat-${index}`}
-                  data-word="hat"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char}
-                </button>
-              );
-            })}
-
-          </div>
+          <img src={yellowMan} className="yellowMan"/>
 
         </div>
 
@@ -610,14 +608,10 @@ export default Marble;
 
 
 
-// ·       UI
 
-// o   Highlight a box. Tap a letter in the pool and it sends it to that box. The next box is now highlighted. This way you can quickly type in a full word if you know it
 
 // o   Tapping a placed letter (that is part of an unsolved word) should return it to the pool
 
 // ·       Visual
-
-// o   Put answers back in the original format, with the yellow man behind them.
 
 // o   Make the instructions disappear after you move your first letter (gives us more real estate to work with on the site)

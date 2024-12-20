@@ -941,22 +941,24 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .marbleButton {
-  width: 9vw;
-  height: 9vw;
+  width: 7vw;
+  height: 7vw;
   font-size: 4.5vw;
   color: black;
   cursor: pointer;
   background-color: white;
+  padding: 0;
 }
 
 .lockedLetter {
-  width: 9vw;
-  height: 9vw;
+  width: 7vw;
+  height: 7vw;
   font-size: 4.5vw;
   color: white;
   cursor: not-allowed;
   background-color: #21174C;
   border: none;
+  padding: 0;
 }
 
 @keyframes growShrink {
@@ -973,14 +975,15 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 .solvedWordLetter {
   border: none;
-  width: 9vw;
-  height: 9vw;
+  width: 6vw;
+  height: 7vw;
   font-size: 4.5vw;
   color: #F9DF39;
   cursor: not-allowed;
   background-color: transparent;
   animation: growShrink 2s ease;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.5s ease, color 0.5s ease, width 2s ease;
+  padding: 0;
 }
 
 .resetButtonContainer {
@@ -1010,34 +1013,30 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 5vw;
 }
 
-.swanNecklaceContainer {
-  width: 95vw;
+.topRowFlex {
+  display: flex;
 }
+
+.swanNecklaceContainer {
+  width: 70vw;
+}
+
+.blackHatContainer {
+  width: 41vw;
+  /* margin-left: 5vw; */
+}
+
 
 .MDSVVCFlex {
   display: flex;
 }
 
-.MDSContainer {
-  width: 60vw;
+.leftSideContainer {
+  width: 50vw;
 }
 
-.vuiVeCupContainer {
-  width: 30vw;
-  margin-left: 5vw;
-}
-
-.clothingFlex {
-  display: flex;
-}
-
-.blueJeansContainer {
-  width: 45vw;
-}
-
-.blackHatContainer {
-  width: 45vw;
-  margin-left: 5vw;
+.yellowMan {
+  width: 40vw;
 }
 
 .marbleInstructions {
@@ -1046,7 +1045,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .lettersContainer {
-  width: 63vw;
+  width: 84vw;
   display: block;
   margin: 0 auto;
 }
