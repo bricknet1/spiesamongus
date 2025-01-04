@@ -1,15 +1,15 @@
 /* UNIVERSAL PAGE CONTENT */
 
 @font-face {
-  font-family: 'DIN Neuzeit Grotesk';
-  src: url('./assets/fonts/DINNeuzeitGroteskLT-Light.ttf') format('truetype');
+  font-family: "DIN Neuzeit Grotesk";
+  src: url("./assets/fonts/DINNeuzeitGroteskLT-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DIN Neuzeit Grotesk';
-  src: url('./assets/fonts/DINNeuzeitGroteskLT-BoldCond.ttf') format('truetype');
+  font-family: "DIN Neuzeit Grotesk";
+  src: url("./assets/fonts/DINNeuzeitGroteskLT-BoldCond.ttf") format("truetype");
   font-weight: bold;
   font-style: bold;
 }
@@ -24,8 +24,8 @@
 } */
 
 body {
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
-  background-color: rgb(33,23,76);
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
+  background-color: rgb(33, 23, 76);
   color: white;
   margin: 0;
   font-weight: bold;
@@ -41,18 +41,18 @@ strong {
   font-size: 10vw;
   height: 20vw;
   display: flex;
-  flex-direction: column; 
-  justify-content: center; 
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .greenBar {
-  background-color: rgb(2,91,13);
+  background-color: rgb(2, 91, 13);
   font-size: 10vw;
   height: 20vw;
   display: flex;
-  flex-direction: column; 
-  justify-content: center; 
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -72,7 +72,6 @@ strong {
   border-radius: 50px;
 }
 
-
 .pageContent {
   padding-bottom: 40vw;
 }
@@ -85,7 +84,7 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: #f9df39 2.5vw solid; 
+  border: #f9df39 2.5vw solid;
   margin: 0 auto;
   margin-top: 5vw;
 }
@@ -104,23 +103,16 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: #f9df39 2.5vw solid; 
+  border: #f9df39 2.5vw solid;
   margin: 0 auto;
   margin-top: 5vw;
 }
 
 .ovalPicVert {
   width: auto;
-  height: 100vw; 
-  transform: translateY(0vw) translateX(0vw); 
+  height: 100vw;
+  transform: translateY(0vw) translateX(0vw);
 }
-
-
-
-
-
-
-
 
 /* LESLIE FOOTER */
 
@@ -128,7 +120,7 @@ strong {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: rgb(33,23,76);
+  background-color: rgb(33, 23, 76);
   color: #fff;
   padding: 1rem 0;
   height: 20vw;
@@ -151,7 +143,7 @@ strong {
   justify-content: center;
   margin-right: 1vw;
   margin-left: 1vw;
-  border: #f9df39 1vw solid; 
+  border: #f9df39 1vw solid;
 }
 
 .leslieFooterPic {
@@ -168,16 +160,6 @@ strong {
   color: #f9df39;
   font-size: 7vw;
 }
-
-
-
-
-
-
-
-
-
-
 
 /* START PAGE CONTENT */
 
@@ -220,15 +202,16 @@ label {
   padding: 6vw;
 }
 
-input:focus, select:focus {
-  border: 2px solid #ff3700; 
+input:focus,
+select:focus {
+  border: 2px solid #ff3700;
   outline: none;
 }
 
 .formField {
   width: 80vw;
   height: 13vw;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 50px;
   border: none;
@@ -241,7 +224,7 @@ input:focus, select:focus {
 }
 
 input[type="checkbox"] {
-  display: none; 
+  display: none;
 }
 
 .secondAgentText {
@@ -254,17 +237,17 @@ input[type="checkbox"] {
 .checkbox {
   display: inline-block;
   background-color: white;
-  width: 8vw; 
-  height: 8vw; 
-  border-radius: 50px; 
+  width: 8vw;
+  height: 8vw;
+  border-radius: 50px;
   position: relative;
   top: 2vw;
-  cursor: pointer; 
+  cursor: pointer;
   margin-right: 3vw;
 }
 
 .checkbox:after {
-  content: '';
+  content: "";
   position: absolute;
   opacity: 0;
   border-radius: 50px;
@@ -275,9 +258,9 @@ input[type="checkbox"]:checked + .checkbox:after {
 }
 
 input[type="checkbox"]:checked + .checkbox:before {
-  content: '✔';
+  content: "✔";
   position: absolute;
-  top: -.75vw;
+  top: -0.75vw;
   left: 1.1vw;
   font-size: 7vw;
   color: black;
@@ -288,7 +271,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .checkboxLabel a:visited {
-    color: white;
+  color: white;
 }
 
 .checkboxLabel a {
@@ -301,7 +284,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 60vw;
   height: 13vw;
   margin: 0 auto;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 50px;
   border: none;
@@ -309,19 +292,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   display: block;
   font-weight: bold;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* OPBC PAGE CONTENT */
 
@@ -345,7 +315,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 .passwordFormField {
   width: 53vw;
   height: 13vw;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 50px;
   border: none;
@@ -361,20 +331,19 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 .passwordFormField.animateInput {
   background-color: yellow;
-  color: rgb(33,23,76);
+  color: rgb(33, 23, 76);
   font-weight: bold;
   transform: scale(1.1);
   transition: background-color 1s ease, transform 1s ease;
   text-align: center;
 }
 
-
 .passwordButton {
   color: white;
   background-color: #ff3700;
   width: 25vw;
   height: 13vw;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 50px;
   border: none;
@@ -401,7 +370,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 .opbcimage {
   margin: 0 auto;
   width: 85vw;
-  border: 5px solid #f9df39; 
+  border: 5px solid #f9df39;
 }
 
 .killOrder {
@@ -453,14 +422,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   justify-content: center;
 }
 
-
-
-
-
-
-
-
-
 /* MY PROFILE PAGE CONTENT */
 
 .myprofile-header {
@@ -478,7 +439,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: #f9df39 2.5vw solid; 
+  border: #f9df39 2.5vw solid;
   margin: 0 auto;
 }
 
@@ -534,7 +495,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin: 0 auto;
   margin-top: 10vw;
   margin-bottom: 10vw;
-  border: #f9df39 1.5vw solid; 
+  border: #f9df39 1.5vw solid;
 }
 
 .transcriptButton {
@@ -577,21 +538,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   line-height: 10vw;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* TERMS CONTENT */
 
 .termsContainer {
@@ -622,13 +568,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-right: 5vw;
 }
 
-
-
-
-
-
-
-
 /* OBELISK TERMS CONTENT */
 
 .yellowBar {
@@ -639,13 +578,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: center;
   padding-top: 10vw;
 }
-
-
-
-
-
-
-
 
 /* MY HISTORY CONTENT */
 
@@ -694,15 +626,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: center;
   margin-top: 15vw;
 }
-
-
-
-
-
-
-
-
-
 
 /* THE MISSION CONTENT */
 
@@ -755,16 +678,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   transform: translateY(0vw) translateX(-20vw); /* Adjust to position the focus area */
 }
 
-
-
-
-
-
-
-
-
-
-
 /* YOUR UPDATED MISSION CONTENT */
 
 .updatedMission-map-wrapper {
@@ -774,7 +687,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: #f9df39 2.5vw solid; 
+  border: #f9df39 2.5vw solid;
   margin: 0 auto;
   margin-top: 5vw;
   margin-bottom: 10vw;
@@ -785,21 +698,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   /* height: 60vw; */
   /* transform: translateY(0vw) translateX(0vw); */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* CONFIRMED CONTENT */
 
@@ -812,11 +710,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   line-height: 7vw;
   margin-bottom: 10vw;
 }
-
-
-
-
-
 
 /* DEBRIEF CONTENT */
 
@@ -850,7 +743,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .debrief-link {
-  color: #F9DF39
+  color: #f9df39;
 }
 
 .debrief-blockquote {
@@ -888,7 +781,8 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin: 0 auto;
   margin-top: 1vw;
   font-size: 7vw;
-  font-family: cormorantgaramond-light, cormorantgaramond, "cormorant garamond", serif;
+  font-family: cormorantgaramond-light, cormorantgaramond, "cormorant garamond",
+    serif;
   font-weight: normal;
   line-height: 10vw;
   margin-bottom: 40vw;
@@ -914,24 +808,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   line-height: 10vw;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* MARBLE PUZZLE */
 
 .puzzleContainer {
@@ -956,7 +832,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 4.5vw;
   color: white;
   cursor: not-allowed;
-  background-color: #21174C;
+  background-color: #21174c;
   border: none;
   padding: 0;
 }
@@ -978,7 +854,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 6vw;
   height: 7vw;
   font-size: 4.5vw;
-  color: #F9DF39;
+  color: #f9df39;
   cursor: not-allowed;
   background-color: transparent;
   animation: growShrink 2s ease;
@@ -993,7 +869,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .resetButton {
-  background-color: #FF3700;
+  background-color: #ff3700;
   color: white;
   border-radius: 20px;
   cursor: pointer;
@@ -1002,7 +878,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .marbleIs {
-  color: #F9DF39;
+  color: #f9df39;
   margin-top: 2vw;
   font-size: 5vw;
 }
@@ -1013,7 +889,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 5vw;
 }
 
-.topRowFlex {
+.marbleUpperFlex {
   display: flex;
 }
 
@@ -1026,8 +902,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   /* margin-left: 5vw; */
 }
 
-
-.MDSVVCFlex {
+.marbleLowerFlex {
   display: flex;
 }
 
@@ -1053,22 +928,10 @@ input[type="checkbox"]:checked + .checkbox:before {
 .marbleCompletionMessage {
   display: block;
   margin: 0 auto;
-  color: #F9DF39;
+  color: #f9df39;
   text-align: center;
   font-size: 10vw;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* PRIVATE PAGE */
 
@@ -1087,14 +950,14 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding-bottom: 30px;
   padding-top: 20px;
   margin: 0 auto;
-  background-color: #F9DF39;
+  background-color: #f9df39;
   border-radius: 25px;
 }
 
 .privatePageFormField {
   width: 80vw;
   height: 13vw;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 17px;
   border: none;
@@ -1104,14 +967,14 @@ input[type="checkbox"]:checked + .checkbox:before {
   box-sizing: border-box;
   margin-top: 1vw;
   font-weight: bold;
-  background-color: #21174C;
-  color: #FF3700;
+  background-color: #21174c;
+  color: #ff3700;
 }
 
 .privatePageFormFieldLarge {
   width: 80vw;
   height: 39vw;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 17px;
   border: none;
@@ -1121,14 +984,13 @@ input[type="checkbox"]:checked + .checkbox:before {
   box-sizing: border-box;
   margin-top: 1vw;
   font-weight: bold;
-  background-color: #21174C;
-  color: #FF3700;
-  overflow-y: auto;       /* Scroll vertically if content overflows */
-  white-space: pre-wrap;  /* Preserve whitespace and wrap text to next line */
-  word-wrap: break-word;  /* Break long words onto the next line */
-  resize: none;           /* Disable manual resizing */
+  background-color: #21174c;
+  color: #ff3700;
+  overflow-y: auto; /* Scroll vertically if content overflows */
+  white-space: pre-wrap; /* Preserve whitespace and wrap text to next line */
+  word-wrap: break-word; /* Break long words onto the next line */
+  resize: none; /* Disable manual resizing */
 }
-
 
 .privatePageSubmitButton {
   color: white;
@@ -1136,7 +998,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 80vw;
   height: 13vw;
   margin: 0 auto;
-  font-family: 'DIN Neuzeit Grotesk', sans-serif;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
   border-radius: 50px;
   border: none;
@@ -1146,7 +1008,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .privatePageLabel {
-  color: #21174C;
+  color: #21174c;
   font-size: 5vw;
   padding: 6vw;
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import LeslieFooter from "./LeslieFooter.js";
 
-import yellowMan from '../assets/pictures/stickfigureyellowwalk.png';
+import yellowMan from "../assets/pictures/stickfigureyellowwalk.png";
 
 function Marble() {
   const initialPuzzleWords = {
@@ -17,7 +17,7 @@ function Marble() {
     blue: "___E",
     jeans: "J__NS",
     black: "_____",
-    hat: "_AT"
+    hat: "_AT",
   };
   const initialAvailableLetters = [
     { letter: "R", id: 0 },
@@ -55,10 +55,12 @@ function Marble() {
     { letter: "N", id: 32 },
     { letter: "E", id: 33 },
     { letter: "L", id: 34 },
-  ]
+  ];
   const [selectedLetter, setSelectedLetter] = useState(null); // Store both value and ID
   const [puzzleWords, setPuzzleWords] = useState(initialPuzzleWords);
-  const [availableLetters, setAvailableLetters] = useState(initialAvailableLetters);
+  const [availableLetters, setAvailableLetters] = useState(
+    initialAvailableLetters
+  );
   const [isBorderVisible, setIsBorderVisible] = useState(false);
 
   useEffect(() => {
@@ -71,8 +73,10 @@ function Marble() {
 
   useEffect(() => {
     const savedPuzzleWords = JSON.parse(localStorage.getItem("puzzleWords"));
-    const savedAvailableLetters = JSON.parse(localStorage.getItem("availableLetters"));
-    
+    const savedAvailableLetters = JSON.parse(
+      localStorage.getItem("availableLetters")
+    );
+
     if (savedPuzzleWords) {
       setPuzzleWords(savedPuzzleWords);
     }
@@ -97,7 +101,7 @@ function Marble() {
     e.preventDefault();
     const { word, index } = e.target.dataset; // Access word and index dynamically
     const wordIndex = parseInt(index, 10); // Convert to a number
-  
+
     if (word && selectedLetter) {
       setPuzzleWords((prevWords) => {
         const currentWord = prevWords[word];
@@ -105,24 +109,24 @@ function Marble() {
         if (currentWord[wordIndex] !== "_") {
           return prevWords; // Return without changes
         }
-  
+
         // Update the word if the slot is empty
         const updatedWord =
           currentWord.slice(0, wordIndex) +
           selectedLetter.letter +
           currentWord.slice(wordIndex + 1);
-  
+
         return {
           ...prevWords,
           [word]: updatedWord,
         };
       });
-  
+
       // Remove the selected letter from available letters
       setAvailableLetters((prevLetters) =>
         prevLetters.filter((item) => item.id !== selectedLetter.id)
       );
-  
+
       setSelectedLetter(null); // Clear the selected letter
     }
   }
@@ -131,13 +135,13 @@ function Marble() {
     setPuzzleWords((prevWords) => {
       const resetWords = {};
       const usedLetters = []; // Track letters in unsolved words for resetting
-  
+
       for (const [word, value] of Object.entries(prevWords)) {
         if (value !== word.toUpperCase()) {
           // Reset only unsolved words and collect used letters
           const initialWord = initialPuzzleWords[word];
           resetWords[word] = initialWord;
-  
+
           // Collect letters from the unsolved word
           for (let i = 0; i < value.length; i++) {
             if (value[i] !== "_" && initialWord[i] === "_") {
@@ -148,59 +152,66 @@ function Marble() {
           resetWords[word] = value; // Keep solved words as they are
         }
       }
-  
+
       // Merge unsolved word letters into available letters
       setAvailableLetters((prevAvailable) => {
         // setrack the ids of letters that have been added to resetLetters
         const addedIds = new Set(prevAvailable.map((a) => a.id));
-        
-        const resetLetters = usedLetters.map((letter) => {
-          // Find a unique ID for each used letter, ensuring we haven't already added that ID
-          const match = initialAvailableLetters.find(
-            (l) =>
-              l.letter === letter && 
-              !addedIds.has(l.id) && // Check if this id has already been added
-              !prevAvailable.some((a) => a.id === l.id) // Also check if the id exists in prevAvailable
-          );
-          
-          if (match) {
-            // Add the match id to the addedIds set
-            addedIds.add(match.id);
-          }
-      
-          return match || null; // Ensure we only add valid matches
-        }).filter(Boolean); // Remove nulls
-      
+
+        const resetLetters = usedLetters
+          .map((letter) => {
+            // Find a unique ID for each used letter, ensuring we haven't already added that ID
+            const match = initialAvailableLetters.find(
+              (l) =>
+                l.letter === letter &&
+                !addedIds.has(l.id) && // Check if this id has already been added
+                !prevAvailable.some((a) => a.id === l.id) // Also check if the id exists in prevAvailable
+            );
+
+            if (match) {
+              // Add the match id to the addedIds set
+              addedIds.add(match.id);
+            }
+
+            return match || null; // Ensure we only add valid matches
+          })
+          .filter(Boolean); // Remove nulls
+
         console.log("reset letters: ", resetLetters);
         console.log("available letters: ", availableLetters);
         return [...prevAvailable, ...resetLetters];
       });
-      
-  
+
       return resetWords;
     });
   }
-  
 
   function areAllWordsSolved() {
     return Object.entries(puzzleWords).every(
       ([word, value]) => value === word.toUpperCase()
     );
   }
-  
 
   return (
     <div className="pageContent">
       <title>Agent Marble Physical Description</title>
-      <div className="orangeBar" style={{height: '13vw'}}>Agent Marble is ...</div>
+      <div className="orangeBar" style={{ height: "13vw" }}>
+        Agent Marble is ...
+      </div>
 
       <div className="puzzleContainer">
-
-        <div className="topRowFlex">
-
+        <div className="marbleUpperFlex">
           <div className="swanNecklaceContainer">
-
-            <div className={(puzzleWords.swan === "SWAN" || puzzleWords.necklace === "NECKLACE") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
+            <div
+              className={
+                puzzleWords.swan === "SWAN" ||
+                puzzleWords.necklace === "NECKLACE"
+                  ? "marbleIsSolved"
+                  : "marbleIs"
+              }
+            >
+              ...wearing a...
+            </div>
 
             {/* Render buttons for SWAN */}
             {puzzleWords.swan.split("").map((char, index) => {
@@ -251,12 +262,18 @@ function Marble() {
                 </button>
               );
             })}
-
           </div>
 
           <div className="blackHatContainer">
-
-            <div className={(puzzleWords.black === "BLACK" || puzzleWords.hat === "HAT") ? "marbleIsSolved" : "marbleIs"}>...wearing a...</div>
+            <div
+              className={
+                puzzleWords.black === "BLACK" || puzzleWords.hat === "HAT"
+                  ? "marbleIsSolved"
+                  : "marbleIs"
+              }
+            >
+              ...wearing a...
+            </div>
 
             {/* Render buttons for BLACK */}
             {puzzleWords.black.split("").map((char, index) => {
@@ -307,16 +324,22 @@ function Marble() {
                 </button>
               );
             })}
-
           </div>
-        
         </div>
 
-        <div className="MDSVVCFlex">
-
+        <div className="marbleLowerFlex">
           <div className="leftSideContainer">
-
-            <div className={(puzzleWords.marble === "MARBLE" || puzzleWords.danger === "DANGER" || puzzleWords.signal === "SIGNAL") ? "marbleIsSolved" : "marbleIs"}>...showing the...</div>
+            <div
+              className={
+                puzzleWords.marble === "MARBLE" ||
+                puzzleWords.danger === "DANGER" ||
+                puzzleWords.signal === "SIGNAL"
+                  ? "marbleIsSolved"
+                  : "marbleIs"
+              }
+            >
+              ...showing the...
+            </div>
 
             {/* Render buttons for MARBLE */}
             {puzzleWords.marble.split("").map((char, index) => {
@@ -394,9 +417,19 @@ function Marble() {
               );
             })}
 
-            <br/>
+            <br />
 
-            <div className={(puzzleWords.vui === "VUI" || puzzleWords.ve === "VE" || puzzleWords.cup === "CUP") ? "marbleIsSolved" : "marbleIs"}>...holding a...</div>
+            <div
+              className={
+                puzzleWords.vui === "VUI" ||
+                puzzleWords.ve === "VE" ||
+                puzzleWords.cup === "CUP"
+                  ? "marbleIsSolved"
+                  : "marbleIs"
+              }
+            >
+              ...holding a...
+            </div>
 
             {/* Render buttons for VUI */}
             {puzzleWords.vui.split("").map((char, index) => {
@@ -474,7 +507,15 @@ function Marble() {
               );
             })}
 
-            <div className={(puzzleWords.blue === "BLUE" || puzzleWords.jeans === "JEANS") ? "marbleIsSolved" : "marbleIs"}>...wearing...</div>
+            <div
+              className={
+                puzzleWords.blue === "BLUE" || puzzleWords.jeans === "JEANS"
+                  ? "marbleIsSolved"
+                  : "marbleIs"
+              }
+            >
+              ...wearing...
+            </div>
 
             {/* Render buttons for BLUE */}
             {puzzleWords.blue.split("").map((char, index) => {
@@ -499,7 +540,7 @@ function Marble() {
                 </button>
               );
             })}
-            
+
             <br />
 
             {/* Render buttons for JEANS */}
@@ -525,11 +566,9 @@ function Marble() {
                 </button>
               );
             })}
-
           </div>
 
-          <img src={yellowMan} className="yellowMan"/>
-
+          <img src={yellowMan} className="yellowMan" alt="walking man"/>
         </div>
 
         <br />
@@ -537,21 +576,26 @@ function Marble() {
         {areAllWordsSolved() ? (
           <div className="marbleInstructions">SUCCESS!</div>
         ) : (
-          <div className="marbleInstructions">Tap a letter below and then tap the space where it belongs above!</div>
+          <div className="marbleInstructions">
+            Tap a letter below and then tap the space where it belongs above!
+          </div>
         )}
 
         <br />
 
-
-
         {areAllWordsSolved() ? (
-          <div 
+          <div
             className="marbleCompletionMessage"
             style={{
-              border: isBorderVisible ? "2px solid red" : "2px solid transparent", // Apply border conditionally
+              border: isBorderVisible
+                ? "2px solid red"
+                : "2px solid transparent", // Apply border conditionally
               padding: "10px", // Optional: Adjust spacing for better appearance
-            }}>
-            NOW TEXT PAPYRUS<br/>"READY FOR ACTION"
+            }}
+          >
+            NOW TEXT PAPYRUS
+            <br />
+            "READY FOR ACTION"
           </div>
         ) : (
           <div className="lettersContainer">
@@ -563,7 +607,8 @@ function Marble() {
                 onClick={handleLetterSelect}
                 className="marbleButton"
                 style={{
-                  backgroundColor: selectedLetter?.id === item.id ? "grey" : "white",
+                  backgroundColor:
+                    selectedLetter?.id === item.id ? "grey" : "white",
                   color: selectedLetter?.id === item.id ? "white" : "black",
                 }}
               >
@@ -573,24 +618,15 @@ function Marble() {
           </div>
         )}
 
+        <br />
 
-
-        <br/>
-        
-        {areAllWordsSolved() ? (
-          null
-        ) : (
+        {areAllWordsSolved() ? null : (
           <div className="resetButtonContainer">
-            <button
-              onClick={resetUnsolvedWords}
-              className="resetButton"
-            >
+            <button onClick={resetUnsolvedWords} className="resetButton">
               Reset Letters
             </button>
           </div>
         )}
-
-
       </div>
 
       <LeslieFooter />
@@ -599,16 +635,6 @@ function Marble() {
 }
 
 export default Marble;
-
-
-
-
-
-
-
-
-
-
 
 // o   Tapping a placed letter (that is part of an unsolved word) should return it to the pool
 
