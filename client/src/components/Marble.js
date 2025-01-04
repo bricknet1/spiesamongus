@@ -62,6 +62,7 @@ function Marble() {
     initialAvailableLetters
   );
   const [isBorderVisible, setIsBorderVisible] = useState(false);
+  const [isFirstLetterPlaced, setIsFirstLetterPlaced] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,6 +129,8 @@ function Marble() {
       );
 
       setSelectedLetter(null); // Clear the selected letter
+
+      setIsFirstLetterPlaced(true);
     }
   }
 
@@ -232,7 +235,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -258,7 +261,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -294,7 +297,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -320,7 +323,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -360,7 +363,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -386,7 +389,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -412,7 +415,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -450,7 +453,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -476,7 +479,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -502,7 +505,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -536,7 +539,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -562,7 +565,7 @@ function Marble() {
                       : "marbleButton" // Default for user-interactable letters
                   }
                 >
-                  {char}
+                  {char === "_" ? "\u00A0" : char}
                 </button>
               );
             })}
@@ -575,7 +578,7 @@ function Marble() {
 
         {areAllWordsSolved() ? (
           <div className="marbleInstructions">SUCCESS!</div>
-        ) : (
+        ) : isFirstLetterPlaced ? <div className="marbleInstructions"><br/><br/></div> : (
           <div className="marbleInstructions">
             Tap a letter below and then tap the space where it belongs above!
           </div>
@@ -610,6 +613,11 @@ function Marble() {
                   backgroundColor:
                     selectedLetter?.id === item.id ? "grey" : "white",
                   color: selectedLetter?.id === item.id ? "white" : "black",
+                  border: "none", // remove border
+                  margin: "2px", // remove border
+                  width: "6vw", // remove border
+                  height: "6vw", // remove border
+                  paddingTop: "1px", // remove border
                 }}
               >
                 {item.letter}

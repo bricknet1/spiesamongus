@@ -875,6 +875,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   cursor: pointer;
   height: 10vw;
   width: 40vw;
+  font-size: 4vw;
 }
 
 .marbleIs {
@@ -920,7 +921,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .lettersContainer {
-  width: 84vw;
+  width: 85vw;
   display: block;
   margin: 0 auto;
 }
