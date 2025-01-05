@@ -200,10 +200,12 @@ function Marble() {
   function resetGame() {
     setAvailableLetters(initialAvailableLetters)
     setPuzzleWords(initialPuzzleWords)
+    setIsFirstLetterPlaced(false)
   }
 
   function solveGame(){
     setAvailableLetters([])
+    setIsFirstLetterPlaced(true)
     setPuzzleWords({
       swan: "SWAN",
       necklace: "NECKLACE",
@@ -599,18 +601,26 @@ function Marble() {
             })}
           </div>
 
-          <img src={yellowMan} className="yellowMan" alt="walking man"/>
+          <div className="yellowManContainer">
+            <img src={yellowMan} className="yellowMan" alt="walking man"/>
+            {isFirstLetterPlaced ? null : <div className="marblePuzzleInstructions">Tap a letter below and then tap the space where it belongs above!</div>}
+          </div>
         </div>
 
         <br />
 
-        {areAllWordsSolved() ? (
+        {/* {areAllWordsSolved() ? (
           <div className="marbleInstructions">SUCCESS!</div>
         ) : isFirstLetterPlaced ? <div className="marbleInstructions"><br/><br/></div> : (
           <div className="marbleInstructions">
             Tap a letter below and then tap the space where it belongs above!
           </div>
-        )}
+        )} */}
+
+        {areAllWordsSolved() ? (
+          <div className="marbleInstructions">SUCCESS!</div>
+        ) : null
+        }
 
         <br />
 
@@ -687,9 +697,4 @@ function Marble() {
 
 export default Marble;
 
-// o   Tapping a placed letter (that is part of an unsolved word) should return it to the pool
-
-// ·       Visual
-
-// o   Make the instructions disappear after you move your first letter (gives us more real estate to work with on the site)
-
+// Tapping a placed letter (that is part of an unsolved word) should return it to the pool

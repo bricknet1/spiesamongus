@@ -911,8 +911,28 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 50vw;
 }
 
+.yellowManContainer {
+  position: relative; /* Create a positioning context for children */
+  display: inline-block;
+  width: 40vw;
+}
+
 .yellowMan {
   width: 40vw;
+  display: block;
+}
+
+.marblePuzzleInstructions {
+  position: absolute; /* Position relative to the container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for perfect centering */
+  color: white; /* Text color */
+  background-color: rgba(0, 0, 0, 0.6); /* Optional: Background with transparency */
+  padding: 10px 20px; /* Optional: Padding around text */
+  font-size: 18px; /* Adjust as needed */
+  text-align: center; /* Center the text */
+  border-radius: 5px; /* Optional: Rounded corners */
 }
 
 .marbleInstructions {
@@ -933,6 +953,21 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: center;
   font-size: 10vw;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* PRIVATE PAGE */
 
