@@ -622,8 +622,6 @@ function Marble() {
         ) : null
         }
 
-        <br />
-
         {areAllWordsSolved() ? (
           <div
             className="marbleCompletionMessage"
