@@ -10,6 +10,6 @@ Navigate to client directory
 
 Run these commands:
 * npm install
-* npm run
+* npm start
 
 Only intended for use on mobile devices, it is not formatted for use with non-mobile devices

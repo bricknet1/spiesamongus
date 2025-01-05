@@ -194,6 +194,34 @@ function Marble() {
       ([word, value]) => value === word.toUpperCase()
     );
   }
+  
+
+  // TEMPORARY
+  function resetGame() {
+    setAvailableLetters(initialAvailableLetters)
+    setPuzzleWords(initialPuzzleWords)
+  }
+
+  function solveGame(){
+    setAvailableLetters([])
+    setPuzzleWords({
+      swan: "SWAN",
+      necklace: "NECKLACE",
+      marble: "MARBLE",
+      danger: "DANGER",
+      signal: "SIGNAL",
+      vui: "VUI",
+      ve: "VE",
+      cup: "CUP",
+      blue: "BLUE",
+      jeans: "JEANS",
+      black: "BLACK",
+      hat: "HAT",
+    })
+  }
+  // TEMPORARY
+
+
 
   return (
     <div className="pageContent">
@@ -635,6 +663,21 @@ function Marble() {
             </button>
           </div>
         )}
+
+
+        {/* temporary */}
+        <div className="resetButtonContainer">
+          <button onClick={resetGame} className="resetButton">
+            TEMP Reset Game
+          </button>
+          <button onClick={solveGame} className="resetButton">
+            TEMP Solve Game
+          </button>
+        </div>
+        {/* temporary */}
+
+
+
       </div>
 
       <LeslieFooter />
