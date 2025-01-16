@@ -48,7 +48,7 @@ function Start() {
     onSubmit: (values) => {
       console.log("Submitted values:", values);
 
-      fetch("/signupdb", {
+      fetch("https://hook.us1.make.com/0hjpqsprwulf8d7oq9ybw2byuz5je95n", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,22 +56,18 @@ function Start() {
         body: JSON.stringify(values),
       }).then((res) => {
         if (res.ok) {
-          res.json().then((user) => {
-            // setUser(user)
-            history.push("/");
-            // setValues(user)
-          });
+          console.log("successful response", res);
         } else {
           res.json().then((error) => {
-            console.log(error.error);
-            if (
-              error.error.includes("users_email_key") ||
-              error.error.includes("UNIQUE constraint failed: users.email")
-            ) {
-              formik.setErrors({
-                email: "An account with this email already exists",
-              });
-            }
+            console.error(error.error);
+            // if (
+            //   error.error.includes("users_email_key") ||
+            //   error.error.includes("UNIQUE constraint failed: users.email")
+            // ) {
+            //   formik.setErrors({
+            //     email: "An account with this email already exists",
+            //   });
+            // }
             // setError(error.message)
           });
         }
@@ -79,6 +75,32 @@ function Start() {
     },
   });
   console.log("Form Values:", formik.values);
+
+  // const callWebhook = async () => {
+  //   const webhookUrl = "https://hook.us1.make.com/0hjpqsprwulf8d7oq9ybw2byuz5je95n";
+  //   const data = {something: "something else"};
+
+  //   try {
+  //     const response = await fetch(webhookUrl, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data)
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.json();
+  //       console.log("Webhook response:", result);
+  //     } else {
+  //       console.error("Failed to call webhook:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error calling webhook:", error);
+  //   }
+  // };
+    
+
 
   return (
     <div className="pageContent">
