@@ -822,10 +822,10 @@ input[type="checkbox"]:checked + .checkbox:before {
   cursor: pointer;
   background-color: white;
   border: none;
-  margin: 2px;
+  margin: .4vw;
   width: 6vw;
   height: 6vw;
-  padding-top: 1px;
+  padding-top: .5vw;
 }
 
 .lockedLetter {
