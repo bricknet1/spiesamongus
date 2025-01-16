@@ -817,15 +817,13 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .marbleButton {
+  width: 7vw;
+  height: 7vw;
   font-size: 4.5vw;
   color: black;
   cursor: pointer;
   background-color: white;
-  border: none;
-  margin: .4vw;
-  width: 6vw;
-  height: 6vw;
-  padding-top: .5vw;
+  padding: 0;
 }
 
 .lockedLetter {
@@ -897,11 +895,11 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .swanNecklaceContainer {
-  width: 60vw;
+  width: 70vw;
 }
 
 .blackHatContainer {
-  width: 36vw;
+  width: 41vw;
   /* margin-left: 5vw; */
 }
 

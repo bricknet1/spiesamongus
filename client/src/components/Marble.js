@@ -264,6 +264,13 @@ function Marble() {
                       ? "lockedLetter" // Pre-provided letters
                       : "marbleButton" // Default for user-interactable letters
                   }
+                  style={{
+                    border: "none", // remove border
+                    margin: "2px", // remove border
+                    width: "6vw", // remove border
+                    height: "6vw", // remove border
+                    paddingTop: "1px", // remove border
+                  }}
                 >
                   {char === "_" ? "\u00A0" : char}
                 </button>
@@ -649,11 +656,11 @@ function Marble() {
                   backgroundColor:
                     selectedLetter?.id === item.id ? "grey" : "white",
                   color: selectedLetter?.id === item.id ? "white" : "black",
-                  // border: "none", // remove border
-                  // margin: "2px", // remove border
-                  // width: "6vw", // remove border
-                  // height: "6vw", // remove border
-                  // paddingTop: "1px", // remove border
+                  border: "none", // remove border
+                  margin: "2px", // remove border
+                  width: "6vw", // remove border
+                  height: "6vw", // remove border
+                  paddingTop: "1px", // remove border
                 }}
               >
                 {item.letter}
