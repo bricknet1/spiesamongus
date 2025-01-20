@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
+import Begin from "./components/Begin.js";
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
 import Marble from "./components/Marble.js";
@@ -24,6 +25,9 @@ function App() {
 
       {/* MISSION PAGES */}
       <Switch>
+        <Route path="/begin" exact>
+          <Begin />
+        </Route>
         <Route path="/start" exact>
           <Start />
         </Route>

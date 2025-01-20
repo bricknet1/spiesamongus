@@ -276,6 +276,7 @@ function Marble() {
     setAvailableLetters(initialAvailableLetters)
     setPuzzleWords(initialPuzzleWords)
     setIsFirstLetterPlaced(false)
+    setSelectedLetter(null)
   }
 
   function solveGame(){

@@ -104,6 +104,7 @@ function Start() {
 
   return (
     <div className="pageContent">
+      DON'T USE THIS PAGE ANYMORE. USE /BEGIN
       <title>Start Mission | Spies Among Us</title>
 
       <div className="start-header">Welcome, Agent.</div>
