@@ -341,6 +341,8 @@ function Marble() {
 
             <br />
 
+            <button className="lockedLetter"></button>
+            
             {/* Render buttons for HAT */}
             {puzzleWords.hat.split("").map((char, index) => {
               const isLockedLetter = initialPuzzleWords.hat[index] !== "_"; // Check if the letter was pre-provided
