@@ -687,7 +687,7 @@ function Marble() {
 
           <div className="yellowManContainer">
             <img src={yellowMan} className="yellowMan" alt="walking man"/>
-            {isFirstLetterPlaced ? null : <div className="marblePuzzleInstructions">Tap a letter below and then tap the space where it belongs above!</div>}
+            {isFirstLetterPlaced ? null : <div className="marblePuzzleInstructions">Tap a letter below, then tap the space where it belongs</div>}
           </div>
         </div>
 

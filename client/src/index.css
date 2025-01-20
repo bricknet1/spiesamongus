@@ -959,9 +959,10 @@ input[type="checkbox"]:checked + .checkbox:before {
   color: white; /* Text color */
   background-color: rgba(0, 0, 0, 0.6); /* Optional: Background with transparency */
   padding: 10px 20px; /* Optional: Padding around text */
-  font-size: 18px; /* Adjust as needed */
+  font-size: 30px; /* Adjust as needed */
   text-align: center; /* Center the text */
   border-radius: 5px; /* Optional: Rounded corners */
+  width: 35vw;
 }
 
 .marbleInstructions {
