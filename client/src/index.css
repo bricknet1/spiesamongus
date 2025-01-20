@@ -36,16 +36,16 @@ strong {
   text-shadow: 1.25px 0 0 currentColor;
 }
 
-button {
-  all: unset; /* Remove default styles */
-  display: inline-block; /* Reset display behavior */
-  padding: 10px; /* Add consistent padding */
+/* button {
+  all: unset;
+  display: inline-block;
+  padding: 10px;
   border: none;
   background: none;
   font: inherit;
   text-align: center;
   cursor: pointer;
-}
+} */
 
 .orangeBar {
   background-color: #ff3700;
@@ -828,6 +828,17 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .marbleButton {
+  all: unset;
+  display: inline-block;
+  /* padding: 10px; */
+  /* border: none; */
+  /* background: none; */
+  /* font: inherit; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: center;
+  /* cursor: pointer; */
+
   width: 7vw;
   height: 7vw;
   font-size: 4.5vw;
@@ -837,10 +848,10 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding: 0;
 
   border: none;
-  margin: 2px;
+  margin: .5vw;
   width: 6vw;
   height: 6vw;
-  padding-top: 1px;
+  /* padding-top: 1px; */
 }
 
 .lockedLetter {
