@@ -730,14 +730,8 @@ function Marble() {
                 onClick={handleLetterSelect}
                 className="marbleButton"
                 style={{
-                  backgroundColor:
-                    selectedLetter?.id === item.id ? "grey" : "white",
-                  color: selectedLetter?.id === item.id ? "white" : "black",
-                  border: "none", // remove border
-                  margin: "2px", // remove border
-                  width: "6vw", // remove border
-                  height: "6vw", // remove border
-                  paddingTop: "1px", // remove border
+                  backgroundColor: selectedLetter?.id === item.id ? "#FF3700" : "white",
+                  color: selectedLetter?.id === item.id ? "white" : "black"
                 }}
               >
                 {item.letter}
