@@ -136,6 +136,81 @@ function Marble() {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function handleLetterRemoval(e) {
+    e.preventDefault();
+    const { word, index } = e.target.dataset; // Access the word and index
+    const wordIndex = parseInt(index, 10); // Convert index to a number
+  
+    setPuzzleWords((prevWords) => {
+      const currentWord = prevWords[word];
+      const letterToRemove = currentWord[wordIndex]; // Get the letter to remove
+  
+      // If the slot is empty, do nothing
+      if (letterToRemove === "_") {
+        return prevWords;
+      }
+  
+      // Update the word by replacing the letter with an underscore
+      const updatedWord =
+        currentWord.slice(0, wordIndex) + "_" + currentWord.slice(wordIndex + 1);
+  
+      // Add the removed letter back to available letters with a unique ID
+      setAvailableLetters((prevLetters) => {
+        const usedIds = new Set(prevLetters.map((l) => l.id)); // Track used IDs
+  
+        const match = initialAvailableLetters.find(
+          (l) =>
+            l.letter === letterToRemove && !usedIds.has(l.id) // Ensure unique ID
+        );
+  
+        if (match) {
+          usedIds.add(match.id); // Mark the ID as used
+          return [...prevLetters, match]; // Add the matched letter back
+        }
+  
+        return prevLetters; // No matching ID found
+      });
+  
+      return {
+        ...prevWords,
+        [word]: updatedWord,
+      };
+    });
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   function resetUnsolvedWords() {
     setPuzzleWords((prevWords) => {
       const resetWords = {};
@@ -228,7 +303,7 @@ function Marble() {
 
 
   return (
-    <div className="pageContent">
+    <div className="pageContent" style={{paddingBottom: "0vw"}}>
       <title>Agent Marble Physical Description</title>
       <div className="orangeBar" style={{ height: "13vw" }}>
         Agent Marble is ...
@@ -257,8 +332,8 @@ function Marble() {
                   key={`swan-${index}`}
                   data-word="swan"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -290,8 +365,8 @@ function Marble() {
                   key={`necklace-${index}`}
                   data-word="necklace"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -326,8 +401,8 @@ function Marble() {
                   key={`black-${index}`}
                   data-word="black"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -354,8 +429,8 @@ function Marble() {
                   key={`hat-${index}`}
                   data-word="hat"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -394,8 +469,8 @@ function Marble() {
                   key={`marble-${index}`}
                   data-word="marble"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -420,8 +495,8 @@ function Marble() {
                   key={`danger-${index}`}
                   data-word="danger"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -446,8 +521,8 @@ function Marble() {
                   key={`signal-${index}`}
                   data-word="signal"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -484,8 +559,8 @@ function Marble() {
                   key={`vui-${index}`}
                   data-word="vui"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -510,8 +585,8 @@ function Marble() {
                   key={`ve-${index}`}
                   data-word="ve"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -536,8 +611,8 @@ function Marble() {
                   key={`cup-${index}`}
                   data-word="cup"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -570,8 +645,8 @@ function Marble() {
                   key={`blue-${index}`}
                   data-word="blue"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
@@ -596,8 +671,8 @@ function Marble() {
                   key={`jeans-${index}`}
                   data-word="jeans"
                   data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : null}
-                  disabled={isLockedLetter || char !== "_"} // Prevent interaction for locked letters
+                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                   className={
                     wordIsSolved
                       ? "solvedWordLetter" // Highest priority when word is solved
