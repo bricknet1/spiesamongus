@@ -1,9 +1,9 @@
 import lesliePic from '../assets/pictures/Leslie.jpg';
 
-function LeslieFooter() {
+function LeslieFooter({unfixed}) {
 
   return (
-    <div className='leslieFooter'>
+    <div className={unfixed ? null : 'leslieFooter'}> {/* will be a fixed position by default unless "true" is passed in */}
       <div className="orangeLine"/>
       <div className="leslieFooterContent">
         <div className="leslieFooterPicWrapper">

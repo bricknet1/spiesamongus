@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-// import LeslieFooter from "./LeslieFooter.js";
-import lesliePic from '../assets/pictures/Leslie.jpg';
-
+import LeslieFooter from "./LeslieFooter.js";
 
 import yellowMan from "../assets/pictures/stickfigureyellowwalk.png";
 
@@ -775,24 +773,11 @@ function Marble() {
       </div>
 
 
-      {/* LESLIE FOOTER CONTENT */}
       <br/>
       <br/>
       <br/>
       <br/>
-      <div className="orangeLine"/>
-      <div className="leslieFooterContent">
-        <div className="leslieFooterPicWrapper">
-          <img src={lesliePic} className="leslieFooterPic" alt="Agent Leslie" />
-        </div>
-
-        <div className="leslieFooterText">
-          Having a catastrophic issue with your mission? Text <a className='textLeslieLink' target="_blank" rel="noreferrer" href="sms:+18778477437"><u>Agent Leslie</u></a> for help!
-        </div>
-      </div>
-      {/* LESLIE FOOTER CONTENT */}
-
-
+      <LeslieFooter unfixed={true}/>
 
     </div>
   );
