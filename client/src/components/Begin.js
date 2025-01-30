@@ -68,9 +68,6 @@ function Begin() {
       .oneOf([true], "Agreeing to the terms and conditions is required"),
   });
 
-// name1 - should be a combo of firs and last, but the other names should be just first
-// phone1
-
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -372,14 +369,3 @@ function Begin() {
 
 export default Begin;
 
-
-
-
-// name1 - should be a combo of firs and last, but the other names should be just first
-// phone1
-// NumberOfPlayers
-// NoStairs
-// TermsAgreed
-
-// if possible, send an email to contact@interactiveescapes.com
-// formatted if possible to look normal
