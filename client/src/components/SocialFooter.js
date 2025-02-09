@@ -1,9 +1,27 @@
 import instagram from "../assets/pictures/instagram.webp";
 import facebook from "../assets/pictures/facebook.webp";
+import useDeviceType from "./UseDeviceType.js";
 
 function SocialFooter() {
+
+  const isMobile = useDeviceType();
+
+  const footerStyle = {
+    fontSize: isMobile ? "5vw" : "18px",
+    textAlign: "center",
+    marginTop: isMobile ? "30vw" : "150px",
+    marginBottom: isMobile ? "" : "20px",
+    fontWeight: "normal"
+  };
+
+  const iconStyle = {
+    width: isMobile ? "10vw" : "28px",
+    marginBottom: "0",
+    paddingBottom: "0"
+  };
+
   return (
-    <div style={{ fontSize: "5vw", textAlign: "center", marginTop: "30vw" }}>
+    <div style={footerStyle}>
       <a
         href="https://www.instagram.com/spiesamong"
         target="_blank"
@@ -12,7 +30,7 @@ function SocialFooter() {
         <img
           src={instagram}
           alt="Instagram"
-          style={{ width: "10vw", marginBottom: "0", paddingBottom: "0" }}
+          style={iconStyle}
         ></img>
       </a>
       <a
@@ -23,10 +41,10 @@ function SocialFooter() {
         <img
           src={facebook}
           alt="Facebook"
-          style={{ width: "10vw", marginBottom: "0", paddingBottom: "0" }}
+          style={iconStyle}
         ></img>
       </a>
-      <div style={{ fontWeight: "normal" }}>2024 Interactive Escapes</div>
+      <div>2025 Interactive Escapes</div>
     </div>
   );
 }
