@@ -85,7 +85,7 @@ function Begin() {
       agreeToTerms: false,
     },
     validationSchema: formSchema,
-    validateOnChange: true,
+    validateOnChange: false,
     validateOnBlur: true,
     onSubmit: (values) => {
       console.log("Submitted values:", values);
@@ -99,6 +99,7 @@ function Begin() {
       }).then((res) => {
         if (res.ok) {
           console.log("successful response", res);
+          history.push("/confirmed");
         } else {
           res.json().then((error) => {
             console.error(error.error);
