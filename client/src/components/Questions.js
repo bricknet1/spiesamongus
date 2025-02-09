@@ -41,7 +41,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -61,7 +61,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
 
       <div 
@@ -84,7 +84,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -104,7 +104,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -124,7 +124,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -144,7 +144,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -164,7 +164,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -184,7 +184,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -204,7 +204,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -224,7 +224,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -244,7 +244,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
       <div 
         className='myHistoryDropdown' 
@@ -264,7 +264,7 @@ function Questions() {
         </div>
       </div>}
 
-      <div class="thinOrangeLine"/>
+      <div className="thinOrangeLine"/>
 
     </div>
 
