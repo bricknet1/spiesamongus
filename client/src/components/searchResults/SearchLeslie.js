@@ -1,4 +1,4 @@
-import lesliePic from '../assets/pictures/Leslie Polaroid.png';
+import lesliePic from '../../assets/pictures/Leslie Polaroid.png';
 
 
 function SearchLeslie() {

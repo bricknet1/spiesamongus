@@ -1,4 +1,4 @@
-import rookiePic from '../assets/pictures/Rookie Polaroid.png';
+import rookiePic from '../../assets/pictures/Rookie Polaroid.png';
 
 
 function SearchRookie() {

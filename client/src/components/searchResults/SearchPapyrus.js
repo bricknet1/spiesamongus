@@ -1,7 +1,7 @@
-import papyrusPic from '../assets/pictures/Papyrus Polaroid.png';
-import suggestionPic from '../assets/pictures/Suggestion Box Form 11.20.23.jpg';
-import trackingPic from '../assets/pictures/Tracking Chip Classified 11.21.23.jpg';
-import achievementPic from '../assets/pictures/Notable Achievement Papyrus 11.21.23.jpg';
+import papyrusPic from '../../assets/pictures/Papyrus Polaroid.png';
+import suggestionPic from '../../assets/pictures/Suggestion Box Form 11.20.23.jpg';
+import trackingPic from '../../assets/pictures/Tracking Chip Classified 11.21.23.jpg';
+import achievementPic from '../../assets/pictures/Notable Achievement Papyrus 11.21.23.jpg';
 
 function SearchPapyrus() {
 

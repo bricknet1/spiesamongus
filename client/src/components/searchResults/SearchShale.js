@@ -1,5 +1,5 @@
-import shalePic from '../assets/pictures/Shale Polaroid full size.png';
-import shaleAchievementPic from '../assets/pictures/Notable Achievement Shale 11.21.23.jpg';
+import shalePic from '../../assets/pictures/Shale Polaroid full size.png';
+import shaleAchievementPic from '../../assets/pictures/Notable Achievement Shale 11.21.23.jpg';
 
 function SearchShale() {
 

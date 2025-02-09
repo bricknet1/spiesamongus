@@ -1,14 +1,14 @@
 import LeslieFooter from "./LeslieFooter.js";
-import SearchDylan from "./SearchDylan.js";
-import SearchLeslie from "./SearchLeslie.js";
-import SearchMarble from "./SearchMarble.js";
-import SearchMDS from "./SearchMDS.js";
-import SearchObelisk from "./SearchObelisk.js";
-import SearchOPBC from "./SearchOPBC.js";
-import SearchPapyrus from "./SearchPapyrus.js";
-import SearchReamer from "./SearchReamer.js";
-import SearchRookie from "./SearchRookie.js";
-import SearchShale from "./SearchShale.js";
+import SearchDylan from "./searchResults/SearchDylan.js";
+import SearchLeslie from "./searchResults/SearchLeslie.js";
+import SearchMarble from "./searchResults/SearchMarble.js";
+import SearchMDS from "./searchResults/SearchMDS.js";
+import SearchObelisk from "./searchResults/SearchObelisk.js";
+import SearchOPBC from "./searchResults/SearchOPBC.js";
+import SearchPapyrus from "./searchResults/SearchPapyrus.js";
+import SearchReamer from "./searchResults/SearchReamer.js";
+import SearchRookie from "./searchResults/SearchRookie.js";
+import SearchShale from "./searchResults/SearchShale.js";
 
 import papyrusPic from '../assets/pictures/Papyrus Portrait with medal 12.5.23.jpg';
 import filesPic from '../assets/pictures/Files.jpg';

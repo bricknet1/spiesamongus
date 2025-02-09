@@ -1,4 +1,4 @@
-import dylanPic from '../assets/pictures/Dylan Polaroid.png';
+import dylanPic from '../../assets/pictures/Dylan Polaroid.png';
 
 
 function SearchDylan() {

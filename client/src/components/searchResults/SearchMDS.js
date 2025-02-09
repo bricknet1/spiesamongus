@@ -1,4 +1,4 @@
-import marbleSignalPic from '../assets/pictures/MDS 11.20.23.jpg';
+import marbleSignalPic from '../../assets/pictures/MDS 11.20.23.jpg';
 
 
 function SearchMDS() {

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 
-import marblePic from '../assets/pictures/Marble Polaroid.png';
-import marbleAchievementPic from '../assets/pictures/Notable Achievement Marble 11.21.23.jpg';
-import marbleSignalPic from '../assets/pictures/MDS 11.20.23.jpg';
-import marblevideo from '../assets/videos/Papyrus Shale Phone Call Video 3.29.24.mp4'
+import marblePic from '../../assets/pictures/Marble Polaroid.png';
+import marbleAchievementPic from '../../assets/pictures/Notable Achievement Marble 11.21.23.jpg';
+import marbleSignalPic from '../../assets/pictures/MDS 11.20.23.jpg';
+import marblevideo from '../../assets/videos/Papyrus Shale Phone Call Video 3.29.24.mp4'
 
 
 

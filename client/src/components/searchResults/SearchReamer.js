@@ -1,4 +1,4 @@
-import reamerPic from '../assets/pictures/Reamer Polaroid.png';
+import reamerPic from '../../assets/pictures/Reamer Polaroid.png';
 
 
 function SearchReamer() {
