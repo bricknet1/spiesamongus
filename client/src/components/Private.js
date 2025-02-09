@@ -1,5 +1,7 @@
 import Questions from "./Questions.js";
 import SocialFooter from "./SocialFooter.js";
+import posterPic from '../assets/pictures/Private Events Poster.jpg';
+
 
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -82,7 +84,10 @@ function Private() {
 
       add menu header here
 
+      <img src={posterPic} style={{width: '100vw'}} alt="Private Events" />
+      
       <div style={{alignContent: 'center', textAlign: 'center', display: 'block', margin: '0 auto', width: '90vw'}}>
+
 
         <br/>
         <br/>
