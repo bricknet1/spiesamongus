@@ -1,3 +1,4 @@
+import HamburgerMenuHeader from "./HamburgerMenuHeader.js";
 import SocialFooter from "./SocialFooter.js";
 import useDeviceType from "./UseDeviceType.js";
 
@@ -29,6 +30,8 @@ function Privacy() {
     <div className="pageContent" style={pageContentStyle}>
 
       <title>Privacy | Spies Among Us</title>
+
+      <HamburgerMenuHeader />
 
       <div className={orangeBar}>PRIVACY POLICY</div>
 

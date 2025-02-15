@@ -182,6 +182,107 @@ strong {
   font-size: 7vw;
 }
 
+
+
+
+
+
+
+
+/* HAMBURGER MENU */
+
+/* Hamburger Icon */
+.hamburger-icon {
+  position: fixed !important;
+  top: 15px !important;
+  right: 10px !important;
+  font-size: 30px;
+  background: rgb(33, 23, 76);
+  border: 1px solid #ff3700;
+  cursor: pointer;
+  z-index: 1001;
+  color: #ff3700;
+}
+
+/* Menu Overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* When menu is open */
+.menu-overlay.open {
+  right: 0;
+}
+
+/* Navigation Menu */
+.menu ul {
+  list-style: none;
+  text-align: center;
+}
+
+.menu ul li {
+  margin: 20px 0;
+}
+
+.menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+  color: #ff9900;
+}
+
+.menu .burger-menu-active {
+  color: yellow;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* START PAGE CONTENT */
 
 .start-header {

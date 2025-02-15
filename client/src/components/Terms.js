@@ -1,3 +1,4 @@
+import HamburgerMenuHeader from "./HamburgerMenuHeader.js";
 import SocialFooter from "./SocialFooter.js";
 import useDeviceType from "./UseDeviceType.js";
 
@@ -14,6 +15,8 @@ function Terms() {
   return (
     <div>
       <title>Terms & Conditions</title>
+
+      <HamburgerMenuHeader />
 
       <div className={orangeBar}>TERMS & CONDITIONS</div>
 

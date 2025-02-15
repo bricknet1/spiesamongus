@@ -1,3 +1,4 @@
+import HamburgerMenuHeader from "./HamburgerMenuHeader.js";
 import Questions from "./Questions.js";
 import SocialFooter from "./SocialFooter.js";
 import posterPic from "../assets/pictures/Private Events Poster.jpg";
@@ -89,7 +90,9 @@ function Private() {
   return (
     <div className="pageContent" style={{ paddingBottom: "10vw" }}>
       <title>Private Events | Spies Among Us</title>
-      add menu header here
+      
+      <HamburgerMenuHeader />
+
       <img src={posterPic} style={{ width: "100vw" }} alt="Private Events" />
       <div
         style={{
