@@ -739,13 +739,27 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-top: 6vw;
 }
 
-.myHistoryDropdown {
+.myHistoryDropdownMobile {
   font-size: 6vw;
   margin-bottom: 10vw;
   margin-top: 10vw;
   width: 90vw;
   margin-left: 5vw;
   margin-right: 5vw;
+  cursor: pointer; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myHistoryDropdownDesktop {
+  font-size: 35px;
+  width: 800px;
+  margin: 15px auto;
+  cursor: pointer; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .myHistoryDropdownText {
@@ -849,9 +863,9 @@ input[type="checkbox"]:checked + .checkbox:before {
   /* transform: translateY(0vw) translateX(0vw); */
 }
 
-/* CONFIRMED CONTENT */
+/* QUESTIONS CONTENT */
 
-.confirmedDropdownText {
+.questionsDropdownTextMobile {
   font-size: 4.5vw;
   width: 86vw;
   margin-left: 7vw;
@@ -859,6 +873,15 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-weight: normal;
   line-height: 7vw;
   margin-bottom: 10vw;
+}
+
+.questionsDropdownTextDesktop {
+  font-size: 18px;
+  width: 800px;
+  margin: 0 auto;
+  font-weight: normal;
+  /* line-height: 7vw; */
+  margin-bottom: 30px;
 }
 
 /* DEBRIEF CONTENT */

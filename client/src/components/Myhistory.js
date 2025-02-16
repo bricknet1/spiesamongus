@@ -29,7 +29,7 @@ function Myhistory() {
       <div className='myHistoryHeading'>Agent Papyrus, click on a mission below to see your personal notes.</div>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setOneToggled(!oneToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>OPERATION FILTHY LAUNDRY (ongoing)</span>
@@ -49,7 +49,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setTwoToggled(!twoToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>OPERATION DIRTY LAUNDRY</span>
@@ -70,7 +70,7 @@ function Myhistory() {
 
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setThreeToggled(!threeToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>OPERATION BUBONIC CURTSY*</span>
@@ -96,7 +96,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setFourToggled(!fourToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>UNLOCK THE REAMER ASSIGNMENT</span>
@@ -116,7 +116,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setFiveToggled(!fiveToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>HAVANA SYNDROME ROUND ROBIN</span>
@@ -136,7 +136,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setSixToggled(!sixToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>EXPEDITION GOOSE MURDER</span>
@@ -156,7 +156,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setSevenToggled(!sevenToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>THE GOOSE STRANGLE CHALLENGE</span>
@@ -176,7 +176,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setEightToggled(!eightToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>MISSION: INVOLUNTARY U2 DOWNLOAD</span>
@@ -196,7 +196,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setNineToggled(!nineToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>OPERATION CHENEY TRAIN HEIST</span>
@@ -216,7 +216,7 @@ function Myhistory() {
       <div class="thinOrangeLine"/>
 
       <div 
-        className='myHistoryDropdown' 
+        className='myHistoryDropdownMobile' 
         onClick={() => setTenToggled(!tenToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <span>THE QUEST FOR THE SILVER OBELISK</span>
