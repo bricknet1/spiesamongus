@@ -1,6 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 
 import Begin from "./components/Begin.js";
+import Bypass from "./components/Bypass.js";
+import Cancel from "./components/Cancel.js";
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
 import Marble from "./components/Marble.js";
@@ -66,12 +68,12 @@ function App() {
         </Route>
 
         {/* ADMIN PAGES */}
-        {/* <Route path="/bypass" exact>
+        <Route path="/bypass" exact>
           <Bypass />
-        </Route> */}
-        {/* <Route path="/cancel" exact>
+        </Route>
+        <Route path="/cancel" exact>
           <Cancel />
-        </Route> */}
+        </Route>
 
         {/* GENERAL PAGES */}
         <Route path="/" exact>
