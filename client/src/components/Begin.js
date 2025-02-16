@@ -104,15 +104,6 @@ function Begin() {
           res.json().then((error) => {
             console.error(error.error);
             alert(`Error: ${error.message}`);
-            // if (
-            //   error.error.includes("users_email_key") ||
-            //   error.error.includes("UNIQUE constraint failed: users.email")
-            // ) {
-            //   formik.setErrors({
-            //     email: "An account with this email already exists",
-            //   });
-            // }
-            // setError(error.message)
           });
         }
       });
@@ -120,36 +111,12 @@ function Begin() {
   });
   console.log("Form Values:", formik.values);
 
-  // const callWebhook = async () => {
-  //   const webhookUrl = "https://hook.us1.make.com/0hjpqsprwulf8d7oq9ybw2byuz5je95n";
-  //   const data = {something: "something else"};
-
-  //   try {
-  //     const response = await fetch(webhookUrl, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(data)
-  //     });
-
-  //     if (response.ok) {
-  //       const result = await response.json();
-  //       console.log("Webhook response:", result);
-  //     } else {
-  //       console.error("Failed to call webhook:", response.statusText);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error calling webhook:", error);
-  //   }
-  // };
-    
-
   useEffect(() => {
     const { firstName, lastName } = formik.values;
     if (firstName || lastName) {
       formik.setFieldValue("name1", `${firstName} ${lastName}`.trim());
     }
+    // eslint-disable-next-line
   }, [formik.values.firstName, formik.values.lastName]);
 
   return (

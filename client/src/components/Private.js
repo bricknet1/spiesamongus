@@ -104,7 +104,6 @@ function Private() {
     paddingLeft: isMobile ? "5vw" : "",
     lineHeight: isMobile ? "8vw" : "30px",
     margin: isMobile ? "" : "0 auto",
-    fontSize: isMobile ? "" : "30px",
   };
 
   const posterStyle = {

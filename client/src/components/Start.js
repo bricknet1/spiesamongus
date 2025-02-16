@@ -20,13 +20,6 @@ function Start() {
     friendPhone: yup
       .string()
       .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
-    // .when("numberOfAgents", {
-    //   is: '2',
-    //   then: yup.string()
-    //     .required('Phone is required')
-    //     .matches(/^[0-9]{10}$/,'Phone number must be exactly 10 digits'),
-    //   // otherwise: yup.string().notRequired(),
-    // }),
     agreeToTerms: yup
       .boolean()
       .oneOf([true], "Agreeing to the terms and conditions is required"),
@@ -57,6 +50,7 @@ function Start() {
       }).then((res) => {
         if (res.ok) {
           console.log("successful response", res);
+          history.push("/confirmed");
         } else {
           res.json().then((error) => {
             console.error(error);
