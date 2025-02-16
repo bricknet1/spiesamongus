@@ -1,6 +1,7 @@
 import HamburgerMenuHeader from "./HamburgerMenuHeader.js";
 import Questions from "./Questions.js";
 import SocialFooter from "./SocialFooter.js";
+import useDeviceType from "./UseDeviceType.js";
 import posterPic from "../assets/pictures/Private Events Poster.jpg";
 
 import * as yup from "yup";
@@ -71,15 +72,15 @@ function Private() {
   function SubmissionMessage() {
     return (
       <>
-      <br />
+        <br />
         {submittionSuccess === true && (
-          <div style={{ color: "black", fontSize: "8vw" }}>
+          <div style={submissionMessageStyle}>
             Submission received! We will be in touch soon. Please check your
             spam folder as emails often end up there!
           </div>
         )}
         {submittionSuccess === false && (
-          <div style={{ color: "black", fontSize: "8vw" }}>
+          <div style={submissionMessageStyle}>
             Submission failed! Please refresh the page and try again!
           </div>
         )}
@@ -87,38 +88,71 @@ function Private() {
     );
   }
 
+  const isMobile = useDeviceType();
+
+  const pageContentStyle = {
+    paddingBottom: isMobile ? "10vw" : "10px",
+    alignContent: "center",
+    textAlign: "center",
+    display: "block",
+    margin: "0 auto",
+  };
+
+  const mainStyle = {
+    fontSize: isMobile ? "4.5vw" : "18px",
+    // fontWeight: "normal",
+    width: isMobile ? "90vw" : "700px",
+    paddingLeft: isMobile ? "5vw" : "",
+    lineHeight: isMobile ? "8vw" : "30px",
+    margin: isMobile ? "" : "0 auto",
+    fontSize: isMobile ? "" : "30px",
+    // alignContent: "center",
+    // textAlign: "center",
+    // display: "block",
+    // margin: "0 auto",
+  };
+
+  const posterStyle = {
+    width: isMobile ? "100vw" : "700px",
+  }
+
+  const headingStyle = {
+    fontSize: isMobile ? "8vw" : "40px",
+    marginTop: isMobile ? "" : "60px",
+  }
+
+  const listItemStyle = (isMobile ? "privateEventsListItemMobile" : "privateEventsListItemDesktop")
+
+  const submissionMessageStyle = {
+    color: "black",
+    fontSize: isMobile ? "8vw" : "30px", 
+    paddingBottom: "20px"
+  }
+
   return (
-    <div className="pageContent" style={{ paddingBottom: "10vw" }}>
+    <div className="pageContent" style={pageContentStyle}>
       <title>Private Events | Spies Among Us</title>
-      
+
       <HamburgerMenuHeader />
 
-      <img src={posterPic} style={{ width: "100vw" }} alt="Private Events" />
+      <img src={posterPic} style={posterStyle} alt="Private Events" />
       <div
-        style={{
-          alignContent: "center",
-          textAlign: "center",
-          display: "block",
-          margin: "0 auto",
-          width: "90vw",
-        }}
+        style={mainStyle}
       >
         <br />
-        <br />
-        <br />
-        <div style={{ fontSize: "8vw" }}>HOW IT WORKS</div>
+        <div style={headingStyle}>HOW IT WORKS</div>
         <ul className="privateEventsList">
-          <li className="privateEventsListItem">
+          <li className={listItemStyle}>
             Tell us what day and time you would like your group event.
           </li>
-          <li className="privateEventsListItem">
+          <li className={listItemStyle}>
             Pick a meeting spot in Little Tokyo (bar, hotel, restaurant...)
           </li>
-          <li className="privateEventsListItem">
+          <li className={listItemStyle}>
             On the day of your event, we will send your participants through the
             Spies experience in groups of four every 5 minutes.
           </li>
-          <li className="privateEventsListItem">
+          <li className={listItemStyle}>
             As each group finishes the experience, they will receive a final
             text leading them to the meeting place to debrief and celebrate!
           </li>
@@ -128,143 +162,137 @@ function Private() {
       </div>
       <div className="orangeLine" />
       <div
-        style={{
-          alignContent: "center",
-          textAlign: "center",
-          display: "block",
-          margin: "0 auto",
-          width: "90vw",
-        }}
+        style={mainStyle}
       >
         <br />
         <br />
-        <div style={{ fontSize: "8vw" }}>
+        <div style={headingStyle}>
           Fill out this form to learn more and receive a quote!
         </div>
         <br />
         <br />
 
-        <form onSubmit={formik.handleSubmit} className="privatePageForm">
-          <label htmlFor="firstName" className="privatePageLabel">
+        <form onSubmit={formik.handleSubmit} className={ isMobile ? "privatePageFormMobile" : "privatePageFormDesktop" }>
+          <label htmlFor="firstName" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             First name *
           </label>
           <br />
           <input
             type="text"
             name="firstName"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.firstName}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.firstName}</h3>
 
-          <label htmlFor="lastName" className="privatePageLabel">
+          <label htmlFor="lastName" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Last name *
           </label>
           <br />
           <input
             type="text"
             name="lastName"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.lastName}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.lastName}</h3>
 
-          <label htmlFor="email" className="privatePageLabel">
+          <label htmlFor="email" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Email *
           </label>
           <br />
           <input
             type="text"
             name="email"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.email}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.email}</h3>
 
-          <label htmlFor="phone" className="privatePageLabel">
+          <label htmlFor="phone" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Phone
           </label>
           <br />
           <input
             type="tel"
             name="phone"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.phone}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone}</h3>
 
-          <label htmlFor="company" className="privatePageLabel">
+          <label htmlFor="company" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Company name or reason for event
           </label>
           <br />
           <input
             type="text"
             name="company"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.company}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.company}</h3>
 
-          <label htmlFor="numberOfGuests" className="privatePageLabel">
+          <label htmlFor="numberOfGuests" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Rough number of guests you are expecting
           </label>
           <br />
           <input
             type="text"
             name="numberOfGuests"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.numberOfGuests}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.numberOfGuests}</h3>
 
-          <label htmlFor="date" className="privatePageLabel">
+          <label htmlFor="date" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Date you are considering for the event
           </label>
           <br />
           <input
             type="text"
             name="date"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.date}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.date}</h3>
 
-          <label htmlFor="time" className="privatePageLabel">
+          <label htmlFor="time" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Time you are considering for the event
           </label>
           <br />
           <input
             type="text"
             name="time"
-            className="privatePageFormField"
+            className={ isMobile ? "privatePageFormFieldMobile" : "privatePageFormFieldDesktop" }
             value={formik.values.time}
             onChange={formik.handleChange}
           />
           <br />
           <h3 style={{ color: "#4FC9C2" }}> {formik.errors.time}</h3>
 
-          <label htmlFor="otherInfo" className="privatePageLabel">
+          <label htmlFor="otherInfo" className={ isMobile ? "privatePageLabelMobile" : "privatePageLabelDesktop" }>
             Anything else we should know?
           </label>
           <br />
           <textarea
             type="text"
             name="otherInfo"
-            className="privatePageFormFieldLarge"
+            className={ isMobile ? "privatePageFormFieldLargeMobile" : "privatePageFormFieldLargeDesktop" }
             value={formik.values.otherInfo}
             onChange={formik.handleChange}
           />
@@ -275,7 +303,7 @@ function Private() {
           <input
             type="submit"
             value="Submit"
-            className="privatePageSubmitButton"
+            className={ isMobile ? "privatePageSubmitButtonMobile" : "privatePageSubmitButtonDesktop" }
           />
           {/* {error&& <h3 style={{color:'#4FC9C2'}}> {error}</h3>} */}
 

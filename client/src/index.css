@@ -1142,7 +1142,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 /* .privateEventsList {} */
 
-.privateEventsListItem {
+.privateEventsListItemMobile {
   font-size: 7vw;
   /* width: 79vw; */
   line-height: 9vw;
@@ -1150,16 +1150,31 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: left;
 }
 
-.privatePageForm {
+.privateEventsListItemDesktop {
+  font-size: 30px;
+  /* width: 79vw; */
+  line-height: 45px;
+  /* margin-right: 5vw; */
+  text-align: left;
+}
+
+.privatePageFormMobile {
   width: 90vw;
-  padding-bottom: 30px;
   padding-top: 20px;
   margin: 0 auto;
   background-color: #f9df39;
   border-radius: 25px;
 }
 
-.privatePageFormField {
+.privatePageFormDesktop {
+  width: 700px;
+  padding-top: 20px;
+  margin: 0 auto;
+  background-color: #f9df39;
+  border-radius: 25px;
+}
+
+.privatePageFormFieldMobile {
   width: 80vw;
   height: 13vw;
   font-family: "DIN Neuzeit Grotesk", sans-serif;
@@ -1176,7 +1191,24 @@ input[type="checkbox"]:checked + .checkbox:before {
   color: #ff3700;
 }
 
-.privatePageFormFieldLarge {
+.privatePageFormFieldDesktop {
+  width: 600px;
+  height: 50px;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
+  font-size: 20px;
+  border-radius: 17px;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  font-weight: bold;
+  background-color: #21174c;
+  color: #ff3700;
+}
+
+.privatePageFormFieldLargeMobile {
   width: 80vw;
   height: 39vw;
   font-family: "DIN Neuzeit Grotesk", sans-serif;
@@ -1197,7 +1229,30 @@ input[type="checkbox"]:checked + .checkbox:before {
   resize: none; /* Disable manual resizing */
 }
 
-.privatePageSubmitButton {
+.privatePageFormFieldLargeDesktop {
+  width: 600px;
+  height: 150px;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
+  font-size: 20px;
+  border-radius: 17px;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  font-weight: bold;
+  background-color: #21174c;
+  color: #ff3700;
+  overflow-y: auto; /* Scroll vertically if content overflows */
+  white-space: pre-wrap; /* Preserve whitespace and wrap text to next line */
+  word-wrap: break-word; /* Break long words onto the next line */
+  resize: none; /* Disable manual resizing */
+}
+
+.privatePageSubmitButtonMobile {
   color: white;
   background-color: #ff3700;
   width: 80vw;
@@ -1212,8 +1267,30 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-weight: bold;
 }
 
-.privatePageLabel {
+.privatePageSubmitButtonDesktop {
+  color: white;
+  background-color: #ff3700;
+  width: 600px;
+  height: 50px;
+  margin: 0 auto;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
+  font-size: 30px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  display: block;
+  font-weight: bold;
+}
+
+.privatePageLabelMobile {
   color: #21174c;
   font-size: 5vw;
   padding: 6vw;
 }
+
+.privatePageLabelDesktop {
+  color: #21174c;
+  font-size: 30px;
+  padding: 10px;
+}
+
