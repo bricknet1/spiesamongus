@@ -10,23 +10,23 @@ import { useState } from "react";
 
 function Private() {
   const formSchema = yup.object().shape({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
+    firstName: yup.string().required("⬆️ First name is required"),
+    lastName: yup.string().required("⬆️ Last name is required"),
     email: yup
       .string()
-      .email("Must be a valid email")
-      .required("Email is required"),
+      .email("⬆️ Must be a valid email")
+      .required("⬆️ Email is required"),
     phone: yup
       .string()
-      .required("Phone is required")
+      .required("⬆️ Phone is required")
       .matches(
         /^\+1\d{10}$/,
-        'Phone number must start with "+1" followed by exactly 10 digits'
+        '⬆️ Phone must start with "+1" followed by 10 digits'
       ),
-    company: yup.string().required("Company name or Reason is required"),
-    numberOfGuests: yup.string().required("Number of Guests is required"),
-    date: yup.string().required("Date is required"),
-    time: yup.string().required("Time is required"),
+    company: yup.string().required("⬆️ Company name or Reason is required"),
+    numberOfGuests: yup.string().required("⬆️ Number of Guests is required"),
+    date: yup.string().required("⬆️ Date is required"),
+    time: yup.string().required("⬆️ Time is required"),
   });
 
   const formik = useFormik({
@@ -126,6 +126,13 @@ function Private() {
     paddingBottom: "20px",
   };
 
+  const errorStyle = {
+    color: "#DF3131",
+    fontSize: isMobile ? "" : "20px",
+    // lineHeight: "10px"
+    height: isMobile ? "" : "25px"
+  }
+
   return (
     <div>
       <div className="pageContent" style={pageContentStyle}>
@@ -193,7 +200,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.firstName}</h3>
+            <div style={errorStyle}> {formik.errors.firstName}</div>
 
             <label
               htmlFor="lastName"
@@ -216,7 +223,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.lastName}</h3>
+            <div style={errorStyle}> {formik.errors.lastName}</div>
 
             <label
               htmlFor="email"
@@ -239,7 +246,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.email}</h3>
+            <div style={errorStyle}> {formik.errors.email}</div>
 
             <label
               htmlFor="phone"
@@ -262,7 +269,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone}</h3>
+            <div style={errorStyle}> {formik.errors.phone}</div>
 
             <label
               htmlFor="company"
@@ -285,7 +292,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.company}</h3>
+            <div style={errorStyle}> {formik.errors.company}</div>
 
             <label
               htmlFor="numberOfGuests"
@@ -308,10 +315,10 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}>
+            <div style={errorStyle}>
               {" "}
               {formik.errors.numberOfGuests}
-            </h3>
+            </div>
 
             <label
               htmlFor="date"
@@ -334,7 +341,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.date}</h3>
+            <div style={errorStyle}> {formik.errors.date}</div>
 
             <label
               htmlFor="time"
@@ -357,7 +364,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.time}</h3>
+            <div style={errorStyle}> {formik.errors.time}</div>
 
             <label
               htmlFor="otherInfo"
@@ -380,7 +387,7 @@ function Private() {
               onChange={formik.handleChange}
             />
             <br />
-            <h3 style={{ color: "#4FC9C2" }}> {formik.errors.otherInfo}</h3>
+            <div style={errorStyle}> {formik.errors.otherInfo}</div>
 
             <input
               type="submit"
@@ -391,7 +398,7 @@ function Private() {
                   : "privatePageSubmitButtonDesktop"
               }
             />
-            {/* {error&& <h3 style={{color:'#4FC9C2'}}> {error}</h3>} */}
+            {/* {error&& <div style={{color:'#4FC9C2'}}> {error}</div>} */}
 
             <SubmissionMessage />
           </form>
