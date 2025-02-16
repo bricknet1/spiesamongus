@@ -1190,7 +1190,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .privatePageFormDesktop {
-  width: 700px;
+  width: 600px;
   padding-top: 20px;
   margin: 0 auto;
   background-color: #f9df39;
@@ -1215,8 +1215,8 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .privatePageFormFieldDesktop {
-  width: 600px;
-  height: 50px;
+  width: 500px;
+  height: 40px;
   font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 20px;
   border-radius: 17px;
@@ -1225,7 +1225,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   font-weight: bold;
   background-color: #21174c;
   color: #ff3700;
@@ -1253,8 +1253,8 @@ input[type="checkbox"]:checked + .checkbox:before {
 }
 
 .privatePageFormFieldLargeDesktop {
-  width: 600px;
-  height: 150px;
+  width: 500px;
+  height: 100px;
   font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 20px;
   border-radius: 17px;
@@ -1265,7 +1265,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding-top: 10px;
   padding-bottom: 10px;
   box-sizing: border-box;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   font-weight: bold;
   background-color: #21174c;
   color: #ff3700;
@@ -1293,7 +1293,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 .privatePageSubmitButtonDesktop {
   color: white;
   background-color: #ff3700;
-  width: 600px;
+  width: 500px;
   height: 50px;
   margin: 0 auto;
   font-family: "DIN Neuzeit Grotesk", sans-serif;
@@ -1313,7 +1313,7 @@ input[type="checkbox"]:checked + .checkbox:before {
 
 .privatePageLabelDesktop {
   color: #21174c;
-  font-size: 30px;
+  font-size: 25px;
   padding: 10px;
 }
 

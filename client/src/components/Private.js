@@ -382,7 +382,6 @@ function Private() {
             <br />
             <h3 style={{ color: "#4FC9C2" }}> {formik.errors.otherInfo}</h3>
 
-            <br />
             <input
               type="submit"
               value="Submit"
