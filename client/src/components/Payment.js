@@ -1,5 +1,6 @@
 import Questions from "./Questions.js";
 import SocialFooter from "./SocialFooter.js";
+import useDeviceType from "./UseDeviceType.js";
 
 function TopBuyButtonComponent() {
   return (
@@ -20,58 +21,54 @@ function BottomBuyButtonComponent() {
 }
 
 function Payment() {
+  const isMobile = useDeviceType();
+
+  const orangeBar = isMobile ? "orangeBar" : "orangeBarDesktop";
+
+  const style = {
+    alignContent: "center",
+    textAlign: "center",
+    display: "block",
+    margin: "0 auto",
+    width: isMobile ? "90vw" : "600px",
+    fontSize: isMobile ? "7vw" : "32px",
+    fontStyle: "italic",
+  };
+
+
+
   return (
     <div className="pageContent" style={{ paddingBottom: "10vw" }}>
       <title>Payment Page | Spies Among Us</title>
 
-      <div className="orangeBar">PAYMENT PAGE</div>
+      <div className={orangeBar}>PAYMENT PAGE</div>
 
-      <div
-        style={{
-          alignContent: "center",
-          textAlign: "center",
-          display: "block",
-          margin: "0 auto",
-          width: "90vw",
-        }}
-      >
+      <div style={style}>
         <br />
         <br />
         <br />
-        <div style={{ fontSize: "7vw", fontStyle: "italic" }}>
+        <div>
           Click the "Get Tickets" button to go to out payment page where you can
           select your quantity of tickets.
         </div>
         <br />
-        <br />
-        <br />
-
         <TopBuyButtonComponent />
-
         <br />
         <br />
         <br />
       </div>
 
-      <div className="orangeBar">GENERAL PAYMENTS</div>
+      <div className={orangeBar}>GENERAL PAYMENTS</div>
 
       <div
-        style={{
-          alignContent: "center",
-          textAlign: "center",
-          display: "block",
-          margin: "0 auto",
-          width: "90vw",
-        }}
+        style={style}
       >
         <br />
         <br />
         <br />
-        <div style={{ fontSize: "7vw", fontStyle: "italic" }}>
+        <div>
           Enter the requested amount and click pay to go to the checkout page.
         </div>
-        <br />
-        <br />
         <br />
         <BottomBuyButtonComponent />
         <br />
