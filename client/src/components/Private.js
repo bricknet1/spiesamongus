@@ -29,15 +29,14 @@ function Private() {
       .required("⬆️ Email is required"),
     phone: yup
       .string()
-      .required("⬆️ Phone is required")
       .matches(
         /^\d{3}-\d{3}-\d{4}$/,
         '⬆️ Phone must be in the format "xxx-xxx-xxxx"'
       ),
-    company: yup.string().required("⬆️ Company name or Reason is required"),
-    numberOfGuests: yup.string().required("⬆️ Number of Guests is required"),
-    date: yup.string().required("⬆️ Date is required"),
-    time: yup.string().required("⬆️ Time is required"),
+    company: yup.string(),
+    numberOfGuests: yup.string(),
+    date: yup.string(),
+    time: yup.string(),
   });
 
   const formik = useFormik({
