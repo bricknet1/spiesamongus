@@ -1,5 +1,5 @@
 import instagram from "../assets/pictures/instagram.webp";
-import facebook from "../assets/pictures/facebook.webp";
+import facebook from "../assets/pictures/Facebook icon.avif";
 import useDeviceType from "./UseDeviceType.js";
 
 function SocialFooter() {
