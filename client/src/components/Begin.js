@@ -99,7 +99,7 @@ function Begin() {
       }).then((res) => {
         if (res.ok) {
           console.log("successful response", res);
-          history.push("/confirmed");
+          history.push("/confirmed#top");
         } else {
           res.json().then((error) => {
             console.error(error.error);

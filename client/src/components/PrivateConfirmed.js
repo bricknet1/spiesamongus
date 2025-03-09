@@ -3,19 +3,20 @@ import SocialFooter from "./SocialFooter.js";
 
 import SAUPic from "../assets/pictures/animatedSpiesLogo.gif";
 
-function Confirmed() {
+function PrivateConfirmed() {
   return (
-    <div className="pageContent" style={{ paddingBottom: "10vw" }} id="top">
-      <title>Mission Confirmed | Spies Among Us</title>
+    <div className="pageContent" style={{ paddingBottom: "10vw" }}>
+      <title>Submission Confirmed | Spies Among Us</title>
 
-      <div className="orangeBar">MISSION: CONFIRMED</div>
+      <div className="orangeBar" id="top">SUBMISSION: CONFIRMED</div>
 
       <div style={{ alignContent: "center", textAlign: "center" }}>
         <br />
         <br />
         <br />
         <div style={{ fontSize: "8vw" }}>
-          You will receive a text with instructions shortly.
+        Submission received! We will be in touch soon. Please check your
+        spam folder as emails often end up there!
         </div>
         <br />
         <br />
@@ -34,4 +35,4 @@ function Confirmed() {
   );
 }
 
-export default Confirmed;
+export default PrivateConfirmed;

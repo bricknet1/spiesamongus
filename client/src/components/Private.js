@@ -75,6 +75,7 @@ function Private() {
         if (res.ok) {
           console.log("Form successfully submitted");
           setSubmissionSuccess(true);
+          history.push('/privateconfirmed#top')
         } else {
           console.error("Submission failed");
           setSubmissionSuccess(false);

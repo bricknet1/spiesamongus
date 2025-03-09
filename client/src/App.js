@@ -15,7 +15,8 @@ import Opbc from "./components/Opbc.js";
 import Payment from "./components/Payment.js";
 import Privacy from "./components/Privacy.js";
 import Private from "./components/Private.js";
-import Start from "./components/Start.js";
+import PrivateConfirmed from "./components/PrivateConfirmed.js";
+// import Start from "./components/Start.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
 import YourMission from "./components/YourMission.js";
@@ -31,7 +32,7 @@ function App() {
           <Begin />
         </Route>
         <Route path="/start" exact>
-          <Start />
+          <Begin />
         </Route>
         <Route path="/confirmed" exact>
           <Confirmed />
@@ -90,6 +91,9 @@ function App() {
         </Route>
         <Route path="/private" exact>
           <Private />
+        </Route>
+        <Route path="/privateconfirmed" exact>
+          <PrivateConfirmed />
         </Route>
 
         <Route path="*">
