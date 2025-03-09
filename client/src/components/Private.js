@@ -16,7 +16,10 @@ function Private() {
 
   useEffect(() => {
     if (submissionSuccess === true) {
-      window.location.hash = "#submission";
+      history.push("/private#submission")
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     }
   }, [submissionSuccess, history]);
 
