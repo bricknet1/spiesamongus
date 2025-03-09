@@ -17,7 +17,7 @@ function Opbc() {
     console.log("Submitted value:", valueCaps);
     setSubmittedPassword(valueCaps);
 
-    if (validPasswords.includes(valueCaps)) {
+    if ((valueCaps.includes('EGREGIOUS')) || (valueCaps.includes('EGREGOUS'))) {
       setIsAnimating(true);
       setPassword('Success!');
     }
@@ -33,9 +33,6 @@ function Opbc() {
     }
   }, [isAnimating]);
 
-  const validPasswords = ['EGREGIOUS', 'EGREGOUS']
-
-
   return (
     <div>
       <div className='pageContent'>
@@ -44,7 +41,7 @@ function Opbc() {
 
         <div className='orangeBar'>OPERATION BUBONIC CURTSY</div>
 
-        {(!validPasswords.includes(submittedPassword) || submittedPassword === "" || isAnimating === true) && <div>
+        {(!(submittedPassword.includes('EGREGIOUS') || submittedPassword.includes('EGREGOUS')) || submittedPassword === "" || isAnimating === true) && <div>
 
           <div className='opbc-subheader'>WARNING! Classified files. Enter password to continue.</div>
 
@@ -66,13 +63,13 @@ function Opbc() {
 
         {submittedPassword==="" && <div></div>}
 
-        {(!validPasswords.includes(submittedPassword) && submittedPassword !== "") && 
+        {(!(submittedPassword.includes('EGREGIOUS') || submittedPassword.includes('EGREGOUS')) && submittedPassword !== "") && 
           <div className='wrongPassword'>Wrong password.<br/>Entry denied!<br/>
             <img src={papyrusheadshake3} alt="Papyrus shaking his head" className="papyrusheadshake3"/>
           </div>
         }
 
-        {(validPasswords.includes(submittedPassword) && isAnimating !== true) &&
+        {((submittedPassword.includes('EGREGIOUS') || submittedPassword.includes('EGREGOUS')) && isAnimating !== true) &&
           <div className='rightPassword'>
             <br/>
             <img src={opbcimage} alt="Secret Document" className="opbcimage"/>
