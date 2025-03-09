@@ -61,13 +61,7 @@ function Mission() {
 
           <img src={phonePic} className="missionPhonePic" alt="Telephone" />
 
-          <span className='mission-emphasis'>5. USE YOUR OWN PHONE.</span> Each agent should read texts and go to websites on their own phone. Share any information you discover! Only your partner can respond to texts, but you will need to use your phone to click on sites, fill out information, and answer phone calls as they come in!<br/>
-          <br/>
-
-          <div className="orangeLine"/><br/>
-          <br/>
-
-          <span className='mission-emphasis'>6. TO BEGIN,</span> cross the street and walk to the <span className='mission-emphasis'>RED BELL TOWER</span>.
+          <span className='mission-emphasis'>5. TO BEGIN,</span> cross the street and walk to the <span className='mission-emphasis'>RED BELL TOWER</span>.
 
           <div className="ovalPicWrapperVert">
             <img src={pathPic} className="ovalPicVert" alt="The path forward" />
@@ -75,7 +69,7 @@ function Mission() {
           <br/>
           <br/>
 
-          <span className='mission-emphasis'>7. Once you are there, tell your partner to text <span style={{ color: '#f9DF39'}}>READY FOR DANGER</span> to:<br/><br/></span>
+          <span className='mission-emphasis'>6. Once you are there, text READY FOR DANGER to:<br/><br/></span>
           <div style={{ fontSize:"10vw", textAlign:"center"}}><a target="_parent" href="sms:+18776641821" style={{ color: '#f9DF39'}}><u>Agent Papyrus</u></a></div>
         </div>
 
