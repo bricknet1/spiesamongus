@@ -49,8 +49,8 @@ function Debrief() {
       <div className="debrief-main-text">
         Thank you for playing!<br/>
         <br/>
-        We are still tweaking this new show so we appreciate all feedback as we improve it.<br/>
-        <br/>
+        {/* We are still tweaking this new show so we appreciate all feedback as we improve it.<br/>
+        <br/> */}
         Please tell us about your experience <a href="https://forms.gle/46bRLZ4QmdgKmGYW6" target="_blank" rel="noreferrer" style={{color: '#f9DF39'}}>here</a>.
       </div>
 
@@ -74,7 +74,7 @@ function Debrief() {
       </div>
       {oneToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/Qr8EMq6z15iatjpr8" rel="noreferrer" className="debrief-link">MIDORI MATCHA</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/Vn7jLVC814Gy7ats7" rel="noreferrer" className="debrief-link">TEA MASTER MATCHA CAFE</a><br/>
           <i>They take matcha VERY seriously</i><br/>
           <br/>
           What to order?
@@ -130,7 +130,7 @@ function Debrief() {
         className='debriefDropdown' 
         onClick={() => setThreeToggled(!threeToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <span>Drinks</span>
+        <span>Drinks (Alcoholic)</span>
         <span style={{ 
           transform: threeToggled ? 'rotate(180deg)' : 'rotate(0deg)', 
           transition: 'transform 0.3s ease' 
@@ -140,17 +140,17 @@ function Debrief() {
       </div>
       {threeToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/MBAcx7Ki7EVEdE3T6" rel="noreferrer" className="debrief-link">WOLF AND CRANE</a><br/>
-          <i>Probably the closest rec to you if you just finished the mission. Huge selection of Japanese whiskies and tasty cocktails.</i><br/>
-          <br/>
-          What to order?
-          <blockquote className="debrief-blockquote">Beets by Wolf</blockquote>
-          <br/>
           <a target="_blank" href="https://maps.app.goo.gl/NMrXQfNq6XY7Kbzq7" rel="noreferrer" className="debrief-link">THE MERMAID</a><br/>
           <i>Tiki dive bar with refreshing drinks!</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Smokey Eye</blockquote>
+          <br/>
+          <a target="_blank" href="https://maps.app.goo.gl/MBAcx7Ki7EVEdE3T6" rel="noreferrer" className="debrief-link">WOLF AND CRANE</a><br/>
+          <i>Probably the closest rec to you if you just finished the mission. Huge selection of Japanese whiskies and tasty cocktails.</i><br/>
+          <br/>
+          What to order?
+          <blockquote className="debrief-blockquote">Beets by Wolf</blockquote>
         </div>
       </div>}
 
@@ -160,7 +160,7 @@ function Debrief() {
         className='debriefDropdown' 
         onClick={() => setFourToggled(!fourToggled)} 
         style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <span>Taasty Treats</span>
+        <span>Tasty Treats</span>
         <span style={{ 
           transform: fourToggled ? 'rotate(180deg)' : 'rotate(0deg)', 
           transition: 'transform 0.3s ease' 
@@ -170,17 +170,17 @@ function Debrief() {
       </div>
       {fourToggled===true && <div style={{ marginTop: '20px' }}>
         <div className="debriefDropdownText" >
-          <a target="_blank" href="https://maps.app.goo.gl/oz9gK5bfa8Z5gzuWA" rel="noreferrer" className="debrief-link">SOMISOMI</a><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/T88avFqGYWxqJf7Q8" rel="noreferrer" className="debrief-link">LITTLE TOKYO TAIYAKI</a><br/>
           <i>Specializing in Taiyaki: freshly grilled dough in the shape of a fish. Pick a filling that sounds good to you.</i><br/>
           <br/>
           What to order?
           <blockquote className="debrief-blockquote">Nutella Taiyaki</blockquote>
           <br/>
-          <a target="_blank" href="https://maps.app.goo.gl/CzX9pYJhDZ97y4156" rel="noreferrer" className="debrief-link">MIDORI MATCHA CAFE</a><br/>
-          <i>They take matcha VERY seriously</i><br/>
+          <a target="_blank" href="https://maps.app.goo.gl/Vn7jLVC814Gy7ats7" rel="noreferrer" className="debrief-link">TEA MASTER MATCHA CAFE</a><br/>
+          <i>They take matcha VERY seriously and their soft serve is the creamiest.</i><br/>
           <br/>
           What to order?
-          <blockquote className="debrief-blockquote">Matcha Swirl Soft Serve</blockquote>
+          <blockquote className="debrief-blockquote">Matcha Soft Serve</blockquote>
           <br/>
           <a target="_blank" href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6" rel="noreferrer" className="debrief-link">HONEYMEE</a><br/>
           <i>Lots of delicious drinks and ice creams</i><br/>
@@ -255,13 +255,13 @@ function Debrief() {
         onClick={() => handleImageClick('Victoria')}
         style={{ cursor: 'pointer' }}
       />
-      <img
+      {/* <img
         src={jamesPolaroid}
         className="debrief-james"
         alt="James Jelin"
         onClick={() => handleImageClick('James')}
         style={{ cursor: 'pointer' }}
-      />
+      /> */}
 
       {modalVisible && (
         <div
@@ -334,7 +334,7 @@ function Debrief() {
       <br/>
       <br/>
       <div className="debrief-titles">Agent Shale Model</div>
-      <div className="debrief-names"><a href='https://www.campdouttents.com/about' target="_blank" rel="noreferrer" style={{color: 'white'}}>Kitty Medina</a></div>
+      <div className="debrief-names"><a href='https://www.campdouttents.com/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Kitty Medina</a></div>
       <br/>
       <br/>
       <div className="debrief-titles">Agent Leslie Voice Work</div>
@@ -364,6 +364,10 @@ function Debrief() {
       <br/>
       <div className="debrief-titles">Art and Design by</div>
       <div className="debrief-names"><a href='https://ccalleo.com/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Curtiss Calleo</a></div>
+      <br/>
+      <br/>
+      <div className="debrief-titles">Developer</div>
+      <div className="debrief-names"><a href='https://www.linkedin.com/in/nickjohnson-losangeles/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Nick Johnson</a></div>
       <br/>
       <br/>
       <div className="debrief-titles">Special thanks to</div>
