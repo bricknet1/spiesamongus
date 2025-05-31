@@ -7,15 +7,15 @@ function Begin() {
   const history = useHistory();
 
   const formSchema = yup.object().shape({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
+    firstName: yup.string().required("Enter a first name"),
+    lastName: yup.string().required("Enter a last name"),
     phone1: yup
       .string()
-      .required("Phone is required")
-      .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+      .required("Enter a 10 digit phone number")
+      .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number"),
     name2: yup.string().test(
       "required-player2-name",
-      "Name for player 2 is required",
+      "Enter a name for Player 2",
       function (value) {
         const { NumberOfPlayers } = this.parent;
         return parseInt(NumberOfPlayers || "0") < 2 || !!value;
@@ -23,7 +23,7 @@ function Begin() {
     ),
     phone2: yup.string().test(
       "required-player2-phone",
-      "Phone for player 2 required & must be 10 digits",
+      "Enter a 10 digit phone number",
       function (value) {
         const { NumberOfPlayers } = this.parent;
         return parseInt(NumberOfPlayers || "0") < 2 || (value && /^[0-9]{10}$/.test(value));
@@ -31,7 +31,7 @@ function Begin() {
     ),
     name3: yup.string().test(
       "required-player3-name",
-      "Name for player 3 is required",
+      "Enter a name for Player 3",
       function (value) {
         const { NumberOfPlayers } = this.parent;
         return parseInt(NumberOfPlayers || "0") < 3 || !!value;
@@ -39,7 +39,7 @@ function Begin() {
     ),
     phone3: yup.string().test(
       "required-player3-phone",
-      "Phone for player 3 required & must be 10 digits",
+      "Enter a 10 digit phone number",
       function (value) {
         const { NumberOfPlayers } = this.parent;
         return parseInt(NumberOfPlayers || "0") < 3 || (value && /^[0-9]{10}$/.test(value));
@@ -47,7 +47,7 @@ function Begin() {
     ),
     name4: yup.string().test(
       "required-player4-name",
-      "Name for player 4 is required",
+      "Enter a name for Player 4",
       function (value) {
         const { NumberOfPlayers } = this.parent;
         return parseInt(NumberOfPlayers || "0") < 4 || !!value;
@@ -55,7 +55,7 @@ function Begin() {
     ),
     phone4: yup.string().test(
       "required-player4-phone",
-      "Phone for player 4 required & must be 10 digits",
+      "Enter a 10 digit phone number",
       function (value) {
         const { NumberOfPlayers } = this.parent;
         return parseInt(NumberOfPlayers || "0") < 4 || (value && /^[0-9]{10}$/.test(value));
@@ -65,7 +65,7 @@ function Begin() {
     NoStairs: yup.boolean(),
     agreeToTerms: yup
       .boolean()
-      .oneOf([true], "Agreeing to the terms and conditions is required"),
+      .oneOf([true], "Agree to the terms and conditions to proceed"),
   });
 
   const formik = useFormik({
@@ -119,18 +119,36 @@ function Begin() {
     // eslint-disable-next-line
   }, [formik.values.firstName, formik.values.lastName]);
 
+  const formatPhone = (value) => {
+    const digits = value.replace(/\D/g, '');
+    const part1 = digits.slice(0, 3);
+    const part2 = digits.slice(3, 6);
+    const part3 = digits.slice(6, 10);
+    let formatted = part1;
+    if (part2) formatted += '-' + part2;
+    if (part3) formatted += '-' + part3;
+    return formatted;
+  };
+  
+  const handleFormattedPhoneChange = (fieldName, formik) => (e) => {
+    const raw = e.target.value.replace(/\D/g, '');
+    if (raw.length <= 10) {
+      formik.setFieldValue(fieldName, raw);
+    }
+  };
+
   return (
     <div className="pageContent">
       <title>Start Mission | Spies Among Us</title>
 
-      <div className="start-header">Welcome, Agent.</div>
+      {/* <div className="start-header">Welcome, Agent.</div>
       <div className="start-subheader">We have a mission for you.</div>
       <div className="start-subsubheader">
         <span className="rogueSpy">A ROGUE SPY</span> is currently roaming the
         area. Use your phone and wits to uncover clues, reveal their plot, and
         deduce their whereabouts. Adventure and danger will be hiding from you
         in plain sight!
-      </div>
+      </div> */}
       <div className="orangeBar">MISSION SIGN-UP</div>
 
       <form onSubmit={formik.handleSubmit} className="startPageForm">
@@ -144,7 +162,7 @@ function Begin() {
           onChange={formik.handleChange}
         />
         <br />
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.firstName}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.firstName}</h3>
 
         <label htmlFor="lastName">Last name</label>
         <br />
@@ -156,7 +174,7 @@ function Begin() {
           onChange={formik.handleChange}
         />
         <br />
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.lastName}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.lastName}</h3>
 
         <label htmlFor="phone1">Phone</label>
         <br />
@@ -164,11 +182,11 @@ function Begin() {
           type="tel"
           name="phone1"
           className="formField"
-          value={formik.values.phone1}
-          onChange={formik.handleChange}
+          value={formatPhone(formik.values.phone1)}
+          onChange={handleFormattedPhoneChange('phone1', formik)}
         />
         <br />
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone1}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.phone1}</h3>
 
         <label htmlFor="NumberOfPlayers">Number of agents on your mission</label>
         <br />
@@ -207,7 +225,7 @@ function Begin() {
             <br />
           </div>
         )}
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.name2}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.name2}</h3>
 
         {formik.values.NumberOfPlayers >= "2" && (
           <div id="phone2">
@@ -217,13 +235,13 @@ function Begin() {
               type="tel"
               name="phone2"
               className="formField"
-              value={formik.values.phone2}
-              onChange={formik.handleChange}
+              value={formatPhone(formik.values.phone2)}
+              onChange={handleFormattedPhoneChange('phone2', formik)}
             />
             <br />
           </div>
         )}
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone2}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.phone2}</h3>
 
         {formik.values.NumberOfPlayers >= "3" && (
           <div id="name3">
@@ -239,7 +257,7 @@ function Begin() {
             <br />
           </div>
         )}
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.name3}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.name3}</h3>
 
         {formik.values.NumberOfPlayers >= "3" && (
           <div id="phone3">
@@ -249,13 +267,13 @@ function Begin() {
               type="tel"
               name="phone3"
               className="formField"
-              value={formik.values.phone3}
-              onChange={formik.handleChange}
+              value={formatPhone(formik.values.phone3)}
+              onChange={handleFormattedPhoneChange('phone3', formik)}
             />
             <br />
           </div>
         )}
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone3}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.phone3}</h3>
         
         {formik.values.NumberOfPlayers >= "4" && (
           <div id="name4">
@@ -271,7 +289,7 @@ function Begin() {
             <br />
           </div>
         )}
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.name4}</h3>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.name4}</h3>
 
         {formik.values.NumberOfPlayers >= "4" && (
           <div id="phone4">
@@ -281,29 +299,13 @@ function Begin() {
               type="tel"
               name="phone4"
               className="formField"
-              value={formik.values.phone4}
-              onChange={formik.handleChange}
+              value={formatPhone(formik.values.phone4)}
+              onChange={handleFormattedPhoneChange('phone4', formik)}
             />
             <br />
           </div>
         )}
-        <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone4}</h3>
-
-        <label>
-          <div style={{ display: "flex", alignItems: "flex-start" }}>
-            <input
-              type="checkbox"
-              name="NoStairs"
-              checked={formik.values.NoStairs}
-              onChange={formik.handleChange}
-            />
-            <span className="checkbox"></span>
-            <span className="checkboxLabel">
-              I do not want to go up any stairs this mission.
-            </span>
-          </div>
-          <h3 style={{ color: "#4FC9C2" }}> {formik.errors.NoStairs}</h3>
-        </label>
+        <h3 style={{ color: "#ff3700" }}> {formik.errors.phone4}</h3>
 
         <label>
           <div style={{ display: "flex", alignItems: "flex-start" }}>
@@ -323,13 +325,29 @@ function Begin() {
               .
             </span>
           </div>
-          <h3 style={{ color: "#4FC9C2" }}> {formik.errors.agreeToTerms}</h3>
+          <h3 style={{ color: "#ff3700" }}> {formik.errors.agreeToTerms}</h3>
+        </label>
+
+        <label>
+          <div style={{ display: "flex", alignItems: "flex-start" }}>
+            <input
+              type="checkbox"
+              name="NoStairs"
+              checked={formik.values.NoStairs}
+              onChange={formik.handleChange}
+            />
+            <span className="checkbox"></span>
+            <span className="checkboxLabel">
+              I do not want to go up any stairs this mission.
+            </span>
+          </div>
+          <h3 style={{ color: "#ff3700" }}> {formik.errors.NoStairs}</h3>
         </label>
 
         <br />
         <br />
         <input type="submit" value="Begin Mission" className="submitButton" />
-        {/* {error&& <h3 style={{color:'#4FC9C2'}}> {error}</h3>} */}
+        {/* {error&& <h3 style={{color:'#ff3700'}}> {error}</h3>} */}
       </form>
     </div>
   );
