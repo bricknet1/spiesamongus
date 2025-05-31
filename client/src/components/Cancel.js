@@ -65,7 +65,7 @@ function Cancel() {
             onChange={formik.handleChange}
           />
           <br />
-          <h3 style={{ color: "#4FC9C2" }}> {formik.errors.phone}</h3>
+          <h3 style={{ color: "#ff3700" }}> {formik.errors.phone}</h3>
           <br />
           {cancelled ? (
             <h3>Mission Cancelled</h3>
