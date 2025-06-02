@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from time import time
+import sqlite3
 import json
 import os
 
@@ -20,17 +21,41 @@ CORS(app, origins=["http://localhost:3000", "https://spiesamongus.onrender.com",
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 AUTH_TOKEN = os.getenv("AUTH_TOKEN", "secure-token-123")  # Simple token
 
-SETTINGS_FILE = 'settings.json'
+DB_PATH = 'settings.db'
+
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS settings (
+            key TEXT PRIMARY KEY,
+            value TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_db()
 
 def load_settings():
-    if not os.path.exists(SETTINGS_FILE):
-        return {}
-    with open(SETTINGS_FILE, 'r') as f:
-        return json.load(f)
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute("SELECT key, value FROM settings")
+    rows = c.fetchall()
+    conn.close()
+    return {key: json.loads(value) for key, value in rows}
 
 def save_settings(data):
-    with open(SETTINGS_FILE, 'w') as f:
-        json.dump(data, f, indent=2)
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    for key, value in data.items():
+        c.execute('''
+            INSERT INTO settings (key, value)
+            VALUES (?, ?)
+            ON CONFLICT(key) DO UPDATE SET value=excluded.value
+        ''', (key, json.dumps(value)))
+    conn.commit()
+    conn.close()
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -65,7 +90,4 @@ def update_settings():
     return jsonify({"status": "success", "data": data})
 
 if __name__ == '__main__':
-    debug = os.getenv("FLASK_DEBUG", "false").lower() == "true"
-    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=debug)
-
