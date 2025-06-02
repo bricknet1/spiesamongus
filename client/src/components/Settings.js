@@ -8,8 +8,10 @@ function Settings() {
 
   const isLoggedIn = !!token;
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const handleLogin = () => {
-    fetch("http://localhost:5000/api/login", {
+    fetch(`${API_URL}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password: passwordInput }),
@@ -30,14 +32,14 @@ function Settings() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetch("http://localhost:5000/api/settings")
+      fetch(`${API_URL}/api/settings`)
         .then((res) => res.json())
         .then((data) => setSettings(data));
     }
   }, [isLoggedIn]);
 
   const handleSave = () => {
-    fetch("http://localhost:5000/api/settings", {
+    fetch(`${API_URL}/api/settings`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
