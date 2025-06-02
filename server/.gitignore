@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment
+.env
+
+# Editor/OS junk
+.DS_Store
+*.swp
+*.swo
+
+# Settings file (since it's editable and can contain content data)
+settings.json
+
+# Log files (optional if you add logging)
+*.log

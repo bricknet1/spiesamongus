@@ -17,6 +17,7 @@ import Privacy from "./components/Privacy.js";
 import Private from "./components/Private.js";
 import PrivateConfirmed from "./components/PrivateConfirmed.js";
 // import Start from "./components/Start.js";
+import Settings from "./components/Settings.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
 import YourMission from "./components/YourMission.js";
@@ -25,7 +26,6 @@ import YourUpdatedMission from "./components/YourUpdatedMission.js";
 function App() {
   return (
     <div className="App">
-
       {/* MISSION PAGES */}
       <Switch>
         <Route path="/begin" exact>
@@ -95,11 +95,13 @@ function App() {
         <Route path="/privateconfirmed" exact>
           <PrivateConfirmed />
         </Route>
+        <Route path="/settings" exact>
+          <Settings />
+        </Route>
 
         <Route path="*">
           <NotFound />
         </Route>
-
       </Switch>
     </div>
   );
