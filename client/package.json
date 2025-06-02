@@ -18,6 +18,7 @@
   "scripts": {
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
+    "build": "react-scripts build",
     "server": "cd ../server && python app.py"
   },
   "eslintConfig": {
