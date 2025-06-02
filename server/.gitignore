@@ -13,7 +13,7 @@ __pycache__/
 *.swo
 
 # Settings file (since it's editable and can contain content data)
-settings.json
+settings.db
 
 # Log files (optional if you add logging)
 *.log

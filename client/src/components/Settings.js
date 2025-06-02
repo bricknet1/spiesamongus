@@ -74,6 +74,7 @@ function Settings() {
     })
       .then((res) => {
         if (!res.ok) throw new Error("Save failed");
+        if (res.ok) alert("Save successful")
         return res.json();
       })
       .then(console.log)
