@@ -10,6 +10,8 @@ function Settings() {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
+  const allActors = ["Victoria", "James"];
+
   const handleLogin = () => {
     fetch(`${API_URL}/api/login`, {
       method: "POST",
@@ -34,9 +36,32 @@ function Settings() {
     if (isLoggedIn) {
       fetch(`${API_URL}/api/settings`)
         .then((res) => res.json())
-        .then((data) => setSettings(data));
+        .then((data) => {
+          // Ensure activeActors is an array or default to empty
+          if (!Array.isArray(data.activeActors)) {
+            data.activeActors = [];
+          }
+          setSettings(data);
+        });
     }
   }, [isLoggedIn]);
+
+  const toggleActor = (actor) => {
+    if (!settings) return;
+
+    const activeActors = settings.activeActors || [];
+    let newActiveActors;
+
+    if (activeActors.includes(actor)) {
+      // Remove actor if already active
+      newActiveActors = activeActors.filter((a) => a !== actor);
+    } else {
+      // Add actor if not active
+      newActiveActors = [...activeActors, actor];
+    }
+
+    setSettings({ ...settings, activeActors: newActiveActors });
+  };
 
   const handleSave = () => {
     fetch(`${API_URL}/api/settings`, {
@@ -64,8 +89,9 @@ function Settings() {
           placeholder="Enter password"
           value={passwordInput}
           onChange={(e) => setPasswordInput(e.target.value)}
+          style={{fontSize: "10vw", width: "90vw" }}
         />
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleLogin} className="settingsPageButton">Login</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     );
@@ -74,29 +100,55 @@ function Settings() {
   if (!settings) return <p>Loading settings...</p>;
 
   return (
-    <div>
-      <h2>Admin Panel</h2>
-      <label>
-        Homepage Message:
-        <input
-          value={settings.homepageMessage}
-          onChange={(e) =>
-            setSettings({ ...settings, homepageMessage: e.target.value })
-          }
-        />
-      </label>
-      <label>
-        Show Banner:
-        <input
-          type="checkbox"
-          checked={settings.showBanner}
-          onChange={(e) =>
-            setSettings({ ...settings, showBanner: e.target.checked })
-          }
-        />
-      </label>
-      <button onClick={handleSave}>Save Changes</button>
+    <div style={{ display: "inline-block", fontSize: "5vw", paddingLeft: "10vw" }}>
+      <title>SETTINGS | Spies Among Us</title>
+      <h1>Admin Panel</h1>
+      <div>
+        <h2>Active Actors:</h2>
+        {allActors.map((actor) => (
+          <label key={actor} style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
+            <input
+              type="checkbox"
+              style={{ display: "inline-block", width: "10vw", height: "10vw" }}
+              checked={settings.activeActors.includes(actor)}
+              onChange={() => toggleActor(actor)}
+            />
+            {actor}
+          </label>
+        ))}
+      </div>
+      <div>
+        <h2>Wardrobe:</h2>
+        <div>
+          <label style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
+            <input
+              type="radio"
+              name="wardrobe"
+              value="Jeans"
+              checked={settings.wardrobe === "Jeans"}
+              onChange={() => setSettings({ ...settings, wardrobe: "Jeans" })}
+              style={{ width: "10vw", height: "10vw" }}
+            />
+            Jeans
+          </label>
+          <label style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
+            <input
+              type="radio"
+              name="wardrobe"
+              value="Shorts"
+              checked={settings.wardrobe === "Shorts"}
+              onChange={() => setSettings({ ...settings, wardrobe: "Shorts" })}
+              style={{ width: "10vw", height: "10vw" }}
+            />
+            Shorts
+          </label>
+        </div>
+      </div>
+      <br/>
+      <button onClick={handleSave} className="settingsPageButton">Save Changes</button>
+      <br/>
       <button
+        className="settingsPageButton"
         onClick={() => {
           localStorage.removeItem("adminToken");
           window.location.reload();

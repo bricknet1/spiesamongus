@@ -1317,3 +1317,18 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding: 10px;
 }
 
+
+
+
+
+
+
+
+
+
+/* SETTINGS PAGE */
+
+.settingsPageButton {
+  font-size: 10vw;
+  margin-bottom: 5vw;
+}
