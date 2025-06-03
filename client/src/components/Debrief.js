@@ -19,6 +19,9 @@ function Debrief() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
+  const [settings, setSettings] = useState(null);
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const handleImageClick = (content) => {
     setModalContent(content);
     setModalVisible(true);
@@ -30,6 +33,17 @@ function Debrief() {
   };
 
   useEffect(() => {
+      fetch(`${API_URL}/api/settings`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (!Array.isArray(data.activeActors)) {
+            data.activeActors = [];
+          }
+          setSettings(data);
+        });
+  }, [API_URL]);
+
+  useEffect(() => {
     if (modalVisible) {
       document.body.classList.add('no-scroll');
     } else {
@@ -38,6 +52,8 @@ function Debrief() {
     return () => document.body.classList.remove('no-scroll'); // Cleanup on unmount
   }, [modalVisible]);
 
+
+  if (!settings) return <div>Loading...</div>;
 
   return (
     <div className="pageContent">
@@ -248,20 +264,24 @@ function Debrief() {
       AGENT MARBLE<br/>
       (tap image to reveal)</div>
 
-      <img
-        src={victoriaPolaroid}
-        className="debrief-victoria"
-        alt="Victoria Strange"
-        onClick={() => handleImageClick('Victoria')}
-        style={{ cursor: 'pointer' }}
-      />
-      {/* <img
-        src={jamesPolaroid}
-        className="debrief-james"
-        alt="James Jelin"
-        onClick={() => handleImageClick('James')}
-        style={{ cursor: 'pointer' }}
-      /> */}
+      {settings?.activeActors?.includes("Victoria") &&
+        <img
+          src={victoriaPolaroid}
+          className="debrief-victoria"
+          alt="Victoria Strange"
+          onClick={() => handleImageClick('Victoria')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
+      {settings?.activeActors?.includes("James") &&
+        <img
+          src={jamesPolaroid}
+          className="debrief-james"
+          alt="James Jelin"
+          onClick={() => handleImageClick('James')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
 
       {modalVisible && (
         <div
