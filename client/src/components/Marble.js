@@ -20,13 +20,137 @@ function Marble() {
     const savedAvailableLetters = JSON.parse(localStorage.getItem("availableLetters"));
     const savedSettings = JSON.parse(localStorage.getItem("settings"));
 
+    const jeansInitialWords = {
+      swan: "_W__",
+      necklace: "__C__AC_",
+      marble: "M___LE",
+      danger: "D____R",
+      signal: "S____L",
+      vui: "V__",
+      ve: "V_",
+      cup: "__P",
+      blue: "___E",
+      jeans: "J__NS",
+      black: "_____",
+      hat: "_AT",
+    }
+    const shortsInitialWords = {
+      swan: "_W__",
+      necklace: "__C__AC_",
+      marble: "M___LE",
+      danger: "D____R",
+      signal: "S____L",
+      vui: "V__",
+      ve: "V_",
+      cup: "__P",
+      shorts: "S__R__",
+      black: "_____",
+      hat: "_AT",
+    }
+    const jeansInitialLetters = [
+      { letter: "R", id: 0 },
+      { letter: "E", id: 1 },
+      { letter: "U", id: 2 },
+      { letter: "G", id: 3 },
+      { letter: "E", id: 4 },
+      { letter: "N", id: 5 },
+      { letter: "K", id: 6 },
+      { letter: "U", id: 7 },
+      { letter: "L", id: 8 },
+      { letter: "A", id: 9 },
+      { letter: "E", id: 10 },
+      { letter: "A", id: 11 },
+      { letter: "S", id: 12 },
+      { letter: "N", id: 13 },
+      { letter: "A", id: 14 },
+      { letter: "B", id: 15 },
+      { letter: "I", id: 16 },
+      { letter: "E", id: 17 },
+      { letter: "K", id: 18 },
+      { letter: "U", id: 19 },
+      { letter: "A", id: 20 },
+      { letter: "G", id: 21 },
+      { letter: "B", id: 22 },
+      { letter: "N", id: 23 },
+      { letter: "H", id: 24 },
+      { letter: "B", id: 25 },
+      { letter: "A", id: 26 },
+      { letter: "C", id: 27 },
+      { letter: "I", id: 28 },
+      { letter: "A", id: 29 },
+      { letter: "L", id: 30 },
+      { letter: "C", id: 31 },
+      { letter: "N", id: 32 },
+      { letter: "E", id: 33 },
+      { letter: "L", id: 34 },
+    ]
+    const shortsInitialLetters = [
+      { letter: "R", id: 0 },
+      { letter: "E", id: 1 },
+      { letter: "U", id: 2 },
+      { letter: "G", id: 3 },
+      { letter: "E", id: 4 },
+      { letter: "N", id: 5 },
+      { letter: "K", id: 6 },
+      { letter: "U", id: 7 },
+      { letter: "L", id: 8 },
+      { letter: "A", id: 9 },
+      { letter: "E", id: 10 },
+      { letter: "A", id: 11 },
+      { letter: "S", id: 12 },
+      { letter: "N", id: 13 },
+      { letter: "A", id: 14 },
+      { letter: "B", id: 15 },
+      { letter: "I", id: 16 },
+      { letter: "E", id: 17 },
+      { letter: "K", id: 18 },
+      { letter: "H", id: 19 },
+      { letter: "A", id: 20 },
+      { letter: "G", id: 21 },
+      { letter: "B", id: 22 },
+      { letter: "N", id: 23 },
+      { letter: "H", id: 24 },
+      { letter: "O", id: 25 },
+      { letter: "A", id: 26 },
+      { letter: "C", id: 27 },
+      { letter: "I", id: 28 },
+      { letter: "T", id: 29 },
+      { letter: "L", id: 30 },
+      { letter: "C", id: 31 },
+      { letter: "N", id: 32 },
+      { letter: "S", id: 33 },
+    ]
+
     if (savedPuzzleWords && savedAvailableLetters) {
       console.log("Setting words from localStorage...");
       setPuzzleWords(savedPuzzleWords);
       setAvailableLetters(savedAvailableLetters);
-      setInitialPuzzleWords(savedPuzzleWords);
-      setInitialAvailableLetters(savedAvailableLetters);
       setSettings(savedSettings);
+      if (savedSettings.wardrobe === "Jeans") {
+        setInitialPuzzleWords(jeansInitialWords);
+        setInitialAvailableLetters(jeansInitialLetters);
+      }
+      if (savedSettings.wardrobe === "Shorts") {
+        setInitialPuzzleWords(shortsInitialWords);
+        setInitialAvailableLetters(shortsInitialLetters);
+      }
+      if ((savedAvailableLetters !== jeansInitialLetters) && (savedAvailableLetters !== shortsInitialLetters)) {
+        setIsFirstLetterPlaced(true);
+      }
+
+      const objectsAreEqual = (obj1, obj2) => {
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+        if (keys1.length !== keys2.length) return false;
+        return keys1.every(key => obj1[key] === obj2[key]);
+      };
+      if (
+        objectsAreEqual(savedPuzzleWords, jeansInitialWords) ||
+        objectsAreEqual(savedPuzzleWords, shortsInitialWords)
+      ) {
+        setIsFirstLetterPlaced(false);
+      }
+
       setIsInitialized(true);
     } else {
       console.log("Fetching settings...");
@@ -42,109 +166,13 @@ function Marble() {
           let letters = [];
 
           if (data.wardrobe === "Jeans"){
-            words = {
-              swan: "_W__",
-              necklace: "__C__AC_",
-              marble: "M___LE",
-              danger: "D____R",
-              signal: "S____L",
-              vui: "V__",
-              ve: "V_",
-              cup: "__P",
-              blue: "___E",
-              jeans: "J__NS",
-              black: "_____",
-              hat: "_AT",
-            }
-            letters = [
-              { letter: "R", id: 0 },
-              { letter: "E", id: 1 },
-              { letter: "U", id: 2 },
-              { letter: "G", id: 3 },
-              { letter: "E", id: 4 },
-              { letter: "N", id: 5 },
-              { letter: "K", id: 6 },
-              { letter: "U", id: 7 },
-              { letter: "L", id: 8 },
-              { letter: "A", id: 9 },
-              { letter: "E", id: 10 },
-              { letter: "A", id: 11 },
-              { letter: "S", id: 12 },
-              { letter: "N", id: 13 },
-              { letter: "A", id: 14 },
-              { letter: "B", id: 15 },
-              { letter: "I", id: 16 },
-              { letter: "E", id: 17 },
-              { letter: "K", id: 18 },
-              { letter: "U", id: 19 },
-              { letter: "A", id: 20 },
-              { letter: "G", id: 21 },
-              { letter: "B", id: 22 },
-              { letter: "N", id: 23 },
-              { letter: "H", id: 24 },
-              { letter: "B", id: 25 },
-              { letter: "A", id: 26 },
-              { letter: "C", id: 27 },
-              { letter: "I", id: 28 },
-              { letter: "A", id: 29 },
-              { letter: "L", id: 30 },
-              { letter: "C", id: 31 },
-              { letter: "N", id: 32 },
-              { letter: "E", id: 33 },
-              { letter: "L", id: 34 },
-            ]
+            words = jeansInitialWords
+            letters = jeansInitialLetters
           }
 
           if (data.wardrobe === "Shorts"){
-            words = {
-              swan: "_W__",
-              necklace: "__C__AC_",
-              marble: "M___LE",
-              danger: "D____R",
-              signal: "S____L",
-              vui: "V__",
-              ve: "V_",
-              cup: "__P",
-              shorts: "S__R__",
-              black: "_____",
-              hat: "_AT",
-            }
-            letters = [
-              { letter: "R", id: 0 },
-              { letter: "E", id: 1 },
-              { letter: "U", id: 2 },
-              { letter: "G", id: 3 },
-              { letter: "E", id: 4 },
-              { letter: "N", id: 5 },
-              { letter: "K", id: 6 },
-              { letter: "U", id: 7 },
-              { letter: "L", id: 8 },
-              { letter: "A", id: 9 },
-              { letter: "E", id: 10 },
-              { letter: "A", id: 11 },
-              { letter: "S", id: 12 },
-              { letter: "N", id: 13 },
-              { letter: "A", id: 14 },
-              { letter: "B", id: 15 },
-              { letter: "I", id: 16 },
-              { letter: "E", id: 17 },
-              { letter: "K", id: 18 },
-              { letter: "H", id: 19 },
-              { letter: "A", id: 20 },
-              { letter: "G", id: 21 },
-              { letter: "B", id: 22 },
-              { letter: "N", id: 23 },
-              { letter: "H", id: 24 },
-              { letter: "O", id: 25 },
-              { letter: "A", id: 26 },
-              { letter: "C", id: 27 },
-              { letter: "I", id: 28 },
-              { letter: "T", id: 29 },
-              { letter: "L", id: 30 },
-              { letter: "C", id: 31 },
-              { letter: "N", id: 32 },
-              { letter: "S", id: 33 },
-            ]
+            words = shortsInitialWords
+            letters = shortsInitialLetters
           }
 
           setPuzzleWords(words);
@@ -882,8 +910,17 @@ function Marble() {
 
 
       </div>
-
-
+      
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <br/>
       <br/>
       <br/>
