@@ -1,68 +1,163 @@
 import { useState, useEffect } from "react";
-
 import LeslieFooter from "./LeslieFooter.js";
-
 import yellowMan from "../assets/pictures/stickfigureyellowwalk.png";
 
 function Marble() {
-  const initialPuzzleWords = {
-    swan: "_W__",
-    necklace: "__C__AC_",
-    marble: "M___LE",
-    danger: "D____R",
-    signal: "S____L",
-    vui: "V__",
-    ve: "V_",
-    cup: "__P",
-    blue: "___E",
-    jeans: "J__NS",
-    black: "_____",
-    hat: "_AT",
-  };
-  const initialAvailableLetters = [
-    { letter: "R", id: 0 },
-    { letter: "E", id: 1 },
-    { letter: "U", id: 2 },
-    { letter: "G", id: 3 },
-    { letter: "E", id: 4 },
-    { letter: "N", id: 5 },
-    { letter: "K", id: 6 },
-    { letter: "U", id: 7 },
-    { letter: "L", id: 8 },
-    { letter: "A", id: 9 },
-    { letter: "E", id: 10 },
-    { letter: "A", id: 11 },
-    { letter: "S", id: 12 },
-    { letter: "N", id: 13 },
-    { letter: "A", id: 14 },
-    { letter: "B", id: 15 },
-    { letter: "I", id: 16 },
-    { letter: "E", id: 17 },
-    { letter: "K", id: 18 },
-    { letter: "U", id: 19 },
-    { letter: "A", id: 20 },
-    { letter: "G", id: 21 },
-    { letter: "B", id: 22 },
-    { letter: "N", id: 23 },
-    { letter: "H", id: 24 },
-    { letter: "B", id: 25 },
-    { letter: "A", id: 26 },
-    { letter: "C", id: 27 },
-    { letter: "I", id: 28 },
-    { letter: "A", id: 29 },
-    { letter: "L", id: 30 },
-    { letter: "C", id: 31 },
-    { letter: "N", id: 32 },
-    { letter: "E", id: 33 },
-    { letter: "L", id: 34 },
-  ];
+  const [settings, setSettings] = useState(null);
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [selectedLetter, setSelectedLetter] = useState(null); // Store both value and ID
-  const [puzzleWords, setPuzzleWords] = useState(initialPuzzleWords);
-  const [availableLetters, setAvailableLetters] = useState(
-    initialAvailableLetters
-  );
+  const [puzzleWords, setPuzzleWords] = useState({});
+  const [availableLetters, setAvailableLetters] = useState([]);
   const [isBorderVisible, setIsBorderVisible] = useState(false);
   const [isFirstLetterPlaced, setIsFirstLetterPlaced] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [initialPuzzleWords, setInitialPuzzleWords] = useState({});
+  const [initialAvailableLetters, setInitialAvailableLetters] = useState([]);
+
+  useEffect(() => {
+    const savedPuzzleWords = JSON.parse(localStorage.getItem("puzzleWords"));
+    const savedAvailableLetters = JSON.parse(localStorage.getItem("availableLetters"));
+    const savedSettings = JSON.parse(localStorage.getItem("settings"));
+
+    if (savedPuzzleWords && savedAvailableLetters) {
+      console.log("Setting words from localStorage...");
+      setPuzzleWords(savedPuzzleWords);
+      setAvailableLetters(savedAvailableLetters);
+      setInitialPuzzleWords(savedPuzzleWords);
+      setInitialAvailableLetters(savedAvailableLetters);
+      setSettings(savedSettings);
+      setIsInitialized(true);
+    } else {
+      console.log("Fetching settings...");
+      fetch(`${API_URL}/api/settings`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (!Array.isArray(data.activeActors)) {
+            data.activeActors = [];
+          }
+          setSettings(data);
+
+          let words = {};
+          let letters = [];
+
+          if (data.wardrobe === "Jeans"){
+            words = {
+              swan: "_W__",
+              necklace: "__C__AC_",
+              marble: "M___LE",
+              danger: "D____R",
+              signal: "S____L",
+              vui: "V__",
+              ve: "V_",
+              cup: "__P",
+              blue: "___E",
+              jeans: "J__NS",
+              black: "_____",
+              hat: "_AT",
+            }
+            letters = [
+              { letter: "R", id: 0 },
+              { letter: "E", id: 1 },
+              { letter: "U", id: 2 },
+              { letter: "G", id: 3 },
+              { letter: "E", id: 4 },
+              { letter: "N", id: 5 },
+              { letter: "K", id: 6 },
+              { letter: "U", id: 7 },
+              { letter: "L", id: 8 },
+              { letter: "A", id: 9 },
+              { letter: "E", id: 10 },
+              { letter: "A", id: 11 },
+              { letter: "S", id: 12 },
+              { letter: "N", id: 13 },
+              { letter: "A", id: 14 },
+              { letter: "B", id: 15 },
+              { letter: "I", id: 16 },
+              { letter: "E", id: 17 },
+              { letter: "K", id: 18 },
+              { letter: "U", id: 19 },
+              { letter: "A", id: 20 },
+              { letter: "G", id: 21 },
+              { letter: "B", id: 22 },
+              { letter: "N", id: 23 },
+              { letter: "H", id: 24 },
+              { letter: "B", id: 25 },
+              { letter: "A", id: 26 },
+              { letter: "C", id: 27 },
+              { letter: "I", id: 28 },
+              { letter: "A", id: 29 },
+              { letter: "L", id: 30 },
+              { letter: "C", id: 31 },
+              { letter: "N", id: 32 },
+              { letter: "E", id: 33 },
+              { letter: "L", id: 34 },
+            ]
+          }
+
+          if (data.wardrobe === "Shorts"){
+            words = {
+              swan: "_W__",
+              necklace: "__C__AC_",
+              marble: "M___LE",
+              danger: "D____R",
+              signal: "S____L",
+              vui: "V__",
+              ve: "V_",
+              cup: "__P",
+              shorts: "S__R__",
+              black: "_____",
+              hat: "_AT",
+            }
+            letters = [
+              { letter: "R", id: 0 },
+              { letter: "E", id: 1 },
+              { letter: "U", id: 2 },
+              { letter: "G", id: 3 },
+              { letter: "E", id: 4 },
+              { letter: "N", id: 5 },
+              { letter: "K", id: 6 },
+              { letter: "U", id: 7 },
+              { letter: "L", id: 8 },
+              { letter: "A", id: 9 },
+              { letter: "E", id: 10 },
+              { letter: "A", id: 11 },
+              { letter: "S", id: 12 },
+              { letter: "N", id: 13 },
+              { letter: "A", id: 14 },
+              { letter: "B", id: 15 },
+              { letter: "I", id: 16 },
+              { letter: "E", id: 17 },
+              { letter: "K", id: 18 },
+              { letter: "H", id: 19 },
+              { letter: "A", id: 20 },
+              { letter: "G", id: 21 },
+              { letter: "B", id: 22 },
+              { letter: "N", id: 23 },
+              { letter: "H", id: 24 },
+              { letter: "O", id: 25 },
+              { letter: "A", id: 26 },
+              { letter: "C", id: 27 },
+              { letter: "I", id: 28 },
+              { letter: "T", id: 29 },
+              { letter: "L", id: 30 },
+              { letter: "C", id: 31 },
+              { letter: "N", id: 32 },
+              { letter: "S", id: 33 },
+            ]
+          }
+
+          setPuzzleWords(words);
+          setAvailableLetters(letters);
+          localStorage.setItem("puzzleWords", JSON.stringify(words));
+          localStorage.setItem("availableLetters", JSON.stringify(letters));
+          localStorage.setItem("settings", JSON.stringify(data));
+          setInitialPuzzleWords(words);
+          setInitialAvailableLetters(letters);
+          setIsInitialized(true);
+        });
+      }
+  }, [API_URL]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,23 +168,11 @@ function Marble() {
   }, []);
 
   useEffect(() => {
-    const savedPuzzleWords = JSON.parse(localStorage.getItem("puzzleWords"));
-    const savedAvailableLetters = JSON.parse(
-      localStorage.getItem("availableLetters")
-    );
-
-    if (savedPuzzleWords) {
-      setPuzzleWords(savedPuzzleWords);
+    if (isInitialized) {
+      localStorage.setItem("puzzleWords", JSON.stringify(puzzleWords));
+      localStorage.setItem("availableLetters", JSON.stringify(availableLetters));
     }
-    if (savedAvailableLetters) {
-      setAvailableLetters(savedAvailableLetters);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("puzzleWords", JSON.stringify(puzzleWords));
-    localStorage.setItem("availableLetters", JSON.stringify(availableLetters));
-  }, [puzzleWords, availableLetters]);
+  }, [puzzleWords, availableLetters, isInitialized]);
 
   function handleLetterSelect(e) {
     e.preventDefault();
@@ -272,36 +355,36 @@ function Marble() {
   
 
   // TEMPORARY
-  function resetGame() {
-    setAvailableLetters(initialAvailableLetters)
-    setPuzzleWords(initialPuzzleWords)
-    setIsFirstLetterPlaced(false)
-    setSelectedLetter(null)
-  }
+  // function resetGame() {
+  //   setAvailableLetters(initialAvailableLetters)
+  //   setPuzzleWords(initialPuzzleWords)
+  //   setIsFirstLetterPlaced(false)
+  //   setSelectedLetter(null)
+  // }
 
-  function solveGame(){
-    setAvailableLetters([])
-    setIsFirstLetterPlaced(true)
-    setPuzzleWords({
-      swan: "SWAN",
-      necklace: "NECKLACE",
-      marble: "MARBLE",
-      danger: "DANGER",
-      signal: "SIGNAL",
-      vui: "VUI",
-      ve: "VE",
-      cup: "CUP",
-      blue: "BLUE",
-      jeans: "JEANS",
-      black: "BLACK",
-      hat: "HAT",
-    })
-  }
+  // function solveGame(){
+  //   setAvailableLetters([])
+  //   setIsFirstLetterPlaced(true)
+  //   setPuzzleWords({
+  //     swan: "SWAN",
+  //     necklace: "NECKLACE",
+  //     marble: "MARBLE",
+  //     danger: "DANGER",
+  //     signal: "SIGNAL",
+  //     vui: "VUI",
+  //     ve: "VE",
+  //     cup: "CUP",
+  //     blue: "BLUE",
+  //     jeans: "JEANS",
+  //     black: "BLACK",
+  //     hat: "HAT",
+  //   })
+  // }
   // TEMPORARY
 
+  if (!isInitialized) return <div>Loading...</div>;
 
-
-  return (
+  if (isInitialized) return (
     <div className="pageContent" style={{paddingBottom: "0vw"}}>
       <title>Agent Marble Physical Description</title>
       <div className="orangeBar" style={{ height: "13vw" }}>
@@ -313,8 +396,8 @@ function Marble() {
           <div className="swanNecklaceContainer">
             <div
               className={
-                puzzleWords.swan === "SWAN" ||
-                puzzleWords.necklace === "NECKLACE"
+                puzzleWords.swan === "SWAN"
+                // || puzzleWords.necklace === "NECKLACE"
                   ? "marbleIsSolved"
                   : "marbleIs"
               }
@@ -383,7 +466,8 @@ function Marble() {
           <div className="blackHatContainer">
             <div
               className={
-                puzzleWords.black === "BLACK" || puzzleWords.hat === "HAT"
+                puzzleWords.black === "BLACK" 
+                // || puzzleWords.hat === "HAT"
                   ? "marbleIsSolved"
                   : "marbleIs"
               }
@@ -449,9 +533,9 @@ function Marble() {
           <div className="leftSideContainer">
             <div
               className={
-                puzzleWords.marble === "MARBLE" ||
-                puzzleWords.danger === "DANGER" ||
-                puzzleWords.signal === "SIGNAL"
+                puzzleWords.marble === "MARBLE" 
+                // || puzzleWords.danger === "DANGER"
+                // || puzzleWords.signal === "SIGNAL"
                   ? "marbleIsSolved"
                   : "marbleIs"
               }
@@ -539,9 +623,9 @@ function Marble() {
 
             <div
               className={
-                puzzleWords.vui === "VUI" ||
-                puzzleWords.ve === "VE" ||
-                puzzleWords.cup === "CUP"
+                puzzleWords.vui === "VUI"
+                // || puzzleWords.ve === "VE"
+                // || puzzleWords.cup === "CUP"
                   ? "marbleIsSolved"
                   : "marbleIs"
               }
@@ -627,7 +711,9 @@ function Marble() {
 
             <div
               className={
-                puzzleWords.blue === "BLUE" || puzzleWords.jeans === "JEANS"
+                ( settings.wardrobe === "Jeans" && puzzleWords.blue === "BLUE")
+                // || puzzleWords.jeans === "JEANS"
+                || ( settings.wardrobe === "Shorts" && puzzleWords.shorts === "SHORTS" )
                   ? "marbleIsSolved"
                   : "marbleIs"
               }
@@ -635,55 +721,85 @@ function Marble() {
               ...wearing...
             </div>
 
+            {/* Render buttons for SHORTS */}
+            {settings.wardrobe === "Shorts" && (
+              puzzleWords.shorts.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.shorts[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.shorts === "SHORTS";
+                return (
+                  <button
+                    key={`shorts-${index}`}
+                    data-word="shorts"
+                    data-index={index}
+                    onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })
+            )}
+
             {/* Render buttons for BLUE */}
-            {puzzleWords.blue.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.blue === "BLUE";
-              return (
-                <button
-                  key={`blue-${index}`}
-                  data-word="blue"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
+            {settings.wardrobe === "Jeans" && (
+              puzzleWords.blue.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.blue === "BLUE";
+                return (
+                  <button
+                    key={`blue-${index}`}
+                    data-word="blue"
+                    data-index={index}
+                    onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })
+            )}
 
             <br />
 
             {/* Render buttons for JEANS */}
-            {puzzleWords.jeans.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.jeans === "JEANS";
-              return (
-                <button
-                  key={`jeans-${index}`}
-                  data-word="jeans"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
+            {settings.wardrobe === "Jeans" && (
+              puzzleWords.jeans.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.jeans === "JEANS";
+                return (
+                  <button
+                    key={`jeans-${index}`}
+                    data-word="jeans"
+                    data-index={index}
+                    onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })
+            )}
           </div>
 
           <div className="yellowManContainer">
@@ -753,14 +869,14 @@ function Marble() {
 
 
         {/* temporary */}
-        <div className="resetButtonContainer">
+        {/* <div className="resetButtonContainer">
           <button onClick={resetGame} className="resetButton">
             TEMP Reset Game
           </button>
           <button onClick={solveGame} className="resetButton">
             TEMP Solve Game
           </button>
-        </div>
+        </div> */}
         {/* temporary */}
 
 
@@ -768,6 +884,7 @@ function Marble() {
       </div>
 
 
+      <br/>
       <br/>
       <br/>
       <br/>
