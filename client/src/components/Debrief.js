@@ -1,9 +1,17 @@
 import SocialFooter from "./SocialFooter.js";
 
 import victoriaPic from '../assets/pictures/Victoria Strange.png';
-import jamesPic from '../assets/pictures/James Jelin Headshot.jpg';
 import victoriaPolaroid from '../assets/pictures/Polaroid - Victoria Strange.png';
+import jamesPic from '../assets/pictures/James Jelin Headshot.jpg';
 import jamesPolaroid from '../assets/pictures/Polaroid - James Jelin.png';
+import anniePic from '../assets/pictures/Annie Donley Headshot.jpg';
+import anniePolaroid from '../assets/pictures/Annie Donley poloroid.png';
+import dariaPic from '../assets/pictures/Daria Good.jpg';
+import dariaPolaroid from '../assets/pictures/Daria Good poloroid.png';
+import jeffPic from '../assets/pictures/Jeff Murdoch Headshot.jpg';
+import jeffPolaroid from '../assets/pictures/Jeff Murdoch  polaroid.png';
+import prescottPic from '../assets/pictures/Prescott Gadd Headshot.jpg';
+import prescottPolaroid from '../assets/pictures/Prescott Gadd polaroid.png';
 
 import { useState, useEffect } from 'react';
 
@@ -190,7 +198,7 @@ function Debrief() {
           <i>Specializing in Taiyaki: freshly grilled dough in the shape of a fish. Pick a filling that sounds good to you.</i><br/>
           <br/>
           What to order?
-          <blockquote className="debrief-blockquote">Nutella Taiyaki</blockquote>
+          <blockquote className="debrief-blockquote">Chocolate Taiyaki</blockquote>
           <br/>
           <a target="_blank" href="https://maps.app.goo.gl/Vn7jLVC814Gy7ats7" rel="noreferrer" className="debrief-link">TEA MASTER MATCHA CAFE</a><br/>
           <i>They take matcha VERY seriously and their soft serve is the creamiest.</i><br/>
@@ -282,6 +290,42 @@ function Debrief() {
           style={{ cursor: 'pointer' }}
         />
       }
+        {settings?.activeActors?.includes("Annie") &&
+        <img
+          src={anniePolaroid}
+          className="debrief-victoria"
+          alt="Annie Donley"
+          onClick={() => handleImageClick('Annie')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
+      {settings?.activeActors?.includes("Daria") &&
+        <img
+          src={dariaPolaroid}
+          className="debrief-james"
+          alt="Daria Good"
+          onClick={() => handleImageClick('Daria')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
+        {settings?.activeActors?.includes("Jeff") &&
+        <img
+          src={jeffPolaroid}
+          className="debrief-victoria"
+          alt="Jeff Murdoch"
+          onClick={() => handleImageClick('Jeff')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
+      {settings?.activeActors?.includes("Prescott") &&
+        <img
+          src={prescottPolaroid}
+          className="debrief-james"
+          alt="Prescott Gadd"
+          onClick={() => handleImageClick('Prescott')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
 
       {modalVisible && (
         <div
@@ -341,6 +385,43 @@ function Debrief() {
                 </div>
               </div>
             }
+
+            {modalContent==='Annie' && 
+              <div>
+                <img src={anniePic} className="debrief-headshot" alt="Annie Donley"/>
+                <div className='debrief-bio'>
+                  Annie Donley is a comedian, actor, writer, and co-host of the non-famous podcast Mom Stomp.  She starred in season 3 of JOE PERA TALKS W/ YOU as 'Diane Luten' and was a digital creator at COMEDY CENTRAL prior to that.  Annie served as founding member, instructor, and Programming Director of The Brooklyn Comedy Collective. She co-wrote the unairable pilot truthhunters.com w/ Conner O'Malley.
+                </div>
+              </div>
+            }
+
+              {modalContent==='Jeff' && 
+              <div>
+                <img src={jeffPic} className="debrief-headshot" alt="Jeff Murdoch"/>
+                <div className='debrief-bio'>
+                  Born in Detroit, trained in Chicago Jeff Murdoch is now an actor / comedian / writer living in LA. He has worked on such shows as The Bear, Shameless, and Utopia and is an alumni of the world famous Second City Mainstage in Chicago as well as the Just For Laughs festival in Montreal. A comedian at heart Jeff can be seen around LA working on shows and mics in front of audiences regularly and on his weekly podcast Mystery County Monster Hunters Club.
+                </div>
+              </div>
+            }
+
+            {modalContent==='Daria' && 
+              <div>
+                <img src={dariaPic} className="debrief-headshot" alt="Daria Good"/>
+                <div className='debrief-bio'>
+                  Daria Good graduated from The American Academy of Dramatic Arts (AADA) after attending the Orange County School of the Arts' acting program in high school. Her recent credits include: The development and regional premier of Women of Zalongo, the new musical Cherries Rare and Fair in the Hollywood Fringe, and Foolish co's Muse of Fire and School for Scandal. Good is currently wrapping up production as an actor and producer on the short film The Taxidermy Woman. @daria.is.good
+                </div>
+              </div>
+            }
+
+            {modalContent==='Prescott' && 
+              <div>
+                <img src={prescottPic} className="debrief-headshot" alt="Prescott Gadd"/>
+                <div className='debrief-bio'>
+                  Prescott Gadd created Spies Among Us! He used to perform sketch and improv comedy in Chicago so every now and then he likes to perform as Agent Marble (NOT because an actor had to cancel last minute). Prescott creates immersive experiences in the LA area that are always interactive and sometimes funny. You can see his past and current projects <a href="https://interactiveescapes.com/portfolio" target="_blank" rel="noreferrer" style={{color: 'white'}}>here</a>.
+                </div>
+              </div>
+            }
+            
           </div>
         </div>
       )}
@@ -354,7 +435,7 @@ function Debrief() {
       <br/>
       <br/>
       <div className="debrief-titles">Agent Shale Model</div>
-      <div className="debrief-names"><a href='https://www.campdouttents.com/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Kitty Medina</a></div>
+      <div className="debrief-names">Kitty Medina</div>
       <br/>
       <br/>
       <div className="debrief-titles">Agent Leslie Voice Work</div>
@@ -386,7 +467,7 @@ function Debrief() {
       <div className="debrief-names"><a href='https://ccalleo.com/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Curtiss Calleo</a></div>
       <br/>
       <br/>
-      <div className="debrief-titles">Developer</div>
+      <div className="debrief-titles">Senior Developer</div>
       <div className="debrief-names"><a href='https://www.linkedin.com/in/nickjohnson-losangeles/' target="_blank" rel="noreferrer" style={{color: 'white'}}>Nick Johnson</a></div>
       <br/>
       <br/>
