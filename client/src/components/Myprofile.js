@@ -77,7 +77,7 @@ function Myprofile() {
             <br/>
             On that despicable day, they betrayed their country. They betrayed you. But most importantly, they betrayed our agency. And now, five years later, we're finally going to pay them back.<br/>
             <br/>
-            <u style={{fontWeight: "bold", fontSize: "6vw"}}>YOUR MISSION DETAILS (AGENT PAPYRUS)</u><br/>
+            <u style={{fontWeight: "bold", fontSize: "6vw"}}>YOUR MISSION DETAILS<br/>(AGENT PAPYRUS)</u><br/>
             <br/>
             You will be on a window stake out while your new student / agent Rookie works the field.<br/>
             <br/>
@@ -159,7 +159,7 @@ function Myprofile() {
 
       </div>
 
-      <LeslieFooter />
+      <LeslieFooter unfixed={true}/>
 
     </div>
   );
