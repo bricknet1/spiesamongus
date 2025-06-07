@@ -16,7 +16,8 @@ function SearchLeslie() {
       <div className='searchHeading'>CURRENT ROLE</div>
 
       <div className='searchBody'>
-        Employed at Agency Nov 2001 - Ongoing
+        Employed at Agency Nov 2001 - Ongoing<br/>
+        Head of Human Resources
       </div>
 
       <div class="orangeLine"/>

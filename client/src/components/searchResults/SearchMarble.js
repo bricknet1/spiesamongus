@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 
 import marblePic from '../../assets/pictures/Marble Polaroid.png';
-import marbleAchievementPic from '../../assets/pictures/Notable Achievement Marble 11.21.23.jpg';
+import marbleAchievementPic from '../../assets/pictures/Notable Achievement Marble edited.jpg';
 import marbleSignalPic from '../../assets/pictures/MDS 11.20.23.jpg';
 import marblevideo from '../../assets/videos/Papyrus Shale Phone Call Video 3.29.24.mp4'
 
@@ -89,7 +89,7 @@ function SearchMarble() {
             <div className="dialog">Hold on a sec. Are you calling me from your bathroom?</div>
             <div className="leslieDialog">PAPYRUS</div>
             <div className="dialog">No, goodbye.</div>
-            <div className="leslieDialog" style={{ color: '#ffffff'}}>*END OF CALL*</div>
+            <div className="leslieDialog" style={{ color: '#f9df39'}}>*END OF CALL*</div>
           </div>
         }
       </div>
