@@ -275,7 +275,7 @@ function Debrief() {
       {settings?.activeActors?.includes("Victoria") &&
         <img
           src={victoriaPolaroid}
-          className="debrief-victoria"
+          className="debrief-polaroid"
           alt="Victoria Strange"
           onClick={() => handleImageClick('Victoria')}
           style={{ cursor: 'pointer' }}
@@ -284,7 +284,7 @@ function Debrief() {
       {settings?.activeActors?.includes("James") &&
         <img
           src={jamesPolaroid}
-          className="debrief-james"
+          className="debrief-polaroid"
           alt="James Jelin"
           onClick={() => handleImageClick('James')}
           style={{ cursor: 'pointer' }}
@@ -293,7 +293,7 @@ function Debrief() {
         {settings?.activeActors?.includes("Annie") &&
         <img
           src={anniePolaroid}
-          className="debrief-victoria"
+          className="debrief-polaroid"
           alt="Annie Donley"
           onClick={() => handleImageClick('Annie')}
           style={{ cursor: 'pointer' }}
@@ -302,7 +302,7 @@ function Debrief() {
       {settings?.activeActors?.includes("Daria") &&
         <img
           src={dariaPolaroid}
-          className="debrief-james"
+          className="debrief-polaroid"
           alt="Daria Good"
           onClick={() => handleImageClick('Daria')}
           style={{ cursor: 'pointer' }}
@@ -311,7 +311,7 @@ function Debrief() {
         {settings?.activeActors?.includes("Jeff") &&
         <img
           src={jeffPolaroid}
-          className="debrief-victoria"
+          className="debrief-polaroid"
           alt="Jeff Murdoch"
           onClick={() => handleImageClick('Jeff')}
           style={{ cursor: 'pointer' }}
@@ -320,7 +320,7 @@ function Debrief() {
       {settings?.activeActors?.includes("Prescott") &&
         <img
           src={prescottPolaroid}
-          className="debrief-james"
+          className="debrief-polaroid"
           alt="Prescott Gadd"
           onClick={() => handleImageClick('Prescott')}
           style={{ cursor: 'pointer' }}

@@ -890,7 +890,7 @@ function Marble() {
         {areAllWordsSolved() ? null : (
           <div className="resetButtonContainer">
             <button onClick={resetUnsolvedWords} className="resetButton">
-              Reset Letters
+              Reset Unsolved Words
             </button>
           </div>
         )}

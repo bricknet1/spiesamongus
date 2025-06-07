@@ -926,7 +926,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding-inline-start: 8vw;
 }
 
-.debrief-victoria {
+/* .debrief-polaroid-victoria {
   width: 60vw;
   transform: rotate(-5deg);
   display: block;
@@ -934,11 +934,19 @@ input[type="checkbox"]:checked + .checkbox:before {
   margin-bottom: 10vw;
 }
 
-.debrief-james {
+.debrief-polaroid-james {
   width: 60vw;
   transform: rotate(15deg);
   display: block;
   margin-left: 25vw;
+  margin-bottom: 10vw;
+} */
+
+.debrief-polaroid {
+  width: 60vw;
+  transform: rotate(-5deg);
+  display: block;
+  margin-left: 20vw;
   margin-bottom: 10vw;
 }
 
