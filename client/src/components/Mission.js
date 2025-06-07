@@ -78,7 +78,7 @@ function Mission() {
 
 
       </div>
-      <LeslieFooter />
+      <LeslieFooter unfixed={true}/>
     </div>
   );
 }
