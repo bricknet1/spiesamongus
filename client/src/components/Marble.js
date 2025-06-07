@@ -301,79 +301,61 @@ function Marble() {
       };
     });
   }
-  
-  
 
+  // function resetUnsolvedWords() {
+  //   setPuzzleWords((prevWords) => {
+  //     const resetWords = {};
+  //     const usedLetters = []; // Track letters in unsolved words for resetting
 
+  //     for (const [word, value] of Object.entries(prevWords)) {
+  //       if (value !== word.toUpperCase()) {
+  //         // Reset only unsolved words and collect used letters
+  //         const initialWord = initialPuzzleWords[word];
+  //         resetWords[word] = initialWord;
 
+  //         // Collect letters from the unsolved word
+  //         for (let i = 0; i < value.length; i++) {
+  //           if (value[i] !== "_" && initialWord[i] === "_") {
+  //             usedLetters.push(value[i]);
+  //           }
+  //         }
+  //       } else {
+  //         resetWords[word] = value; // Keep solved words as they are
+  //       }
+  //     }
 
+  //     // Merge unsolved word letters into available letters
+  //     setAvailableLetters((prevAvailable) => {
+  //       // setrack the ids of letters that have been added to resetLetters
+  //       const addedIds = new Set(prevAvailable.map((a) => a.id));
 
+  //       const resetLetters = usedLetters
+  //         .map((letter) => {
+  //           // Find a unique ID for each used letter, ensuring we haven't already added that ID
+  //           const match = initialAvailableLetters.find(
+  //             (l) =>
+  //               l.letter === letter &&
+  //               !addedIds.has(l.id) && // Check if this id has already been added
+  //               !prevAvailable.some((a) => a.id === l.id) // Also check if the id exists in prevAvailable
+  //           );
 
+  //           if (match) {
+  //             // Add the match id to the addedIds set
+  //             addedIds.add(match.id);
+  //           }
 
+  //           return match || null; // Ensure we only add valid matches
+  //         })
+  //         .filter(Boolean); // Remove nulls
 
+  //       console.log("reset letters: ", resetLetters);
+  //       console.log("available letters: ", availableLetters);
+  //       return [...prevAvailable, ...resetLetters];
+  //     });
 
-
-
-
-
-
-
-
-
-  function resetUnsolvedWords() {
-    setPuzzleWords((prevWords) => {
-      const resetWords = {};
-      const usedLetters = []; // Track letters in unsolved words for resetting
-
-      for (const [word, value] of Object.entries(prevWords)) {
-        if (value !== word.toUpperCase()) {
-          // Reset only unsolved words and collect used letters
-          const initialWord = initialPuzzleWords[word];
-          resetWords[word] = initialWord;
-
-          // Collect letters from the unsolved word
-          for (let i = 0; i < value.length; i++) {
-            if (value[i] !== "_" && initialWord[i] === "_") {
-              usedLetters.push(value[i]);
-            }
-          }
-        } else {
-          resetWords[word] = value; // Keep solved words as they are
-        }
-      }
-
-      // Merge unsolved word letters into available letters
-      setAvailableLetters((prevAvailable) => {
-        // setrack the ids of letters that have been added to resetLetters
-        const addedIds = new Set(prevAvailable.map((a) => a.id));
-
-        const resetLetters = usedLetters
-          .map((letter) => {
-            // Find a unique ID for each used letter, ensuring we haven't already added that ID
-            const match = initialAvailableLetters.find(
-              (l) =>
-                l.letter === letter &&
-                !addedIds.has(l.id) && // Check if this id has already been added
-                !prevAvailable.some((a) => a.id === l.id) // Also check if the id exists in prevAvailable
-            );
-
-            if (match) {
-              // Add the match id to the addedIds set
-              addedIds.add(match.id);
-            }
-
-            return match || null; // Ensure we only add valid matches
-          })
-          .filter(Boolean); // Remove nulls
-
-        console.log("reset letters: ", resetLetters);
-        console.log("available letters: ", availableLetters);
-        return [...prevAvailable, ...resetLetters];
-      });
-
-      return resetWords;
-    });
-  }
+  //     return resetWords;
+  //   });
+  // }
 
   function areAllWordsSolved() {
     return Object.entries(puzzleWords).every(
@@ -887,13 +869,14 @@ function Marble() {
 
         <br />
 
-        {areAllWordsSolved() ? null : (
+        {/* HERE IS THE RESET BUTTON IF WE NEED TO PUT IT BACK IN - ALSO NEED TO UNCOMMENT THE resetUnsolvedWords FUNCTION ABOVE */}
+        {/* {areAllWordsSolved() ? null : (
           <div className="resetButtonContainer">
             <button onClick={resetUnsolvedWords} className="resetButton">
               Reset Unsolved Words
             </button>
           </div>
-        )}
+        )} */}
 
 
         {/* temporary */}
@@ -911,6 +894,7 @@ function Marble() {
 
       </div>
       
+      <br/>
       <br/>
       <br/>
       <br/>
