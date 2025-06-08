@@ -17,6 +17,7 @@ function Questions() {
   const [tenToggled, setTenToggled] = useState(false);
   const [elevenToggled, setElevenToggled] = useState(false);
   const [twelveToggled, setTwelveToggled] = useState(false);
+  const [thirteenToggled, setThirteenToggled] = useState(false);
 
   const greenBarStyle = {
     color: "#F9DF39",
@@ -116,11 +117,10 @@ function Questions() {
       {threeToggled === true && (
         <div style={{ marginTop: "20px" }}>
           <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
-            Up to two people can play together, but solo players are welcome.
+            We recommend one to four players per group, but can accommodate up to six.
             <br />
             <br />
-            For groups larger than two, purchase tickets in the same time slots
-            so the missions can start and end around the same time.
+            For groups larger than six, purchase tickets in the adjacent time slots so the missions can start and end around the same time.
           </div>
         </div>
       )}
@@ -273,7 +273,7 @@ function Questions() {
         onClick={() => setNineToggled(!nineToggled)}
       >
         <span>
-          How does it work if I have more than two people in my group?
+          How does it work if I have more than four people in my group?
         </span>
         <span
           style={{
@@ -287,13 +287,36 @@ function Questions() {
       {nineToggled === true && (
         <div style={{ marginTop: "20px" }}>
           <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
-            The missions are designed for groups of two players so we recommend
-            splitting up. We will start the first team five minutes before the
-            second team so that both groups will have their own experience but
-            can end around the same time.
+            The missions are designed for groups of four players so we recommend splitting up. We will start the first team five minutes before the second team so that both groups will have their own experience but can end around the same time.
           </div>
         </div>
       )}
+
+      <div className="thinOrangeLine" style={{ width: isMobile ? "" : "800px" }} />
+
+        <div
+          className={
+            isMobile ? "myHistoryDropdownMobile" : "myHistoryDropdownDesktop"
+          }
+          onClick={() => setTenToggled(!tenToggled)}
+        >
+          <span>How do I add more people to my reservation?</span>
+          <span
+            style={{
+              transform: tenToggled ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            ▼
+          </span>
+        </div>
+        {tenToggled === true && (
+          <div style={{ marginTop: "20px" }}>
+            <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
+              If you already bought tickets and want to add more people to your reservation, reply to your original confirmation email and tell us how many people you would like to add. We will update your reservation and email you a link to pay the difference.
+            </div>
+          </div>
+        )}
 
       <div className="thinOrangeLine" style={{ width: isMobile ? "" : "800px" }} />
 
@@ -301,19 +324,19 @@ function Questions() {
         className={
           isMobile ? "myHistoryDropdownMobile" : "myHistoryDropdownDesktop"
         }
-        onClick={() => setTenToggled(!tenToggled)}
+        onClick={() => setElevenToggled(!elevenToggled)}
       >
         <span>What are your terms and conditions?</span>
         <span
           style={{
-            transform: tenToggled ? "rotate(180deg)" : "rotate(0deg)",
+            transform: elevenToggled ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.3s ease",
           }}
         >
           ▼
         </span>
       </div>
-      {tenToggled === true && (
+      {elevenToggled === true && (
         <div style={{ marginTop: "20px" }}>
           <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
             Located{" "}
@@ -336,19 +359,19 @@ function Questions() {
         className={
           isMobile ? "myHistoryDropdownMobile" : "myHistoryDropdownDesktop"
         }
-        onClick={() => setElevenToggled(!elevenToggled)}
+        onClick={() => setTwelveToggled(!twelveToggled)}
       >
         <span>What data do you collect?</span>
         <span
           style={{
-            transform: elevenToggled ? "rotate(180deg)" : "rotate(0deg)",
+            transform: twelveToggled ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.3s ease",
           }}
         >
           ▼
         </span>
       </div>
-      {elevenToggled === true && (
+      {twelveToggled === true && (
         <div style={{ marginTop: "20px" }}>
           <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
             We collect your phone number and email to send clues to you for up
@@ -374,19 +397,19 @@ function Questions() {
         className={
           isMobile ? "myHistoryDropdownMobile" : "myHistoryDropdownDesktop"
         }
-        onClick={() => setTwelveToggled(!twelveToggled)}
+        onClick={() => setThirteenToggled(!thirteenToggled)}
       >
         <span>I have a question not listed here!</span>
         <span
           style={{
-            transform: twelveToggled ? "rotate(180deg)" : "rotate(0deg)",
+            transform: thirteenToggled ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.3s ease",
           }}
         >
           ▼
         </span>
       </div>
-      {twelveToggled === true && (
+      {thirteenToggled === true && (
         <div style={{ marginTop: "20px" }}>
           <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
             Drop us an email at{" "}
