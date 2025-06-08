@@ -45,11 +45,11 @@ function ObeliskTerms() {
             <li className='termsUL'>You condemn that the Washington Monument was picked to star in Spiderman: Homecoming when the Obelisk would have done a superior job.</li>
           </ul>
 
-          <li className='termsOL'>Opt Out</li>
+          {/* <li className='termsOL'>Opt Out</li>
           <ul>
             <li className='termsUL'>You may opt out of this waiver by texting Papyrus's phone number with the opt out phrase "No way, Jose."</li>
             <li className='termsUL'>You must do this before placing your hands on the Obelisk.</li>
-          </ul>
+          </ul> */}
           
         </ol>
 
