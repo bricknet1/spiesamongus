@@ -84,7 +84,7 @@ function YourMission() {
 
 
       </div>
-      <LeslieFooter />
+      <LeslieFooter unfixed={true}/>
     </div>
   );
 }
