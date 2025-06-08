@@ -48,7 +48,7 @@ function Payment() {
         <br />
         <br />
         <div>
-          Click the "Get Tickets" button to go to out payment page where you can
+          Click the "Get Tickets" button to go to our payment page where you can
           select your quantity of tickets.
         </div>
         <br />
