@@ -1,4 +1,5 @@
-import mapPic from '../assets/pictures/MarblePath5.7.24.gif';
+import mapPic from '../assets/pictures/MarblePath3.12.25.gif';
+import leftArrow from '../assets/pictures/Left Arrow cropped.png';
 
 import LeslieFooter from "./LeslieFooter.js";
 
@@ -14,9 +15,12 @@ function YourUpdatedMission() {
 
         <div className='mission-header'>Urgent update,<br/>Agent Rookie!</div>
 
-        <div className='mission-subsubheader'><span className='mission-emphasis'>WE ACTIVATED</span> the tracking chip Marble is unwittingly carrying. With this knowledge we have traced <span className='mission-emphasis'>the path Marble is continuously walking</span> in a loop.<br/>
+        <div className='mission-subsubheader'><span className='mission-emphasis'>WE ACTIVATED</span> the tracking chip Marble is unwittingly carrying. With this knowledge we have traced <span className='mission-emphasis'>the path Marble is continuously <span style={{color:"#FF3700"}}>walking in a loop in RED.</span></span><br/>
         <br/>
-        We recommend walking in the <span className='mission-emphasis'>opposite direction</span> of Marble, to increase your chances of finding them <span className='mission-emphasis'>OR</span> pick a <span className='mission-emphasis'>secluded spot</span> to stake out and wait for Marble to approach.</div><br/>
+        We recommend:<br/>
+        1. Take a left <img src={leftArrow}/> out of Hashimoto Plaza and walk in the opposite direction of Marble, to increase your chances of finding them.<br/>
+        <span className='mission-emphasis'>OR</span><br/>
+        2. Pick a <span className='mission-emphasis'>secluded spot</span> to stake out and wait for Marble to approach. Avoid areas with big crowds to make it easier!</div><br/>
 
         <div className="updatedMission-map-wrapper">
           <img src={mapPic} className="updatedMission-map" alt="Agent Marble" />
@@ -78,7 +82,7 @@ function YourUpdatedMission() {
 
 
       </div>
-      <LeslieFooter />
+      <LeslieFooter unfixed={true}/>
     </div>
   );
 }
