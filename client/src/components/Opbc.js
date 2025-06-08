@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import papyrusstatic from '../assets/pictures/Papyrus with medal static for opbc page.png';
 import papyrusheadshake3 from '../assets/pictures/Papyrusheadshake3.gif';
 import opbcimage from '../assets/pictures/Operation Bubonic Curtsy 3.20.24.jpg'
 import opbcvideo from '../assets/videos/Papyrus Leslie Phone Call Video 3.29.24.mp4'
@@ -61,7 +62,7 @@ function Opbc() {
 
         </div>}
 
-        {submittedPassword==="" && <div></div>}
+        {submittedPassword === "" && <div className='wrongPassword'><img src={papyrusstatic} alt="Papyrus" className="papyrusheadshake3"/></div>}
 
         {(!(submittedPassword.includes('EGREGIOUS') || submittedPassword.includes('EGREGOUS')) && submittedPassword !== "") && 
           <div className='wrongPassword'>Wrong password.<br/>Entry denied!<br/>
@@ -133,14 +134,15 @@ function Opbc() {
                 <div className="dialog">Ain't that a hoot! You have fun now.</div>
                 <div className="papyrusDialog">PAPYRUS</div>
                 <div className="dialog">Click.</div>
-                <div className="leslieDialog" style={{ color: '#ffffff'}}>*END OF CALL*</div>
+                <div className="leslieDialog" style={{ color: '#f9df39'}}>*END OF CALL*</div>
               </div>
             }
           </div>
         }
 
       </div>
-      <LeslieFooter />
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <LeslieFooter unfixed={true}/>
     </div>
   );
 }
