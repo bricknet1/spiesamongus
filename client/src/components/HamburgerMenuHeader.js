@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function HamburgerMenuHeader() {
+function HamburgerMenuHeader({unfixed}) {
   const [isOpen, setIsOpen] = useState(false);
   const location = window.location.pathname; // Get the current URL path
 
@@ -11,7 +11,16 @@ function HamburgerMenuHeader() {
   return (
     <div>
       {/* Hamburger Icon */}
-      <button className="hamburger-icon" onClick={toggleMenu}>
+      <button
+        className={
+          unfixed
+            ? isOpen
+              ? "hamburger-icon-unfixed hamburger-icon-fixed-override"
+              : "hamburger-icon-unfixed"
+            : "hamburger-icon-fixed"
+        }
+        onClick={toggleMenu}
+      >
         {isOpen ? "✖" : "☰"}
       </button>
 
