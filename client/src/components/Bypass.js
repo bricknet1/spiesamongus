@@ -81,7 +81,7 @@ function Bypass() {
       name4: "",
       phone4: "",
       NumberOfPlayers: "1",
-      act: "1",
+      act: "0",
       NoStairs: false,
       agreeToTerms: false,
     },
@@ -91,7 +91,7 @@ function Bypass() {
     onSubmit: (values) => {
       console.log("Submitted values:", values);
 
-      fetch("NEED WEBHOOK HERE", {
+      fetch("https://hook.us1.make.com/i46nku538ulvwgr1u4b8bld72a8i9ule", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -310,13 +310,13 @@ function Bypass() {
           value={formik.values.act}
           onChange={formik.handleChange}
         >
-          <option value="1">Act 1 (Mission Start)</option>
+          <option value="0">Act 1 (Mission Start)</option>
           <option value="2">Act 2 (Papyrus Call)</option>
           <option value="4">Act 4 (Hashimoto)</option>
           <option value="5">Act 5 (Marble Search)</option>
           <option value="6">Act 6 (Friendship Knot)</option>
-          <option value="7.1">Act 7 (Obelisk)</option>
-          <option value="7.2">Act 7 (Sweat Yoga)</option>
+          <option value="7a">Act 7 (Obelisk)</option>
+          <option value="7h">Act 7 (Sweat Yoga)</option>
           <option value="8">Act 8 (Black)</option>
           <option value="10">Act 10 (White)</option>
         </select>
