@@ -5,6 +5,7 @@ import Bypass from "./components/Bypass.js";
 import Cancel from "./components/Cancel.js";
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
+import GiftCards from "./components/GiftCards.js";
 import Marble from "./components/Marble.js";
 import Mission from "./components/Mission.js";
 import Myhistory from "./components/Myhistory.js";
@@ -97,6 +98,9 @@ function App() {
         </Route>
         <Route path="/settings" exact>
           <Settings />
+        </Route>
+        <Route path="/giftcards" exact>
+          <GiftCards />
         </Route>
 
         <Route path="*">
