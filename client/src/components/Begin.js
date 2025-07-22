@@ -205,7 +205,7 @@ function Begin() {
         <br />
         <br />
 
-        <span className="secondAgentText">
+        <span className="secondAgentText" style={{"fontWeight":"normal", "fontSize":"5vw"}}>
           Other agents will receive all the texts and clues you receive, but you will be responsible for replying to texts.
         </span>
         <br />

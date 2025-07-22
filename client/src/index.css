@@ -351,7 +351,7 @@ select:focus {
   height: 13vw;
   font-family: "DIN Neuzeit Grotesk", sans-serif;
   font-size: 7vw;
-  border-radius: 50px;
+  border-radius: 20px;
   border: none;
   outline: none;
   padding-left: 5vw;
