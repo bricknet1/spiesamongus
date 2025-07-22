@@ -22,6 +22,7 @@ import Reviews from "./components/Reviews.js";
 import Settings from "./components/Settings.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
+import Tickets from "./components/Tickets.js";
 import YourMission from "./components/YourMission.js";
 import YourUpdatedMission from "./components/YourUpdatedMission.js";
 
@@ -105,6 +106,9 @@ function App() {
         </Route>
         <Route path="/reviews" exact>
           <Reviews />
+        </Route>
+        <Route path="/tickets" exact>
+          <Tickets />
         </Route>
 
         <Route path="*">
