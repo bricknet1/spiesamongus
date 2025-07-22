@@ -209,11 +209,11 @@ strong {
   top: 15px;
   right: 10px;
   font-size: 30px;
-  background: rgb(33, 23, 76);
+  background: #ff3700;
   border: 1px solid #ff3700;
   cursor: pointer;
   z-index: 1001;
-  color: #ff3700;
+  color: rgb(33, 23, 76);
 }
 
 .hamburger-icon-fixed-override {

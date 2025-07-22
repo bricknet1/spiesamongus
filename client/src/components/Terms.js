@@ -16,7 +16,7 @@ function Terms() {
     <div>
       <title>Terms & Conditions</title>
 
-      <HamburgerMenuHeader />
+      <HamburgerMenuHeader unfixed={true}/>
 
       <div className={orangeBar}>TERMS & CONDITIONS</div>
 
