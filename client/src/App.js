@@ -18,6 +18,7 @@ import Privacy from "./components/Privacy.js";
 import Private from "./components/Private.js";
 import PrivateConfirmed from "./components/PrivateConfirmed.js";
 // import Start from "./components/Start.js";
+import Reviews from "./components/Reviews.js";
 import Settings from "./components/Settings.js";
 import Terms from "./components/Terms.js";
 import TheMission from "./components/TheMission.js";
@@ -101,6 +102,9 @@ function App() {
         </Route>
         <Route path="/giftcards" exact>
           <GiftCards />
+        </Route>
+        <Route path="/reviews" exact>
+          <Reviews />
         </Route>
 
         <Route path="*">
