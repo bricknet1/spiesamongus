@@ -1,3 +1,6 @@
+// THIS PAGE HAS BEEN INTENTIONALLY DEPRECATED
+// THE CORRECT PAGE IS BEGIN.JS
+
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";

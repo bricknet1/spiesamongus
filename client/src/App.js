@@ -17,7 +17,7 @@ import Payment from "./components/Payment.js";
 import Privacy from "./components/Privacy.js";
 import Private from "./components/Private.js";
 import PrivateConfirmed from "./components/PrivateConfirmed.js";
-// import Start from "./components/Start.js";
+// import Start from "./components/Start.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import Reviews from "./components/Reviews.js";
 import Settings from "./components/Settings.js";
 import Terms from "./components/Terms.js";
