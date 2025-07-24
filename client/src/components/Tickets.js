@@ -15,7 +15,7 @@ function Tickets() {
   const mainStyle = {
     fontSize: isMobile ? "4.5vw" : "18px",
     fontWeight: "normal",
-    width: isMobile ? "90vw" : "1000px",
+    width: isMobile ? "90vw" : "100%",
     paddingLeft: isMobile ? "5vw" : "",
     lineHeight: isMobile ? "8vw" : "30px",
     margin: isMobile ? "" : "0 auto",
@@ -113,6 +113,7 @@ function Tickets() {
 
   return (
     <div className="pageContent" style={pageContentStyle}>
+      <title>Tickets | Spies Among Us</title>
       <div className={orangeBar}>TICKETS</div>
       <HamburgerMenuHeader/>
       <div style={mainStyle}>
