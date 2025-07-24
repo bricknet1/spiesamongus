@@ -11,19 +11,32 @@ function HamburgerMenuHeader() {
     setIsOpen(!isOpen);
   };
 
+  let burgerClassName;
+
+  if (location.startsWith("/private")) {
+    burgerClassName = isMobile
+      ? isOpen
+        ? "hamburger-icon-unfixed-privatePage hamburger-icon-fixed-override"
+        : "hamburger-icon-unfixed-privatePage"
+      : isOpen
+        ? "hamburger-icon-desktop-privatePage hamburger-icon-fixed-override"
+        : "hamburger-icon-desktop-privatePage"
+  } else {
+    burgerClassName = isMobile
+      ? isOpen
+        ? "hamburger-icon-unfixed hamburger-icon-fixed-override"
+        : "hamburger-icon-unfixed"
+      : isOpen
+        ? "hamburger-icon-desktop hamburger-icon-fixed-override"
+        : "hamburger-icon-desktop"
+  }
+
+
   return (
     <div>
       {/* Hamburger Icon */}
       <button
-        className={
-          isMobile
-            ? isOpen
-              ? "hamburger-icon-unfixed hamburger-icon-fixed-override"
-              : "hamburger-icon-unfixed"
-            : isOpen
-              ? "hamburger-icon-desktop hamburger-icon-fixed-override"
-              : "hamburger-icon-desktop"
-        }
+        className={burgerClassName}
         onClick={toggleMenu}
       >
         {isOpen ? "✖" : "☰"}

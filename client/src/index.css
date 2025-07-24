@@ -192,7 +192,7 @@ strong {
 /* HAMBURGER MENU */
 
 /* Hamburger Icon */
-.hamburger-icon-fixed {
+/* .hamburger-icon-fixed {
   position: fixed !important;
   top: 15px !important;
   right: 10px !important;
@@ -202,7 +202,7 @@ strong {
   cursor: pointer;
   z-index: 1001;
   color: #ff3700;
-}
+} */
 
 .hamburger-icon-unfixed {
   position: absolute;
@@ -226,6 +226,30 @@ strong {
   cursor: pointer;
   z-index: 1001;
   color: rgb(33, 23, 76);
+}
+
+.hamburger-icon-unfixed-privatePage {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  font-size: 30px;
+  background: rgb(33, 23, 76);
+  border: 1px solid #ff3700;
+  cursor: pointer;
+  z-index: 1001;
+  color: #ff3700;
+}
+
+.hamburger-icon-desktop-privatePage {
+  position: absolute;
+  top: 50px;
+  right: 10vw;
+  font-size: 60px;
+  background: rgb(33, 23, 76);
+  border: 1px solid #ff3700;
+  cursor: pointer;
+  z-index: 1001;
+  color: #ff3700;
 }
 
 .hamburger-icon-fixed-override {
