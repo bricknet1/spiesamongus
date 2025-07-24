@@ -178,7 +178,7 @@ function Private() {
       <div className="pageContent" style={pageContentStyle} id="top">
         <title>Private Events | Spies Among Us</title>
 
-        <HamburgerMenuHeader unfixed={true}/>
+        <HamburgerMenuHeader/>
 
         <img src={posterPic} style={posterStyle} alt="Private Events" />
 

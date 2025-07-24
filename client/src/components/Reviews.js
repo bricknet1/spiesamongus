@@ -40,7 +40,7 @@ function Reviews() {
 
       <title>Reviews | Spies Among Us</title>
 
-      <HamburgerMenuHeader unfixed={true}/>
+      <HamburgerMenuHeader/>
 
       <div className={orangeBar}>REVIEWS</div>
 

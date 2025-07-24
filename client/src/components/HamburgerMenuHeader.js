@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import useDeviceType from "./UseDeviceType.js";
 
-function HamburgerMenuHeader({unfixed}) {
+function HamburgerMenuHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const location = window.location.pathname; // Get the current URL path
+
+  const isMobile = useDeviceType();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,11 +16,13 @@ function HamburgerMenuHeader({unfixed}) {
       {/* Hamburger Icon */}
       <button
         className={
-          unfixed
+          isMobile
             ? isOpen
               ? "hamburger-icon-unfixed hamburger-icon-fixed-override"
               : "hamburger-icon-unfixed"
-            : "hamburger-icon-fixed"
+            : isOpen
+              ? "hamburger-icon-desktop hamburger-icon-fixed-override"
+              : "hamburger-icon-desktop"
         }
         onClick={toggleMenu}
       >

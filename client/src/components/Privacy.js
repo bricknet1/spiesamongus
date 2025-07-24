@@ -31,7 +31,7 @@ function Privacy() {
 
       <title>Privacy | Spies Among Us</title>
 
-      <HamburgerMenuHeader unfixed={true}/>
+      <HamburgerMenuHeader/>
 
       <div className={orangeBar}>PRIVACY POLICY</div>
 

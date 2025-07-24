@@ -216,6 +216,18 @@ strong {
   color: rgb(33, 23, 76);
 }
 
+.hamburger-icon-desktop {
+  position: absolute;
+  top: 50px;
+  right: 10vw;
+  font-size: 60px;
+  background: #ff3700;
+  border: 1px solid #ff3700;
+  cursor: pointer;
+  z-index: 1001;
+  color: rgb(33, 23, 76);
+}
+
 .hamburger-icon-fixed-override {
   position: fixed !important;
 }

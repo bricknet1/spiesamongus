@@ -114,7 +114,7 @@ function Tickets() {
   return (
     <div className="pageContent" style={pageContentStyle}>
       <div className={orangeBar}>TICKETS</div>
-      <HamburgerMenuHeader unfixed={true}/>
+      <HamburgerMenuHeader/>
       <div style={mainStyle}>
         <div id="otcContainer"></div>
       </div>
