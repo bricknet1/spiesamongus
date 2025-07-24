@@ -1,6 +1,8 @@
 import HamburgerMenuHeader from "./HamburgerMenuHeader.js";
 import SocialFooter from "./SocialFooter.js";
 import useDeviceType from "./UseDeviceType.js";
+import laTimes from '../assets/pictures/LA Times article.jpg';
+import noPro from '../assets/pictures/no pro.jpg';
 
 function Reviews() {
 
@@ -15,7 +17,7 @@ function Reviews() {
   const mainStyle = {
     fontSize: isMobile ? "4.5vw" : "18px",
     fontWeight: "normal",
-    width: isMobile ? "90vw" : "1000px",
+    width: isMobile ? "90vw" : "850px",
     paddingLeft: isMobile ? "5vw" : "",
     lineHeight: isMobile ? "8vw" : "30px",
     margin: isMobile ? "" : "0 auto",
@@ -23,9 +25,17 @@ function Reviews() {
   };
 
   const reviewBody = {
-    fontSize: isMobile ? "8vw": "32px",
+    fontSize: isMobile ? "8vw": "50px",
     fontWeight:"bold",
-    color:"#F9DF39"
+    color:"#F9DF39",
+    lineHeight: isMobile ? "" : "60px"
+  };
+
+  const reviewBodyLonger = {
+    fontSize: isMobile ? "6vw": "32px",
+    fontWeight:"bold",
+    color:"#F9DF39",
+    lineHeight: isMobile ? "" : "50px"
   };
 
   const reviewer = {
@@ -35,6 +45,16 @@ function Reviews() {
     textAlign: "right" 
   };
 
+  const laTimesStyle = {
+    border: "5px solid #F9DF39",
+    width: isMobile ? "80vw" : "400px"
+  }
+
+  const noProStyle = {
+    border: "5px solid #F9DF39",
+    width: isMobile ? "80vw" : "700px"
+  }
+
   return (
     <div className="pageContent" style={pageContentStyle}>
 
@@ -42,22 +62,22 @@ function Reviews() {
 
       <HamburgerMenuHeader/>
 
-      <div className={orangeBar}>REVIEWS</div>
+      <div className={orangeBar}>SPIES AMONG US REVIEWS</div>
 
       <div style={mainStyle}>
 
         <br/>
 
-        <div style={reviewBody}>"a work of theater that unfolds throughout Little Tokyo, a game that allows us to become the protagonist, and every stranger an unwitting extra."</div><br/>
+        <div style={reviewBodyLonger}>"a work of theater that unfolds throughout Little Tokyo, a game that allows us to become the protagonist, and every stranger an unwitting extra."</div><br/>
         <div style={reviewer}>-Todd Martens, <a target="_blank" rel="noopener noreferrer" style={{"color":"#FFFFFF"}} href="https://www.latimes.com/travel/story/2024-09-12/a-thrilling-way-to-see-little-tokyo-chase-down-a-spy-in-this-interactive-mystery-game">LA Times</a></div><br/>
-        IMAGE HERE<br/>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.latimes.com/travel/story/2024-09-12/a-thrilling-way-to-see-little-tokyo-chase-down-a-spy-in-this-interactive-mystery-game"><img src={laTimes} style={laTimesStyle} alt="LA Times Article"/></a><br/>
         <br/>
         <br/>
         <br/>
 
-        <div style={reviewBody}>"It was thrilling to be receiving multiple messages with instructions as to where to go next and who to look out for as we dodged dog walkers and zigzagged through couples who were out for a stroll. The roughly 90-minute experience seemed to go by in a breeze."</div><br/>
+        <div style={reviewBodyLonger}>"It was thrilling to be receiving multiple messages with instructions as to where to go next and who to look out for as we dodged dog walkers and zigzagged through couples who were out for a stroll. The roughly 90-minute experience seemed to go by in a breeze."</div><br/>
         <div style={reviewer}>-Kathryn Yu, <a target="_blank" rel="noopener noreferrer" style={{"color":"#FFFFFF"}} href="https://noproscenium.com/immersive-review-rundown-the-one-with-liminal-office-spaces-ancient-myths-7454a1289370">No Proscenium</a></div><br/>
-        IMAGE HERE<br/>
+        <a target="_blank" rel="noopener noreferrer" href="https://noproscenium.com/immersive-review-rundown-the-one-with-liminal-office-spaces-ancient-myths-7454a1289370"><img src={noPro} style={noProStyle} alt="LA Times Article"/></a><br/>
         <br/>
         <br/>
         <br/>
@@ -114,12 +134,6 @@ function Reviews() {
 
         <div style={reviewBody}>"The pacing and spy theme are exciting, the puzzles at an accessible level of difficulty, and the sense of humor had my wife and I laughing."</div><br/>
         <div style={reviewer}>-Jonathan Z, <a target="_blank" rel="noopener noreferrer" style={{"color":"#FFFFFF"}} href="https://maps.app.goo.gl/yuP3XDBWUkaW6hQk8">Google Reviews</a></div><br/>
-        <br/>
-        <br/>
-        <br/>
-
-        <div style={reviewBody}>"I found myself so fully immersed that I started suspecting every passerby of being in on the game and a potential spy."</div><br/>
-        <div style={reviewer}>-Nick J, <a target="_blank" rel="noopener noreferrer" style={{"color":"#FFFFFF"}} href="https://www.tripadvisor.com/Attraction_Review-g32655-d27950047-Reviews-Spies_Among_Us_An_Immersive_Adventure-Los_Angeles_California.html">Tripadvisor</a></div><br/>
         <br/>
         <br/>
         <br/>
