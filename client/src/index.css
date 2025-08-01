@@ -206,9 +206,11 @@ strong {
 
 .hamburger-icon-unfixed {
   position: absolute;
-  top: 15px;
-  right: 10px;
-  font-size: 30px;
+  top: 5vw;
+  right: 2vw;
+  font-size: 7.5vw;
+  height: 10vw;
+  line-height: 0vw;
   background: #ff3700;
   border: 1px solid #ff3700;
   cursor: pointer;
@@ -219,7 +221,7 @@ strong {
 .hamburger-icon-desktop {
   position: absolute;
   top: 50px;
-  right: 10vw;
+  right: 5vw;
   font-size: 60px;
   background: #ff3700;
   border: 1px solid #ff3700;
@@ -230,9 +232,11 @@ strong {
 
 .hamburger-icon-unfixed-privatePage {
   position: absolute;
-  top: 15px;
-  right: 10px;
-  font-size: 30px;
+  top: 5vw;
+  right: 2vw;
+  font-size: 7.5vw;
+  height: 10vw;
+  line-height: 0vw;
   background: rgb(33, 23, 76);
   border: 1px solid #ff3700;
   cursor: pointer;
@@ -243,7 +247,7 @@ strong {
 .hamburger-icon-desktop-privatePage {
   position: absolute;
   top: 50px;
-  right: 10vw;
+  right: 5vw;
   font-size: 60px;
   background: rgb(33, 23, 76);
   border: 1px solid #ff3700;

@@ -11,7 +11,7 @@ function Reviews() {
   const orangeBar = isMobile ? "orangeBar" : "orangeBarDesktop";
 
   const orangeBarFontSize = {
-    fontSize: isMobile ? "8vw" : "10vw"
+    fontSize: isMobile ? "8vw" : "60px"
   }
 
   const pageContentStyle = {
