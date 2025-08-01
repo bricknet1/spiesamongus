@@ -120,6 +120,28 @@ function Bypass() {
     // eslint-disable-next-line
   }, [formik.values.firstName, formik.values.lastName]);
 
+  useEffect(() => {
+    const num = parseInt(formik.values.NumberOfPlayers || "1");
+  
+    const fieldsToClear = [];
+    if (num < 4) {
+      fieldsToClear.push("name4", "phone4");
+    }
+    if (num < 3) {
+      fieldsToClear.push("name3", "phone3");
+    }
+    if (num < 2) {
+      fieldsToClear.push("name2", "phone2");
+    }
+  
+    // Only reset fields that have values
+    fieldsToClear.forEach((field) => {
+      if (formik.values[field] !== "") {
+        formik.setFieldValue(field, "");
+      }
+    });
+  }, [formik.values.NumberOfPlayers]);
+
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, '');
     const part1 = digits.slice(0, 3);
