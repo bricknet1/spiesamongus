@@ -221,7 +221,7 @@ strong {
 .hamburger-icon-desktop {
   position: absolute;
   top: 50px;
-  right: 5vw;
+  right: 10vw;
   font-size: 60px;
   background: #ff3700;
   border: 1px solid #ff3700;
@@ -247,7 +247,7 @@ strong {
 .hamburger-icon-desktop-privatePage {
   position: absolute;
   top: 50px;
-  right: 5vw;
+  right: 10vw;
   font-size: 60px;
   background: rgb(33, 23, 76);
   border: 1px solid #ff3700;
