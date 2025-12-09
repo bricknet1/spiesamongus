@@ -83,6 +83,7 @@ function Begin() {
       NumberOfPlayers: "1",
       NoStairs: false,
       agreeToTerms: false,
+      waittime: "5"
     },
     validationSchema: formSchema,
     validateOnChange: false,

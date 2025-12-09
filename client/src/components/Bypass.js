@@ -84,6 +84,7 @@ function Bypass() {
       act: "0",
       NoStairs: false,
       agreeToTerms: false,
+      waittime: "0"
     },
     validationSchema: formSchema,
     validateOnChange: false,
