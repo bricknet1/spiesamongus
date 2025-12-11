@@ -27,7 +27,7 @@ function Cancel() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ data: values }),
       }).then((res) => {
         if (res.ok) {
           console.log("successful response", res);
