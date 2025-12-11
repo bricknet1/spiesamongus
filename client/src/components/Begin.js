@@ -80,8 +80,9 @@ function Begin() {
       phone3: "",
       name4: "",
       phone4: "",
-      NumberOfPlayers: "1",
-      NoStairs: false,
+      numberofplayers: "1",
+      act: "Act 1 (Mission Start)",
+      nostairs: false,
       agreeToTerms: false,
       waittime: "5"
     },
@@ -91,7 +92,7 @@ function Begin() {
     onSubmit: (values) => {
       console.log("Submitted values:", values);
 
-      fetch("https://hook.us1.make.com/ez1uff29nk2ooouwswslke2zk63b6w4j", {
+      fetch("https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

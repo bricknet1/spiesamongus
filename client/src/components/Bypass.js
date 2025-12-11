@@ -80,9 +80,9 @@ function Bypass() {
       phone3: "",
       name4: "",
       phone4: "",
-      NumberOfPlayers: "1",
-      act: "0",
-      NoStairs: false,
+      numberofplayers: "1",
+      act: "Act 1 (Mission Start)",
+      nostairs: false,
       agreeToTerms: false,
       waittime: "0"
     },
@@ -92,7 +92,7 @@ function Bypass() {
     onSubmit: (values) => {
       console.log("Submitted values:", values);
 
-      fetch("https://hook.us1.make.com/i46nku538ulvwgr1u4b8bld72a8i9ule", {
+      fetch("https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -333,15 +333,15 @@ function Bypass() {
           value={formik.values.act}
           onChange={formik.handleChange}
         >
-          <option value="0">Act 1 (Mission Start)</option>
-          <option value="2">Act 2 (Papyrus Call)</option>
-          <option value="4">Act 4 (Hashimoto)</option>
-          <option value="5">Act 5 (Marble Search)</option>
-          <option value="6">Act 6 (Friendship Knot)</option>
-          <option value="7a">Act 7 (Obelisk)</option>
-          <option value="7h">Act 7 (Sweat Yoga)</option>
-          <option value="8">Act 8 (Black)</option>
-          <option value="10">Act 10 (White)</option>
+          <option value="Act 1 (Mission Start)">Act 1 (Mission Start)</option>
+          <option value="Act 2 (Papyrus Call)">Act 2 (Papyrus Call)</option>
+          <option value="Act 4 (Hashimoto)">Act 4 (Hashimoto)</option>
+          <option value="Act 5 (Marble Search)">Act 5 (Marble Search)</option>
+          <option value="Act 6 (Friendship Knot)">Act 6 (Friendship Knot)</option>
+          <option value="Act 7 (Obelisk)">Act 7 (Obelisk)</option>
+          <option value="Act 7 (Sweat Yoga)">Act 7 (Sweat Yoga)</option>
+          <option value="Act 8 (Marble)">Act 8 (Marble)</option>
+          <option value="Act 10 (Papyrus)">Act 10 (Papyrus)</option>
         </select>
         <br />
         <br />
