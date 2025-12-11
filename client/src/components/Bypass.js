@@ -17,52 +17,52 @@ function Bypass() {
       "required-player2-name",
       "Enter a name for Player 2",
       function (value) {
-        const { NumberOfPlayers } = this.parent;
-        return parseInt(NumberOfPlayers || "0") < 2 || !!value;
+        const { numberofplayers } = this.parent;
+        return parseInt(numberofplayers || "0") < 2 || !!value;
       }
     ),
     phone2: yup.string().test(
       "required-player2-phone",
       "Enter a 10 digit phone number",
       function (value) {
-        const { NumberOfPlayers } = this.parent;
-        return parseInt(NumberOfPlayers || "0") < 2 || (value && /^[0-9]{10}$/.test(value));
+        const { numberofplayers } = this.parent;
+        return parseInt(numberofplayers || "0") < 2 || (value && /^[0-9]{10}$/.test(value));
       }
     ),
     name3: yup.string().test(
       "required-player3-name",
       "Enter a name for Player 3",
       function (value) {
-        const { NumberOfPlayers } = this.parent;
-        return parseInt(NumberOfPlayers || "0") < 3 || !!value;
+        const { numberofplayers } = this.parent;
+        return parseInt(numberofplayers || "0") < 3 || !!value;
       }
     ),
     phone3: yup.string().test(
       "required-player3-phone",
       "Enter a 10 digit phone number",
       function (value) {
-        const { NumberOfPlayers } = this.parent;
-        return parseInt(NumberOfPlayers || "0") < 3 || (value && /^[0-9]{10}$/.test(value));
+        const { numberofplayers } = this.parent;
+        return parseInt(numberofplayers || "0") < 3 || (value && /^[0-9]{10}$/.test(value));
       }
     ),
     name4: yup.string().test(
       "required-player4-name",
       "Enter a name for Player 4",
       function (value) {
-        const { NumberOfPlayers } = this.parent;
-        return parseInt(NumberOfPlayers || "0") < 4 || !!value;
+        const { numberofplayers } = this.parent;
+        return parseInt(numberofplayers || "0") < 4 || !!value;
       }
     ),
     phone4: yup.string().test(
       "required-player4-phone",
       "Enter a 10 digit phone number",
       function (value) {
-        const { NumberOfPlayers } = this.parent;
-        return parseInt(NumberOfPlayers || "0") < 4 || (value && /^[0-9]{10}$/.test(value));
+        const { numberofplayers } = this.parent;
+        return parseInt(numberofplayers || "0") < 4 || (value && /^[0-9]{10}$/.test(value));
       }
     ),
-    NumberOfPlayers: yup.string().required("Number of Agents is required"),
-    NoStairs: yup.boolean(),
+    numberofplayers: yup.string().required("Number of Agents is required"),
+    nostairs: yup.boolean(),
     agreeToTerms: yup
       .boolean()
       .oneOf([true], "Agree to the terms and conditions to proceed"),
@@ -122,7 +122,7 @@ function Bypass() {
   }, [formik.values.firstName, formik.values.lastName]);
 
   useEffect(() => {
-    const num = parseInt(formik.values.NumberOfPlayers || "1");
+    const num = parseInt(formik.values.numberofplayers || "1");
   
     const fieldsToClear = [];
     if (num < 4) {
@@ -141,7 +141,8 @@ function Bypass() {
         formik.setFieldValue(field, "");
       }
     });
-  }, [formik.values.NumberOfPlayers]);
+    // eslint-disable-next-line
+  }, [formik.values.numberofplayers]);
 
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, '');
@@ -204,13 +205,13 @@ function Bypass() {
         <br />
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone1}</h3>
 
-        <label htmlFor="NumberOfPlayers">Number of agents on your mission</label>
+        <label htmlFor="numberofplayers">Number of agents on your mission</label>
         <br />
         <select
-          name="NumberOfPlayers"
-          id="NumberOfPlayers"
+          name="numberofplayers"
+          id="numberofplayers"
           className="formField"
-          value={formik.values.NumberOfPlayers}
+          value={formik.values.numberofplayers}
           onChange={formik.handleChange}
         >
           <option value="1">1</option>
@@ -227,7 +228,7 @@ function Bypass() {
         <br />
         <br /> */}
 
-        {formik.values.NumberOfPlayers >= "2" && (
+        {formik.values.numberofplayers >= "2" && (
           <div id="name2">
             <label htmlFor="name2">2nd Agent's Name</label>
             <br />
@@ -243,7 +244,7 @@ function Bypass() {
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.name2}</h3>
 
-        {formik.values.NumberOfPlayers >= "2" && (
+        {formik.values.numberofplayers >= "2" && (
           <div id="phone2">
             <label htmlFor="phone2">2nd Agent's Phone Number</label>
             <br />
@@ -259,7 +260,7 @@ function Bypass() {
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone2}</h3>
 
-        {formik.values.NumberOfPlayers >= "3" && (
+        {formik.values.numberofplayers >= "3" && (
           <div id="name3">
             <label htmlFor="name3">3rd Agent's Name</label>
             <br />
@@ -275,7 +276,7 @@ function Bypass() {
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.name3}</h3>
 
-        {formik.values.NumberOfPlayers >= "3" && (
+        {formik.values.numberofplayers >= "3" && (
           <div id="phone3">
             <label htmlFor="phone3">3rd Agent's Phone Number</label>
             <br />
@@ -291,7 +292,7 @@ function Bypass() {
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone3}</h3>
         
-        {formik.values.NumberOfPlayers >= "4" && (
+        {formik.values.numberofplayers >= "4" && (
           <div id="name4">
             <label htmlFor="name4">4th Agent's Name</label>
             <br />
@@ -307,7 +308,7 @@ function Bypass() {
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.name4}</h3>
 
-        {formik.values.NumberOfPlayers >= "4" && (
+        {formik.values.numberofplayers >= "4" && (
           <div id="phone4">
             <label htmlFor="phone4">4th Agent's Phone Number</label>
             <br />
@@ -371,8 +372,8 @@ function Bypass() {
           <div style={{ display: "flex", alignItems: "flex-start" }}>
             <input
               type="checkbox"
-              name="NoStairs"
-              checked={formik.values.NoStairs}
+              name="nostairs"
+              checked={formik.values.nostairs}
               onChange={formik.handleChange}
             />
             <span className="checkbox"></span>
@@ -380,7 +381,7 @@ function Bypass() {
               I do not want to go up any stairs this mission.
             </span>
           </div>
-          <h3 style={{ color: "#ff3700" }}> {formik.errors.NoStairs}</h3>
+          <h3 style={{ color: "#ff3700" }}> {formik.errors.nostairs}</h3>
         </label>
 
         <br />
