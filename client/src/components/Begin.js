@@ -12,55 +12,96 @@ function Begin() {
     phone1: yup
       .string()
       .required("Enter a 10 digit phone number")
-      .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number"),
-    name2: yup.string().test(
-      "required-player2-name",
-      "Enter a name for Player 2",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 2 || !!value;
-      }
-    ),
-    phone2: yup.string().test(
-      "required-player2-phone",
-      "Enter a 10 digit phone number",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 2 || (value && /^[0-9]{10}$/.test(value));
-      }
-    ),
-    name3: yup.string().test(
-      "required-player3-name",
-      "Enter a name for Player 3",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 3 || !!value;
-      }
-    ),
-    phone3: yup.string().test(
-      "required-player3-phone",
-      "Enter a 10 digit phone number",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 3 || (value && /^[0-9]{10}$/.test(value));
-      }
-    ),
-    name4: yup.string().test(
-      "required-player4-name",
-      "Enter a name for Player 4",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 4 || !!value;
-      }
-    ),
-    phone4: yup.string().test(
-      "required-player4-phone",
-      "Enter a 10 digit phone number",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 4 || (value && /^[0-9]{10}$/.test(value));
-      }
-    ),
+      .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number")
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { phone2, phone3, phone4 } = this.parent;
+        if (!value) return true;
+        return value !== phone2 && value !== phone3 && value !== phone4;
+      }),
+    name2: yup
+      .string()
+      .test(
+        "required-player2-name",
+        "Enter a name for Player 2",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return parseInt(numberofplayers || "0") < 2 || !!value;
+        }
+      ),
+    phone2: yup
+      .string()
+      .test(
+        "required-player2-phone",
+        "Enter a 10 digit phone number",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return (
+            parseInt(numberofplayers || "0") < 2 ||
+            (value && /^[0-9]{10}$/.test(value))
+          );
+        }
+      )
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { numberofplayers, phone1, phone3, phone4 } = this.parent;
+        if (parseInt(numberofplayers || "0") < 2 || !value) return true;
+        return value !== phone1 && value !== phone3 && value !== phone4;
+      }),
+    name3: yup
+      .string()
+      .test(
+        "required-player3-name",
+        "Enter a name for Player 3",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return parseInt(numberofplayers || "0") < 3 || !!value;
+        }
+      ),
+    phone3: yup
+      .string()
+      .test(
+        "required-player3-phone",
+        "Enter a 10 digit phone number",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return (
+            parseInt(numberofplayers || "0") < 3 ||
+            (value && /^[0-9]{10}$/.test(value))
+          );
+        }
+      )
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { numberofplayers, phone1, phone2, phone4 } = this.parent;
+        if (parseInt(numberofplayers || "0") < 3 || !value) return true;
+        return value !== phone1 && value !== phone2 && value !== phone4;
+      }),
+    name4: yup
+      .string()
+      .test(
+        "required-player4-name",
+        "Enter a name for Player 4",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return parseInt(numberofplayers || "0") < 4 || !!value;
+        }
+      ),
+    phone4: yup
+      .string()
+      .test(
+        "required-player4-phone",
+        "Enter a 10 digit phone number",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return (
+            parseInt(numberofplayers || "0") < 4 ||
+            (value && /^[0-9]{10}$/.test(value))
+          );
+        }
+      )
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { numberofplayers, phone1, phone2, phone3 } = this.parent;
+        if (parseInt(numberofplayers || "0") < 4 || !value) return true;
+        return value !== phone1 && value !== phone2 && value !== phone3;
+      }),
     numberofplayers: yup.string().required("Number of Agents is required"),
     nostairs: yup.boolean(),
     agreeToTerms: yup
@@ -84,7 +125,7 @@ function Begin() {
       act: "Act 1 (Mission Start)",
       nostairs: false,
       agreeToTerms: false,
-      waittime: "3"
+      waittime: "3",
     },
     validationSchema: formSchema,
     validateOnChange: false,
@@ -123,7 +164,7 @@ function Begin() {
 
   useEffect(() => {
     const num = parseInt(formik.values.numberofplayers || "1");
-  
+
     const fieldsToClear = [];
     if (num < 4) {
       fieldsToClear.push("name4", "phone4");
@@ -134,7 +175,7 @@ function Begin() {
     if (num < 2) {
       fieldsToClear.push("name2", "phone2");
     }
-  
+
     // Only reset fields that have values
     fieldsToClear.forEach((field) => {
       if (formik.values[field] !== "") {
@@ -145,18 +186,18 @@ function Begin() {
   }, [formik.values.numberofplayers]);
 
   const formatPhone = (value) => {
-    const digits = value.replace(/\D/g, '');
+    const digits = value.replace(/\D/g, "");
     const part1 = digits.slice(0, 3);
     const part2 = digits.slice(3, 6);
     const part3 = digits.slice(6, 10);
     let formatted = part1;
-    if (part2) formatted += '-' + part2;
-    if (part3) formatted += '-' + part3;
+    if (part2) formatted += "-" + part2;
+    if (part3) formatted += "-" + part3;
     return formatted;
   };
-  
+
   const handleFormattedPhoneChange = (fieldName, formik) => (e) => {
-    const raw = e.target.value.replace(/\D/g, '');
+    const raw = e.target.value.replace(/\D/g, "");
     if (raw.length <= 10) {
       formik.setFieldValue(fieldName, raw);
     }
@@ -208,12 +249,14 @@ function Begin() {
           name="phone1"
           className="formField"
           value={formatPhone(formik.values.phone1)}
-          onChange={handleFormattedPhoneChange('phone1', formik)}
+          onChange={handleFormattedPhoneChange("phone1", formik)}
         />
         <br />
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone1}</h3>
 
-        <label htmlFor="numberofplayers">Number of agents on your mission</label>
+        <label htmlFor="numberofplayers">
+          Number of agents on your mission
+        </label>
         <br />
         <select
           name="numberofplayers"
@@ -230,8 +273,12 @@ function Begin() {
         <br />
         <br />
 
-        <span className="secondAgentText" style={{"fontWeight":"normal", "fontSize":"5vw"}}>
-          Other agents will receive all the texts and clues you receive, but you will be responsible for replying to texts.
+        <span
+          className="secondAgentText"
+          style={{ fontWeight: "normal", fontSize: "5vw" }}
+        >
+          Other agents will receive all the texts and clues you receive, but you
+          will be responsible for replying to texts.
         </span>
         <br />
         <br />
@@ -261,7 +308,7 @@ function Begin() {
               name="phone2"
               className="formField"
               value={formatPhone(formik.values.phone2)}
-              onChange={handleFormattedPhoneChange('phone2', formik)}
+              onChange={handleFormattedPhoneChange("phone2", formik)}
             />
             <br />
           </div>
@@ -293,13 +340,13 @@ function Begin() {
               name="phone3"
               className="formField"
               value={formatPhone(formik.values.phone3)}
-              onChange={handleFormattedPhoneChange('phone3', formik)}
+              onChange={handleFormattedPhoneChange("phone3", formik)}
             />
             <br />
           </div>
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone3}</h3>
-        
+
         {formik.values.numberofplayers >= "4" && (
           <div id="name4">
             <label htmlFor="name4">4th Agent's Name</label>
@@ -325,7 +372,7 @@ function Begin() {
               name="phone4"
               className="formField"
               value={formatPhone(formik.values.phone4)}
-              onChange={handleFormattedPhoneChange('phone4', formik)}
+              onChange={handleFormattedPhoneChange("phone4", formik)}
             />
             <br />
           </div>
@@ -378,5 +425,4 @@ function Begin() {
   );
 }
 
-export default Begin; 
-
+export default Begin;

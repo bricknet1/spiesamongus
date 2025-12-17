@@ -12,7 +12,12 @@ function Bypass() {
     phone1: yup
       .string()
       .required("Enter a 10 digit phone number")
-      .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number"),
+      .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number")
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { phone2, phone3, phone4 } = this.parent;
+        if (!value) return true;
+        return value !== phone2 && value !== phone3 && value !== phone4;
+      }),
     name2: yup.string().test(
       "required-player2-name",
       "Enter a name for Player 2",
@@ -21,14 +26,24 @@ function Bypass() {
         return parseInt(numberofplayers || "0") < 2 || !!value;
       }
     ),
-    phone2: yup.string().test(
-      "required-player2-phone",
-      "Enter a 10 digit phone number",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 2 || (value && /^[0-9]{10}$/.test(value));
-      }
-    ),
+    phone2: yup
+      .string()
+      .test(
+        "required-player2-phone",
+        "Enter a 10 digit phone number",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return (
+            parseInt(numberofplayers || "0") < 2 ||
+            (value && /^[0-9]{10}$/.test(value))
+          );
+        }
+      )
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { numberofplayers, phone1, phone3, phone4 } = this.parent;
+        if (parseInt(numberofplayers || "0") < 2 || !value) return true;
+        return value !== phone1 && value !== phone3 && value !== phone4;
+      }),
     name3: yup.string().test(
       "required-player3-name",
       "Enter a name for Player 3",
@@ -37,14 +52,24 @@ function Bypass() {
         return parseInt(numberofplayers || "0") < 3 || !!value;
       }
     ),
-    phone3: yup.string().test(
-      "required-player3-phone",
-      "Enter a 10 digit phone number",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 3 || (value && /^[0-9]{10}$/.test(value));
-      }
-    ),
+    phone3: yup
+      .string()
+      .test(
+        "required-player3-phone",
+        "Enter a 10 digit phone number",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return (
+            parseInt(numberofplayers || "0") < 3 ||
+            (value && /^[0-9]{10}$/.test(value))
+          );
+        }
+      )
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { numberofplayers, phone1, phone2, phone4 } = this.parent;
+        if (parseInt(numberofplayers || "0") < 3 || !value) return true;
+        return value !== phone1 && value !== phone2 && value !== phone4;
+      }),
     name4: yup.string().test(
       "required-player4-name",
       "Enter a name for Player 4",
@@ -53,14 +78,24 @@ function Bypass() {
         return parseInt(numberofplayers || "0") < 4 || !!value;
       }
     ),
-    phone4: yup.string().test(
-      "required-player4-phone",
-      "Enter a 10 digit phone number",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 4 || (value && /^[0-9]{10}$/.test(value));
-      }
-    ),
+    phone4: yup
+      .string()
+      .test(
+        "required-player4-phone",
+        "Enter a 10 digit phone number",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return (
+            parseInt(numberofplayers || "0") < 4 ||
+            (value && /^[0-9]{10}$/.test(value))
+          );
+        }
+      )
+      .test("unique-phone", "Phone numbers must be unique", function (value) {
+        const { numberofplayers, phone1, phone2, phone3 } = this.parent;
+        if (parseInt(numberofplayers || "0") < 4 || !value) return true;
+        return value !== phone1 && value !== phone2 && value !== phone3;
+      }),
     numberofplayers: yup.string().required("Number of Agents is required"),
     nostairs: yup.boolean(),
     agreeToTerms: yup
