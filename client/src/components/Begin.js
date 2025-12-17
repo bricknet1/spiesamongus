@@ -142,7 +142,7 @@ function Begin() {
       }).then((res) => {
         if (res.ok) {
           console.log("successful response", res);
-          history.push("/confirmed#top");
+          history.push("/confirmed");
         } else {
           res.json().then((error) => {
             console.error(error.error);

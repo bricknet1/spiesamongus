@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import Questions from "./Questions.js";
 import SocialFooter from "./SocialFooter.js";
 
 import SAUPic from "../assets/pictures/animatedSpiesLogo.gif";
 
 function Confirmed() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="pageContent" style={{ paddingBottom: "10vw" }} id="top">
       <title>Mission Confirmed | Spies Among Us</title>

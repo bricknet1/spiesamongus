@@ -18,14 +18,16 @@ function Bypass() {
         if (!value) return true;
         return value !== phone2 && value !== phone3 && value !== phone4;
       }),
-    name2: yup.string().test(
-      "required-player2-name",
-      "Enter a name for Player 2",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 2 || !!value;
-      }
-    ),
+    name2: yup
+      .string()
+      .test(
+        "required-player2-name",
+        "Enter a name for Player 2",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return parseInt(numberofplayers || "0") < 2 || !!value;
+        }
+      ),
     phone2: yup
       .string()
       .test(
@@ -44,14 +46,16 @@ function Bypass() {
         if (parseInt(numberofplayers || "0") < 2 || !value) return true;
         return value !== phone1 && value !== phone3 && value !== phone4;
       }),
-    name3: yup.string().test(
-      "required-player3-name",
-      "Enter a name for Player 3",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 3 || !!value;
-      }
-    ),
+    name3: yup
+      .string()
+      .test(
+        "required-player3-name",
+        "Enter a name for Player 3",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return parseInt(numberofplayers || "0") < 3 || !!value;
+        }
+      ),
     phone3: yup
       .string()
       .test(
@@ -70,14 +74,16 @@ function Bypass() {
         if (parseInt(numberofplayers || "0") < 3 || !value) return true;
         return value !== phone1 && value !== phone2 && value !== phone4;
       }),
-    name4: yup.string().test(
-      "required-player4-name",
-      "Enter a name for Player 4",
-      function (value) {
-        const { numberofplayers } = this.parent;
-        return parseInt(numberofplayers || "0") < 4 || !!value;
-      }
-    ),
+    name4: yup
+      .string()
+      .test(
+        "required-player4-name",
+        "Enter a name for Player 4",
+        function (value) {
+          const { numberofplayers } = this.parent;
+          return parseInt(numberofplayers || "0") < 4 || !!value;
+        }
+      ),
     phone4: yup
       .string()
       .test(
@@ -119,7 +125,7 @@ function Bypass() {
       act: "Act 1 (Mission Start)",
       nostairs: false,
       agreeToTerms: false,
-      waittime: "0"
+      waittime: "0",
     },
     validationSchema: formSchema,
     validateOnChange: false,
@@ -158,7 +164,7 @@ function Bypass() {
 
   useEffect(() => {
     const num = parseInt(formik.values.numberofplayers || "1");
-  
+
     const fieldsToClear = [];
     if (num < 4) {
       fieldsToClear.push("name4", "phone4");
@@ -169,7 +175,7 @@ function Bypass() {
     if (num < 2) {
       fieldsToClear.push("name2", "phone2");
     }
-  
+
     // Only reset fields that have values
     fieldsToClear.forEach((field) => {
       if (formik.values[field] !== "") {
@@ -180,18 +186,18 @@ function Bypass() {
   }, [formik.values.numberofplayers]);
 
   const formatPhone = (value) => {
-    const digits = value.replace(/\D/g, '');
+    const digits = value.replace(/\D/g, "");
     const part1 = digits.slice(0, 3);
     const part2 = digits.slice(3, 6);
     const part3 = digits.slice(6, 10);
     let formatted = part1;
-    if (part2) formatted += '-' + part2;
-    if (part3) formatted += '-' + part3;
+    if (part2) formatted += "-" + part2;
+    if (part3) formatted += "-" + part3;
     return formatted;
   };
-  
+
   const handleFormattedPhoneChange = (fieldName, formik) => (e) => {
-    const raw = e.target.value.replace(/\D/g, '');
+    const raw = e.target.value.replace(/\D/g, "");
     if (raw.length <= 10) {
       formik.setFieldValue(fieldName, raw);
     }
@@ -235,12 +241,14 @@ function Bypass() {
           name="phone1"
           className="formField"
           value={formatPhone(formik.values.phone1)}
-          onChange={handleFormattedPhoneChange('phone1', formik)}
+          onChange={handleFormattedPhoneChange("phone1", formik)}
         />
         <br />
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone1}</h3>
 
-        <label htmlFor="numberofplayers">Number of agents on your mission</label>
+        <label htmlFor="numberofplayers">
+          Number of agents on your mission
+        </label>
         <br />
         <select
           name="numberofplayers"
@@ -288,7 +296,7 @@ function Bypass() {
               name="phone2"
               className="formField"
               value={formatPhone(formik.values.phone2)}
-              onChange={handleFormattedPhoneChange('phone2', formik)}
+              onChange={handleFormattedPhoneChange("phone2", formik)}
             />
             <br />
           </div>
@@ -320,13 +328,13 @@ function Bypass() {
               name="phone3"
               className="formField"
               value={formatPhone(formik.values.phone3)}
-              onChange={handleFormattedPhoneChange('phone3', formik)}
+              onChange={handleFormattedPhoneChange("phone3", formik)}
             />
             <br />
           </div>
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone3}</h3>
-        
+
         {formik.values.numberofplayers >= "4" && (
           <div id="name4">
             <label htmlFor="name4">4th Agent's Name</label>
@@ -352,14 +360,15 @@ function Bypass() {
               name="phone4"
               className="formField"
               value={formatPhone(formik.values.phone4)}
-              onChange={handleFormattedPhoneChange('phone4', formik)}
+              onChange={handleFormattedPhoneChange("phone4", formik)}
             />
             <br />
           </div>
         )}
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone4}</h3>
 
-        <label htmlFor="act">Jump to later act?</label><br/>
+        <label htmlFor="act">Jump to later act?</label>
+        <br />
         <label htmlFor="act">(Leave at 1 if starting from beginning)</label>
         <br />
         <select
@@ -373,7 +382,9 @@ function Bypass() {
           <option value="Act 2 (Papyrus Call)">Act 2 (Papyrus Call)</option>
           <option value="Act 4 (Hashimoto)">Act 4 (Hashimoto)</option>
           <option value="Act 5 (Marble Search)">Act 5 (Marble Search)</option>
-          <option value="Act 6 (Friendship Knot)">Act 6 (Friendship Knot)</option>
+          <option value="Act 6 (Friendship Knot)">
+            Act 6 (Friendship Knot)
+          </option>
           <option value="Act 7 (Obelisk)">Act 7 (Obelisk)</option>
           <option value="Act 7 (Sweat Yoga)">Act 7 (Sweat Yoga)</option>
           <option value="Act 8 (Marble)">Act 8 (Marble)</option>
@@ -423,7 +434,6 @@ function Bypass() {
         <br />
         <input type="submit" value="Begin Mission" className="submitButton" />
       </form>
-
     </div>
   );
 }
