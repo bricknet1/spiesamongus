@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import LeslieFooter from "./LeslieFooter.js";
+import VisitedPagesMenu from "./VisitedPagesMenu.js";
 import yellowMan from "../assets/pictures/stickfigureyellowwalk.png";
 
 function Marble() {
@@ -17,7 +18,9 @@ function Marble() {
 
   useEffect(() => {
     const savedPuzzleWords = JSON.parse(localStorage.getItem("puzzleWords"));
-    const savedAvailableLetters = JSON.parse(localStorage.getItem("availableLetters"));
+    const savedAvailableLetters = JSON.parse(
+      localStorage.getItem("availableLetters")
+    );
     const savedSettings = JSON.parse(localStorage.getItem("settings"));
 
     const jeansInitialWords = {
@@ -33,7 +36,7 @@ function Marble() {
       jeans: "J__NS",
       black: "_____",
       hat: "_AT",
-    }
+    };
     const shortsInitialWords = {
       swan: "_W__",
       necklace: "__C__AC_",
@@ -46,7 +49,7 @@ function Marble() {
       shorts: "S__R__",
       black: "_____",
       hat: "_AT",
-    }
+    };
     const jeansInitialLetters = [
       { letter: "R", id: 0 },
       { letter: "E", id: 1 },
@@ -83,7 +86,7 @@ function Marble() {
       { letter: "N", id: 32 },
       { letter: "E", id: 33 },
       { letter: "L", id: 34 },
-    ]
+    ];
     const shortsInitialLetters = [
       { letter: "R", id: 0 },
       { letter: "E", id: 1 },
@@ -119,7 +122,7 @@ function Marble() {
       { letter: "C", id: 31 },
       { letter: "N", id: 32 },
       { letter: "S", id: 33 },
-    ]
+    ];
 
     if (savedPuzzleWords && savedAvailableLetters) {
       console.log("Setting words from localStorage...");
@@ -134,7 +137,10 @@ function Marble() {
         setInitialPuzzleWords(shortsInitialWords);
         setInitialAvailableLetters(shortsInitialLetters);
       }
-      if ((savedAvailableLetters !== jeansInitialLetters) && (savedAvailableLetters !== shortsInitialLetters)) {
+      if (
+        savedAvailableLetters !== jeansInitialLetters &&
+        savedAvailableLetters !== shortsInitialLetters
+      ) {
         setIsFirstLetterPlaced(true);
       }
 
@@ -142,7 +148,7 @@ function Marble() {
         const keys1 = Object.keys(obj1);
         const keys2 = Object.keys(obj2);
         if (keys1.length !== keys2.length) return false;
-        return keys1.every(key => obj1[key] === obj2[key]);
+        return keys1.every((key) => obj1[key] === obj2[key]);
       };
       if (
         objectsAreEqual(savedPuzzleWords, jeansInitialWords) ||
@@ -165,14 +171,14 @@ function Marble() {
           let words = {};
           let letters = [];
 
-          if (data.wardrobe === "Jeans"){
-            words = jeansInitialWords
-            letters = jeansInitialLetters
+          if (data.wardrobe === "Jeans") {
+            words = jeansInitialWords;
+            letters = jeansInitialLetters;
           }
 
-          if (data.wardrobe === "Shorts"){
-            words = shortsInitialWords
-            letters = shortsInitialLetters
+          if (data.wardrobe === "Shorts") {
+            words = shortsInitialWords;
+            letters = shortsInitialLetters;
           }
 
           setPuzzleWords(words);
@@ -184,7 +190,7 @@ function Marble() {
           setInitialAvailableLetters(letters);
           setIsInitialized(true);
         });
-      }
+    }
   }, [API_URL]);
 
   useEffect(() => {
@@ -198,7 +204,10 @@ function Marble() {
   useEffect(() => {
     if (isInitialized) {
       localStorage.setItem("puzzleWords", JSON.stringify(puzzleWords));
-      localStorage.setItem("availableLetters", JSON.stringify(availableLetters));
+      localStorage.setItem(
+        "availableLetters",
+        JSON.stringify(availableLetters)
+      );
     }
   }, [puzzleWords, availableLetters, isInitialized]);
 
@@ -245,56 +254,42 @@ function Marble() {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function handleLetterRemoval(e) {
     e.preventDefault();
     const { word, index } = e.target.dataset; // Access the word and index
     const wordIndex = parseInt(index, 10); // Convert index to a number
-  
+
     setPuzzleWords((prevWords) => {
       const currentWord = prevWords[word];
       const letterToRemove = currentWord[wordIndex]; // Get the letter to remove
-  
+
       // If the slot is empty, do nothing
       if (letterToRemove === "_") {
         return prevWords;
       }
-  
+
       // Update the word by replacing the letter with an underscore
       const updatedWord =
-        currentWord.slice(0, wordIndex) + "_" + currentWord.slice(wordIndex + 1);
-  
+        currentWord.slice(0, wordIndex) +
+        "_" +
+        currentWord.slice(wordIndex + 1);
+
       // Add the removed letter back to available letters with a unique ID
       setAvailableLetters((prevLetters) => {
         const usedIds = new Set(prevLetters.map((l) => l.id)); // Track used IDs
-  
+
         const match = initialAvailableLetters.find(
-          (l) =>
-            l.letter === letterToRemove && !usedIds.has(l.id) // Ensure unique ID
+          (l) => l.letter === letterToRemove && !usedIds.has(l.id) // Ensure unique ID
         );
-  
+
         if (match) {
           usedIds.add(match.id); // Mark the ID as used
           return [...prevLetters, match]; // Add the matched letter back
         }
-  
+
         return prevLetters; // No matching ID found
       });
-  
+
       return {
         ...prevWords,
         [word]: updatedWord,
@@ -362,7 +357,6 @@ function Marble() {
       ([word, value]) => value === word.toUpperCase()
     );
   }
-  
 
   // TEMPORARY
   // function resetGame() {
@@ -394,354 +388,77 @@ function Marble() {
 
   if (!isInitialized) return <div>Loading...</div>;
 
-  if (isInitialized) return (
-    <div className="pageContent" style={{paddingBottom: "0vw"}}>
-      <title>Agent Marble Physical Description</title>
-      <div className="orangeBar" style={{ height: "13vw" }}>
-        Agent Marble is ...
-      </div>
-
-      <div className="puzzleContainer">
-        <div className="marbleUpperFlex">
-          <div className="swanNecklaceContainer">
-            <div
-              className={
-                puzzleWords.swan === "SWAN"
-                // || puzzleWords.necklace === "NECKLACE"
-                  ? "marbleIsSolved"
-                  : "marbleIs"
-              }
-            >
-              ...wearing a...
-            </div>
-
-            {/* Render buttons for SWAN */}
-            {puzzleWords.swan.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.swan[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.swan === "SWAN";
-              return (
-                <button
-                  key={`swan-${index}`}
-                  data-word="swan"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                  // style={{
-                  //   border: "none", // remove border
-                  //   margin: "2px", // remove border
-                  //   width: "6vw", // remove border
-                  //   height: "6vw", // remove border
-                  //   paddingTop: "1px", // remove border
-                  // }}
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            {/* Render buttons for NECKLACE */}
-            {puzzleWords.necklace.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.necklace[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.necklace === "NECKLACE";
-              return (
-                <button
-                  key={`necklace-${index}`}
-                  data-word="necklace"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="blackHatContainer">
-            <div
-              className={
-                puzzleWords.black === "BLACK" 
-                // || puzzleWords.hat === "HAT"
-                  ? "marbleIsSolved"
-                  : "marbleIs"
-              }
-            >
-              ...wearing a...
-            </div>
-
-            {/* Render buttons for BLACK */}
-            {puzzleWords.black.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.black[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.black === "BLACK";
-              return (
-                <button
-                  key={`black-${index}`}
-                  data-word="black"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            <button className="lockedLetter"></button>
-
-            {/* Render buttons for HAT */}
-            {puzzleWords.hat.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.hat[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.hat === "HAT";
-              return (
-                <button
-                  key={`hat-${index}`}
-                  data-word="hat"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-          </div>
+  if (isInitialized)
+    return (
+      <div className="pageContent" style={{ paddingBottom: "0vw" }}>
+        <title>Agent Marble Physical Description</title>
+        <VisitedPagesMenu />
+        <div className="orangeBar" style={{ height: "13vw" }}>
+          Agent Marble is ...
         </div>
 
-        <div className="marbleLowerFlex">
-          <div className="leftSideContainer">
-            <div
-              className={
-                puzzleWords.marble === "MARBLE" 
-                // || puzzleWords.danger === "DANGER"
-                // || puzzleWords.signal === "SIGNAL"
-                  ? "marbleIsSolved"
-                  : "marbleIs"
-              }
-            >
-              ...showing the...
-            </div>
+        <div className="puzzleContainer">
+          <div className="marbleUpperFlex">
+            <div className="swanNecklaceContainer">
+              <div
+                className={
+                  puzzleWords.swan === "SWAN"
+                    ? // || puzzleWords.necklace === "NECKLACE"
+                      "marbleIsSolved"
+                    : "marbleIs"
+                }
+              >
+                ...wearing a...
+              </div>
 
-            {/* Render buttons for MARBLE */}
-            {puzzleWords.marble.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.marble[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.marble === "MARBLE";
-              return (
-                <button
-                  key={`marble-${index}`}
-                  data-word="marble"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            {/* Render buttons for DANGER */}
-            {puzzleWords.danger.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.danger[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.danger === "DANGER";
-              return (
-                <button
-                  key={`danger-${index}`}
-                  data-word="danger"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            {/* Render buttons for SIGNAL */}
-            {puzzleWords.signal.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.signal[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.signal === "SIGNAL";
-              return (
-                <button
-                  key={`signal-${index}`}
-                  data-word="signal"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            <div
-              className={
-                puzzleWords.vui === "VUI"
-                // || puzzleWords.ve === "VE"
-                // || puzzleWords.cup === "CUP"
-                  ? "marbleIsSolved"
-                  : "marbleIs"
-              }
-            >
-              ...holding a...
-            </div>
-
-            {/* Render buttons for VUI */}
-            {puzzleWords.vui.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.vui[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.vui === "VUI";
-              return (
-                <button
-                  key={`vui-${index}`}
-                  data-word="vui"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <button className="lockedLetter"></button>
-
-            {/* Render buttons for VE */}
-            {puzzleWords.ve.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.ve[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.ve === "VE";
-              return (
-                <button
-                  key={`ve-${index}`}
-                  data-word="ve"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <br />
-
-            {/* Render buttons for CUP */}
-            {puzzleWords.cup.split("").map((char, index) => {
-              const isLockedLetter = initialPuzzleWords.cup[index] !== "_"; // Check if the letter was pre-provided
-              const wordIsSolved = puzzleWords.cup === "CUP";
-              return (
-                <button
-                  key={`cup-${index}`}
-                  data-word="cup"
-                  data-index={index}
-                  onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
-                  disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                  className={
-                    wordIsSolved
-                      ? "solvedWordLetter" // Highest priority when word is solved
-                      : isLockedLetter
-                      ? "lockedLetter" // Pre-provided letters
-                      : "marbleButton" // Default for user-interactable letters
-                  }
-                >
-                  {char === "_" ? "\u00A0" : char}
-                </button>
-              );
-            })}
-
-            <div
-              className={
-                ( settings.wardrobe === "Jeans" && puzzleWords.blue === "BLUE")
-                // || puzzleWords.jeans === "JEANS"
-                || ( settings.wardrobe === "Shorts" && puzzleWords.shorts === "SHORTS" )
-                  ? "marbleIsSolved"
-                  : "marbleIs"
-              }
-            >
-              ...wearing...
-            </div>
-
-            {/* Render buttons for SHORTS */}
-            {settings.wardrobe === "Shorts" && (
-              puzzleWords.shorts.split("").map((char, index) => {
-                const isLockedLetter = initialPuzzleWords.shorts[index] !== "_"; // Check if the letter was pre-provided
-                const wordIsSolved = puzzleWords.shorts === "SHORTS";
+              {/* Render buttons for SWAN */}
+              {puzzleWords.swan.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.swan[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.swan === "SWAN";
                 return (
                   <button
-                    key={`shorts-${index}`}
-                    data-word="shorts"
+                    key={`swan-${index}`}
+                    data-word="swan"
                     data-index={index}
-                    onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                    // style={{
+                    //   border: "none", // remove border
+                    //   margin: "2px", // remove border
+                    //   width: "6vw", // remove border
+                    //   height: "6vw", // remove border
+                    //   paddingTop: "1px", // remove border
+                    // }}
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <br />
+
+              {/* Render buttons for NECKLACE */}
+              {puzzleWords.necklace.split("").map((char, index) => {
+                const isLockedLetter =
+                  initialPuzzleWords.necklace[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.necklace === "NECKLACE";
+                return (
+                  <button
+                    key={`necklace-${index}`}
+                    data-word="necklace"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
                     disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                     className={
                       wordIsSolved
@@ -754,20 +471,33 @@ function Marble() {
                     {char === "_" ? "\u00A0" : char}
                   </button>
                 );
-              })
-            )}
+              })}
+            </div>
 
-            {/* Render buttons for BLUE */}
-            {settings.wardrobe === "Jeans" && (
-              puzzleWords.blue.split("").map((char, index) => {
-                const isLockedLetter = initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
-                const wordIsSolved = puzzleWords.blue === "BLUE";
+            <div className="blackHatContainer">
+              <div
+                className={
+                  puzzleWords.black === "BLACK"
+                    ? // || puzzleWords.hat === "HAT"
+                      "marbleIsSolved"
+                    : "marbleIs"
+                }
+              >
+                ...wearing a...
+              </div>
+
+              {/* Render buttons for BLACK */}
+              {puzzleWords.black.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.black[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.black === "BLACK";
                 return (
                   <button
-                    key={`blue-${index}`}
-                    data-word="blue"
+                    key={`black-${index}`}
+                    data-word="black"
                     data-index={index}
-                    onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
                     disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                     className={
                       wordIsSolved
@@ -780,22 +510,24 @@ function Marble() {
                     {char === "_" ? "\u00A0" : char}
                   </button>
                 );
-              })
-            )}
+              })}
 
-            <br />
+              <br />
 
-            {/* Render buttons for JEANS */}
-            {settings.wardrobe === "Jeans" && (
-              puzzleWords.jeans.split("").map((char, index) => {
-                const isLockedLetter = initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided
-                const wordIsSolved = puzzleWords.jeans === "JEANS";
+              <button className="lockedLetter"></button>
+
+              {/* Render buttons for HAT */}
+              {puzzleWords.hat.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.hat[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.hat === "HAT";
                 return (
                   <button
-                    key={`jeans-${index}`}
-                    data-word="jeans"
+                    key={`hat-${index}`}
+                    data-word="hat"
                     data-index={index}
-                    onClick={char === "_" ? handleLetterPlacement : handleLetterRemoval}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
                     disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
                     className={
                       wordIsSolved
@@ -808,19 +540,321 @@ function Marble() {
                     {char === "_" ? "\u00A0" : char}
                   </button>
                 );
-              })
-            )}
+              })}
+            </div>
           </div>
 
-          <div className="yellowManContainer">
-            <img src={yellowMan} className="yellowMan" alt="walking man"/>
-            {isFirstLetterPlaced ? null : <div className="marblePuzzleInstructions">Tap a letter below, then tap the space where it belongs</div>}
+          <div className="marbleLowerFlex">
+            <div className="leftSideContainer">
+              <div
+                className={
+                  puzzleWords.marble === "MARBLE"
+                    ? // || puzzleWords.danger === "DANGER"
+                      // || puzzleWords.signal === "SIGNAL"
+                      "marbleIsSolved"
+                    : "marbleIs"
+                }
+              >
+                ...showing the...
+              </div>
+
+              {/* Render buttons for MARBLE */}
+              {puzzleWords.marble.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.marble[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.marble === "MARBLE";
+                return (
+                  <button
+                    key={`marble-${index}`}
+                    data-word="marble"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <br />
+
+              {/* Render buttons for DANGER */}
+              {puzzleWords.danger.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.danger[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.danger === "DANGER";
+                return (
+                  <button
+                    key={`danger-${index}`}
+                    data-word="danger"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <br />
+
+              {/* Render buttons for SIGNAL */}
+              {puzzleWords.signal.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.signal[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.signal === "SIGNAL";
+                return (
+                  <button
+                    key={`signal-${index}`}
+                    data-word="signal"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <br />
+
+              <div
+                className={
+                  puzzleWords.vui === "VUI"
+                    ? // || puzzleWords.ve === "VE"
+                      // || puzzleWords.cup === "CUP"
+                      "marbleIsSolved"
+                    : "marbleIs"
+                }
+              >
+                ...holding a...
+              </div>
+
+              {/* Render buttons for VUI */}
+              {puzzleWords.vui.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.vui[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.vui === "VUI";
+                return (
+                  <button
+                    key={`vui-${index}`}
+                    data-word="vui"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <button className="lockedLetter"></button>
+
+              {/* Render buttons for VE */}
+              {puzzleWords.ve.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.ve[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.ve === "VE";
+                return (
+                  <button
+                    key={`ve-${index}`}
+                    data-word="ve"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <br />
+
+              {/* Render buttons for CUP */}
+              {puzzleWords.cup.split("").map((char, index) => {
+                const isLockedLetter = initialPuzzleWords.cup[index] !== "_"; // Check if the letter was pre-provided
+                const wordIsSolved = puzzleWords.cup === "CUP";
+                return (
+                  <button
+                    key={`cup-${index}`}
+                    data-word="cup"
+                    data-index={index}
+                    onClick={
+                      char === "_" ? handleLetterPlacement : handleLetterRemoval
+                    }
+                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                    className={
+                      wordIsSolved
+                        ? "solvedWordLetter" // Highest priority when word is solved
+                        : isLockedLetter
+                        ? "lockedLetter" // Pre-provided letters
+                        : "marbleButton" // Default for user-interactable letters
+                    }
+                  >
+                    {char === "_" ? "\u00A0" : char}
+                  </button>
+                );
+              })}
+
+              <div
+                className={
+                  (settings.wardrobe === "Jeans" &&
+                    puzzleWords.blue === "BLUE") ||
+                  // || puzzleWords.jeans === "JEANS"
+                  (settings.wardrobe === "Shorts" &&
+                    puzzleWords.shorts === "SHORTS")
+                    ? "marbleIsSolved"
+                    : "marbleIs"
+                }
+              >
+                ...wearing...
+              </div>
+
+              {/* Render buttons for SHORTS */}
+              {settings.wardrobe === "Shorts" &&
+                puzzleWords.shorts.split("").map((char, index) => {
+                  const isLockedLetter =
+                    initialPuzzleWords.shorts[index] !== "_"; // Check if the letter was pre-provided
+                  const wordIsSolved = puzzleWords.shorts === "SHORTS";
+                  return (
+                    <button
+                      key={`shorts-${index}`}
+                      data-word="shorts"
+                      data-index={index}
+                      onClick={
+                        char === "_"
+                          ? handleLetterPlacement
+                          : handleLetterRemoval
+                      }
+                      disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                      className={
+                        wordIsSolved
+                          ? "solvedWordLetter" // Highest priority when word is solved
+                          : isLockedLetter
+                          ? "lockedLetter" // Pre-provided letters
+                          : "marbleButton" // Default for user-interactable letters
+                      }
+                    >
+                      {char === "_" ? "\u00A0" : char}
+                    </button>
+                  );
+                })}
+
+              {/* Render buttons for BLUE */}
+              {settings.wardrobe === "Jeans" &&
+                puzzleWords.blue.split("").map((char, index) => {
+                  const isLockedLetter = initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
+                  const wordIsSolved = puzzleWords.blue === "BLUE";
+                  return (
+                    <button
+                      key={`blue-${index}`}
+                      data-word="blue"
+                      data-index={index}
+                      onClick={
+                        char === "_"
+                          ? handleLetterPlacement
+                          : handleLetterRemoval
+                      }
+                      disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                      className={
+                        wordIsSolved
+                          ? "solvedWordLetter" // Highest priority when word is solved
+                          : isLockedLetter
+                          ? "lockedLetter" // Pre-provided letters
+                          : "marbleButton" // Default for user-interactable letters
+                      }
+                    >
+                      {char === "_" ? "\u00A0" : char}
+                    </button>
+                  );
+                })}
+
+              <br />
+
+              {/* Render buttons for JEANS */}
+              {settings.wardrobe === "Jeans" &&
+                puzzleWords.jeans.split("").map((char, index) => {
+                  const isLockedLetter =
+                    initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided
+                  const wordIsSolved = puzzleWords.jeans === "JEANS";
+                  return (
+                    <button
+                      key={`jeans-${index}`}
+                      data-word="jeans"
+                      data-index={index}
+                      onClick={
+                        char === "_"
+                          ? handleLetterPlacement
+                          : handleLetterRemoval
+                      }
+                      disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                      className={
+                        wordIsSolved
+                          ? "solvedWordLetter" // Highest priority when word is solved
+                          : isLockedLetter
+                          ? "lockedLetter" // Pre-provided letters
+                          : "marbleButton" // Default for user-interactable letters
+                      }
+                    >
+                      {char === "_" ? "\u00A0" : char}
+                    </button>
+                  );
+                })}
+            </div>
+
+            <div className="yellowManContainer">
+              <img src={yellowMan} className="yellowMan" alt="walking man" />
+              {isFirstLetterPlaced ? null : (
+                <div className="marblePuzzleInstructions">
+                  Tap a letter below, then tap the space where it belongs
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
-        <br />
+          <br />
 
-        {/* {areAllWordsSolved() ? (
+          {/* {areAllWordsSolved() ? (
           <div className="marbleInstructions">SUCCESS!</div>
         ) : isFirstLetterPlaced ? <div className="marbleInstructions"><br/><br/></div> : (
           <div className="marbleInstructions">
@@ -828,49 +862,49 @@ function Marble() {
           </div>
         )} */}
 
-        {areAllWordsSolved() ? (
-          <div className="marbleInstructions">SUCCESS!</div>
-        ) : null
-        }
+          {areAllWordsSolved() ? (
+            <div className="marbleInstructions">SUCCESS!</div>
+          ) : null}
 
-        {areAllWordsSolved() ? (
-          <div
-            className="marbleCompletionMessage"
-            style={{
-              border: isBorderVisible
-                ? "2px solid red"
-                : "2px solid transparent", // Apply border conditionally
-              padding: "10px", // Optional: Adjust spacing for better appearance
-            }}
-          >
-            NOW TEXT PAPYRUS
-            <br />
-            "READY FOR ACTION"
-          </div>
-        ) : (
-          <div className="lettersContainer">
-            {availableLetters.map((item, index) => (
-              <button
-                key={`${item.id}-${item.letter}-${index}`}
-                value={item.letter}
-                data-id={item.id}
-                onClick={handleLetterSelect}
-                className="marbleButton"
-                style={{
-                  backgroundColor: selectedLetter?.id === item.id ? "#FF3700" : "white",
-                  color: selectedLetter?.id === item.id ? "white" : "black"
-                }}
-              >
-                {item.letter}
-              </button>
-            ))}
-          </div>
-        )}
+          {areAllWordsSolved() ? (
+            <div
+              className="marbleCompletionMessage"
+              style={{
+                border: isBorderVisible
+                  ? "2px solid red"
+                  : "2px solid transparent", // Apply border conditionally
+                padding: "10px", // Optional: Adjust spacing for better appearance
+              }}
+            >
+              NOW TEXT PAPYRUS
+              <br />
+              "READY FOR ACTION"
+            </div>
+          ) : (
+            <div className="lettersContainer">
+              {availableLetters.map((item, index) => (
+                <button
+                  key={`${item.id}-${item.letter}-${index}`}
+                  value={item.letter}
+                  data-id={item.id}
+                  onClick={handleLetterSelect}
+                  className="marbleButton"
+                  style={{
+                    backgroundColor:
+                      selectedLetter?.id === item.id ? "#FF3700" : "white",
+                    color: selectedLetter?.id === item.id ? "white" : "black",
+                  }}
+                >
+                  {item.letter}
+                </button>
+              ))}
+            </div>
+          )}
 
-        <br />
+          <br />
 
-        {/* HERE IS THE RESET BUTTON IF WE NEED TO PUT IT BACK IN - ALSO NEED TO UNCOMMENT THE resetUnsolvedWords FUNCTION ABOVE */}
-        {/* {areAllWordsSolved() ? null : (
+          {/* HERE IS THE RESET BUTTON IF WE NEED TO PUT IT BACK IN - ALSO NEED TO UNCOMMENT THE resetUnsolvedWords FUNCTION ABOVE */}
+          {/* {areAllWordsSolved() ? null : (
           <div className="resetButtonContainer">
             <button onClick={resetUnsolvedWords} className="resetButton">
               Reset Unsolved Words
@@ -878,9 +912,8 @@ function Marble() {
           </div>
         )} */}
 
-
-        {/* temporary */}
-        {/* <div className="resetButtonContainer">
+          {/* temporary */}
+          {/* <div className="resetButtonContainer">
           <button onClick={resetGame} className="resetButton">
             TEMP Reset Game
           </button>
@@ -888,32 +921,28 @@ function Marble() {
             TEMP Solve Game
           </button>
         </div> */}
-        {/* temporary */}
+          {/* temporary */}
+        </div>
 
-
-
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <LeslieFooter unfixed={true} />
       </div>
-      
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <LeslieFooter unfixed={true}/>
-
-    </div>
-  );
+    );
 }
 
 export default Marble;

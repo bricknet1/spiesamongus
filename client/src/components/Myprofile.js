@@ -1,4 +1,6 @@
 import LeslieFooter from "./LeslieFooter.js";
+import VisitedPagesMenu from "./VisitedPagesMenu.js";
+
 import SearchDylan from "./searchResults/SearchDylan.js";
 import SearchLeslie from "./searchResults/SearchLeslie.js";
 import SearchMarble from "./searchResults/SearchMarble.js";
@@ -91,6 +93,7 @@ function Myprofile() {
     <div>
       <div className="pageContent">
         <title>My Profile (Agent Papyrus)</title>
+        <VisitedPagesMenu />
         <div className="greenBar">MY PROFILE</div>
 
         <div className="myprofile-header">Welcome, Agent Papyrus</div>
