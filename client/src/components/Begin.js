@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function Begin() {
   const history = useHistory();
@@ -185,6 +185,8 @@ function Begin() {
     // eslint-disable-next-line
   }, [formik.values.numberofplayers]);
 
+  const phoneInputRefs = useRef({});
+
   const formatPhone = (value) => {
     const digits = value.replace(/\D/g, "");
     const part1 = digits.slice(0, 3);
@@ -196,10 +198,67 @@ function Begin() {
     return formatted;
   };
 
+  const getCursorPosition = (
+    formattedValue,
+    oldFormattedValue,
+    oldCursorPos,
+    isDeletion
+  ) => {
+    // Count digits before cursor in old value
+    const digitsBeforeCursor = oldFormattedValue
+      .slice(0, oldCursorPos)
+      .replace(/\D/g, "").length;
+
+    // If deleting, keep cursor at same digit position
+    // If typing, advance cursor by one digit
+    const targetDigitCount = isDeletion
+      ? digitsBeforeCursor
+      : digitsBeforeCursor + 1;
+
+    // Find position in new formatted value that has the target number of digits before it
+    let digitCount = 0;
+    for (let i = 0; i < formattedValue.length; i++) {
+      if (/\d/.test(formattedValue[i])) {
+        digitCount++;
+        if (digitCount === targetDigitCount) {
+          // Position cursor after this digit
+          return i + 1;
+        }
+      }
+    }
+    // If we've counted all digits, cursor goes to end
+    return formattedValue.length;
+  };
+
   const handleFormattedPhoneChange = (fieldName, formik) => (e) => {
-    const raw = e.target.value.replace(/\D/g, "");
-    if (raw.length <= 10) {
-      formik.setFieldValue(fieldName, raw);
+    const input = e.target;
+    const oldRaw = (formik.values[fieldName] || "").replace(/\D/g, "");
+    const oldFormatted = formatPhone(formik.values[fieldName] || "");
+    const oldCursorPos = input.selectionStart;
+    const newValue = e.target.value;
+    const newRaw = newValue.replace(/\D/g, "");
+
+    if (newRaw.length <= 10) {
+      // Determine if this is a deletion (new length is less than old length)
+      const isDeletion = newRaw.length < oldRaw.length;
+
+      formik.setFieldValue(fieldName, newRaw);
+
+      // Use setTimeout to ensure the value has been updated and DOM has re-rendered
+      setTimeout(() => {
+        const formattedValue = formatPhone(newRaw);
+        const newCursorPos = getCursorPosition(
+          formattedValue,
+          oldFormatted,
+          oldCursorPos,
+          isDeletion
+        );
+        // Use the input ref if available, otherwise use the event target
+        const inputElement = phoneInputRefs.current[fieldName] || input;
+        if (inputElement) {
+          inputElement.setSelectionRange(newCursorPos, newCursorPos);
+        }
+      }, 0);
     }
   };
 
@@ -250,6 +309,7 @@ function Begin() {
           className="formField"
           value={formatPhone(formik.values.phone1)}
           onChange={handleFormattedPhoneChange("phone1", formik)}
+          ref={(el) => (phoneInputRefs.current.phone1 = el)}
         />
         <br />
         <h3 style={{ color: "#ff3700" }}> {formik.errors.phone1}</h3>
@@ -309,6 +369,7 @@ function Begin() {
               className="formField"
               value={formatPhone(formik.values.phone2)}
               onChange={handleFormattedPhoneChange("phone2", formik)}
+              ref={(el) => (phoneInputRefs.current.phone2 = el)}
             />
             <br />
           </div>
@@ -341,6 +402,7 @@ function Begin() {
               className="formField"
               value={formatPhone(formik.values.phone3)}
               onChange={handleFormattedPhoneChange("phone3", formik)}
+              ref={(el) => (phoneInputRefs.current.phone3 = el)}
             />
             <br />
           </div>
@@ -373,6 +435,7 @@ function Begin() {
               className="formField"
               value={formatPhone(formik.values.phone4)}
               onChange={handleFormattedPhoneChange("phone4", formik)}
+              ref={(el) => (phoneInputRefs.current.phone4 = el)}
             />
             <br />
           </div>
