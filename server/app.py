@@ -4,6 +4,8 @@ from time import time
 import sqlite3
 import json
 import os
+from datetime import datetime
+import pytz
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -48,6 +50,13 @@ def load_settings():
 def save_settings(data):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
+    
+    # Add timestamp in Pacific Time
+    pacific = pytz.timezone('America/Los_Angeles')
+    pacific_time = datetime.now(pacific)
+    timestamp_str = pacific_time.strftime('%Y-%m-%d %I:%M:%S %p %Z')
+    data['lastUpdated'] = timestamp_str
+    
     for key, value in data.items():
         c.execute('''
             INSERT INTO settings (key, value)

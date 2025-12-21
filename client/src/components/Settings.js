@@ -74,10 +74,20 @@ function Settings() {
     })
       .then((res) => {
         if (!res.ok) throw new Error("Save failed");
-        if (res.ok) alert("Save successful")
+        if (res.ok) alert("Save successful");
         return res.json();
       })
-      .then(console.log)
+      .then((data) => {
+        // Refresh settings to get the updated timestamp
+        fetch(`${API_URL}/api/settings`)
+          .then((res) => res.json())
+          .then((updatedData) => {
+            if (!Array.isArray(updatedData.activeActors)) {
+              updatedData.activeActors = [];
+            }
+            setSettings(updatedData);
+          });
+      })
       .catch((err) => alert("Failed to save: " + err.message));
   };
 
@@ -90,9 +100,11 @@ function Settings() {
           placeholder="Enter password"
           value={passwordInput}
           onChange={(e) => setPasswordInput(e.target.value)}
-          style={{fontSize: "10vw", width: "90vw" }}
+          style={{ fontSize: "10vw", width: "90vw" }}
         />
-        <button onClick={handleLogin} className="settingsPageButton">Login</button>
+        <button onClick={handleLogin} className="settingsPageButton">
+          Login
+        </button>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     );
@@ -101,13 +113,18 @@ function Settings() {
   if (!settings) return <p>Loading settings...</p>;
 
   return (
-    <div style={{ display: "inline-block", fontSize: "5vw", paddingLeft: "10vw" }}>
+    <div
+      style={{ display: "inline-block", fontSize: "5vw", paddingLeft: "10vw" }}
+    >
       <title>SETTINGS | Spies Among Us</title>
       <h1>Admin Panel</h1>
       <div>
         <h2>Active Actors:</h2>
         {allActors.map((actor) => (
-          <label key={actor} style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
+          <label
+            key={actor}
+            style={{ display: "block", fontSize: "10vw", padding: "1vw" }}
+          >
             <input
               type="checkbox"
               style={{ display: "inline-block", width: "10vw", height: "10vw" }}
@@ -145,9 +162,16 @@ function Settings() {
           </label>
         </div>
       </div>
-      <br/>
-      <button onClick={handleSave} className="settingsPageButton">Save Changes</button>
-      <br/>
+      {settings.lastUpdated && (
+        <div style={{ marginTop: "2vw", fontSize: "4vw", color: "#888" }}>
+          <strong>Last Updated:</strong> {settings.lastUpdated}
+        </div>
+      )}
+      <br />
+      <button onClick={handleSave} className="settingsPageButton">
+        Save Changes
+      </button>
+      <br />
       <button
         className="settingsPageButton"
         onClick={() => {
