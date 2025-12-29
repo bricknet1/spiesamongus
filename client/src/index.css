@@ -182,13 +182,6 @@ strong {
   font-size: 7vw;
 }
 
-
-
-
-
-
-
-
 /* HAMBURGER MENU */
 
 /* Hamburger Icon */
@@ -306,38 +299,149 @@ strong {
   font-weight: bold;
 }
 
+/* VISITED PAGES MENU */
 
+/* Visited Pages Menu Button */
+.visited-pages-icon-mobile {
+  position: fixed;
+  bottom: 5vw;
+  right: 2vw;
+  font-size: 7.5vw;
+  height: 10vw;
+  line-height: 0vw;
+  background: #f9df39;
+  border: 1px solid #f9df39;
+  cursor: pointer;
+  z-index: 1001;
+  color: rgb(33, 23, 76);
+}
 
+.visited-pages-icon-desktop {
+  position: fixed;
+  bottom: 50px;
+  right: 10vw;
+  font-size: 60px;
+  background: #f9df39;
+  border: 1px solid #f9df39;
+  cursor: pointer;
+  z-index: 1001;
+  color: rgb(33, 23, 76);
+}
 
+.visited-pages-icon-fixed-override {
+  position: fixed !important;
+}
 
+/* Visited Pages Tooltip */
+.visited-pages-tooltip {
+  position: fixed;
+  bottom: 18vw;
+  right: 2vw;
+  background-color: #f9df39;
+  color: rgb(33, 23, 76);
+  padding: 2vw 3vw;
+  border-radius: 8px;
+  font-size: 4vw;
+  white-space: nowrap;
+  z-index: 1002;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeInOut 10s ease-in-out;
+  pointer-events: none;
+}
 
+.visited-pages-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #f9df39;
+}
 
+@media (min-width: 768px) {
+  .visited-pages-tooltip {
+    bottom: 100px;
+    right: 10vw;
+    padding: 12px 18px;
+    font-size: 18px;
+  }
 
+  .visited-pages-tooltip::after {
+    right: 30px;
+  }
+}
 
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
 
+/* Visited Pages Menu Overlay */
+.visited-pages-overlay {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 23, 76, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
 
+/* When visited pages menu is open */
+.visited-pages-overlay.open {
+  right: 0;
+}
 
+/* Visited Pages Navigation Menu */
+.visited-pages-menu ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
 
+.visited-pages-menu ul li {
+  margin: 20px 0;
+  padding: 0;
+}
 
+.visited-pages-menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  transition: color 0.3s;
+  display: inline-block;
+}
 
+.visited-pages-menu ul li a:hover {
+  color: #f9df39;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.visited-pages-menu .visited-pages-active {
+  color: #f9df39;
+  font-weight: bold;
+}
 
 /* START PAGE CONTENT */
 
@@ -756,9 +860,8 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 32px;
   /* width: 85vw; */
   /* margin: 0 auto; */
-}o
-
-.termsUL {
+}
+o .termsUL {
   font-size: 4vw;
   font-weight: normal;
   /* width: 79vw; */
@@ -802,7 +905,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   width: 90vw;
   margin-left: 5vw;
   margin-right: 5vw;
-  cursor: pointer; 
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -812,7 +915,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 35px;
   width: 800px;
   margin: 15px auto;
-  cursor: pointer; 
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1074,7 +1177,7 @@ input[type="checkbox"]:checked + .checkbox:before {
   padding: 0;
 
   border: none;
-  margin: .5vw;
+  margin: 0.5vw;
   width: 6vw;
   height: 6vw;
   /* padding-top: 1px; */
@@ -1183,7 +1286,12 @@ input[type="checkbox"]:checked + .checkbox:before {
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Adjust for perfect centering */
   color: white; /* Text color */
-  background-color: rgba(0, 0, 0, 0.6); /* Optional: Background with transparency */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Optional: Background with transparency */
   padding: 10px 20px; /* Optional: Padding around text */
   font-size: 30px; /* Adjust as needed */
   text-align: center; /* Center the text */
@@ -1209,21 +1317,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   text-align: center;
   font-size: 10vw;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* PRIVATE PAGE */
 
@@ -1380,15 +1473,6 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-size: 25px;
   padding: 10px;
 }
-
-
-
-
-
-
-
-
-
 
 /* SETTINGS PAGE */
 

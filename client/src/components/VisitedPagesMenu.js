@@ -1,24 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useDeviceType from "./UseDeviceType.js";
 
 // List of pages that should be tracked
 const TRACKED_PAGES = [
-  { path: "/marble", label: "Marble" },
-  { path: "/mission", label: "Mission" },
-  { path: "/myhistory", label: "My History" },
-  { path: "/myprofile", label: "My Profile" },
+  { path: "/myhistory", label: "Papyrus Mission History" },
+  { path: "/myprofile", label: "Papyrus Profile / HR Search" },
   { path: "/notfound", label: "Not Found" },
-  { path: "/obeliskterms", label: "Obelisk Terms" },
-  { path: "/opbc", label: "OPBC" },
-  { path: "/themission", label: "The Mission" },
-  { path: "/yourmission", label: "Your Mission" },
-  { path: "/yourupdatedmission", label: "Your Updated Mission" },
+  { path: "/opbc", label: "Bubonic Curtsy" },
 ];
 
 const STORAGE_KEY = "visitedMissionPages";
+const TOOLTIP_SHOWN_KEY = "visitedPagesTooltipShown";
 
 function VisitedPagesMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipTimerRef = useRef(null);
   // Initialize from localStorage immediately
   const getInitialVisitedPages = () => {
     try {
@@ -30,10 +27,13 @@ function VisitedPagesMenu() {
   };
   const [visitedPages, setVisitedPages] = useState(getInitialVisitedPages);
   const location = window.location.pathname;
+  const locationLower = location.toLowerCase();
   const isMobile = useDeviceType();
 
-  // Check if current page is one of the tracked pages
-  const isTrackedPage = TRACKED_PAGES.some((page) => page.path === location);
+  // Check if current page is one of the tracked pages (case-insensitive)
+  const isTrackedPage = TRACKED_PAGES.some(
+    (page) => page.path.toLowerCase() === locationLower
+  );
 
   // Track page visit on mount and when location changes
   useEffect(() => {
@@ -41,9 +41,13 @@ function VisitedPagesMenu() {
       const stored = localStorage.getItem(STORAGE_KEY);
       const visited = stored ? JSON.parse(stored) : [];
 
-      // Add current page if not already visited
-      if (!visited.includes(location)) {
-        const updated = [...visited, location];
+      // Normalize visited paths to lowercase for comparison
+      const visitedLower = visited.map((path) => path.toLowerCase());
+
+      // Add current page if not already visited (case-insensitive check)
+      if (!visitedLower.includes(locationLower)) {
+        // Store the normalized lowercase path
+        const updated = [...visited, locationLower];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
         setVisitedPages(updated);
       } else {
@@ -58,49 +62,96 @@ function VisitedPagesMenu() {
         setVisitedPages(visited);
       }
     }
-  }, [location, isTrackedPage]);
+  }, [location, locationLower, isTrackedPage]);
+
+  // Show tooltip when menu button first appears (when visitedPages.length becomes > 1)
+  // Only show once ever, tracked in localStorage
+  useEffect(() => {
+    if (isTrackedPage && visitedPages.length > 1) {
+      // Check if tooltip has already been shown
+      const tooltipShown = localStorage.getItem(TOOLTIP_SHOWN_KEY);
+      if (!tooltipShown) {
+        // Mark tooltip as shown in localStorage
+        localStorage.setItem(TOOLTIP_SHOWN_KEY, "true");
+        setShowTooltip(true);
+        tooltipTimerRef.current = setTimeout(() => {
+          setShowTooltip(false);
+          tooltipTimerRef.current = null;
+        }, 10000); // 10 seconds
+
+        return () => {
+          if (tooltipTimerRef.current) {
+            clearTimeout(tooltipTimerRef.current);
+            tooltipTimerRef.current = null;
+          }
+        };
+      }
+    }
+  }, [isTrackedPage, visitedPages.length]);
 
   // Only show menu if on a tracked page and more than 1 page has been visited
   if (!isTrackedPage || visitedPages.length <= 1) {
     return null;
   }
 
-  // Get visited page info, excluding /notfound from menu display
+  // Get visited page info, excluding /notfound from menu display (case-insensitive)
   const visitedPageInfo = TRACKED_PAGES.filter(
-    (page) => visitedPages.includes(page.path) && page.path !== "/notfound"
+    (page) =>
+      visitedPages.some(
+        (visitedPath) => visitedPath.toLowerCase() === page.path.toLowerCase()
+      ) && page.path.toLowerCase() !== "/notfound"
   );
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    // Hide tooltip immediately when button is clicked
+    if (showTooltip) {
+      if (tooltipTimerRef.current) {
+        clearTimeout(tooltipTimerRef.current);
+        tooltipTimerRef.current = null;
+      }
+      setShowTooltip(false);
+    }
   };
 
-  let burgerClassName;
+  let buttonClassName;
 
-  // Use similar styling to HamburgerMenuHeader
-  burgerClassName = isMobile
+  // Use unique styling for VisitedPagesMenu
+  buttonClassName = isMobile
     ? isOpen
-      ? "hamburger-icon-unfixed hamburger-icon-fixed-override"
-      : "hamburger-icon-unfixed"
+      ? "visited-pages-icon-mobile visited-pages-icon-fixed-override"
+      : "visited-pages-icon-mobile"
     : isOpen
-    ? "hamburger-icon-desktop hamburger-icon-fixed-override"
-    : "hamburger-icon-desktop";
+    ? "visited-pages-icon-desktop visited-pages-icon-fixed-override"
+    : "visited-pages-icon-desktop";
 
   return (
     <div>
-      {/* Hamburger Icon */}
-      <button className={burgerClassName} onClick={toggleMenu}>
+      {/* Menu Button */}
+      <button className={buttonClassName} onClick={toggleMenu}>
         {isOpen ? "✖" : "☰"}
       </button>
 
+      {/* Tooltip */}
+      {showTooltip && !isOpen && (
+        <div className="visited-pages-tooltip">
+          Tap here to return to pages you've visited!
+        </div>
+      )}
+
       {/* Overlay Menu */}
-      <div className={`menu-overlay ${isOpen ? "open" : ""}`}>
-        <nav className="menu">
+      <div className={`visited-pages-overlay ${isOpen ? "open" : ""}`}>
+        <nav className="visited-pages-menu">
           <ul>
             {visitedPageInfo.map((page) => (
               <li key={page.path}>
                 <a
                   href={page.path}
-                  className={location === page.path ? "burger-menu-active" : ""}
+                  className={
+                    locationLower === page.path.toLowerCase()
+                      ? "visited-pages-active"
+                      : ""
+                  }
                 >
                   {page.label}
                 </a>
