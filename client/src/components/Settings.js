@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function Settings() {
   const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
   const [passwordInput, setPasswordInput] = useState("");
   const [settings, setSettings] = useState(null);
   const [error, setError] = useState("");
+  const history = useHistory();
 
   const isLoggedIn = !!token;
 
@@ -170,6 +172,14 @@ function Settings() {
       <br />
       <button onClick={handleSave} className="settingsPageButton">
         Save Changes
+      </button>
+      <br />
+      <br />
+      <button
+        className="settingsPageButton"
+        onClick={() => history.push("/playerprogress")}
+      >
+        View Player Progress
       </button>
       <br />
       <button

@@ -14,6 +14,7 @@ import NotFound from "./components/NotFound.js";
 import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
 import Payment from "./components/Payment.js";
+import PlayerProgress from "./components/PlayerProgress.js";
 import Privacy from "./components/Privacy.js";
 import Private from "./components/Private.js";
 import PrivateConfirmed from "./components/PrivateConfirmed.js";
@@ -34,9 +35,9 @@ function App() {
         <Route path="/begin" exact>
           <Begin />
         </Route>
-        <Route path="/start" exact>
+        {/* <Route path="/start" exact>
           <Begin />
-        </Route>
+        </Route> */}
         <Route path="/confirmed" exact>
           <Confirmed />
         </Route>
@@ -78,10 +79,13 @@ function App() {
         <Route path="/cancel" exact>
           <Cancel />
         </Route>
+        <Route path="/playerprogress" exact>
+          <PlayerProgress />
+        </Route>
 
         {/* GENERAL PAGES */}
         <Route path="/" exact>
-          <div>MAIN LANDING PAGE</div>
+          <Begin />
         </Route>
         <Route path="/privacy" exact>
           <Privacy />

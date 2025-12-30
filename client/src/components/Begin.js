@@ -13,7 +13,7 @@ function Begin() {
       .string()
       .required("Enter a 10 digit phone number")
       .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number")
-      .test("unique-phone", "Phone numbers must be unique", function (value) {
+      .test("unique-phone", "Two players can not use the same phone number", function (value) {
         const { phone2, phone3, phone4 } = this.parent;
         if (!value) return true;
         return value !== phone2 && value !== phone3 && value !== phone4;
@@ -41,7 +41,7 @@ function Begin() {
           );
         }
       )
-      .test("unique-phone", "Phone numbers must be unique", function (value) {
+      .test("unique-phone", "Two players can not use the same phone number", function (value) {
         const { numberofplayers, phone1, phone3, phone4 } = this.parent;
         if (parseInt(numberofplayers || "0") < 2 || !value) return true;
         return value !== phone1 && value !== phone3 && value !== phone4;
@@ -69,7 +69,7 @@ function Begin() {
           );
         }
       )
-      .test("unique-phone", "Phone numbers must be unique", function (value) {
+      .test("unique-phone", "Two players can not use the same phone number", function (value) {
         const { numberofplayers, phone1, phone2, phone4 } = this.parent;
         if (parseInt(numberofplayers || "0") < 3 || !value) return true;
         return value !== phone1 && value !== phone2 && value !== phone4;
@@ -97,7 +97,7 @@ function Begin() {
           );
         }
       )
-      .test("unique-phone", "Phone numbers must be unique", function (value) {
+      .test("unique-phone", "Two players can not use the same phone number", function (value) {
         const { numberofplayers, phone1, phone2, phone3 } = this.parent;
         if (parseInt(numberofplayers || "0") < 4 || !value) return true;
         return value !== phone1 && value !== phone2 && value !== phone3;
