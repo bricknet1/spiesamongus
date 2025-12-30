@@ -13,11 +13,15 @@ function Begin() {
       .string()
       .required("Enter a 10 digit phone number")
       .matches(/^[0-9]{10}$/, "Enter a 10 digit phone number")
-      .test("unique-phone", "Two players can not use the same phone number", function (value) {
-        const { phone2, phone3, phone4 } = this.parent;
-        if (!value) return true;
-        return value !== phone2 && value !== phone3 && value !== phone4;
-      }),
+      .test(
+        "unique-phone",
+        "Two players can not use the same phone number",
+        function (value) {
+          const { phone2, phone3, phone4 } = this.parent;
+          if (!value) return true;
+          return value !== phone2 && value !== phone3 && value !== phone4;
+        }
+      ),
     name2: yup
       .string()
       .test(
@@ -41,11 +45,15 @@ function Begin() {
           );
         }
       )
-      .test("unique-phone", "Two players can not use the same phone number", function (value) {
-        const { numberofplayers, phone1, phone3, phone4 } = this.parent;
-        if (parseInt(numberofplayers || "0") < 2 || !value) return true;
-        return value !== phone1 && value !== phone3 && value !== phone4;
-      }),
+      .test(
+        "unique-phone",
+        "Two players can not use the same phone number",
+        function (value) {
+          const { numberofplayers, phone1, phone3, phone4 } = this.parent;
+          if (parseInt(numberofplayers || "0") < 2 || !value) return true;
+          return value !== phone1 && value !== phone3 && value !== phone4;
+        }
+      ),
     name3: yup
       .string()
       .test(
@@ -69,11 +77,15 @@ function Begin() {
           );
         }
       )
-      .test("unique-phone", "Two players can not use the same phone number", function (value) {
-        const { numberofplayers, phone1, phone2, phone4 } = this.parent;
-        if (parseInt(numberofplayers || "0") < 3 || !value) return true;
-        return value !== phone1 && value !== phone2 && value !== phone4;
-      }),
+      .test(
+        "unique-phone",
+        "Two players can not use the same phone number",
+        function (value) {
+          const { numberofplayers, phone1, phone2, phone4 } = this.parent;
+          if (parseInt(numberofplayers || "0") < 3 || !value) return true;
+          return value !== phone1 && value !== phone2 && value !== phone4;
+        }
+      ),
     name4: yup
       .string()
       .test(
@@ -97,11 +109,15 @@ function Begin() {
           );
         }
       )
-      .test("unique-phone", "Two players can not use the same phone number", function (value) {
-        const { numberofplayers, phone1, phone2, phone3 } = this.parent;
-        if (parseInt(numberofplayers || "0") < 4 || !value) return true;
-        return value !== phone1 && value !== phone2 && value !== phone3;
-      }),
+      .test(
+        "unique-phone",
+        "Two players can not use the same phone number",
+        function (value) {
+          const { numberofplayers, phone1, phone2, phone3 } = this.parent;
+          if (parseInt(numberofplayers || "0") < 4 || !value) return true;
+          return value !== phone1 && value !== phone2 && value !== phone3;
+        }
+      ),
     numberofplayers: yup.string().required("Number of Agents is required"),
     nostairs: yup.boolean(),
     agreeToTerms: yup
@@ -188,78 +204,71 @@ function Begin() {
   const phoneInputRefs = useRef({});
 
   const formatPhone = (value) => {
-    const digits = value.replace(/\D/g, "");
-    const part1 = digits.slice(0, 3);
-    const part2 = digits.slice(3, 6);
-    const part3 = digits.slice(6, 10);
-    let formatted = part1;
-    if (part2) formatted += "-" + part2;
-    if (part3) formatted += "-" + part3;
-    return formatted;
+    // Extract only digits
+    const digits = (value || "").replace(/\D/g, "");
+    // Add dashes after 3rd and 6th digits
+    if (digits.length <= 3) {
+      return digits;
+    } else if (digits.length <= 6) {
+      return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    } else {
+      return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(
+        6,
+        10
+      )}`;
+    }
   };
 
-  const getCursorPosition = (
-    formattedValue,
-    oldFormattedValue,
-    oldCursorPos,
-    isDeletion
-  ) => {
-    // Count digits before cursor in old value
-    const digitsBeforeCursor = oldFormattedValue
-      .slice(0, oldCursorPos)
+  const handlePhoneChange = (fieldName) => (e) => {
+    const input = e.target;
+    const inputValue = input.value;
+    const cursorPos = input.selectionStart;
+
+    // Get old values
+    const oldFormatted = formatPhone(formik.values[fieldName] || "");
+    const oldDigits = (formik.values[fieldName] || "").replace(/\D/g, "");
+
+    // Extract only digits and limit to 10
+    const digitsOnly = inputValue.replace(/\D/g, "").slice(0, 10);
+
+    // Determine if this is a deletion
+    const isDeletion = digitsOnly.length < oldDigits.length;
+
+    // Count digits in the browser's input value up to cursor position
+    // This tells us where the cursor actually is after the browser's insertion/deletion
+    const digitsAtCursorInInput = inputValue
+      .slice(0, cursorPos)
       .replace(/\D/g, "").length;
 
-    // If deleting, keep cursor at same digit position
-    // If typing, advance cursor by one digit
-    const targetDigitCount = isDeletion
-      ? digitsBeforeCursor
-      : digitsBeforeCursor + 1;
+    // Update the value
+    formik.setFieldValue(fieldName, digitsOnly);
 
-    // Find position in new formatted value that has the target number of digits before it
-    let digitCount = 0;
-    for (let i = 0; i < formattedValue.length; i++) {
-      if (/\d/.test(formattedValue[i])) {
-        digitCount++;
-        if (digitCount === targetDigitCount) {
-          // Position cursor after this digit
-          return i + 1;
+    // Restore cursor position after React re-renders
+    setTimeout(() => {
+      const inputElement = phoneInputRefs.current[fieldName] || input;
+      if (inputElement) {
+        const newFormatted = formatPhone(digitsOnly);
+
+        // Use the digit count from the browser's input value
+        // This accurately reflects where the cursor should be
+        const targetDigitCount = digitsAtCursorInInput;
+
+        // Find position in formatted string with target number of digits before it
+        let digitCount = 0;
+        let newCursorPos = newFormatted.length;
+        for (let i = 0; i < newFormatted.length; i++) {
+          if (/\d/.test(newFormatted[i])) {
+            digitCount++;
+            if (digitCount === targetDigitCount) {
+              newCursorPos = i + 1;
+              break;
+            }
+          }
         }
+
+        inputElement.setSelectionRange(newCursorPos, newCursorPos);
       }
-    }
-    // If we've counted all digits, cursor goes to end
-    return formattedValue.length;
-  };
-
-  const handleFormattedPhoneChange = (fieldName, formik) => (e) => {
-    const input = e.target;
-    const oldRaw = (formik.values[fieldName] || "").replace(/\D/g, "");
-    const oldFormatted = formatPhone(formik.values[fieldName] || "");
-    const oldCursorPos = input.selectionStart;
-    const newValue = e.target.value;
-    const newRaw = newValue.replace(/\D/g, "");
-
-    if (newRaw.length <= 10) {
-      // Determine if this is a deletion (new length is less than old length)
-      const isDeletion = newRaw.length < oldRaw.length;
-
-      formik.setFieldValue(fieldName, newRaw);
-
-      // Use setTimeout to ensure the value has been updated and DOM has re-rendered
-      setTimeout(() => {
-        const formattedValue = formatPhone(newRaw);
-        const newCursorPos = getCursorPosition(
-          formattedValue,
-          oldFormatted,
-          oldCursorPos,
-          isDeletion
-        );
-        // Use the input ref if available, otherwise use the event target
-        const inputElement = phoneInputRefs.current[fieldName] || input;
-        if (inputElement) {
-          inputElement.setSelectionRange(newCursorPos, newCursorPos);
-        }
-      }, 0);
-    }
+    }, 0);
   };
 
   return (
@@ -308,7 +317,7 @@ function Begin() {
           name="phone1"
           className="formField"
           value={formatPhone(formik.values.phone1)}
-          onChange={handleFormattedPhoneChange("phone1", formik)}
+          onChange={handlePhoneChange("phone1")}
           ref={(el) => (phoneInputRefs.current.phone1 = el)}
         />
         <br />
@@ -368,7 +377,7 @@ function Begin() {
               name="phone2"
               className="formField"
               value={formatPhone(formik.values.phone2)}
-              onChange={handleFormattedPhoneChange("phone2", formik)}
+              onChange={handlePhoneChange("phone2")}
               ref={(el) => (phoneInputRefs.current.phone2 = el)}
             />
             <br />
@@ -401,7 +410,7 @@ function Begin() {
               name="phone3"
               className="formField"
               value={formatPhone(formik.values.phone3)}
-              onChange={handleFormattedPhoneChange("phone3", formik)}
+              onChange={handlePhoneChange("phone3")}
               ref={(el) => (phoneInputRefs.current.phone3 = el)}
             />
             <br />
@@ -434,7 +443,7 @@ function Begin() {
               name="phone4"
               className="formField"
               value={formatPhone(formik.values.phone4)}
-              onChange={handleFormattedPhoneChange("phone4", formik)}
+              onChange={handlePhoneChange("phone4")}
               ref={(el) => (phoneInputRefs.current.phone4 = el)}
             />
             <br />

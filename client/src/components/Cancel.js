@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function Cancel() {
   const [cancelled, setCancelled] = useState(false);
@@ -42,6 +42,76 @@ function Cancel() {
   });
   console.log("Form Values:", formik.values);
 
+  const phoneInputRef = useRef(null);
+
+  const formatPhone = (value) => {
+    // Extract only digits
+    const digits = (value || "").replace(/\D/g, "");
+    // Add dashes after 3rd and 6th digits
+    if (digits.length <= 3) {
+      return digits;
+    } else if (digits.length <= 6) {
+      return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    } else {
+      return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(
+        6,
+        10
+      )}`;
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const input = e.target;
+    const inputValue = input.value;
+    const cursorPos = input.selectionStart;
+
+    // Get old values
+    const oldFormatted = formatPhone(formik.values.phone || "");
+    const oldDigits = (formik.values.phone || "").replace(/\D/g, "");
+
+    // Extract only digits and limit to 10
+    const digitsOnly = inputValue.replace(/\D/g, "").slice(0, 10);
+
+    // Determine if this is a deletion
+    const isDeletion = digitsOnly.length < oldDigits.length;
+
+    // Count digits in the browser's input value up to cursor position
+    // This tells us where the cursor actually is after the browser's insertion/deletion
+    const digitsAtCursorInInput = inputValue
+      .slice(0, cursorPos)
+      .replace(/\D/g, "").length;
+
+    // Update the value
+    formik.setFieldValue("phone", digitsOnly);
+
+    // Restore cursor position after React re-renders
+    setTimeout(() => {
+      const inputElement = phoneInputRef.current || input;
+      if (inputElement) {
+        const newFormatted = formatPhone(digitsOnly);
+
+        // Use the digit count from the browser's input value
+        // This accurately reflects where the cursor should be
+        const targetDigitCount = digitsAtCursorInInput;
+
+        // Find position in formatted string with target number of digits before it
+        let digitCount = 0;
+        let newCursorPos = newFormatted.length;
+        for (let i = 0; i < newFormatted.length; i++) {
+          if (/\d/.test(newFormatted[i])) {
+            digitCount++;
+            if (digitCount === targetDigitCount) {
+              newCursorPos = i + 1;
+              break;
+            }
+          }
+        }
+
+        inputElement.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+  };
+
   return (
     <div className="pageContent" style={{ paddingBottom: "10vw" }}>
       <title>Cancel Mission | Spies Among Us</title>
@@ -61,8 +131,9 @@ function Cancel() {
             type="tel"
             name="phone"
             className="formField"
-            value={formik.values.phone}
-            onChange={formik.handleChange}
+            value={formatPhone(formik.values.phone)}
+            onChange={handlePhoneChange}
+            ref={phoneInputRef}
           />
           <br />
           <h3 style={{ color: "#ff3700" }}> {formik.errors.phone}</h3>
