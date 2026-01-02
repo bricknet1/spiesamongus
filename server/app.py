@@ -174,6 +174,8 @@ def get_pacific_timestamp():
 @app.route('/api/webhook/player-progress', methods=['POST'])
 def webhook_player_progress():
     """Webhook endpoint to create a new player group (POST)"""
+    if not check_auth():
+        return jsonify({"error": "Unauthorized"}), 401
     try:
         data = request.get_json()
         
@@ -253,6 +255,8 @@ def webhook_player_progress():
 @app.route('/api/webhook/player-progress', methods=['PATCH'])
 def update_player_progress():
     """Webhook endpoint to update an existing player group (PATCH)"""
+    if not check_auth():
+        return jsonify({"error": "Unauthorized"}), 401
     try:
         data = request.get_json()
         
@@ -422,6 +426,8 @@ def update_player_progress():
 @app.route('/api/webhook/player-progress', methods=['DELETE'])
 def delete_player_progress():
     """Webhook endpoint to delete a player group (DELETE)"""
+    if not check_auth():
+        return jsonify({"error": "Unauthorized"}), 401
     try:
         data = request.get_json()
         
