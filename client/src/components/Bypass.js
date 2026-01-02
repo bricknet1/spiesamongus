@@ -172,6 +172,7 @@ function Bypass() {
       };
 
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
       // Call both endpoints
       const makeWebhookPromise = fetch(
@@ -191,6 +192,7 @@ function Bypass() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
           },
           body: JSON.stringify(apiData),
         }
