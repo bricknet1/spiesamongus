@@ -149,23 +149,90 @@ function Begin() {
     onSubmit: (values) => {
       console.log("Submitted values:", values);
 
-      fetch("https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: values }),
-      }).then((res) => {
-        if (res.ok) {
-          console.log("successful response", res);
-          history.push("/confirmed");
-        } else {
-          res.json().then((error) => {
-            console.error(error.error);
-            alert(`Error: ${error.message}`);
-          });
+      // Transform form data to match API format
+      const formatPhone = (phone) => {
+        if (!phone) return "";
+        const digits = phone.replace(/\D/g, "");
+        return digits.length === 10 ? `+1${digits}` : phone;
+      };
+
+      const apiData = {
+        player1_name:
+          values.name1 || `${values.firstName} ${values.lastName}`.trim(),
+        player1_phone: formatPhone(values.phone1),
+        player2_name: values.name2 || "",
+        player2_phone: formatPhone(values.phone2),
+        player3_name: values.name3 || "",
+        player3_phone: formatPhone(values.phone3),
+        player4_name: values.name4 || "",
+        player4_phone: formatPhone(values.phone4),
+        number_of_players: values.numberofplayers,
+        current_act: values.act || "Act 1 (Mission Start)",
+        texts: [],
+      };
+
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+      // Call both endpoints
+      const makeWebhookPromise = fetch(
+        "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: values }),
         }
-      });
+      );
+
+      const apiWebhookPromise = fetch(
+        `${API_URL}/api/webhook/player-progress`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(apiData),
+        }
+      );
+
+      // Wait for both requests (don't fail if API webhook fails)
+      Promise.allSettled([makeWebhookPromise, apiWebhookPromise]).then(
+        (results) => {
+          const makeResult = results[0];
+          const apiResult = results[1];
+
+          // Log API webhook result (but don't block on it)
+          if (apiResult.status === "fulfilled") {
+            apiResult.value
+              .json()
+              .then((data) => {
+                console.log("API webhook response:", data);
+              })
+              .catch((err) => {
+                console.warn("API webhook error (non-blocking):", err);
+              });
+          } else {
+            console.warn(
+              "API webhook failed (non-blocking):",
+              apiResult.reason
+            );
+          }
+
+          // Only check Make webhook for success/failure
+          if (makeResult.status === "fulfilled" && makeResult.value.ok) {
+            console.log("successful response", makeResult.value);
+            history.push("/confirmed");
+          } else {
+            const errorMsg =
+              makeResult.status === "fulfilled"
+                ? "Make webhook error"
+                : makeResult.reason?.message || "Unknown error";
+            console.error(errorMsg);
+            alert(`Error: ${errorMsg}`);
+          }
+        }
+      );
     },
   });
   console.log("Form Values:", formik.values);

@@ -22,22 +22,79 @@ function Cancel() {
     onSubmit: (values) => {
       console.log("Submitted values:", values);
 
-      fetch("https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: values }),
-      }).then((res) => {
-        if (res.ok) {
-          console.log("successful response", res);
-          setCancelled(true);
-        } else {
-          res.json().then((error) => {
-            console.error(error.error);
-          });
+      // Format phone with +1 prefix for API
+      const formatPhone = (phone) => {
+        if (!phone) return "";
+        const digits = phone.replace(/\D/g, "");
+        return digits.length === 10 ? `+1${digits}` : phone;
+      };
+
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+      // Prepare data for DELETE endpoint
+      const deleteData = {
+        phone: formatPhone(values.phone),
+      };
+
+      // Call both endpoints
+      const makeWebhookPromise = fetch(
+        "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: values }),
         }
-      });
+      );
+
+      const deleteWebhookPromise = fetch(
+        `${API_URL}/api/webhook/player-progress`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(deleteData),
+        }
+      );
+
+      // Wait for both requests (don't fail if DELETE webhook fails)
+      Promise.allSettled([makeWebhookPromise, deleteWebhookPromise]).then(
+        (results) => {
+          const makeResult = results[0];
+          const deleteResult = results[1];
+
+          // Log DELETE webhook result (but don't block on it)
+          if (deleteResult.status === "fulfilled") {
+            deleteResult.value
+              .json()
+              .then((data) => {
+                console.log("DELETE webhook response:", data);
+              })
+              .catch((err) => {
+                console.warn("DELETE webhook error (non-blocking):", err);
+              });
+          } else {
+            console.warn(
+              "DELETE webhook failed (non-blocking):",
+              deleteResult.reason
+            );
+          }
+
+          // Only check Make webhook for success/failure
+          if (makeResult.status === "fulfilled" && makeResult.value.ok) {
+            console.log("successful response", makeResult.value);
+            setCancelled(true);
+          } else {
+            const errorMsg =
+              makeResult.status === "fulfilled"
+                ? "Make webhook error"
+                : makeResult.reason?.message || "Unknown error";
+            console.error(errorMsg);
+          }
+        }
+      );
     },
   });
   console.log("Form Values:", formik.values);

@@ -25,6 +25,25 @@ AUTH_TOKEN = os.getenv("AUTH_TOKEN", "secure-token-123")  # Simple token
 
 DB_PATH = 'settings.db'
 
+def check_auth():
+    """Check authentication from either Authorization header or token query parameter"""
+    # Check Authorization header first
+    auth_header = request.headers.get('Authorization', '')
+    token = auth_header.replace('Bearer ', '').strip()
+    
+    # If no token in header, check query parameter
+    if not token:
+        token = request.args.get('token', '').strip()
+    
+    # Debug logging
+    if debug:
+        print(f"DEBUG: Auth check - token received: '{token}', AUTH_TOKEN: '{AUTH_TOKEN}', match: {token == AUTH_TOKEN}")
+        print(f"DEBUG: Query params: {dict(request.args)}")
+        print(f"DEBUG: Auth header: '{auth_header}'")
+    
+    # Return True only if token matches and is not empty
+    return bool(token) and token == AUTH_TOKEN
+
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -111,13 +130,22 @@ def login():
 
 @app.route('/api/settings', methods=['GET'])
 def get_settings():
+    # Allow access without auth for backward compatibility, but check auth if token is provided
+    # This allows browser access with ?token=xxx while maintaining existing functionality
+    auth_header = request.headers.get('Authorization', '')
+    header_token = auth_header.replace('Bearer ', '')
+    query_token = request.args.get('token', '')
+    
+    # If a token is provided (either in header or query), validate it
+    token = header_token or query_token
+    if token and token != AUTH_TOKEN:
+        return jsonify({"error": "Unauthorized"}), 401
+    
     return jsonify(load_settings())
 
 @app.route('/api/settings', methods=['POST'])
 def update_settings():
-    auth_header = request.headers.get('Authorization', '')
-    token = auth_header.replace('Bearer ', '')
-    if token != AUTH_TOKEN:
+    if not check_auth():
         return jsonify({"error": "Unauthorized"}), 401
     data = request.get_json()
     save_settings(data)
@@ -181,6 +209,7 @@ def webhook_player_progress():
         texts = json.dumps(data.get('texts', [])) if isinstance(data.get('texts'), list) else json.dumps([])
         
         last_updated = get_pacific_timestamp()
+        created_at = get_pacific_timestamp()
         
         # Insert new group
         c.execute('''
@@ -188,8 +217,8 @@ def webhook_player_progress():
                 group_id, player1_name, player1_phone, player2_name, player2_phone,
                 player3_name, player3_phone, player4_name, player4_phone,
                 number_of_players, start_time, current_act, texts, end_path,
-                team_image, marble_selfie, special_event, selfie_path, last_updated
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                team_image, marble_selfie, special_event, selfie_path, last_updated, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             group_id,
             data.get('player1_name', ''),
@@ -209,7 +238,8 @@ def webhook_player_progress():
             data.get('marble_selfie', ''),
             data.get('special_event', ''),
             data.get('selfie_path', ''),
-            last_updated
+            last_updated,
+            created_at
         ))
         conn.commit()
         conn.close()
@@ -230,6 +260,107 @@ def update_player_progress():
         if not data:
             return jsonify({"error": "Request body is required"}), 400
         
+        # Handle array format
+        if isinstance(data, list):
+            conn = sqlite3.connect(DB_PATH)
+            c = conn.cursor()
+            updated_groups = []
+            
+            for item in data:
+                if not isinstance(item, dict):
+                    continue
+                
+                # Handle format: [{"player1": "+1234567890", "selfie": "https://..."}]
+                player1_phone = item.get('player1')
+                selfie_url = item.get('selfie')
+                
+                if player1_phone and selfie_url:
+                    # Find group by player1_phone
+                    c.execute('SELECT group_id FROM player_progress WHERE player1_phone = ?', (player1_phone,))
+                    group = c.fetchone()
+                    
+                    if group:
+                        group_id = group[0]
+                        # Update selfie_path for this group
+                        c.execute('''
+                            UPDATE player_progress
+                            SET selfie_path = ?, last_updated = ?
+                            WHERE group_id = ?
+                        ''', (selfie_url, get_pacific_timestamp(), group_id))
+                        updated_groups.append(group_id)
+                    continue
+                
+                # Handle format: [{"act": "8", "phone": "+1234567890", "text": "message"}]
+                phone = item.get('phone')
+                act = item.get('act')
+                text = item.get('text')
+                
+                if phone:
+                    # Find group by matching phone against any player phone field
+                    c.execute('''
+                        SELECT group_id, texts FROM player_progress
+                        WHERE player1_phone = ? OR player2_phone = ? OR player3_phone = ? OR player4_phone = ?
+                    ''', (phone, phone, phone, phone))
+                    group = c.fetchone()
+                    
+                    if group:
+                        group_id = group[0]
+                        existing_texts_json = group[1]
+                        
+                        # Parse existing texts array
+                        existing_texts = []
+                        if existing_texts_json:
+                            try:
+                                existing_texts = json.loads(existing_texts_json)
+                            except:
+                                existing_texts = []
+                        
+                        # Append new text if provided
+                        if text:
+                            existing_texts.append(text)
+                        
+                        # Build update query
+                        update_fields = []
+                        update_values = []
+                        
+                        if act:
+                            update_fields.append("current_act = ?")
+                            update_values.append(act)
+                        
+                        if text:
+                            update_fields.append("texts = ?")
+                            update_values.append(json.dumps(existing_texts))
+                        
+                        # Always update last_updated
+                        update_fields.append("last_updated = ?")
+                        update_values.append(get_pacific_timestamp())
+                        
+                        # Add group_id for WHERE clause
+                        update_values.append(group_id)
+                        
+                        # Execute update
+                        if update_fields:
+                            update_query = f'''
+                                UPDATE player_progress
+                                SET {', '.join(update_fields)}
+                                WHERE group_id = ?
+                            '''
+                            c.execute(update_query, update_values)
+                            updated_groups.append(group_id)
+            
+            conn.commit()
+            conn.close()
+            
+            if updated_groups:
+                return jsonify({
+                    "status": "success",
+                    "message": f"Updated {len(updated_groups)} group(s)",
+                    "group_ids": updated_groups
+                }), 200
+            else:
+                return jsonify({"error": "No groups found or no valid updates"}), 404
+        
+        # Handle object format (existing behavior for backward compatibility)
         # Generate group_id from player phones
         group_id = generate_group_id(data)
         if not group_id:
@@ -298,37 +429,76 @@ def delete_player_progress():
         if not data:
             return jsonify({"error": "Request body is required"}), 400
         
-        # Generate group_id from player phones
-        group_id = generate_group_id(data)
-        if not group_id:
-            return jsonify({"error": "At least one player phone is required"}), 400
-        
-        # Check if group exists and delete
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
-        c.execute('SELECT id FROM player_progress WHERE group_id = ?', (group_id,))
-        existing = c.fetchone()
         
-        if not existing:
+        # Try to generate group_id from player phones (for full group data)
+        group_id = generate_group_id(data)
+        
+        if group_id:
+            # Standard path: use generated group_id
+            c.execute('SELECT id FROM player_progress WHERE group_id = ?', (group_id,))
+            existing = c.fetchone()
+            
+            if not existing:
+                conn.close()
+                return jsonify({"error": "Group not found"}), 404
+            
+            # Delete the group
+            c.execute('DELETE FROM player_progress WHERE group_id = ?', (group_id,))
+            conn.commit()
             conn.close()
-            return jsonify({"error": "Group not found"}), 404
-        
-        # Delete the group
-        c.execute('DELETE FROM player_progress WHERE group_id = ?', (group_id,))
-        conn.commit()
-        conn.close()
-        
-        return jsonify({"status": "success", "message": "Group deleted", "group_id": group_id}), 200
+            
+            return jsonify({"status": "success", "message": "Group deleted", "group_id": group_id}), 200
+        else:
+            # Fallback: find group by single phone number (for cancel operations)
+            # Check if we have a single phone field
+            single_phone = None
+            if 'phone' in data:
+                # Format phone with +1 if it's 10 digits
+                phone_str = str(data['phone'])
+                phone_digits = ''.join(filter(str.isdigit, phone_str))
+                if len(phone_digits) == 10:
+                    single_phone = f"+1{phone_digits}"
+                else:
+                    single_phone = data['phone']
+            elif 'player1_phone' in data:
+                single_phone = data['player1_phone']
+            
+            if single_phone:
+                # Find group where any player phone matches
+                c.execute('''
+                    SELECT group_id FROM player_progress
+                    WHERE player1_phone = ? OR player2_phone = ? OR player3_phone = ? OR player4_phone = ?
+                ''', (single_phone, single_phone, single_phone, single_phone))
+                group = c.fetchone()
+                
+                if group:
+                    found_group_id = group[0]
+                    # Delete the group
+                    c.execute('DELETE FROM player_progress WHERE group_id = ?', (found_group_id,))
+                    conn.commit()
+                    conn.close()
+                    
+                    return jsonify({"status": "success", "message": "Group deleted", "group_id": found_group_id}), 200
+                else:
+                    conn.close()
+                    return jsonify({"error": "Group not found"}), 404
+            else:
+                conn.close()
+                return jsonify({"error": "At least one player phone is required"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/player-progress', methods=['GET'])
 def get_player_progress():
     """Get all player progress data (admin only)"""
-    auth_header = request.headers.get('Authorization', '')
-    token = auth_header.replace('Bearer ', '')
-    if token != AUTH_TOKEN:
-        return jsonify({"error": "Unauthorized"}), 401
+    auth_result = check_auth()
+    if not auth_result:
+        return jsonify({
+            "error": "Unauthorized",
+            "message": "Authentication required. Provide token via Authorization header (Bearer <token>) or query parameter (?token=<token>)"
+        }), 401
     
     try:
         conn = sqlite3.connect(DB_PATH)
@@ -379,6 +549,7 @@ def get_player_progress():
                 "created_at": row[20]
             })
         
+        # Always return JSON
         return jsonify({"status": "success", "data": progress_list}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
