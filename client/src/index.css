@@ -402,10 +402,13 @@ strong {
   height: 100%;
   background: rgba(33, 23, 76, 0.95);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 0;
   transition: right 0.3s ease-in-out;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 /* When visited pages menu is open */
@@ -413,7 +416,28 @@ strong {
   right: 0;
 }
 
+/* Leslie content at top of visited pages overlay */
+.visited-pages-overlay > .orangeLine {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.visited-pages-overlay > .leslieFooterContent {
+  width: 100%;
+  padding: 1rem 0;
+  flex-shrink: 0;
+}
+
 /* Visited Pages Navigation Menu */
+.visited-pages-menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
 .visited-pages-menu ul {
   list-style: none;
   text-align: center;

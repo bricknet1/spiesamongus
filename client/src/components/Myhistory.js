@@ -1,5 +1,4 @@
 import notepadPic from "../assets/pictures/personal notes.jpg";
-import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
 
 import { useState } from "react";
@@ -351,7 +350,6 @@ function Myhistory() {
           For older missions, please upgrade to HR Pro™
         </div>
       </div>
-      <LeslieFooter unfixed={true} />
     </div>
   );
 }

@@ -3,7 +3,6 @@ import papyrusstatic from "../assets/pictures/Papyrus with medal static for opbc
 import papyrusheadshake3 from "../assets/pictures/Papyrusheadshake3.gif";
 import opbcimage from "../assets/pictures/Operation Bubonic Curtsy 3.20.24.jpg";
 import opbcvideo from "../assets/videos/Papyrus Leslie Phone Call Video 3.29.24.mp4";
-import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
 
 function Opbc() {
@@ -233,28 +232,6 @@ function Opbc() {
             </div>
           )}
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <LeslieFooter unfixed={true} />
     </div>
   );
 }

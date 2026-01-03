@@ -1,4 +1,3 @@
-import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
 
 import SearchDylan from "./searchResults/SearchDylan.js";
@@ -291,7 +290,6 @@ function Myprofile() {
         )}
       </div>
 
-      <LeslieFooter unfixed={true} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import useDeviceType from "./UseDeviceType.js";
+import lesliePic from "../assets/pictures/Leslie.jpg";
 
 // List of pages that should be tracked
 const TRACKED_PAGES = [
@@ -64,10 +65,10 @@ function VisitedPagesMenu() {
     }
   }, [location, locationLower, isTrackedPage]);
 
-  // Show tooltip when menu button first appears (when visitedPages.length becomes > 1)
+  // Show tooltip when menu button first appears
   // Only show once ever, tracked in localStorage
   useEffect(() => {
-    if (isTrackedPage && visitedPages.length > 1) {
+    if (isTrackedPage && visitedPages.length > 0) {
       // Check if tooltip has already been shown
       const tooltipShown = localStorage.getItem(TOOLTIP_SHOWN_KEY);
       if (!tooltipShown) {
@@ -89,8 +90,8 @@ function VisitedPagesMenu() {
     }
   }, [isTrackedPage, visitedPages.length]);
 
-  // Only show menu if on a tracked page and more than 1 page has been visited
-  if (!isTrackedPage || visitedPages.length <= 1) {
+  // Only show menu if on a tracked page
+  if (!isTrackedPage) {
     return null;
   }
 
@@ -141,6 +142,31 @@ function VisitedPagesMenu() {
 
       {/* Overlay Menu */}
       <div className={`visited-pages-overlay ${isOpen ? "open" : ""}`}>
+        {/* Leslie Footer Content at Top */}
+        <div className="leslieFooterContent">
+          <div className="leslieFooterPicWrapper">
+            <img
+              src={lesliePic}
+              className="leslieFooterPic"
+              alt="Agent Leslie"
+            />
+          </div>
+
+          <div className="leslieFooterText">
+            Having a catastrophic issue with your mission? Text{" "}
+            <a
+              className="textLeslieLink"
+              target="_blank"
+              rel="noreferrer"
+              href="sms:+18778477437"
+            >
+              <u>Agent Leslie</u>
+            </a>{" "}
+            for help!
+          </div>
+        </div>
+        <div className="orangeLine" />
+
         <nav className="visited-pages-menu">
           <ul>
             {visitedPageInfo.map((page) => (
