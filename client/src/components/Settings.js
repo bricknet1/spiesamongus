@@ -277,6 +277,7 @@ function Settings() {
         View Player Progress
       </button>
       <br />
+      <br />
       <button
         className="settingsPageButton"
         onClick={() => {

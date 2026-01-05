@@ -127,13 +127,6 @@ function PlayerProgress() {
       <div style={{ marginBottom: "3vw" }}>
         <button
           className="settingsPageButton"
-          onClick={() => history.push("/settings")}
-          style={{ marginRight: "2vw" }}
-        >
-          Back to Settings
-        </button>
-        <button
-          className="settingsPageButton"
           onClick={fetchProgressData}
           disabled={loading}
         >
@@ -453,6 +446,15 @@ function PlayerProgress() {
         </div>
       )}
 
+      <br />
+      <br />
+      <button
+        className="settingsPageButton"
+        onClick={() => history.push("/settings")}
+        style={{ marginRight: "2vw" }}
+      >
+        Admin Settings
+      </button>
       <br />
       <br />
       <button
