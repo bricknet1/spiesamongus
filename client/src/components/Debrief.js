@@ -12,7 +12,8 @@ import jeffPic from '../assets/pictures/Jeff Murdoch Headshot.jpg';
 import jeffPolaroid from '../assets/pictures/Jeff Murdoch  polaroid.png';
 import prescottPic from '../assets/pictures/Prescott Gadd Headshot.jpg';
 import prescottPolaroid from '../assets/pictures/Prescott Gadd polaroid.png';
-
+import alexPic from '../assets/pictures/AlexFelderHeadshot.jfif';
+import alexPolaroid from '../assets/pictures/AlexFelderHeadshot.jfif';
 import { useState, useEffect } from 'react';
 
 
@@ -68,13 +69,12 @@ function Debrief() {
 
       <title>Debrief & Credits</title>
 
-      <div className='orangeBar'>MISSION DEBRIEF</div>
+      <div className='orangeBar'>REVIEW US</div>
 
       <div className="debrief-main-text">
-        Thank you for playing!<br/>
+        If you had a great time, it would be very helpful if you left us a review on <a href="https://www.tripadvisor.com/UserReviewEdit-g32655-d27950047-Spies_Among_Us_An_Immersive_Adventure-Los_Angeles_California.html" target="_blank" rel="noreferrer" style={{color: '#f9DF39'}}>Tripadvisor</a> or <a href="https://g.page/r/CVzTMbhGamnjEAI/review" target="_blank" rel="noreferrer" style={{color: '#f9DF39'}}>Google</a>!<br/>
         <br/>
-        {/* We are still tweaking this new show so we appreciate all feedback as we improve it.<br/>
-        <br/> */}
+        If you did not have a great time, have feedback, or have an idea on how to improve the mission, please tell us here.
         Please tell us about your experience <a href="https://forms.gle/46bRLZ4QmdgKmGYW6" target="_blank" rel="noreferrer" style={{color: '#f9DF39'}}>here</a>.
       </div>
 
@@ -317,6 +317,15 @@ function Debrief() {
           style={{ cursor: 'pointer' }}
         />
       }
+      {settings?.activeActors?.includes("Alex") &&
+        <img
+          src={alexPolaroid}
+          className="debrief-polaroid"
+          alt="Alex Felder"
+          onClick={() => handleImageClick('Alex')}
+          style={{ cursor: 'pointer' }}
+        />
+      }
       {settings?.activeActors?.includes("Prescott") &&
         <img
           src={prescottPolaroid}
@@ -409,6 +418,19 @@ function Debrief() {
                 <img src={dariaPic} className="debrief-headshot" alt="Daria Good"/>
                 <div className='debrief-bio'>
                   Daria Good graduated from The American Academy of Dramatic Arts (AADA) after attending the Orange County School of the Arts' acting program in high school. Her recent credits include: The development and regional premier of Women of Zalongo, the new musical Cherries Rare and Fair in the Hollywood Fringe, and Foolish co's Muse of Fire and School for Scandal. Good is currently wrapping up production as an actor and producer on the short film The Taxidermy Woman. @daria.is.good
+                </div>
+              </div>
+            }
+
+            {modalContent==='Alex' && 
+              <div>
+                <img src={alexPic} className="debrief-headshot" alt="Alex Felder"/>
+                <div className='debrief-bio'>
+                Alex Felder is an LA-based actor/comedian who you may have seen in a national "Safelite" ad campaign! (So like, technically he was in the Olympics, mom...)<br/>
+                <br/>
+                In addition to his film appearances, he does sketch and improv with his teams "Corduroy" and "Blood Pact" at the Pack Theater, and regularly performs at the Lyric Hyperion theater in the episodic improv show "Writer's Block." You can find him posting regularly on his instagram @aka_felder. He also has other hobbies, which in the grand scheme of the universe don't really matter. None of this matters. You are a speck of dust. <br/>
+                <br/>
+                Enjoy the show!!
                 </div>
               </div>
             }

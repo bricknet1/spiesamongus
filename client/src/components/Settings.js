@@ -12,7 +12,7 @@ function Settings() {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  const allActors = ["Victoria", "James", "Annie", "Daria", "Jeff", "Prescott"];
+  const allActors = ["Victoria", "James", "Annie", "Daria", "Jeff", "Alex","Prescott"];
 
   const handleLogin = () => {
     fetch(`${API_URL}/api/login`, {
