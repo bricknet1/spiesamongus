@@ -12,7 +12,15 @@ function Settings() {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  const allActors = ["Victoria", "James", "Annie", "Daria", "Jeff", "Alex","Prescott"];
+  const allActors = [
+    "Victoria",
+    "James",
+    "Annie",
+    "Daria",
+    "Jeff",
+    "Alex",
+    "Prescott",
+  ];
 
   const handleLogin = () => {
     fetch(`${API_URL}/api/login`, {
@@ -39,30 +47,46 @@ function Settings() {
       fetch(`${API_URL}/api/settings`)
         .then((res) => res.json())
         .then((data) => {
-          // Ensure activeActors is an array or default to empty
+          // Initialize actorRoles if it doesn't exist
+          if (!data.actorRoles || typeof data.actorRoles !== "object") {
+            data.actorRoles = {};
+          }
+          // Maintain backward compatibility: derive activeActors from actorRoles
           if (!Array.isArray(data.activeActors)) {
-            data.activeActors = [];
+            data.activeActors = Object.keys(data.actorRoles).filter(
+              (actor) =>
+                data.actorRoles[actor] && data.actorRoles[actor] !== "Off"
+            );
           }
           setSettings(data);
         });
     }
   }, [isLoggedIn]);
 
-  const toggleActor = (actor) => {
+  const setActorRole = (actor, role) => {
     if (!settings) return;
 
-    const activeActors = settings.activeActors || [];
-    let newActiveActors;
+    const actorRoles = settings.actorRoles || {};
+    const newActorRoles = { ...actorRoles };
 
-    if (activeActors.includes(actor)) {
-      // Remove actor if already active
-      newActiveActors = activeActors.filter((a) => a !== actor);
+    if (role === "Off" || role === null || role === undefined) {
+      // Remove actor from roles if set to Off
+      delete newActorRoles[actor];
     } else {
-      // Add actor if not active
-      newActiveActors = [...activeActors, actor];
+      // Set actor role
+      newActorRoles[actor] = role;
     }
 
-    setSettings({ ...settings, activeActors: newActiveActors });
+    // Update activeActors for backward compatibility
+    const newActiveActors = Object.keys(newActorRoles).filter(
+      (a) => newActorRoles[a] && newActorRoles[a] !== "Off"
+    );
+
+    setSettings({
+      ...settings,
+      actorRoles: newActorRoles,
+      activeActors: newActiveActors,
+    });
   };
 
   const handleSave = () => {
@@ -84,8 +108,22 @@ function Settings() {
         fetch(`${API_URL}/api/settings`)
           .then((res) => res.json())
           .then((updatedData) => {
+            // Initialize actorRoles if it doesn't exist
+            if (
+              !updatedData.actorRoles ||
+              typeof updatedData.actorRoles !== "object"
+            ) {
+              updatedData.actorRoles = {};
+            }
+            // Maintain backward compatibility
             if (!Array.isArray(updatedData.activeActors)) {
-              updatedData.activeActors = [];
+              updatedData.activeActors = Object.keys(
+                updatedData.actorRoles
+              ).filter(
+                (actor) =>
+                  updatedData.actorRoles[actor] &&
+                  updatedData.actorRoles[actor] !== "Off"
+              );
             }
             setSettings(updatedData);
           });
@@ -121,21 +159,78 @@ function Settings() {
       <title>SETTINGS | Spies Among Us</title>
       <h1>Admin Panel</h1>
       <div>
-        <h2>Active Actors:</h2>
-        {allActors.map((actor) => (
-          <label
-            key={actor}
-            style={{ display: "block", fontSize: "10vw", padding: "1vw" }}
-          >
-            <input
-              type="checkbox"
-              style={{ display: "inline-block", width: "10vw", height: "10vw" }}
-              checked={settings.activeActors.includes(actor)}
-              onChange={() => toggleActor(actor)}
-            />
-            {actor}
-          </label>
-        ))}
+        <h2>Actor Roles:</h2>
+        {allActors.map((actor) => {
+          const currentRole = settings.actorRoles?.[actor] || "Off";
+          return (
+            <div
+              key={actor}
+              style={{
+                display: "block",
+                fontSize: "8vw",
+                padding: "1vw",
+                marginBottom: "2vw",
+              }}
+            >
+              <div style={{ fontWeight: "bold", marginBottom: "0.5vw" }}>
+                {actor}:
+              </div>
+              <label
+                style={{
+                  display: "inline-block",
+                  fontSize: "8vw",
+                  padding: "0.5vw",
+                  marginRight: "2vw",
+                }}
+              >
+                <input
+                  type="radio"
+                  name={`actor-${actor}`}
+                  value="Marble"
+                  checked={currentRole === "Marble"}
+                  onChange={() => setActorRole(actor, "Marble")}
+                  style={{ width: "8vw", height: "8vw", marginRight: "1vw" }}
+                />
+                Marble
+              </label>
+              <label
+                style={{
+                  display: "inline-block",
+                  fontSize: "8vw",
+                  padding: "0.5vw",
+                  marginRight: "2vw",
+                }}
+              >
+                <input
+                  type="radio"
+                  name={`actor-${actor}`}
+                  value="Handler"
+                  checked={currentRole === "Handler"}
+                  onChange={() => setActorRole(actor, "Handler")}
+                  style={{ width: "8vw", height: "8vw", marginRight: "1vw" }}
+                />
+                Handler
+              </label>
+              <label
+                style={{
+                  display: "inline-block",
+                  fontSize: "8vw",
+                  padding: "0.5vw",
+                }}
+              >
+                <input
+                  type="radio"
+                  name={`actor-${actor}`}
+                  value="Off"
+                  checked={currentRole === "Off" || !currentRole}
+                  onChange={() => setActorRole(actor, "Off")}
+                  style={{ width: "8vw", height: "8vw", marginRight: "1vw" }}
+                />
+                Off
+              </label>
+            </div>
+          );
+        })}
       </div>
       <div>
         <h2>Wardrobe:</h2>
