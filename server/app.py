@@ -450,7 +450,36 @@ def update_player_progress():
             if f'player{i}' in data and f'player{i}_phone' not in data:
                 field_mapping[f'player{i}_phone'] = data[f'player{i}']
         
-        # Merge mapped fields into data
+        # Map 'act' to 'current_act' (common in form data)
+        if 'act' in data and 'current_act' not in data:
+            field_mapping['current_act'] = data['act']
+        
+        # Handle 'text' field specially - append to existing texts array (like array format does)
+        # Only do this if 'texts' is not already provided (texts takes precedence)
+        if 'text' in data and 'texts' not in data:
+            # Get existing texts from database
+            c.execute('SELECT texts FROM player_progress WHERE group_id = ?', (group_id,))
+            existing_texts_row = c.fetchone()
+            existing_texts_json = existing_texts_row[0] if existing_texts_row else None
+            
+            # Parse existing texts array
+            existing_texts = []
+            if existing_texts_json:
+                try:
+                    existing_texts = json.loads(existing_texts_json)
+                except:
+                    existing_texts = []
+            
+            # Append new text
+            new_text = data['text']
+            if new_text:
+                existing_texts.append(new_text)
+            
+            # Add to update fields
+            update_fields.append("texts = ?")
+            update_values.append(json.dumps(existing_texts))
+        
+        # Merge mapped fields into data (after handling text)
         data = {**data, **field_mapping}
         
         for field in updatable_fields:
