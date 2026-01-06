@@ -157,7 +157,8 @@ def generate_group_id(data):
     num_players = int(data.get('number_of_players', '1'))
     
     for i in range(1, num_players + 1):
-        phone = data.get(f'player{i}_phone', '')
+        # Try both player{i}_phone and player{i} formats (for form data compatibility)
+        phone = data.get(f'player{i}_phone', '') or data.get(f'player{i}', '')
         if phone:
             phones.append(phone)
     
@@ -442,6 +443,15 @@ def update_player_progress():
             'number_of_players', 'start_time', 'current_act', 'texts',
             'end_path', 'team_image', 'marble_selfie', 'special_event', 'selfie_path'
         ]
+        
+        # Map short form field names to full field names (for form data compatibility)
+        field_mapping = {}
+        for i in range(1, 5):
+            if f'player{i}' in data and f'player{i}_phone' not in data:
+                field_mapping[f'player{i}_phone'] = data[f'player{i}']
+        
+        # Merge mapped fields into data
+        data = {**data, **field_mapping}
         
         for field in updatable_fields:
             if field in data:
