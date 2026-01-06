@@ -252,11 +252,9 @@ def webhook_player_progress():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/webhook/player-progress', methods=['PATCH'])
+@app.route('/api/webhook/update-player-progress', methods=['POST'])
 def update_player_progress():
-    """Webhook endpoint to update an existing player group (PATCH)"""
-    if not check_auth():
-        return jsonify({"error": "Unauthorized"}), 401
+    """Webhook endpoint to update an existing player group (POST)"""
     try:
         data = request.get_json()
         
