@@ -304,7 +304,8 @@ def update_player_progress():
     """Webhook endpoint to update an existing player group (POST)"""
     try:
         # Try JSON first (for backward compatibility)
-        data = request.get_json()
+        # Use silent=True to avoid 415 error when Content-Type is not application/json
+        data = request.get_json(silent=True)
         
         # If no JSON, try form URL-encoded data
         if data is None:
