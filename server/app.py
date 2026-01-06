@@ -171,6 +171,53 @@ def get_pacific_timestamp():
     pacific_time = datetime.now(pacific)
     return pacific_time.strftime('%Y-%m-%d %I:%M:%S %p %Z')
 
+def parse_form_data():
+    """Parse form URL-encoded data into the same structure as JSON"""
+    form = request.form
+    
+    # Check if there's a JSON string in a 'data' field (common pattern)
+    if 'data' in form:
+        try:
+            return json.loads(form['data'])
+        except (json.JSONDecodeError, ValueError):
+            pass
+    
+    # Check for bracket notation arrays (e.g., items[0][key]=value)
+    # Look for patterns like items[0][...], items[1][...], etc.
+    items_dict = {}
+    for key in form.keys():
+        if '[' in key and ']' in key:
+            # Parse bracket notation: items[0][player1] -> items, 0, player1
+            parts = key.split('[')
+            if len(parts) >= 3:
+                base_key = parts[0]  # e.g., 'items'
+                index_str = parts[1].rstrip(']')  # e.g., '0'
+                field_key = parts[2].rstrip(']')  # e.g., 'player1'
+                
+                try:
+                    index = int(index_str)
+                    if base_key not in items_dict:
+                        items_dict[base_key] = {}
+                    if index not in items_dict[base_key]:
+                        items_dict[base_key][index] = {}
+                    items_dict[base_key][index][field_key] = form[key]
+                except (ValueError, IndexError):
+                    pass
+    
+    # If we found bracket notation arrays, convert to list format
+    if items_dict:
+        result = []
+        for base_key, indices in items_dict.items():
+            for index in sorted(indices.keys()):
+                result.append(indices[index])
+        return result if result else None
+    
+    # Otherwise, convert flat form fields to a dict
+    if form:
+        return dict(form)
+    
+    return None
+
 @app.route('/api/webhook/player-progress', methods=['POST'])
 def webhook_player_progress():
     """Webhook endpoint to create a new player group (POST)"""
@@ -256,7 +303,12 @@ def webhook_player_progress():
 def update_player_progress():
     """Webhook endpoint to update an existing player group (POST)"""
     try:
+        # Try JSON first (for backward compatibility)
         data = request.get_json()
+        
+        # If no JSON, try form URL-encoded data
+        if data is None:
+            data = parse_form_data()
         
         # Validate required fields
         if not data:
@@ -392,9 +444,29 @@ def update_player_progress():
         
         for field in updatable_fields:
             if field in data:
-                if field == 'texts' and isinstance(data[field], list):
-                    update_fields.append(f"{field} = ?")
-                    update_values.append(json.dumps(data[field]))
+                if field == 'texts':
+                    # Handle texts field - could be list, JSON string, or other
+                    texts_value = data[field]
+                    if isinstance(texts_value, list):
+                        update_fields.append(f"{field} = ?")
+                        update_values.append(json.dumps(texts_value))
+                    elif isinstance(texts_value, str):
+                        # Try to parse as JSON string (common in form data)
+                        try:
+                            parsed_texts = json.loads(texts_value)
+                            if isinstance(parsed_texts, list):
+                                update_fields.append(f"{field} = ?")
+                                update_values.append(json.dumps(parsed_texts))
+                            else:
+                                update_fields.append(f"{field} = ?")
+                                update_values.append(texts_value)
+                        except (json.JSONDecodeError, ValueError):
+                            # Not valid JSON, treat as plain string
+                            update_fields.append(f"{field} = ?")
+                            update_values.append(texts_value)
+                    else:
+                        update_fields.append(f"{field} = ?")
+                        update_values.append(texts_value)
                 else:
                     update_fields.append(f"{field} = ?")
                     update_values.append(data[field])
