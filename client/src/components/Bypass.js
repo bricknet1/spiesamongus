@@ -303,9 +303,9 @@ function Bypass() {
     // Determine if this is a deletion
     const isDeletion = digitsOnly.length < oldDigits.length;
 
-    // Count digits in the browser's input value up to cursor position
-    // This tells us where the cursor actually is after the browser's insertion/deletion
-    const digitsAtCursorInInput = inputValue
+    // Count digits in the current input value up to cursor position
+    // This represents where the cursor is in the current (browser-modified) input
+    const digitsBeforeCursorInInput = inputValue
       .slice(0, cursorPos)
       .replace(/\D/g, "").length;
 
@@ -313,31 +313,47 @@ function Bypass() {
     formik.setFieldValue(fieldName, digitsOnly);
 
     // Restore cursor position after React re-renders
-    setTimeout(() => {
-      const inputElement = phoneInputRefs.current[fieldName] || input;
-      if (inputElement) {
-        const newFormatted = formatPhone(digitsOnly);
+    // Use double requestAnimationFrame to ensure React has fully updated the DOM
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const inputElement = phoneInputRefs.current[fieldName] || input;
+        if (inputElement) {
+          const newFormatted = formatPhone(digitsOnly);
 
-        // Use the digit count from the browser's input value
-        // This accurately reflects where the cursor should be
-        const targetDigitCount = digitsAtCursorInInput;
+          // The target digit count is based on where the cursor was in the input
+          // after the browser's modification
+          const targetDigitCount = digitsBeforeCursorInInput;
 
-        // Find position in formatted string with target number of digits before it
-        let digitCount = 0;
-        let newCursorPos = newFormatted.length;
-        for (let i = 0; i < newFormatted.length; i++) {
-          if (/\d/.test(newFormatted[i])) {
-            digitCount++;
-            if (digitCount === targetDigitCount) {
-              newCursorPos = i + 1;
-              break;
+          // Find position in formatted string with target number of digits before it
+          let newCursorPos;
+          
+          if (targetDigitCount === 0) {
+            newCursorPos = 0;
+          } else if (targetDigitCount >= digitsOnly.length) {
+            // If target is at or beyond the end, place at the end
+            newCursorPos = newFormatted.length;
+          } else {
+            // Find the position after the targetDigitCount-th digit
+            let digitCount = 0;
+            for (let i = 0; i < newFormatted.length; i++) {
+              if (/\d/.test(newFormatted[i])) {
+                digitCount++;
+                if (digitCount === targetDigitCount) {
+                  newCursorPos = i + 1;
+                  break;
+                }
+              }
+            }
+            // Fallback: if we didn't break (shouldn't happen), place at end
+            if (newCursorPos === undefined) {
+              newCursorPos = newFormatted.length;
             }
           }
-        }
 
-        inputElement.setSelectionRange(newCursorPos, newCursorPos);
-      }
-    }, 0);
+          inputElement.setSelectionRange(newCursorPos, newCursorPos);
+        }
+      });
+    });
   };
 
   return (
