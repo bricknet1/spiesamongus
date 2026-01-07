@@ -124,15 +124,8 @@ function Cancel() {
     const inputValue = input.value;
     const cursorPos = input.selectionStart;
 
-    // Get old values
-    const oldFormatted = formatPhone(formik.values.phone || "");
-    const oldDigits = (formik.values.phone || "").replace(/\D/g, "");
-
     // Extract only digits and limit to 10
     const digitsOnly = inputValue.replace(/\D/g, "").slice(0, 10);
-
-    // Determine if this is a deletion
-    const isDeletion = digitsOnly.length < oldDigits.length;
 
     // Count digits in the current input value up to cursor position
     // This represents where the cursor is in the current (browser-modified) input

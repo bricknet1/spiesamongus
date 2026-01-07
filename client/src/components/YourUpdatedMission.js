@@ -31,7 +31,7 @@ function YourUpdatedMission() {
           <br />
           We recommend:
           <br />
-          1. Take a left <img src={leftArrow} /> out of Hashimoto Plaza and walk
+          1. Take a left <img src={leftArrow} alt="left arrow" /> out of Hashimoto Plaza and walk
           in the opposite direction of Marble, to increase your chances of
           finding them.
           <br />

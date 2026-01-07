@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Settings() {
   const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
   const [passwordInput, setPasswordInput] = useState("");
@@ -9,8 +11,6 @@ function Settings() {
   const history = useHistory();
 
   const isLoggedIn = !!token;
-
-  const API_URL = process.env.REACT_APP_API_URL;
 
   const allActors = [
     "Victoria",

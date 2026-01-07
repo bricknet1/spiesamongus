@@ -8,6 +8,7 @@ function PlayerProgress() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState(new Set());
+  const [endingMission, setEndingMission] = useState(null);
   const history = useHistory();
 
   const isLoggedIn = !!token;
@@ -82,6 +83,122 @@ function PlayerProgress() {
       }
       return newSet;
     });
+  };
+
+  const handleEndMission = (progress) => {
+    if (!progress.player1_phone) {
+      setError("Player 1 phone number is required");
+      return;
+    }
+
+    // Show confirmation alert
+    const player1Name = progress.player1_name || "this player";
+    const confirmed = window.confirm(
+      `Are you absolutely certain you want to end the mission for ${player1Name}?`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setEndingMission(progress.id);
+    setError("");
+
+    // Format phone with +1 prefix for API (remove +1 if present, then add it)
+    const formatPhone = (phone) => {
+      if (!phone) return "";
+      const digits = phone.replace(/\D/g, "");
+      return digits.length === 10 ? `+1${digits}` : phone;
+    };
+
+    // Extract 10-digit phone number for Make webhook
+    const phoneDigits = progress.player1_phone.replace(/\D/g, "").slice(-10);
+    const phoneForMake = phoneDigits.length === 10 ? phoneDigits : progress.player1_phone.replace(/\D/g, "");
+
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+    const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
+
+    // Prepare data for DELETE endpoint
+    const deleteData = {
+      phone: formatPhone(progress.player1_phone),
+    };
+
+    // Call both endpoints (same as Cancel.js)
+    const makeWebhookPromise = fetch(
+      "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: { phone: phoneForMake } }),
+      }
+    );
+
+    const deleteWebhookPromise = fetch(
+      `${API_URL}/api/webhook/player-progress`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
+        },
+        body: JSON.stringify(deleteData),
+      }
+    );
+
+    // Wait for both requests
+    Promise.allSettled([makeWebhookPromise, deleteWebhookPromise]).then(
+      (results) => {
+        const makeResult = results[0];
+        const deleteResult = results[1];
+
+        // Check if both are successful
+        const makeSuccess = makeResult.status === "fulfilled" && makeResult.value.ok;
+        const deleteSuccess = deleteResult.status === "fulfilled" && deleteResult.value.ok;
+
+        if (makeSuccess && deleteSuccess) {
+          // Prepare data for Bypass.js
+          // Extract first and last name from player1_name
+          const player1NameParts = (progress.player1_name || "").trim().split(" ");
+          const firstName = player1NameParts[0] || "";
+          const lastName = player1NameParts.slice(1).join(" ") || "";
+
+          // Extract phone numbers (remove +1 prefix if present)
+          const extractPhoneDigits = (phone) => {
+            if (!phone) return "";
+            return phone.replace(/\D/g, "").slice(-10);
+          };
+
+          const bypassData = {
+            firstName: firstName,
+            lastName: lastName,
+            phone1: extractPhoneDigits(progress.player1_phone),
+            name2: progress.player2_name || "",
+            phone2: extractPhoneDigits(progress.player2_phone),
+            name3: progress.player3_name || "",
+            phone3: extractPhoneDigits(progress.player3_phone),
+            name4: progress.player4_name || "",
+            phone4: extractPhoneDigits(progress.player4_phone),
+            numberofplayers: String(progress.number_of_players || "1"),
+            act: progress.current_act || "Act 1 (Mission Start)",
+            nostairs: false, // Default value, can't determine from progress data
+            agreeToTerms: true, // Pre-checked since they already had a mission
+          };
+
+          // Navigate to Bypass with prepopulated data
+          history.push("/bypass", { prepopulatedData: bypassData });
+        } else {
+          const errorMsg = !makeSuccess
+            ? "Make webhook failed"
+            : !deleteSuccess
+            ? "Delete webhook failed"
+            : "Unknown error";
+          setError(`Failed to end mission: ${errorMsg}`);
+          setEndingMission(null);
+        }
+      }
+    );
   };
 
   if (!isLoggedIn) {
@@ -436,6 +553,26 @@ function PlayerProgress() {
                             <strong>Created:</strong> {progress.created_at}
                           </div>
                         )}
+                      </div>
+
+                      {/* End Mission Button */}
+                      <div style={{ marginTop: "3vw", marginBottom: "1vw" }}>
+                        <button
+                          className="settingsPageButton"
+                          onClick={() => handleEndMission(progress)}
+                          disabled={endingMission === progress.id}
+                          style={{
+                            backgroundColor: endingMission === progress.id ? "#666" : "#ff3700",
+                            color: "white",
+                            fontSize: "4vw",
+                            padding: "2vw 4vw",
+                            border: "none",
+                            borderRadius: "0.5vw",
+                            cursor: endingMission === progress.id ? "not-allowed" : "pointer",
+                          }}
+                        >
+                          {endingMission === progress.id ? "Ending Mission..." : "End Mission"}
+                        </button>
                       </div>
                     </>
                   )}

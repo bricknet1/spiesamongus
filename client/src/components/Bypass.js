@@ -1,10 +1,12 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
 function Bypass() {
   const history = useHistory();
+  const location = useLocation();
+  const prepopulatedData = location.state?.prepopulatedData || null;
 
   const formSchema = yup.object().shape({
     firstName: yup.string().required("Enter a first name"),
@@ -127,20 +129,22 @@ function Bypass() {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      name1: "",
-      phone1: "",
-      name2: "",
-      phone2: "",
-      name3: "",
-      phone3: "",
-      name4: "",
-      phone4: "",
-      numberofplayers: "1",
-      act: "Act 1 (Mission Start)",
-      nostairs: false,
-      agreeToTerms: false,
+      firstName: prepopulatedData?.firstName || "",
+      lastName: prepopulatedData?.lastName || "",
+      name1: prepopulatedData?.firstName && prepopulatedData?.lastName 
+        ? `${prepopulatedData.firstName} ${prepopulatedData.lastName}`.trim()
+        : "",
+      phone1: prepopulatedData?.phone1 || "",
+      name2: prepopulatedData?.name2 || "",
+      phone2: prepopulatedData?.phone2 || "",
+      name3: prepopulatedData?.name3 || "",
+      phone3: prepopulatedData?.phone3 || "",
+      name4: prepopulatedData?.name4 || "",
+      phone4: prepopulatedData?.phone4 || "",
+      numberofplayers: prepopulatedData?.numberofplayers || "1",
+      act: prepopulatedData?.act || "Act 1 (Mission Start)",
+      nostairs: prepopulatedData?.nostairs || false,
+      agreeToTerms: prepopulatedData?.agreeToTerms || false,
       waittime: "0",
     },
     validationSchema: formSchema,
@@ -293,15 +297,8 @@ function Bypass() {
     const inputValue = input.value;
     const cursorPos = input.selectionStart;
 
-    // Get old values
-    const oldFormatted = formatPhone(formik.values[fieldName] || "");
-    const oldDigits = (formik.values[fieldName] || "").replace(/\D/g, "");
-
     // Extract only digits and limit to 10
     const digitsOnly = inputValue.replace(/\D/g, "").slice(0, 10);
-
-    // Determine if this is a deletion
-    const isDeletion = digitsOnly.length < oldDigits.length;
 
     // Count digits in the current input value up to cursor position
     // This represents where the cursor is in the current (browser-modified) input
