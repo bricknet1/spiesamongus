@@ -208,7 +208,7 @@ function PlayerProgress() {
             phone4: extractPhoneDigits(progress.player4_phone),
             numberofplayers: String(progress.number_of_players || "1"),
             act: mapActValue(progress.current_act),
-            nostairs: false, // Default value, can't determine from progress data
+            nostairs: progress.nostairs || false, // Use stored value from database
             agreeToTerms: true, // Pre-checked since they already had a mission
           };
 

@@ -172,6 +172,7 @@ function Bypass() {
         player4_phone: formatPhone(values.phone4),
         number_of_players: values.numberofplayers,
         current_act: values.act || "Act 1 (Mission Start)",
+        nostairs: values.nostairs || false,
         texts: [],
       };
 

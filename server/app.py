@@ -74,10 +74,17 @@ def init_db():
             marble_selfie TEXT,
             special_event TEXT,
             selfie_path TEXT,
+            nostairs INTEGER DEFAULT 0,
             last_updated TEXT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    # Add nostairs column if it doesn't exist (for existing databases)
+    try:
+        c.execute('ALTER TABLE player_progress ADD COLUMN nostairs INTEGER DEFAULT 0')
+    except sqlite3.OperationalError:
+        # Column already exists, ignore
+        pass
     conn.commit()
     conn.close()
 
@@ -252,14 +259,17 @@ def webhook_player_progress():
         last_updated = get_pacific_timestamp()
         created_at = get_pacific_timestamp()
         
+        # Get nostairs boolean (SQLite will store as integer internally)
+        nostairs = bool(data.get('nostairs', False))
+        
         # Insert new group
         c.execute('''
             INSERT INTO player_progress (
                 group_id, player1_name, player1_phone, player2_name, player2_phone,
                 player3_name, player3_phone, player4_name, player4_phone,
                 number_of_players, start_time, current_act, texts, end_path,
-                team_image, marble_selfie, special_event, selfie_path, last_updated, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                team_image, marble_selfie, special_event, selfie_path, nostairs, last_updated, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             group_id,
             data.get('player1_name', ''),
@@ -279,6 +289,7 @@ def webhook_player_progress():
             data.get('marble_selfie', ''),
             data.get('special_event', ''),
             data.get('selfie_path', ''),
+            nostairs,
             last_updated,
             created_at
         ))
@@ -432,7 +443,7 @@ def update_player_progress():
             'player1_name', 'player1_phone', 'player2_name', 'player2_phone',
             'player3_name', 'player3_phone', 'player4_name', 'player4_phone',
             'number_of_players', 'start_time', 'current_act', 'texts',
-            'end_path', 'team_image', 'marble_selfie', 'special_event', 'selfie_path'
+            'end_path', 'team_image', 'marble_selfie', 'special_event', 'selfie_path', 'nostairs'
         ]
         
         # Map short form field names to full field names (for form data compatibility)
@@ -501,6 +512,10 @@ def update_player_progress():
                     else:
                         update_fields.append(f"{field} = ?")
                         update_values.append(texts_value)
+                elif field == 'nostairs':
+                    # Store nostairs as boolean (SQLite will handle conversion)
+                    update_fields.append(f"{field} = ?")
+                    update_values.append(bool(data[field]))
                 else:
                     update_fields.append(f"{field} = ?")
                     update_values.append(data[field])
@@ -617,7 +632,7 @@ def get_player_progress():
             SELECT id, group_id, player1_name, player1_phone, player2_name, player2_phone,
                    player3_name, player3_phone, player4_name, player4_phone,
                    number_of_players, start_time, current_act, texts, end_path,
-                   team_image, marble_selfie, special_event, selfie_path,
+                   team_image, marble_selfie, special_event, selfie_path, nostairs,
                    last_updated, created_at
             FROM player_progress
             ORDER BY last_updated DESC, created_at DESC
@@ -634,6 +649,9 @@ def get_player_progress():
                     texts_data = json.loads(row[13])
                 except:
                     texts_data = []
+            
+            # Convert nostairs from SQLite integer (0/1) to boolean
+            nostairs_value = bool(row[19]) if row[19] is not None else False
             
             progress_list.append({
                 "id": row[0],
@@ -655,8 +673,9 @@ def get_player_progress():
                 "marble_selfie": row[16],
                 "special_event": row[17],
                 "selfie_path": row[18],
-                "last_updated": row[19],
-                "created_at": row[20]
+                "nostairs": nostairs_value,
+                "last_updated": row[20],
+                "created_at": row[21]
             })
         
         # Always return JSON
