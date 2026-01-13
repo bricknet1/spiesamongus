@@ -152,19 +152,10 @@ def update_settings():
     return jsonify({"status": "success", "data": data})
 
 def generate_group_id(data):
-    """Generate a unique group identifier based on player phones"""
-    phones = []
-    num_players = int(data.get('number_of_players', '1'))
-    
-    for i in range(1, num_players + 1):
-        # Try both player{i}_phone and player{i} formats (for form data compatibility)
-        phone = data.get(f'player{i}_phone', '') or data.get(f'player{i}', '')
-        if phone:
-            phones.append(phone)
-    
-    # Sort phones to ensure consistent group_id regardless of order
-    phones.sort()
-    return '|'.join(phones) if phones else None
+    """Generate a unique group identifier based on player 1's phone number"""
+    # Try both player1_phone and player1 formats (for form data compatibility)
+    phone = data.get('player1_phone', '') or data.get('player1', '')
+    return phone if phone else None
 
 def get_pacific_timestamp():
     """Get current timestamp in Pacific Time"""
