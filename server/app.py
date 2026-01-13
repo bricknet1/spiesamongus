@@ -153,8 +153,8 @@ def update_settings():
 
 def generate_group_id(data):
     """Generate a unique group identifier based on player 1's phone number"""
-    # Try both player1_phone and player1 formats (for form data compatibility)
-    phone = data.get('player1_phone', '') or data.get('player1', '')
+    # Try player1_phone, phone, and player1 formats (for form data compatibility)
+    phone = data.get('player1_phone', '') or data.get('phone', '') or data.get('player1', '')
     return phone if phone else None
 
 def get_pacific_timestamp():
@@ -317,8 +317,8 @@ def update_player_progress():
                 if not isinstance(item, dict):
                     continue
                 
-                # Handle format: [{"player1": "+1234567890", "selfie": "https://..."}]
-                player1_phone = item.get('player1')
+                # Handle format: [{"phone": "+1234567890", "selfie": "https://..."}]
+                player1_phone = item.get('phone') or item.get('player1')
                 selfie_url = item.get('selfie')
                 
                 if player1_phone and selfie_url:
@@ -437,6 +437,9 @@ def update_player_progress():
         
         # Map short form field names to full field names (for form data compatibility)
         field_mapping = {}
+        # Map 'phone' to 'player1_phone' (preferred format)
+        if 'phone' in data and 'player1_phone' not in data:
+            field_mapping['player1_phone'] = data['phone']
         for i in range(1, 5):
             if f'player{i}' in data and f'player{i}_phone' not in data:
                 field_mapping[f'player{i}_phone'] = data[f'player{i}']
