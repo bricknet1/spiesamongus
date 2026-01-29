@@ -27,10 +27,12 @@ import TheMission from "./components/TheMission.js";
 import Tickets from "./components/Tickets.js";
 import YourMission from "./components/YourMission.js";
 import YourUpdatedMission from "./components/YourUpdatedMission.js";
+import RouteMetaTags from "./components/RouteMetaTags.js";
 
 function App() {
   return (
     <div className="App">
+      <RouteMetaTags />
       {/* MISSION PAGES */}
       <Switch>
         <Route path="/begin" exact>

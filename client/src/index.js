@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 // redux
 // import {configureStore} from '@reduxjs/toolkit';
@@ -14,9 +15,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <Router>
-    {/* <Provider store={store}> */}
-    <App />
-    {/* </Provider> */}
-  </Router>
+  <HelmetProvider>
+    <Router>
+      {/* <Provider store={store}> */}
+      <App />
+      {/* </Provider> */}
+    </Router>
+  </HelmetProvider>
 );
