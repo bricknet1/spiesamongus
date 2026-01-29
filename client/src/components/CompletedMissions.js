@@ -8,6 +8,7 @@ function CompletedMissions() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState(new Set());
+  const [deletingTeam, setDeletingTeam] = useState(null);
   const history = useHistory();
 
   const isLoggedIn = !!token;
@@ -86,6 +87,65 @@ function CompletedMissions() {
       }
       return newSet;
     });
+  };
+
+  const handleDeleteTeam = (progress) => {
+    if (!progress.player1_phone) {
+      setError("Player 1 phone number is required");
+      return;
+    }
+
+    // Show confirmation alert
+    const player1Name = progress.player1_name || "this team";
+    const confirmed = window.confirm(
+      `Are you absolutely certain you want to delete the completed mission for ${player1Name}? This action cannot be undone.`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setDeletingTeam(progress.id);
+    setError("");
+
+    // Format phone with +1 prefix for API (remove +1 if present, then add it)
+    const formatPhone = (phone) => {
+      if (!phone) return "";
+      const digits = phone.replace(/\D/g, "");
+      return digits.length === 10 ? `+1${digits}` : phone;
+    };
+
+    const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
+
+    // Prepare data for DELETE endpoint
+    const deleteData = {
+      phone: formatPhone(progress.player1_phone),
+    };
+
+    // Call DELETE endpoint
+    fetch(`${API_URL}/api/webhook/player-progress`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
+      },
+      body: JSON.stringify(deleteData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to delete team");
+        }
+        return res.json();
+      })
+      .then(() => {
+        // Refresh the data after successful deletion
+        fetchProgressData();
+        setDeletingTeam(null);
+      })
+      .catch((err) => {
+        setError(`Failed to delete team: ${err.message}`);
+        setDeletingTeam(null);
+      });
   };
 
   if (!isLoggedIn) {
@@ -440,6 +500,26 @@ function CompletedMissions() {
                             <strong>Created:</strong> {progress.created_at}
                           </div>
                         )}
+                      </div>
+
+                      {/* Delete Team Button */}
+                      <div style={{ marginTop: "3vw", marginBottom: "1vw" }}>
+                        <button
+                          className="settingsPageButton"
+                          onClick={() => handleDeleteTeam(progress)}
+                          disabled={deletingTeam === progress.id}
+                          style={{
+                            backgroundColor: deletingTeam === progress.id ? "#666" : "#ff3700",
+                            color: "white",
+                            fontSize: "4vw",
+                            padding: "2vw 4vw",
+                            border: "none",
+                            borderRadius: "0.5vw",
+                            cursor: deletingTeam === progress.id ? "not-allowed" : "pointer",
+                          }}
+                        >
+                          {deletingTeam === progress.id ? "Deleting..." : "Delete Team"}
+                        </button>
                       </div>
                     </>
                   )}
