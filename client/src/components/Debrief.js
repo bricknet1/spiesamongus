@@ -1,3 +1,6 @@
+import { Helmet } from "react-helmet";
+import { useState, useEffect } from "react";
+
 import SocialFooter from "./SocialFooter.js";
 
 import victoriaPic from "../assets/pictures/Victoria Strange.png";
@@ -13,8 +16,7 @@ import jeffPolaroid from "../assets/pictures/Jeff Murdoch  polaroid.png";
 import prescottPic from "../assets/pictures/Prescott Gadd Headshot.jpg";
 import prescottPolaroid from "../assets/pictures/Prescott Gadd polaroid.png";
 import alexPic from "../assets/pictures/AlexFelderHeadshot.jfif";
-import alexPolaroid from "../assets/pictures/AlexFelderHeadshot.jfif";
-import { useState, useEffect } from "react";
+import alexPolaroid from "../assets/pictures/Alex Felder Polaroid.png";
 
 function Debrief() {
   const [oneToggled, setOneToggled] = useState(false);
@@ -62,12 +64,26 @@ function Debrief() {
   if (!settings) return <div>Loading...</div>;
 
   return (
-    <div className="pageContent">
-      <title>Debrief & Credits</title>
+    <>
+      <Helmet>
+        <title>Your Mission</title>
+        <meta property="og:title" content="Debrief" />
+        <meta
+          property="og:description"
+          content="Spies Among Us - Debrief"
+        />
+        <meta
+          property="og:image"
+          content={"https://raw.githubusercontent.com/bricknet1/spiesamongus/refs/heads/main/client/src/assets/pictures/social_share/Debrief.jpg"}
+        />
+      </Helmet>
 
-      <div className="orangeBar">REVIEW US</div>
+      <div className="pageContent">
+        <title>Debrief & Credits</title>
 
-      <div className="debrief-main-text">
+        <div className="orangeBar">REVIEW US</div>
+
+        <div className="debrief-main-text">
         If you had a great time, it would be very helpful if you left us a
         review on{" "}
         <a
@@ -101,39 +117,39 @@ function Debrief() {
           here
         </a>
         .
-      </div>
+        </div>
 
-      <div className="orangeBar">LOCAL RECS</div>
+        <div className="orangeBar">LOCAL RECS</div>
 
-      <div className="debrief-main-text">
-        Little Tokyo is full of great spots to check out. You probably
-        discovered a few on your mission, but here are some of our favorite
-        places in the area!
-      </div>
+        <div className="debrief-main-text">
+          Little Tokyo is full of great spots to check out. You probably
+          discovered a few on your mission, but here are some of our favorite
+          places in the area!
+        </div>
 
-      <div
-        className="debriefDropdown"
-        onClick={() => setOneToggled(!oneToggled)}
-        style={{
-          cursor: "pointer",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span>Drinks N/A</span>
-        <span
+        <div
+          className="debriefDropdown"
+          onClick={() => setOneToggled(!oneToggled)}
           style={{
-            transform: oneToggled ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          ▼
-        </span>
-      </div>
-      {oneToggled === true && (
-        <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
+          <span>Drinks N/A</span>
+          <span
+            style={{
+              transform: oneToggled ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            ▼
+          </span>
+        </div>
+        {oneToggled === true && (
+          <div style={{ marginTop: "20px" }}>
+            <div className="debriefDropdownText">
             <a
               target="_blank"
               href="https://maps.app.goo.gl/Vn7jLVC814Gy7ats7"
@@ -162,38 +178,38 @@ function Debrief() {
             <br />
             <br />
             What to order?
-            <blockquote className="debrief-blockquote">
-              Brown Sugar Boba
-            </blockquote>
+              <blockquote className="debrief-blockquote">
+                Brown Sugar Boba
+              </blockquote>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="thinOrangeLine" />
+        <div className="thinOrangeLine" />
 
-      <div
-        className="debriefDropdown"
-        onClick={() => setTwoToggled(!twoToggled)}
-        style={{
-          cursor: "pointer",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span>Quick Bites</span>
-        <span
+        <div
+          className="debriefDropdown"
+          onClick={() => setTwoToggled(!twoToggled)}
           style={{
-            transform: twoToggled ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          ▼
-        </span>
-      </div>
-      {twoToggled === true && (
-        <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
+          <span>Quick Bites</span>
+          <span
+            style={{
+              transform: twoToggled ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            ▼
+          </span>
+        </div>
+        {twoToggled === true && (
+          <div style={{ marginTop: "20px" }}>
+            <div className="debriefDropdownText">
             <a
               target="_blank"
               href="https://maps.app.goo.gl/b6rM8sWXJFDSCdD88"
@@ -250,38 +266,38 @@ function Debrief() {
             <br />
             <br />
             What to order?
-            <blockquote className="debrief-blockquote">
-              Salmon Onigiri
-            </blockquote>
+              <blockquote className="debrief-blockquote">
+                Salmon Onigiri
+              </blockquote>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="thinOrangeLine" />
+        <div className="thinOrangeLine" />
 
-      <div
-        className="debriefDropdown"
-        onClick={() => setThreeToggled(!threeToggled)}
-        style={{
-          cursor: "pointer",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span>Drinks (Alcoholic)</span>
-        <span
+        <div
+          className="debriefDropdown"
+          onClick={() => setThreeToggled(!threeToggled)}
           style={{
-            transform: threeToggled ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          ▼
-        </span>
-      </div>
-      {threeToggled === true && (
-        <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
+          <span>Drinks (Alcoholic)</span>
+          <span
+            style={{
+              transform: threeToggled ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            ▼
+          </span>
+        </div>
+        {threeToggled === true && (
+          <div style={{ marginTop: "20px" }}>
+            <div className="debriefDropdownText">
             <a
               target="_blank"
               href="https://maps.app.goo.gl/NMrXQfNq6XY7Kbzq7"
@@ -313,38 +329,38 @@ function Debrief() {
             <br />
             <br />
             What to order?
-            <blockquote className="debrief-blockquote">
-              Beets by Wolf
-            </blockquote>
+              <blockquote className="debrief-blockquote">
+                Beets by Wolf
+              </blockquote>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="thinOrangeLine" />
+        <div className="thinOrangeLine" />
 
-      <div
-        className="debriefDropdown"
-        onClick={() => setFourToggled(!fourToggled)}
-        style={{
-          cursor: "pointer",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span>Tasty Treats</span>
-        <span
+        <div
+          className="debriefDropdown"
+          onClick={() => setFourToggled(!fourToggled)}
           style={{
-            transform: fourToggled ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          ▼
-        </span>
-      </div>
-      {fourToggled === true && (
-        <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
+          <span>Tasty Treats</span>
+          <span
+            style={{
+              transform: fourToggled ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            ▼
+          </span>
+        </div>
+        {fourToggled === true && (
+          <div style={{ marginTop: "20px" }}>
+            <div className="debriefDropdownText">
             <a
               target="_blank"
               href="https://maps.app.goo.gl/T88avFqGYWxqJf7Q8"
@@ -398,38 +414,38 @@ function Debrief() {
             <br />
             <br />
             What to order?
-            <blockquote className="debrief-blockquote">
-              Honeycomb Ice Cream
-            </blockquote>
+              <blockquote className="debrief-blockquote">
+                Honeycomb Ice Cream
+              </blockquote>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="thinOrangeLine" />
+        <div className="thinOrangeLine" />
 
-      <div
-        className="debriefDropdown"
-        onClick={() => setFiveToggled(!fiveToggled)}
-        style={{
-          cursor: "pointer",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span>Sit Down Meals</span>
-        <span
+        <div
+          className="debriefDropdown"
+          onClick={() => setFiveToggled(!fiveToggled)}
           style={{
-            transform: fiveToggled ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          ▼
-        </span>
-      </div>
-      {fiveToggled === true && (
-        <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
+          <span>Sit Down Meals</span>
+          <span
+            style={{
+              transform: fiveToggled ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            ▼
+          </span>
+        </div>
+        {fiveToggled === true && (
+          <div style={{ marginTop: "20px" }}>
+            <div className="debriefDropdownText">
             <a
               target="_blank"
               href="https://maps.app.goo.gl/y2ArQaL7bTpSu3Vv7"
@@ -497,132 +513,130 @@ function Debrief() {
             <br />
             <br />
             What to order?
-            <blockquote className="debrief-blockquote">Garnet Ramen</blockquote>
+              <blockquote className="debrief-blockquote">Garnet Ramen</blockquote>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="thinOrangeLine" />
+        <div className="thinOrangeLine" />
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-      <div className="orangeBar">CREDITS</div>
+        <div className="orangeBar">CREDITS</div>
 
-      {/* Helper function to get actors by role */}
-      {(() => {
-        const actorPolaroids = {
-          Victoria: victoriaPolaroid,
-          James: jamesPolaroid,
-          Annie: anniePolaroid,
-          Daria: dariaPolaroid,
-          Jeff: jeffPolaroid,
-          Alex: alexPolaroid,
-          Prescott: prescottPolaroid,
-        };
+        {/* Helper function to get actors by role */}
+        {(() => {
+          const actorPolaroids = {
+            Victoria: victoriaPolaroid,
+            James: jamesPolaroid,
+            Annie: anniePolaroid,
+            Daria: dariaPolaroid,
+            Jeff: jeffPolaroid,
+            Alex: alexPolaroid,
+            Prescott: prescottPolaroid,
+          };
 
-        const getActorsByRole = (role) => {
-          const actorRoles = settings?.actorRoles || {};
-          return Object.keys(actorRoles).filter(
-            (actor) => actorRoles[actor] === role
-          );
-        };
+          const getActorsByRole = (role) => {
+            const actorRoles = settings?.actorRoles || {};
+            return Object.keys(actorRoles).filter(
+              (actor) => actorRoles[actor] === role
+            );
+          };
 
-        const marbleActors = getActorsByRole("Marble");
-        const handlerActors = getActorsByRole("Handler");
+          const marbleActors = getActorsByRole("Marble");
+          const handlerActors = getActorsByRole("Handler");
 
-        const renderActorPolaroid = (actorName) => {
-          const polaroid = actorPolaroids[actorName];
-          if (!polaroid) return null;
+          const renderActorPolaroid = (actorName) => {
+            const polaroid = actorPolaroids[actorName];
+            if (!polaroid) return null;
+
+            return (
+              <img
+                key={actorName}
+                src={polaroid}
+                className="debrief-polaroid"
+                alt={actorName}
+                onClick={() => handleImageClick(actorName)}
+                style={{ cursor: "pointer" }}
+              />
+            );
+          };
 
           return (
-            <img
-              key={actorName}
-              src={polaroid}
-              className="debrief-polaroid"
-              alt={actorName}
-              onClick={() => handleImageClick(actorName)}
-              style={{ cursor: "pointer" }}
-            />
+            <>
+              {marbleActors.length > 0 && (
+                <>
+                  <div className="debrief-main-text">
+                    AGENT MARBLE
+                    <br />
+                    (tap image to reveal)
+                  </div>
+                  {marbleActors.map((actor) => renderActorPolaroid(actor))}
+                </>
+              )}
+
+              {handlerActors.length > 0 && (
+                <>
+                  <div
+                    className="debrief-main-text"
+                    style={{ marginTop: marbleActors.length > 0 ? "20px" : "0" }}
+                  >
+                    HANDLER
+                    <br />
+                    (tap image to reveal)
+                  </div>
+                  {handlerActors.map((actor) => renderActorPolaroid(actor))}
+                </>
+              )}
+            </>
           );
-        };
+        })()}
 
-        return (
-          <>
-            {marbleActors.length > 0 && (
-              <>
-                <div className="debrief-main-text">
-                  AGENT MARBLE
-                  <br />
-                  (tap image to reveal)
-                </div>
-                {marbleActors.map((actor) => renderActorPolaroid(actor))}
-              </>
-            )}
-
-            {handlerActors.length > 0 && (
-              <>
-                <div
-                  className="debrief-main-text"
-                  style={{ marginTop: marbleActors.length > 0 ? "20px" : "0" }}
-                >
-                  HANDLER
-                  <br />
-                  (tap image to reveal)
-                </div>
-                {handlerActors.map((actor) => renderActorPolaroid(actor))}
-              </>
-            )}
-          </>
-        );
-      })()}
-
-      {modalVisible && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1000,
-            overflow: "auto",
-          }}
-        >
+        {modalVisible && (
           <div
             style={{
-              background: "#21174C",
-              // padding: '20px',
-              // position: 'relative',
+              position: "fixed",
+              top: 0,
+              left: 0,
               width: "100%",
               height: "100%",
-              overflowY: "auto",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 1000,
+              overflow: "auto",
             }}
           >
-            <button
-              onClick={closeModal}
+            <div
               style={{
-                position: "absolute",
-                top: "1vw",
-                right: "1vw",
-                background: "transparent",
-                border: "none",
-                fontSize: "15vw",
-                cursor: "pointer",
-                color: "white",
+                background: "#21174C",
+                width: "100%",
+                height: "100%",
+                overflowY: "auto",
               }}
             >
-              &times;
-            </button>
-            {modalContent === "Victoria" && (
-              <div>
+              <button
+                onClick={closeModal}
+                style={{
+                  position: "absolute",
+                  top: "1vw",
+                  right: "1vw",
+                  background: "transparent",
+                  border: "none",
+                  fontSize: "15vw",
+                  cursor: "pointer",
+                  color: "white",
+                }}
+              >
+                &times;
+              </button>
+              {modalContent === "Victoria" && (
+                <div>
                 <img
                   src={victoriaPic}
                   className="debrief-headshot"
@@ -648,11 +662,11 @@ function Debrief() {
                   overlooked film soundtracks, climate justice, or your next
                   great performance idea.
                 </div>
-              </div>
-            )}
+                </div>
+              )}
 
-            {modalContent === "James" && (
-              <div>
+              {modalContent === "James" && (
+                <div>
                 <img
                   src={jamesPic}
                   className="debrief-headshot"
@@ -669,11 +683,11 @@ function Debrief() {
                   the side, James runs social media and fundraising programs for
                   progressive political campaigns.
                 </div>
-              </div>
-            )}
+                </div>
+              )}
 
-            {modalContent === "Annie" && (
-              <div>
+              {modalContent === "Annie" && (
+                <div>
                 <img
                   src={anniePic}
                   className="debrief-headshot"
@@ -688,11 +702,11 @@ function Debrief() {
                   Comedy Collective. She co-wrote the unairable pilot
                   truthhunters.com w/ Conner O'Malley.
                 </div>
-              </div>
-            )}
+                </div>
+              )}
 
-            {modalContent === "Jeff" && (
-              <div>
+              {modalContent === "Jeff" && (
+                <div>
                 <img
                   src={jeffPic}
                   className="debrief-headshot"
@@ -708,11 +722,11 @@ function Debrief() {
                   of audiences regularly and on his weekly podcast Mystery
                   County Monster Hunters Club.
                 </div>
-              </div>
-            )}
+                </div>
+              )}
 
-            {modalContent === "Daria" && (
-              <div>
+              {modalContent === "Daria" && (
+                <div>
                 <img
                   src={dariaPic}
                   className="debrief-headshot"
@@ -729,11 +743,11 @@ function Debrief() {
                   and producer on the short film The Taxidermy Woman.
                   @daria.is.good
                 </div>
-              </div>
-            )}
+                </div>
+              )}
 
-            {modalContent === "Alex" && (
-              <div>
+              {modalContent === "Alex" && (
+                <div>
                 <img
                   src={alexPic}
                   className="debrief-headshot"
@@ -756,11 +770,11 @@ function Debrief() {
                   <br />
                   Enjoy the show!!
                 </div>
-              </div>
-            )}
+                </div>
+              )}
 
-            {modalContent === "Prescott" && (
-              <div>
+              {modalContent === "Prescott" && (
+                <div>
                 <img
                   src={prescottPic}
                   className="debrief-headshot"
@@ -783,185 +797,186 @@ function Debrief() {
                   </a>
                   .
                 </div>
-              </div>
-            )}
+                </div>
+              )}
+            </div>
           </div>
+        )}
+
+        <div className="orangeLine" />
+        <br />
+        <br />
+        <br />
+        <div className="debrief-titles">Agent Shale Voice Work</div>
+        <div className="debrief-names">
+          <a
+            href="https://www.thetarotnerd.com/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            Tosca Minotto
+          </a>
         </div>
-      )}
+        <br />
+        <br />
+        <div className="debrief-titles">Agent Shale Model</div>
+        <div className="debrief-names">Kitty Medina</div>
+        <br />
+        <br />
+        <div className="debrief-titles">Agent Leslie Voice Work</div>
+        <div className="debrief-names">
+          <a
+            href="https://www.instagram.com/momstomppodcast/?hl=en"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            Jo Scott
+          </a>
+        </div>
+        <br />
+        <br />
+        <div className="debrief-titles">Agent Papyrus Voice Work</div>
+        <div className="debrief-names">Prescott Gadd</div>
+        <br />
+        <br />
+        <div className="debrief-titles">Agent Papyrus Model</div>
+        <div className="debrief-names">Peter Scott</div>
+        <br />
+        <br />
+        <br />
+        <div className="orangeLine" />
+        <br />
+        <br />
+        <br />
+        <div className="debrief-titles">Created by</div>
+        <div className="debrief-names">Prescott Gadd</div>
+        <br />
+        <br />
+        <div className="debrief-titles">Operations by</div>
+        <div className="debrief-names">Jen Staben</div>
+        <br />
+        <br />
+        <div className="debrief-titles">Art and Design by</div>
+        <div className="debrief-names">
+          <a
+            href="https://ccalleo.com/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            Curtiss Calleo
+          </a>
+        </div>
+        <br />
+        <br />
+        <div className="debrief-titles">Senior Developer</div>
+        <div className="debrief-names">
+          <a
+            href="https://www.linkedin.com/in/nickjohnson-losangeles/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            Nick Johnson
+          </a>
+        </div>
+        <br />
+        <br />
+        <div className="debrief-titles">Special thanks to</div>
+        <div className="debrief-names">
+          <a
+            href="https://williamoconnell.me/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            William O'Connell / Subtext Game
+          </a>
+        </div>
+        <div className="debrief-titles">for tech advice</div>
+        <br />
+        <br />
+        <br />
 
-      <div className="orangeLine" />
-      <br />
-      <br />
-      <br />
-      <div className="debrief-titles">Agent Shale Voice Work</div>
-      <div className="debrief-names">
-        <a
-          href="https://www.thetarotnerd.com/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          Tosca Minotto
-        </a>
-      </div>
-      <br />
-      <br />
-      <div className="debrief-titles">Agent Shale Model</div>
-      <div className="debrief-names">Kitty Medina</div>
-      <br />
-      <br />
-      <div className="debrief-titles">Agent Leslie Voice Work</div>
-      <div className="debrief-names">
-        <a
-          href="https://www.instagram.com/momstomppodcast/?hl=en"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          Jo Scott
-        </a>
-      </div>
-      <br />
-      <br />
-      <div className="debrief-titles">Agent Papyrus Voice Work</div>
-      <div className="debrief-names">Prescott Gadd</div>
-      <br />
-      <br />
-      <div className="debrief-titles">Agent Papyrus Model</div>
-      <div className="debrief-names">Peter Scott</div>
-      <br />
-      <br />
-      <br />
-      <div className="orangeLine" />
-      <br />
-      <br />
-      <br />
-      <div className="debrief-titles">Created by</div>
-      <div className="debrief-names">Prescott Gadd</div>
-      <br />
-      <br />
-      <div className="debrief-titles">Operations by</div>
-      <div className="debrief-names">Jen Staben</div>
-      <br />
-      <br />
-      <div className="debrief-titles">Art and Design by</div>
-      <div className="debrief-names">
-        <a
-          href="https://ccalleo.com/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          Curtiss Calleo
-        </a>
-      </div>
-      <br />
-      <br />
-      <div className="debrief-titles">Senior Developer</div>
-      <div className="debrief-names">
-        <a
-          href="https://www.linkedin.com/in/nickjohnson-losangeles/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          Nick Johnson
-        </a>
-      </div>
-      <br />
-      <br />
-      <div className="debrief-titles">Special thanks to</div>
-      <div className="debrief-names">
-        <a
-          href="https://williamoconnell.me/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          William O'Connell / Subtext Game
-        </a>
-      </div>
-      <div className="debrief-titles">for tech advice</div>
-      <br />
-      <br />
-      <br />
+        <div className="orangeLine" />
 
-      <div className="orangeLine" />
+        <div className="debrief-names">
+          <br />
+          Thank you to our playtesters...
+          <br />
+          <br />
+          John Anderson
+          <br />
+          Molly Anderson
+          <br />
+          Benjamin Berk
+          <br />
+          Brian Biancardi
+          <br />
+          Serena Bright
+          <br />
+          Becky Cumberland
+          <br />
+          Marlee Delia
+          <br />
+          Annie Donley
+          <br />
+          Rachel Donley
+          <br />
+          Valerie Gansel
+          <br />
+          Alex Haney
+          <br />
+          Tim Heurlin
+          <br />
+          Tommy Honton
+          <br />
+          Kevin Horst
+          <br />
+          Jared Jeffries
+          <br />
+          James Jelin
+          <br />
+          Tim Lamphier
+          <br />
+          Phil Meister
+          <br />
+          Geremy Mumenthaler
+          <br />
+          Jeff Murdoch
+          <br />
+          Anne Nemer
+          <br />
+          Jordan Nomura
+          <br />
+          Erin Rein
+          <br />
+          James Ross
+          <br />
+          Kate Ross
+          <br />
+          Louis Ross
+          <br />
+          Tyler Samples
+          <br />
+          Harold Scissors
+          <br />
+          Christine Shedd-Thompson
+          <br />
+          Jen Staben
+          <br />
+          Victoria Strange
+          <br />
+          Meaghan Strickland
+          <br />
+          Nina Zhao
+        </div>
 
-      <div className="debrief-names">
-        <br />
-        Thank you to our playtesters...
-        <br />
-        <br />
-        John Anderson
-        <br />
-        Molly Anderson
-        <br />
-        Benjamin Berk
-        <br />
-        Brian Biancardi
-        <br />
-        Serena Bright
-        <br />
-        Becky Cumberland
-        <br />
-        Marlee Delia
-        <br />
-        Annie Donley
-        <br />
-        Rachel Donley
-        <br />
-        Valerie Gansel
-        <br />
-        Alex Haney
-        <br />
-        Tim Heurlin
-        <br />
-        Tommy Honton
-        <br />
-        Kevin Horst
-        <br />
-        Jared Jeffries
-        <br />
-        James Jelin
-        <br />
-        Tim Lamphier
-        <br />
-        Phil Meister
-        <br />
-        Geremy Mumenthaler
-        <br />
-        Jeff Murdoch
-        <br />
-        Anne Nemer
-        <br />
-        Jordan Nomura
-        <br />
-        Erin Rein
-        <br />
-        James Ross
-        <br />
-        Kate Ross
-        <br />
-        Louis Ross
-        <br />
-        Tyler Samples
-        <br />
-        Harold Scissors
-        <br />
-        Christine Shedd-Thompson
-        <br />
-        Jen Staben
-        <br />
-        Victoria Strange
-        <br />
-        Meaghan Strickland
-        <br />
-        Nina Zhao
+        <SocialFooter />
       </div>
-
-      <SocialFooter />
-    </div>
+    </>
   );
 }
 
