@@ -181,12 +181,13 @@ function PlayerProgress() {
             
             // Map single digit or numeric strings to full act names
             const actMap = {
-              "1": "Act 1 (Mission Start)",
+              "0": "Act 1 (Mission Start)",
               "2": "Act 2 (Papyrus Call)",
               "4": "Act 4 (Hashimoto)",
               "5": "Act 5 (Marble Search)",
               "6": "Act 6 (Friendship Knot)",
-              "7": "Act 7 (Obelisk)", // Default to Obelisk, can be changed if needed
+              "7a": "Act 7 (Obelisk)",
+              "7h": "Act 7 (Sweat Yoga)", 
               "8": "Act 8 (Marble)",
               "10": "Act 10 (Papyrus)",
             };
