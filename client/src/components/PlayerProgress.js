@@ -89,6 +89,33 @@ function PlayerProgress() {
     });
   };
 
+  // Map act values to the format expected for display
+  const mapActValue = (act) => {
+    if (!act) return "Act 1 (Mission Start)";
+    
+    // If already in the correct format, return as-is
+    if (typeof act === "string" && act.startsWith("Act ")) {
+      return act;
+    }
+    
+    // Map single digit or numeric strings to full act names
+    const actMap = {
+      "0": "Act 1 (Mission Start)",
+      "2": "Act 2 (Papyrus Call)",
+      "4": "Act 4 (Hashimoto)",
+      "5": "Act 5 (Marble Search)",
+      "6": "Act 6 (Friendship Knot)",
+      "7a": "Act 7 (Obelisk)",
+      "7h": "Act 7 (Sweat Yoga)", 
+      "8": "Act 8 (Marble)",
+      "10": "Act 10 (Papyrus)",
+    };
+    
+    // Convert to string and check if it's a key in the map
+    const actStr = String(act).trim();
+    return actMap[actStr] || act; // Return mapped value or original if not found
+  };
+
   const handleEndMission = (progress) => {
     if (!progress.player1_phone) {
       setError("Player 1 phone number is required");
@@ -175,31 +202,6 @@ function PlayerProgress() {
           };
 
           // Map act values to the format expected by Bypass.js
-          const mapActValue = (act) => {
-            if (!act) return "Act 1 (Mission Start)";
-            
-            // If already in the correct format, return as-is
-            if (typeof act === "string" && act.startsWith("Act ")) {
-              return act;
-            }
-            
-            // Map single digit or numeric strings to full act names
-            const actMap = {
-              "0": "Act 1 (Mission Start)",
-              "2": "Act 2 (Papyrus Call)",
-              "4": "Act 4 (Hashimoto)",
-              "5": "Act 5 (Marble Search)",
-              "6": "Act 6 (Friendship Knot)",
-              "7a": "Act 7 (Obelisk)",
-              "7h": "Act 7 (Sweat Yoga)", 
-              "8": "Act 8 (Marble)",
-              "10": "Act 10 (Papyrus)",
-            };
-            
-            // Convert to string and check if it's a key in the map
-            const actStr = String(act).trim();
-            return actMap[actStr] || act; // Return mapped value or original if not found
-          };
 
           const bypassData = {
             firstName: firstName,
@@ -339,7 +341,7 @@ function PlayerProgress() {
                       {progress.number_of_players || "N/A"} Players
                       {progress.current_act && (
                         <span style={{ fontSize: "4vw", marginLeft: "2vw" }}>
-                          | Act: {progress.current_act}
+                          | {mapActValue(progress.current_act)}
                         </span>
                       )}
                     </span>
@@ -429,7 +431,7 @@ function PlayerProgress() {
                           <div
                             style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
                           >
-                            <strong>Current Act:</strong> {progress.current_act}
+                            <strong>Current Act:</strong> {mapActValue(progress.current_act)}
                           </div>
                         )}
                         {progress.end_path && (
