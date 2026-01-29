@@ -72,8 +72,20 @@ function Debrief() {
           property="og:description"
           content="Spies Among Us - Debrief"
         />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`${window.location.origin}/debrief`}
+        />
         <meta
           property="og:image"
+          content={"https://raw.githubusercontent.com/bricknet1/spiesamongus/refs/heads/main/client/src/assets/pictures/social_share/Debrief.jpg"}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Debrief" />
+        <meta name="twitter:description" content="Spies Among Us - Debrief" />
+        <meta
+          name="twitter:image"
           content={"https://raw.githubusercontent.com/bricknet1/spiesamongus/refs/heads/main/client/src/assets/pictures/social_share/Debrief.jpg"}
         />
       </Helmet>
