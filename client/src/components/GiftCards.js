@@ -2,7 +2,6 @@ import HamburgerMenuHeader from "./HamburgerMenuHeader.js";
 import SocialFooter from "./SocialFooter.js";
 import useDeviceType from "./UseDeviceType.js";
 import Questions from "./Questions.js";
-import MetaTags from "./MetaTags.js";
 import giftCardPic from '../assets/pictures/Spies Gift Card.png';
 
 function GiftCards() {
@@ -52,12 +51,8 @@ function GiftCards() {
 
   return (
     <div className="pageContent" style={pageContentStyle}>
-      <MetaTags
-        title="Gift Cards | Spies Among Us"
-        description="Give the gift of espionage with a spy mission gift card"
-        ogTitle="Gift Cards | Spies Among Us"
-        ogDescription="Give the gift of espionage with a spy mission gift card"
-      />
+
+      <title>Gift Cards | Spies Among Us</title>
 
       <HamburgerMenuHeader/>
 
