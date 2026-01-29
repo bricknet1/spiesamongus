@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Begin from "./components/Begin.js";
 import Bypass from "./components/Bypass.js";
 import Cancel from "./components/Cancel.js";
+import CompletedMissions from "./components/CompletedMissions.js";
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
 import GiftCards from "./components/GiftCards.js";
@@ -79,8 +80,14 @@ function App() {
         <Route path="/cancel" exact>
           <Cancel />
         </Route>
+        <Route path="/settings" exact>
+          <Settings />
+        </Route>
         <Route path="/playerprogress" exact>
           <PlayerProgress />
+        </Route>
+        <Route path="/completedmissions" exact>
+          <CompletedMissions />
         </Route>
 
         {/* GENERAL PAGES */}
@@ -101,9 +108,6 @@ function App() {
         </Route>
         <Route path="/privateconfirmed" exact>
           <PrivateConfirmed />
-        </Route>
-        <Route path="/settings" exact>
-          <Settings />
         </Route>
         <Route path="/giftcards" exact>
           <GiftCards />

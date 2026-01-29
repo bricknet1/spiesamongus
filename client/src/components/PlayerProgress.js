@@ -56,7 +56,11 @@ function PlayerProgress() {
         return res.json();
       })
       .then((data) => {
-        setProgressData(data.data || []);
+        // Filter out completed missions (current_act === "end")
+        const activeMissions = (data.data || []).filter(
+          (progress) => progress.current_act !== "end"
+        );
+        setProgressData(activeMissions);
         setError("");
       })
       .catch((err) => {
@@ -618,6 +622,13 @@ function PlayerProgress() {
         style={{ marginRight: "2vw" }}
       >
         Admin Settings
+      </button>
+      <button
+        className="settingsPageButton"
+        onClick={() => history.push("/completedmissions")}
+        style={{ marginRight: "2vw" }}
+      >
+        Completed Missions
       </button>
       <br />
       <br />

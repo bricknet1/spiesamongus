@@ -280,6 +280,14 @@ function Settings() {
       <br />
       <button
         className="settingsPageButton"
+        onClick={() => history.push("/completedmissions")}
+      >
+        View Completed Missions
+      </button>
+      <br />
+      <br />
+      <button
+        className="settingsPageButton"
         onClick={() => {
           localStorage.removeItem("adminToken");
           window.location.reload();
