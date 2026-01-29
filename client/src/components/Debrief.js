@@ -66,7 +66,7 @@ function Debrief() {
   return (
     <>
       <Helmet>
-        <title>Your Mission</title>
+        <title>Debrief & Credits</title>
         <meta property="og:title" content="Debrief" />
         <meta
           property="og:description"
@@ -79,8 +79,6 @@ function Debrief() {
       </Helmet>
 
       <div className="pageContent">
-        <title>Debrief & Credits</title>
-
         <div className="orangeBar">REVIEW US</div>
 
         <div className="debrief-main-text">
