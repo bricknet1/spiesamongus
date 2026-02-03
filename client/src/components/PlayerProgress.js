@@ -470,7 +470,7 @@ function PlayerProgress() {
                       </div>
 
                       {/* Images */}
-                      {(progress.team_image || progress.marble_selfie) && (
+                      {(progress.selfie || progress.marbleselfie) && (
                         <div style={{ marginTop: "2vw", marginBottom: "2vw" }}>
                           <div
                             style={{
@@ -482,13 +482,13 @@ function PlayerProgress() {
                           >
                             Images:
                           </div>
-                          {progress.team_image && (
+                          {progress.selfie && (
                             <div
                               style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
                             >
                               <strong>Team Image:</strong>{" "}
                               <a
-                                href={progress.team_image}
+                                href={progress.selfie}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{
@@ -496,17 +496,17 @@ function PlayerProgress() {
                                   wordBreak: "break-all",
                                 }}
                               >
-                                {progress.team_image}
+                                {progress.selfie}
                               </a>
                             </div>
                           )}
-                          {progress.marble_selfie && (
+                          {progress.marbleselfie && (
                             <div
                               style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
                             >
                               <strong>Marble Selfie:</strong>{" "}
                               <a
-                                href={progress.marble_selfie}
+                                href={progress.marbleselfie}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{
@@ -514,7 +514,7 @@ function PlayerProgress() {
                                   wordBreak: "break-all",
                                 }}
                               >
-                                {progress.marble_selfie}
+                                {progress.marbleselfie}
                               </a>
                             </div>
                           )}

@@ -70,8 +70,8 @@ def init_db():
             current_act TEXT,
             texts TEXT,
             end_path TEXT,
-            team_image TEXT,
-            marble_selfie TEXT,
+            selfie TEXT,
+            marbleselfie TEXT,
             special_event TEXT,
             selfie_path TEXT,
             nostairs INTEGER DEFAULT 0,
@@ -268,7 +268,7 @@ def webhook_player_progress():
                 group_id, player1_name, player1_phone, player2_name, player2_phone,
                 player3_name, player3_phone, player4_name, player4_phone,
                 number_of_players, start_time, current_act, texts, end_path,
-                team_image, marble_selfie, special_event, selfie_path, nostairs, last_updated, created_at
+                selfie, marbleselfie, special_event, selfie_path, nostairs, last_updated, created_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             group_id,
@@ -285,8 +285,8 @@ def webhook_player_progress():
             data.get('current_act', ''),
             texts,
             data.get('end_path', ''),
-            data.get('team_image', ''),
-            data.get('marble_selfie', ''),
+            data.get('selfie', ''),
+            data.get('marbleselfie', ''),
             data.get('special_event', ''),
             data.get('selfie_path', ''),
             nostairs,
@@ -443,7 +443,7 @@ def update_player_progress():
             'player1_name', 'player1_phone', 'player2_name', 'player2_phone',
             'player3_name', 'player3_phone', 'player4_name', 'player4_phone',
             'number_of_players', 'start_time', 'current_act', 'texts',
-            'end_path', 'team_image', 'marble_selfie', 'special_event', 'selfie_path', 'nostairs'
+            'end_path', 'selfie', 'marbleselfie', 'special_event', 'selfie_path', 'nostairs'
         ]
         
         # Map short form field names to full field names (for form data compatibility)
@@ -632,7 +632,7 @@ def get_player_progress():
             SELECT id, group_id, player1_name, player1_phone, player2_name, player2_phone,
                    player3_name, player3_phone, player4_name, player4_phone,
                    number_of_players, start_time, current_act, texts, end_path,
-                   team_image, marble_selfie, special_event, selfie_path, nostairs,
+                   selfie, marbleselfie, special_event, selfie_path, nostairs,
                    last_updated, created_at
             FROM player_progress
             ORDER BY last_updated DESC, created_at DESC
@@ -669,8 +669,8 @@ def get_player_progress():
                 "current_act": row[12],
                 "texts": texts_data,
                 "end_path": row[14],
-                "team_image": row[15],
-                "marble_selfie": row[16],
+                "selfie": row[15],
+                "marbleselfie": row[16],
                 "special_event": row[17],
                 "selfie_path": row[18],
                 "nostairs": nostairs_value,
