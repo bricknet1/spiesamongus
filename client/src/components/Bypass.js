@@ -214,7 +214,7 @@ function Bypass() {
           } else {
             // Make webhook did not return 200, don't call API webhook
             throw new Error(
-              `Make webhook returned status ${makeResponse.status}`
+              `Make webhook returned status ${makeResponse.status} - A mission with this phone number is already in progress, please cancel that mission before trying to create a new one.`
             );
           }
         })
