@@ -175,67 +175,56 @@ function Begin() {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-      // Call both endpoints
-      const makeWebhookPromise = fetch(
-        "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data: values }),
-        }
-      );
-
-      const apiWebhookPromise = fetch(
-        `${API_URL}/api/webhook/player-progress`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
-          },
-          body: JSON.stringify(apiData),
-        }
-      );
-
-      // Wait for both requests (don't fail if API webhook fails)
-      Promise.allSettled([makeWebhookPromise, apiWebhookPromise]).then(
-        (results) => {
-          const makeResult = results[0];
-          const apiResult = results[1];
-
-          // Log API webhook result (but don't block on it)
-          if (apiResult.status === "fulfilled") {
-            apiResult.value
-              .json()
-              .then((data) => {
-                console.log("API webhook response:", data);
+      // Call make webhook first
+      fetch("https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: values }),
+      })
+        .then((makeResponse) => {
+          // Check if make webhook returned 200
+          if (makeResponse.status === 200) {
+            console.log("Make webhook successful:", makeResponse);
+            
+            // Only call API webhook if make webhook returned 200
+            return fetch(`${API_URL}/api/webhook/player-progress`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
+              },
+              body: JSON.stringify(apiData),
+            })
+              .then((apiResponse) => {
+                return apiResponse.json().then((data) => {
+                  console.log("API webhook response:", data);
+                  return { makeResponse, apiResponse: data };
+                });
               })
               .catch((err) => {
                 console.warn("API webhook error (non-blocking):", err);
+                return { makeResponse, apiResponse: null };
               });
           } else {
-            console.warn(
-              "API webhook failed (non-blocking):",
-              apiResult.reason
+            // Make webhook did not return 200, don't call API webhook
+            throw new Error(
+              `Make webhook returned status ${makeResponse.status}`
             );
           }
-
-          // Only check Make webhook for success/failure
-          if (makeResult.status === "fulfilled" && makeResult.value.ok) {
-            console.log("successful response", makeResult.value);
-            history.push("/confirmed");
-          } else {
-            const errorMsg =
-              makeResult.status === "fulfilled"
-                ? "Make webhook error"
-                : makeResult.reason?.message || "Unknown error";
-            console.error(errorMsg);
-            alert(`Error: ${errorMsg}`);
-          }
-        }
-      );
+        })
+        .then((results) => {
+          // Success: make webhook returned 200 (and API webhook was called)
+          console.log("successful response", results.makeResponse);
+          history.push("/confirmed");
+        })
+        .catch((error) => {
+          // Error: make webhook failed or returned non-200
+          const errorMsg = error.message || "Unknown error";
+          console.error("Make webhook error:", errorMsg);
+          alert(`Error: ${errorMsg}`);
+        });
     },
   });
   console.log("Form Values:", formik.values);
