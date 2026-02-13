@@ -60,7 +60,16 @@ function PlayerProgress() {
         const activeMissions = (data.data || []).filter(
           (progress) => progress.current_act !== "end"
         );
-        setProgressData(activeMissions);
+        // Sort by created_at: newest first (descending order)
+        const sortedMissions = activeMissions.sort((a, b) => {
+          // Handle null/undefined created_at values (put them at the end)
+          if (!a.created_at && !b.created_at) return 0;
+          if (!a.created_at) return 1;
+          if (!b.created_at) return -1;
+          // Compare dates (newest first = descending)
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        setProgressData(sortedMissions);
         setError("");
       })
       .catch((err) => {
