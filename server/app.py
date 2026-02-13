@@ -18,10 +18,15 @@ debug = os.getenv("FLASK_DEBUG", "false").lower() == "true"
 port = int(os.environ.get("PORT", 5000))
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000", "https://spiesamongus.onrender.com", "https://www.spiesamong.us", "https://app.spiesamong.us", "https://www.app.spiesamong.us", "https://nickjohnson.work", "https://www.nickjohnson.work"])
+CORS(app, origins=["http://localhost:3000", "https://spiesamongus.onrender.com", "https://www.spiesamong.us", "https://app.spiesamong.us", "https://www.app.spiesamong.us", "https://nickjohnson.work", "https://www.nickjohnson.work", "https://seattle.spiesamong.us"])
 
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
-AUTH_TOKEN = os.getenv("AUTH_TOKEN", "secure-token-123")  # Simple token
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+AUTH_TOKEN = os.getenv("AUTH_TOKEN")
+
+if not ADMIN_PASSWORD:
+    raise ValueError("ADMIN_PASSWORD environment variable must be set")
+if not AUTH_TOKEN:
+    raise ValueError("AUTH_TOKEN environment variable must be set")
 
 DB_PATH = 'settings.db'
 
