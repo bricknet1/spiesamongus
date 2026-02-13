@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
+import { SubdomainProvider } from "./components/SubdomainProvider.js";
 import Begin from "./components/Begin.js";
 import Bypass from "./components/Bypass.js";
 import Cancel from "./components/Cancel.js";
@@ -30,9 +31,10 @@ import YourUpdatedMission from "./components/YourUpdatedMission.js";
 
 function App() {
   return (
-    <div className="App">
-      {/* MISSION PAGES */}
-      <Switch>
+    <SubdomainProvider>
+      <div className="App">
+        {/* MISSION PAGES */}
+        <Switch>
         <Route path="/begin" exact>
           <Begin />
         </Route>
@@ -123,7 +125,8 @@ function App() {
           <NotFound />
         </Route>
       </Switch>
-    </div>
+      </div>
+    </SubdomainProvider>
   );
 }
 

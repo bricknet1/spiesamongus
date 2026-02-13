@@ -2,9 +2,11 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { useSubdomain } from "./SubdomainProvider.js"; //SEATTLE TEST
 
 function Begin() {
   const history = useHistory();
+  const subdomain = useSubdomain(); //SEATTLE TEST
 
   const formSchema = yup.object().shape({
     firstName: yup.string().required("Enter a first name"),
@@ -351,7 +353,7 @@ function Begin() {
         deduce their whereabouts. Adventure and danger will be hiding from you
         in plain sight!
       </div> */}
-      <div className="orangeBar">MISSION SIGN-UP</div>
+      <div className="orangeBar">{subdomain === "seattle" ? "SEATTLE TEST" : "MISSION SIGN-UP"}</div> 
 
       <form onSubmit={formik.handleSubmit} className="startPageForm">
         <label htmlFor="firstName">First name</label>

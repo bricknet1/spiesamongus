@@ -495,7 +495,7 @@ function PlayerProgress() {
                                 >
                                   <img
                                     src={progress.selfie}
-                                    alt="Team Image"
+                                    alt="Team Selfie"
                                     style={{
                                       maxWidth: "100%",
                                       maxHeight: "50vw",
