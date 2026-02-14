@@ -43,6 +43,8 @@ function Myprofile() {
     SHAKE: <SearchShale />,
     "OPERATION BC": <SearchOPBC />,
     "OPERATION BUBONIC CURTSY": <SearchOPBC />,
+    BUBONIC: <SearchOPBC />,
+    CURTSY: <SearchOPBC />,
     "BUBONIC CURTSY": <SearchOPBC />,
     "BUBONIC CURTSEY": <SearchOPBC />,
     "BUBONIC CURTAY": <SearchOPBC />,
