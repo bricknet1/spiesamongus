@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 
 import SocialFooter from "./SocialFooter.js";
 
-import victoriaPic from "../assets/pictures/Victoria Strange.png";
-import victoriaPolaroid from "../assets/pictures/Polaroid - Victoria Strange.png";
-import jamesPic from "../assets/pictures/James Jelin Headshot.jpg";
-import jamesPolaroid from "../assets/pictures/Polaroid - James Jelin.png";
-import anniePic from "../assets/pictures/Annie Donley Headshot.jpg";
-import anniePolaroid from "../assets/pictures/Annie Donley poloroid.png";
-import dariaPic from "../assets/pictures/Daria Good.jpg";
-import dariaPolaroid from "../assets/pictures/Daria Good poloroid.png";
-import jeffPic from "../assets/pictures/Jeff Murdoch Headshot.jpg";
-import jeffPolaroid from "../assets/pictures/Jeff Murdoch  polaroid.png";
-import prescottPic from "../assets/pictures/Prescott Gadd Headshot.jpg";
-import prescottPolaroid from "../assets/pictures/Prescott Gadd polaroid.png";
-import alexPic from "../assets/pictures/AlexFelderHeadshot.jfif";
-import alexPolaroid from "../assets/pictures/Alex Felder Polaroid.png";
+import victoriaPic from "../assets/pictures/actors/Victoria Strange.png";
+import victoriaPolaroid from "../assets/pictures/actors/Polaroid - Victoria Strange.png";
+import jamesPic from "../assets/pictures/actors/James Jelin Headshot.jpg";
+import jamesPolaroid from "../assets/pictures/actors/Polaroid - James Jelin.png";
+import anniePic from "../assets/pictures/actors/Annie Donley Headshot.jpg";
+import anniePolaroid from "../assets/pictures/actors/Annie Donley poloroid.png";
+import dariaPic from "../assets/pictures/actors/Daria Good.jpg";
+import dariaPolaroid from "../assets/pictures/actors/Daria Good poloroid.png";
+import jeffPic from "../assets/pictures/actors/Jeff Murdoch Headshot.jpg";
+import jeffPolaroid from "../assets/pictures/actors/Jeff Murdoch  polaroid.png";
+import prescottPic from "../assets/pictures/actors/Prescott Gadd Headshot.jpg";
+import prescottPolaroid from "../assets/pictures/actors/Prescott Gadd polaroid.png";
+import alexPic from "../assets/pictures/actors/AlexFelderHeadshot.jfif";
+import alexPolaroid from "../assets/pictures/actors/Alex Felder Polaroid.png";
 
 function Debrief() {
   const [oneToggled, setOneToggled] = useState(false);
