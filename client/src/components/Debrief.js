@@ -62,6 +62,28 @@ function Debrief() {
 
   if (!settings) return <div>Loading...</div>;
 
+  const recsObject = (name, url, blurb, order) => {
+    return (
+      <div className="debrief-recs-object">
+        <a
+          target="_blank"
+          href={url}
+          rel="noreferrer"
+          className="debrief-link"
+        >
+          {name}
+        </a>
+        <br />
+        <i>{blurb}</i>
+        <br />
+        <br />
+        What to order?
+        <br />
+        <div className="debrief-order">-{order}-</div>
+      </div>
+    );
+  };
+
   return (
     <div className="pageContent">
       <title>Debrief & Credits</title>
@@ -133,39 +155,8 @@ function Debrief() {
       </div>
       {oneToggled === true && (
         <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/Vn7jLVC814Gy7ats7"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            TEA MASTER MATCHA CAFE
-          </a>
-          <br />
-          <i>They take matcha VERY seriously</i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">Matcha Latte</blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            HONEYMEE
-          </a>
-          <br />
-          <i>Lots of delicious drinks and ice creams</i>
-          <br />
-          <br />
-          What to order?
-            <blockquote className="debrief-blockquote">
-              Brown Sugar Boba
-            </blockquote>
-          </div>
+          {recsObject("TEA MASTER MATCHA CAFE", "https://maps.app.goo.gl/Vn7jLVC814Gy7ats7", "They take matcha VERY seriously", "Matcha Latte")}
+          {recsObject("HONEYMEE", "https://maps.app.goo.gl/qk9u16CU19ATEYYV6", "Lots of delicious drinks and ice creams", "Honeycomb Ice Cream")}
         </div>
       )}
 
@@ -193,67 +184,9 @@ function Debrief() {
       </div>
       {twoToggled === true && (
         <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/b6rM8sWXJFDSCdD88"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            BANDIT CHOW MEIN
-          </a>
-          <br />
-          <i>
-            You walked by this food truck a few times today. It is delicious!
-          </i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Red Oil Chicken Chow Mein
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/uvb3fGM854rRdU2k9"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            BUNGRAZE
-          </a>
-          <br />
-          <i>
-            They have fresh focaccia dough that they throw into the oven only
-            after you order. Makes for an incredible burger bun!
-          </i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Super Smash Burger
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/sf2aSv89ck3TNfUx7"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            NIJIYA MARKET
-          </a>
-          <br />
-          <i>
-            This is the very market you first discovered with the golden
-            statues on the roof! They have everything you could want from a
-            Japanese market.
-          </i>
-          <br />
-          <br />
-          What to order?
-            <blockquote className="debrief-blockquote">
-              Salmon Onigiri
-            </blockquote>
-          </div>
+          {recsObject("BANDIT CHOW MEIN", "https://maps.app.goo.gl/b6rM8sWXJFDSCdD88", "You walked by this food truck a few times today. It is delicious!", "Red Oil Chicken Chow Mein")}
+          {recsObject("BUNGRAZE", "https://maps.app.goo.gl/uvb3fGM854rRdU2k9", "They have fresh focaccia dough that they throw into the oven only after you order. Makes for an incredible burger bun!", "Super Smash Burger")}
+          {recsObject("NIJIYA MARKET", "https://maps.app.goo.gl/sf2aSv89ck3TNfUx7", "This is the very market you first discovered with the golden statues on the roof! They have everything you could want from a Japanese market.", "Salmon Onigiri")}
         </div>
       )}
 
@@ -281,42 +214,8 @@ function Debrief() {
       </div>
       {threeToggled === true && (
         <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/NMrXQfNq6XY7Kbzq7"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            THE MERMAID
-          </a>
-          <br />
-          <i>Tiki dive bar with refreshing drinks!</i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">Smokey Eye</blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/MBAcx7Ki7EVEdE3T6"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            WOLF AND CRANE
-          </a>
-          <br />
-          <i>
-            Probably the closest rec to you if you just finished the mission.
-            Huge selection of Japanese whiskies and tasty cocktails.
-          </i>
-          <br />
-          <br />
-          What to order?
-            <blockquote className="debrief-blockquote">
-              Beets by Wolf
-            </blockquote>
-          </div>
+          {recsObject("THE MERMAID", "https://maps.app.goo.gl/NMrXQfNq6XY7Kbzq7", "Tiki dive bar with refreshing drinks!", "Smokey Eye")}
+          {recsObject("WOLF AND CRANE", "https://maps.app.goo.gl/MBAcx7Ki7EVEdE3T6", "Probably the closest rec to you if you just finished the mission. Huge selection of Japanese whiskies and tasty cocktails.", "Beets by Wolf")}
         </div>
       )}
 
@@ -344,64 +243,9 @@ function Debrief() {
       </div>
       {fourToggled === true && (
         <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/T88avFqGYWxqJf7Q8"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            LITTLE TOKYO TAIYAKI
-          </a>
-          <br />
-          <i>
-            Specializing in Taiyaki: freshly grilled dough in the shape of a
-            fish. Pick a filling that sounds good to you.
-          </i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Chocolate Taiyaki
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/Vn7jLVC814Gy7ats7"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            TEA MASTER MATCHA CAFE
-          </a>
-          <br />
-          <i>
-            They take matcha VERY seriously and their soft serve is the
-            creamiest.
-          </i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Matcha Soft Serve
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/qk9u16CU19ATEYYV6"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            HONEYMEE
-          </a>
-          <br />
-          <i>Lots of delicious drinks and ice creams</i>
-          <br />
-          <br />
-          What to order?
-            <blockquote className="debrief-blockquote">
-              Honeycomb Ice Cream
-            </blockquote>
-          </div>
+          {recsObject("LITTLE TOKYO TAIYAKI", "https://maps.app.goo.gl/T88avFqGYWxqJf7Q8", "Specializing in Taiyaki: freshly grilled dough in the shape of a fish. Pick a filling that sounds good to you.", "Chocolate Taiyaki")}
+          {recsObject("TEA MASTER MATCHA CAFE", "https://maps.app.goo.gl/Vn7jLVC814Gy7ats7", "They take matcha VERY seriously and their soft serve is the creamiest.", "Matcha Soft Serve")}
+          {recsObject("HONEYMEE", "https://maps.app.goo.gl/qk9u16CU19ATEYYV6", "Lots of delicious drinks and ice creams", "Honeycomb Ice Cream")}
         </div>
       )}
 
@@ -429,76 +273,10 @@ function Debrief() {
       </div>
       {fiveToggled === true && (
         <div style={{ marginTop: "20px" }}>
-          <div className="debriefDropdownText">
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/y2ArQaL7bTpSu3Vv7"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            IZAKAYA GAZEN
-          </a>
-          <br />
-          <i>
-            Huge menu, great sake list. Everything from sushi to shabu shabu
-            to noodles.
-          </i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Signature Tofu Sampler
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/wHAwj2jXGbWjSH7P6"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            SHIN-SEN-GUMI HAKATA RAMEN
-          </a>
-          <br />
-          <i>Great ramen with lots of topping options</i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Spicy Hakata Dandan Men Ramen
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/hcLXCQqZzFNmWeNV9"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            BADMAASH
-          </a>
-          <br />
-          <i>Classic Indian menu spruced up with inventive fusion items</i>
-          <br />
-          <br />
-          What to order?
-          <blockquote className="debrief-blockquote">
-            Goan Pork Curry
-          </blockquote>
-          <br />
-          <a
-            target="_blank"
-            href="https://maps.app.goo.gl/S2jq33aQDnA8NxZy7"
-            rel="noreferrer"
-            className="debrief-link"
-          >
-            RAKKAN RAMEN
-          </a>
-          <br />
-          <i>Offers yummy Vegetarian & Vegan Ramen</i>
-          <br />
-          <br />
-          What to order?
-            <blockquote className="debrief-blockquote">Garnet Ramen</blockquote>
-          </div>
+          {recsObject("IZAKAYA GAZEN", "https://maps.app.goo.gl/y2ArQaL7bTpSu3Vv7", "Huge menu, great sake list. Everything from sushi to shabu shabu to noodles.", "Signature Tofu Sampler")}
+          {recsObject("SHIN-SEN-GUMI HAKATA RAMEN", "https://maps.app.goo.gl/wHAwj2jXGbWjSH7P6", "Great ramen with lots of topping options", "Spicy Hakata Dandan Men Ramen")}
+          {recsObject("BADMAASH", "https://maps.app.goo.gl/hcLXCQqZzFNmWeNV9", "Classic Indian menu spruced up with inventive fusion items", "Goan Pork Curry")}
+          {recsObject("RAKKAN RAMEN", "https://maps.app.goo.gl/S2jq33aQDnA8NxZy7", "Offers yummy Vegetarian & Vegan Ramen", "Garnet Ramen")}
         </div>
       )}
 
