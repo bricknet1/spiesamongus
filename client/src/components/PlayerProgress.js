@@ -569,7 +569,6 @@ function PlayerProgress() {
                                 padding: "2vw",
                                 borderRadius: "0.5vw",
                                 fontSize: "3.5vw",
-                                maxHeight: "30vw",
                                 overflowY: "auto",
                               }}
                             >
