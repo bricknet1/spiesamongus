@@ -401,17 +401,25 @@ function CompletedMissions() {
                               style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
                             >
                               <strong>Team Image:</strong>{" "}
-                              <a
-                                href={progress.selfie}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                  color: "#4A9EFF",
-                                  wordBreak: "break-all",
-                                }}
-                              >
-                                {progress.selfie}
-                              </a>
+                              <div style={{ marginTop: "1vw" }}>
+                                <a
+                                  href={progress.selfie}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <img
+                                    src={progress.selfie}
+                                    alt="Team Selfie"
+                                    style={{
+                                      maxWidth: "100%",
+                                      maxHeight: "50vw",
+                                      borderRadius: "0.5vw",
+                                      cursor: "pointer",
+                                      border: "1px solid #444",
+                                    }}
+                                  />
+                                </a>
+                              </div>
                             </div>
                           )}
                           {progress.marbleselfie && (
@@ -419,17 +427,25 @@ function CompletedMissions() {
                               style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
                             >
                               <strong>Marble Selfie:</strong>{" "}
-                              <a
-                                href={progress.marbleselfie}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                  color: "#4A9EFF",
-                                  wordBreak: "break-all",
-                                }}
-                              >
-                                {progress.marbleselfie}
-                              </a>
+                              <div style={{ marginTop: "1vw" }}>
+                                <a
+                                  href={progress.marbleselfie}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <img
+                                    src={progress.marbleselfie}
+                                    alt="Marble Selfie"
+                                    style={{
+                                      maxWidth: "100%",
+                                      maxHeight: "50vw",
+                                      borderRadius: "0.5vw",
+                                      cursor: "pointer",
+                                      border: "1px solid #444",
+                                    }}
+                                  />
+                                </a>
+                              </div>
                             </div>
                           )}
                         </div>
@@ -458,7 +474,6 @@ function CompletedMissions() {
                                 padding: "2vw",
                                 borderRadius: "0.5vw",
                                 fontSize: "3.5vw",
-                                maxHeight: "30vw",
                                 overflowY: "auto",
                               }}
                             >
