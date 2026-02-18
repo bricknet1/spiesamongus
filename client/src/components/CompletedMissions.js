@@ -1,7 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 function CompletedMissions() {
+  const subdomain = useSubdomain();
   const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
   const [passwordInput, setPasswordInput] = useState("");
   const [progressData, setProgressData] = useState(null);
@@ -56,8 +58,11 @@ function CompletedMissions() {
         return res.json();
       })
       .then((data) => {
-        // Filter for completed missions (current_act === "end")
-        const completedMissions = (data.data || []).filter(
+        // Filter by subdomain first, then filter for completed missions (current_act === "end")
+        const filteredBySubdomain = (data.data || []).filter(
+          (progress) => progress.subdomain === subdomain
+        );
+        const completedMissions = filteredBySubdomain.filter(
           (progress) => progress.current_act === "end"
         );
         setProgressData(completedMissions);
@@ -69,7 +74,7 @@ function CompletedMissions() {
       .finally(() => {
         setLoading(false);
       });
-  }, [API_URL, token]);
+  }, [API_URL, token, subdomain]);
 
   useEffect(() => {
     if (isLoggedIn) {
