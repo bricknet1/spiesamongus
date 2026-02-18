@@ -178,8 +178,13 @@ function Begin() {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
+      // Determine webhook URL based on subdomain
+      const webhookUrl = subdomain === "seattle" 
+        ? "https://hook.us2.make.com/fdu9p6lsanzdmm7ux212l2jdg2o12nns"
+        : "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6";
+
       // Call make webhook first
-      fetch("https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6", {
+      fetch(webhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
