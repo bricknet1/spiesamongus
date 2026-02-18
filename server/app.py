@@ -90,6 +90,12 @@ def init_db():
     except sqlite3.OperationalError:
         # Column already exists, ignore
         pass
+    # Add subdomain column if it doesn't exist (for existing databases)
+    try:
+        c.execute('ALTER TABLE player_progress ADD COLUMN subdomain TEXT')
+    except sqlite3.OperationalError:
+        # Column already exists, ignore
+        pass
     conn.commit()
     conn.close()
 
@@ -273,8 +279,8 @@ def webhook_player_progress():
                 group_id, player1_name, player1_phone, player2_name, player2_phone,
                 player3_name, player3_phone, player4_name, player4_phone,
                 number_of_players, start_time, current_act, texts, end_path,
-                selfie, marbleselfie, special_event, selfie_path, nostairs, last_updated, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                selfie, marbleselfie, special_event, selfie_path, nostairs, subdomain, last_updated, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             group_id,
             data.get('player1_name', ''),
@@ -295,6 +301,7 @@ def webhook_player_progress():
             data.get('special_event', ''),
             data.get('selfie_path', ''),
             nostairs,
+            data.get('subdomain', ''),
             last_updated,
             created_at
         ))
@@ -448,7 +455,7 @@ def update_player_progress():
             'player1_name', 'player1_phone', 'player2_name', 'player2_phone',
             'player3_name', 'player3_phone', 'player4_name', 'player4_phone',
             'number_of_players', 'start_time', 'current_act', 'texts',
-            'end_path', 'selfie', 'marbleselfie', 'special_event', 'selfie_path', 'nostairs'
+            'end_path', 'selfie', 'marbleselfie', 'special_event', 'selfie_path', 'nostairs', 'subdomain'
         ]
         
         # Map short form field names to full field names (for form data compatibility)
@@ -637,7 +644,7 @@ def get_player_progress():
             SELECT id, group_id, player1_name, player1_phone, player2_name, player2_phone,
                    player3_name, player3_phone, player4_name, player4_phone,
                    number_of_players, start_time, current_act, texts, end_path,
-                   selfie, marbleselfie, special_event, selfie_path, nostairs,
+                   selfie, marbleselfie, special_event, selfie_path, nostairs, subdomain,
                    last_updated, created_at
             FROM player_progress
             ORDER BY last_updated DESC, created_at DESC
@@ -679,8 +686,9 @@ def get_player_progress():
                 "special_event": row[17],
                 "selfie_path": row[18],
                 "nostairs": nostairs_value,
-                "last_updated": row[20],
-                "created_at": row[21]
+                "subdomain": row[20],
+                "last_updated": row[21],
+                "created_at": row[22]
             })
         
         # Always return JSON
