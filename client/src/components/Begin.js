@@ -172,6 +172,7 @@ function Begin() {
         current_act: values.act || "Act 1 (Mission Start)",
         nostairs: values.nostairs || false,
         texts: [],
+        subdomain: subdomain,
       };
 
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";

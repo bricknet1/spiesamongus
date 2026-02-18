@@ -2,11 +2,13 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 function Bypass() {
   const history = useHistory();
   const location = useLocation();
   const prepopulatedData = location.state?.prepopulatedData || null;
+  const subdomain = useSubdomain();
 
   const formSchema = yup.object().shape({
     firstName: yup.string().required("Enter a first name"),
@@ -174,6 +176,7 @@ function Bypass() {
         current_act: values.act || "Act 1 (Mission Start)",
         nostairs: values.nostairs || false,
         texts: [],
+        subdomain: subdomain,
       };
 
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
