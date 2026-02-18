@@ -40,6 +40,11 @@ function Debrief() {
     setModalContent(null);
   };
 
+  // Clear all localStorage when user visits debrief page
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   useEffect(() => {
     fetch(`${API_URL}/api/settings`)
       .then((res) => res.json())
