@@ -58,8 +58,11 @@ function PlayerProgress() {
         return res.json();
       })
       .then((data) => {
-        // Filter out completed missions (current_act === "end")
-        const activeMissions = (data.data || []).filter(
+        // Filter by subdomain first, then filter out completed missions (current_act === "end")
+        const filteredBySubdomain = (data.data || []).filter(
+          (progress) => progress.subdomain === subdomain
+        );
+        const activeMissions = filteredBySubdomain.filter(
           (progress) => progress.current_act !== "end"
         );
         // Sort by created_at: newest first (descending order)
@@ -80,7 +83,7 @@ function PlayerProgress() {
       .finally(() => {
         setLoading(false);
       });
-  }, [API_URL, token]);
+  }, [API_URL, token, subdomain]);
 
   useEffect(() => {
     if (isLoggedIn) {
