@@ -1,7 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 function PlayerProgress() {
+  const subdomain = useSubdomain();
   const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
   const [passwordInput, setPasswordInput] = useState("");
   const [progressData, setProgressData] = useState(null);
@@ -158,6 +160,11 @@ function PlayerProgress() {
     const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
+    // Determine webhook URL based on subdomain
+    const webhookUrl = subdomain === "seattle" 
+      ? "https://hook.us2.make.com/4lb7x7sjcvbdinx48qh10myw4ejxc3r6"
+      : "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op";
+
     // Prepare data for DELETE endpoint
     const deleteData = {
       phone: formatPhone(progress.player1_phone),
@@ -165,7 +172,7 @@ function PlayerProgress() {
 
     // Call both endpoints (same as Cancel.js)
     const makeWebhookPromise = fetch(
-      "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op",
+      webhookUrl,
       {
         method: "POST",
         headers: {
