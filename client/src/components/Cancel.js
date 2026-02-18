@@ -1,9 +1,11 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState, useRef } from "react";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 function Cancel() {
   const [cancelled, setCancelled] = useState(false);
+  const subdomain = useSubdomain();
 
   const formSchema = yup.object().shape({
     phone: yup
@@ -32,6 +34,11 @@ function Cancel() {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
+      // Determine webhook URL based on subdomain
+      const webhookUrl = subdomain === "seattle" 
+        ? "https://hook.us2.make.com/4lb7x7sjcvbdinx48qh10myw4ejxc3r6"
+        : "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op";
+
       // Prepare data for DELETE endpoint
       const deleteData = {
         phone: formatPhone(values.phone),
@@ -39,7 +46,7 @@ function Cancel() {
 
       // Call both endpoints
       const makeWebhookPromise = fetch(
-        "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op",
+        webhookUrl,
         {
           method: "POST",
           headers: {
