@@ -63,14 +63,6 @@ function Debrief() {
           data[actorRolesKey] = {};
         }
         
-        // Maintain backward compatibility with old keys
-        if (!Array.isArray(data.activeActors)) {
-          data.activeActors = data[activeActorsKey] || [];
-        }
-        if (!data.actorRoles || typeof data.actorRoles !== "object") {
-          data.actorRoles = data[actorRolesKey] || {};
-        }
-        
         setSettings(data);
       });
   }, [API_URL, subdomain]);
@@ -329,7 +321,7 @@ function Debrief() {
         const getActorsByRole = (role) => {
           // Determine which actorRoles key to use based on subdomain
           const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
-          const actorRoles = settings?.[actorRolesKey] || settings?.actorRoles || {};
+          const actorRoles = settings?.[actorRolesKey] || {};
           return Object.keys(actorRoles).filter(
             (actor) => actorRoles[actor] === role
           );

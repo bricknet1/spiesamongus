@@ -134,7 +134,7 @@ function Marble() {
       
       // Get subdomain-specific wardrobe
       const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
-      const currentWardrobe = savedSettings[wardrobeKey] || savedSettings.wardrobe || "Jeans";
+      const currentWardrobe = savedSettings[wardrobeKey] || "Jeans";
       
       if (currentWardrobe === "Jeans") {
         setInitialPuzzleWords(jeansInitialWords);
@@ -178,23 +178,15 @@ function Marble() {
             data[activeActorsKey] = [];
           }
           
-          // Maintain backward compatibility with old key
-          if (!Array.isArray(data.activeActors)) {
-            data.activeActors = data[activeActorsKey] || [];
-          }
-          
           // Get subdomain-specific wardrobe
           const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
-          const currentWardrobe = data[wardrobeKey] || data.wardrobe || "Jeans";
           
           // Initialize subdomain-specific wardrobe if it doesn't exist
           if (!data[wardrobeKey]) {
-            data[wardrobeKey] = data.wardrobe || "Jeans";
+            data[wardrobeKey] = "Jeans";
           }
-          // Maintain backward compatibility
-          if (!data.wardrobe) {
-            data.wardrobe = data[wardrobeKey] || "Jeans";
-          }
+          
+          const currentWardrobe = data[wardrobeKey];
           
           setSettings(data);
 
@@ -227,7 +219,7 @@ function Marble() {
   const getCurrentWardrobe = () => {
     if (!settings) return "Jeans";
     const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
-    return settings[wardrobeKey] || settings.wardrobe || "Jeans";
+    return settings[wardrobeKey] || "Jeans";
   };
 
   useEffect(() => {

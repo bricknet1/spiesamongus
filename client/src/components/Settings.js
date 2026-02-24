@@ -66,7 +66,7 @@ function Settings() {
             data[actorRolesKey] = {};
           }
           
-          // Maintain backward compatibility: derive activeActors from actorRoles
+          // Derive activeActors from actorRoles
           if (!Array.isArray(data[activeActorsKey])) {
             data[activeActorsKey] = Object.keys(data[actorRolesKey] || {}).filter(
               (actor) =>
@@ -74,22 +74,10 @@ function Settings() {
             );
           }
           
-          // Also maintain backward compatibility with old actorRoles/activeActors keys
-          if (!data.actorRoles || typeof data.actorRoles !== "object") {
-            data.actorRoles = data[actorRolesKey] || {};
-          }
-          if (!Array.isArray(data.activeActors)) {
-            data.activeActors = data[activeActorsKey] || [];
-          }
-          
           // Initialize subdomain-specific wardrobe
           const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
           if (!data[wardrobeKey]) {
-            data[wardrobeKey] = data.wardrobe || "Jeans"; // Default to Jeans if not set
-          }
-          // Maintain backward compatibility with old wardrobe key
-          if (!data.wardrobe) {
-            data.wardrobe = data[wardrobeKey] || "Jeans";
+            data[wardrobeKey] = "Jeans"; // Default to Jeans if not set
           }
           
           setSettings(data);
@@ -126,12 +114,6 @@ function Settings() {
       [actorRolesKey]: newActorRoles,
       [activeActorsKey]: newActiveActors,
     };
-    
-    // Also maintain backward compatibility with old keys
-    if (subdomain === "app") {
-      updatedSettings.actorRoles = newActorRoles;
-      updatedSettings.activeActors = newActiveActors;
-    }
 
     setSettings(updatedSettings);
   };
@@ -164,7 +146,7 @@ function Settings() {
               updatedData[actorRolesKey] = {};
             }
             
-            // Maintain backward compatibility
+            // Derive activeActors from actorRoles
             if (!Array.isArray(updatedData[activeActorsKey])) {
               updatedData[activeActorsKey] = Object.keys(
                 updatedData[actorRolesKey] || {}
@@ -175,22 +157,10 @@ function Settings() {
               );
             }
             
-            // Also maintain backward compatibility with old keys
-            if (!updatedData.actorRoles || typeof updatedData.actorRoles !== "object") {
-              updatedData.actorRoles = updatedData[actorRolesKey] || {};
-            }
-            if (!Array.isArray(updatedData.activeActors)) {
-              updatedData.activeActors = updatedData[activeActorsKey] || [];
-            }
-            
             // Initialize subdomain-specific wardrobe
             const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
             if (!updatedData[wardrobeKey]) {
-              updatedData[wardrobeKey] = updatedData.wardrobe || "Jeans";
-            }
-            // Maintain backward compatibility with old wardrobe key
-            if (!updatedData.wardrobe) {
-              updatedData.wardrobe = updatedData[wardrobeKey] || "Jeans";
+              updatedData[wardrobeKey] = "Jeans";
             }
             
             setSettings(updatedData);
@@ -231,7 +201,7 @@ function Settings() {
         {allActors.map((actor) => {
           // Get the appropriate actorRoles key based on subdomain
           const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
-          const currentRole = settings[actorRolesKey]?.[actor] || settings.actorRoles?.[actor] || "Off";
+          const currentRole = settings[actorRolesKey]?.[actor] || "Off";
           return (
             <div
               key={actor}
@@ -310,17 +280,13 @@ function Settings() {
               type="radio"
               name="wardrobe"
               value="Jeans"
-              checked={(subdomain === "seattle" ? settings.seattleWardrobe : settings.appWardrobe) === "Jeans" || (subdomain !== "seattle" && !settings.appWardrobe && settings.wardrobe === "Jeans")}
+              checked={(subdomain === "seattle" ? settings.seattleWardrobe : settings.appWardrobe) === "Jeans"}
               onChange={() => {
                 const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
                 const updatedSettings = {
                   ...settings,
                   [wardrobeKey]: "Jeans",
                 };
-                // Maintain backward compatibility
-                if (subdomain === "app") {
-                  updatedSettings.wardrobe = "Jeans";
-                }
                 setSettings(updatedSettings);
               }}
               style={{ width: "10vw", height: "10vw" }}
@@ -332,17 +298,13 @@ function Settings() {
               type="radio"
               name="wardrobe"
               value="Shorts"
-              checked={(subdomain === "seattle" ? settings.seattleWardrobe : settings.appWardrobe) === "Shorts" || (subdomain !== "seattle" && !settings.appWardrobe && settings.wardrobe === "Shorts")}
+              checked={(subdomain === "seattle" ? settings.seattleWardrobe : settings.appWardrobe) === "Shorts"}
               onChange={() => {
                 const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
                 const updatedSettings = {
                   ...settings,
                   [wardrobeKey]: "Shorts",
                 };
-                // Maintain backward compatibility
-                if (subdomain === "app") {
-                  updatedSettings.wardrobe = "Shorts";
-                }
                 setSettings(updatedSettings);
               }}
               style={{ width: "10vw", height: "10vw" }}
