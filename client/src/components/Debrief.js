@@ -581,6 +581,19 @@ function Debrief() {
               </div>
               </div>
             )}
+
+            {modalContent === "SampleJeff" || modalContent === "SamplePrescott" && (
+              <div>
+              <img
+                src={jeffPic}
+                className="debrief-headshot"
+                alt="Jeff Murdoch"
+              />
+              <div className="debrief-bio">
+                SAMPLE CONTENT FOR SEATTLE
+              </div>
+              </div>
+            )}
           </div>
         </div>
       )}
