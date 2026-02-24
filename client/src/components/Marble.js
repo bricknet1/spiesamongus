@@ -19,11 +19,13 @@ function Marble() {
   const [initialAvailableLetters, setInitialAvailableLetters] = useState([]);
 
   useEffect(() => {
-    const savedPuzzleWords = JSON.parse(localStorage.getItem("puzzleWords"));
-    const savedAvailableLetters = JSON.parse(
-      localStorage.getItem("availableLetters")
-    );
-    const savedSettings = JSON.parse(localStorage.getItem("settings"));
+    const savedPuzzleWordsStr = localStorage.getItem("puzzleWords");
+    const savedAvailableLettersStr = localStorage.getItem("availableLetters");
+    const savedSettingsStr = localStorage.getItem("settings");
+    
+    const savedPuzzleWords = savedPuzzleWordsStr ? JSON.parse(savedPuzzleWordsStr) : null;
+    const savedAvailableLetters = savedAvailableLettersStr ? JSON.parse(savedAvailableLettersStr) : null;
+    const savedSettings = savedSettingsStr ? JSON.parse(savedSettingsStr) : null;
 
     const jeansInitialWords = {
       swan: "_W__",
@@ -134,15 +136,18 @@ function Marble() {
       
       // Get subdomain-specific wardrobe
       const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
-      const currentWardrobe = savedSettings[wardrobeKey] || "Jeans";
+      const currentWardrobe = (savedSettings && savedSettings[wardrobeKey]) ? savedSettings[wardrobeKey] : "Jeans";
       
       if (currentWardrobe === "Jeans") {
         setInitialPuzzleWords(jeansInitialWords);
         setInitialAvailableLetters(jeansInitialLetters);
-      }
-      if (currentWardrobe === "Shorts") {
+      } else if (currentWardrobe === "Shorts") {
         setInitialPuzzleWords(shortsInitialWords);
         setInitialAvailableLetters(shortsInitialLetters);
+      } else {
+        // Default to Jeans if wardrobe is not set or invalid
+        setInitialPuzzleWords(jeansInitialWords);
+        setInitialAvailableLetters(jeansInitialLetters);
       }
       if (
         savedAvailableLetters !== jeansInitialLetters &&
@@ -781,9 +786,10 @@ function Marble() {
 
               {/* Render buttons for SHORTS */}
               {getCurrentWardrobe() === "Shorts" &&
+                puzzleWords.shorts &&
                 puzzleWords.shorts.split("").map((char, index) => {
                   const isLockedLetter =
-                    initialPuzzleWords.shorts[index] !== "_"; // Check if the letter was pre-provided
+                    initialPuzzleWords.shorts && initialPuzzleWords.shorts[index] !== "_"; // Check if the letter was pre-provided
                   const wordIsSolved = puzzleWords.shorts === "SHORTS";
                   return (
                     <button
@@ -811,8 +817,9 @@ function Marble() {
 
               {/* Render buttons for BLUE */}
               {getCurrentWardrobe() === "Jeans" &&
+                puzzleWords.blue &&
                 puzzleWords.blue.split("").map((char, index) => {
-                  const isLockedLetter = initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
+                  const isLockedLetter = initialPuzzleWords.blue && initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
                   const wordIsSolved = puzzleWords.blue === "BLUE";
                   return (
                     <button
@@ -842,9 +849,10 @@ function Marble() {
 
               {/* Render buttons for JEANS */}
               {getCurrentWardrobe() === "Jeans" &&
+                puzzleWords.jeans &&
                 puzzleWords.jeans.split("").map((char, index) => {
                   const isLockedLetter =
-                    initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided
+                    initialPuzzleWords.jeans && initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided
                   const wordIsSolved = puzzleWords.jeans === "JEANS";
                   return (
                     <button
