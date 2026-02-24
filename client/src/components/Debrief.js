@@ -316,6 +316,8 @@ function Debrief() {
           Jeff: jeffPolaroid,
           Alex: alexPolaroid,
           Prescott: prescottPolaroid,
+          SampleJeff: jeffPolaroid,
+          SamplePrescott: prescottPolaroid,
         };
 
         const getActorsByRole = (role) => {

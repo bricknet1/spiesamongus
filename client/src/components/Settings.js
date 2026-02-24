@@ -26,7 +26,7 @@ function Settings() {
 
   const allActorsSeattle = [
     "SamplePrescott",
-    "SampleNick",
+    "SampleJeff",
   ];
 
   // Get the appropriate actor list based on subdomain
