@@ -240,7 +240,7 @@ function PlayerProgress() {
         } else {
           // Make webhook did not return 200, don't call delete webhook
           throw new Error(
-            `Make webhook returned status ${makeResponse.status} - Failed to end mission`
+            `Unable to end mission, no mission found associated with phone number: ${phoneForMake}`
           );
         }
       })

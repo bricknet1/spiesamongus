@@ -86,7 +86,7 @@ function Cancel() {
           } else {
             // Make webhook did not return 200, don't call delete webhook
             throw new Error(
-              `Make webhook returned status ${makeResponse.status} - Failed to cancel mission`
+              `Unable to cancel mission, no mission found associated with phone number: ${values.phone}`
             );
           }
         })
