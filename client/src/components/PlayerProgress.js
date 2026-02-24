@@ -173,84 +173,84 @@ function PlayerProgress() {
       phone: formatPhone(progress.player1_phone),
     };
 
-    // Call both endpoints (same as Cancel.js)
-    const makeWebhookPromise = fetch(
-      webhookUrl,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: { phone: phoneForMake } }),
-      }
-    );
+    // Call make webhook first
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data: { phone: phoneForMake } }),
+    })
+      .then((makeResponse) => {
+        // Check if make webhook returned 200
+        if (makeResponse.status === 200) {
+          console.log("Make webhook successful:", makeResponse);
+          
+          // Only call delete webhook if make webhook returned 200
+          return fetch(`${API_URL}/api/webhook/player-progress`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
+            },
+            body: JSON.stringify(deleteData),
+          })
+            .then((deleteResponse) => {
+              if (deleteResponse.ok) {
+                // Prepare data for Bypass.js
+                // Extract first and last name from player1_name
+                const player1NameParts = (progress.player1_name || "").trim().split(" ");
+                const firstName = player1NameParts[0] || "";
+                const lastName = player1NameParts.slice(1).join(" ") || "";
 
-    const deleteWebhookPromise = fetch(
-      `${API_URL}/api/webhook/player-progress`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
-        },
-        body: JSON.stringify(deleteData),
-      }
-    );
+                // Extract phone numbers (remove +1 prefix if present)
+                const extractPhoneDigits = (phone) => {
+                  if (!phone) return "";
+                  return phone.replace(/\D/g, "").slice(-10);
+                };
 
-    // Wait for both requests
-    Promise.allSettled([makeWebhookPromise, deleteWebhookPromise]).then(
-      (results) => {
-        const makeResult = results[0];
-        const deleteResult = results[1];
+                // Map act values to the format expected by Bypass.js
+                const bypassData = {
+                  firstName: firstName,
+                  lastName: lastName,
+                  phone1: extractPhoneDigits(progress.player1_phone),
+                  name2: progress.player2_name || "",
+                  phone2: extractPhoneDigits(progress.player2_phone),
+                  name3: progress.player3_name || "",
+                  phone3: extractPhoneDigits(progress.player3_phone),
+                  name4: progress.player4_name || "",
+                  phone4: extractPhoneDigits(progress.player4_phone),
+                  numberofplayers: String(progress.number_of_players || "1"),
+                  act: mapActValue(progress.current_act),
+                  nostairs: progress.nostairs || false, // Use stored value from database
+                  agreeToTerms: true, // Pre-checked since they already had a mission
+                };
 
-        // Check if both are successful
-        const makeSuccess = makeResult.status === "fulfilled" && makeResult.value.ok;
-        const deleteSuccess = deleteResult.status === "fulfilled" && deleteResult.value.ok;
-
-        if (makeSuccess && deleteSuccess) {
-          // Prepare data for Bypass.js
-          // Extract first and last name from player1_name
-          const player1NameParts = (progress.player1_name || "").trim().split(" ");
-          const firstName = player1NameParts[0] || "";
-          const lastName = player1NameParts.slice(1).join(" ") || "";
-
-          // Extract phone numbers (remove +1 prefix if present)
-          const extractPhoneDigits = (phone) => {
-            if (!phone) return "";
-            return phone.replace(/\D/g, "").slice(-10);
-          };
-
-          // Map act values to the format expected by Bypass.js
-
-          const bypassData = {
-            firstName: firstName,
-            lastName: lastName,
-            phone1: extractPhoneDigits(progress.player1_phone),
-            name2: progress.player2_name || "",
-            phone2: extractPhoneDigits(progress.player2_phone),
-            name3: progress.player3_name || "",
-            phone3: extractPhoneDigits(progress.player3_phone),
-            name4: progress.player4_name || "",
-            phone4: extractPhoneDigits(progress.player4_phone),
-            numberofplayers: String(progress.number_of_players || "1"),
-            act: mapActValue(progress.current_act),
-            nostairs: progress.nostairs || false, // Use stored value from database
-            agreeToTerms: true, // Pre-checked since they already had a mission
-          };
-
-          // Navigate to Bypass with prepopulated data
-          history.push("/bypass", { prepopulatedData: bypassData });
+                // Navigate to Bypass with prepopulated data
+                history.push("/bypass", { prepopulatedData: bypassData });
+              } else {
+                throw new Error("Delete webhook failed");
+              }
+            })
+            .catch((err) => {
+              console.error("Delete webhook error:", err);
+              setError(`Failed to end mission: ${err.message || "Delete webhook failed"}`);
+              setEndingMission(null);
+            });
         } else {
-          const errorMsg = !makeSuccess
-            ? "Make webhook failed"
-            : !deleteSuccess
-            ? "Delete webhook failed"
-            : "Unknown error";
-          setError(`Failed to end mission: ${errorMsg}`);
-          setEndingMission(null);
+          // Make webhook did not return 200, don't call delete webhook
+          throw new Error(
+            `Make webhook returned status ${makeResponse.status} - Failed to end mission`
+          );
         }
-      }
-    );
+      })
+      .catch((error) => {
+        // Error: make webhook failed or returned non-200
+        const errorMsg = error.message || "Unknown error";
+        console.error("Make webhook error:", errorMsg);
+        setError(`Failed to end mission: ${errorMsg}`);
+        setEndingMission(null);
+      });
   };
 
   if (!isLoggedIn) {

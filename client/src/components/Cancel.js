@@ -44,66 +44,58 @@ function Cancel() {
         phone: formatPhone(values.phone),
       };
 
-      // Call both endpoints
-      const makeWebhookPromise = fetch(
-        webhookUrl,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data: values }),
-        }
-      );
-
-      const deleteWebhookPromise = fetch(
-        `${API_URL}/api/webhook/player-progress`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
-          },
-          body: JSON.stringify(deleteData),
-        }
-      );
-
-      // Wait for both requests (don't fail if DELETE webhook fails)
-      Promise.allSettled([makeWebhookPromise, deleteWebhookPromise]).then(
-        (results) => {
-          const makeResult = results[0];
-          const deleteResult = results[1];
-
-          // Log DELETE webhook result (but don't block on it)
-          if (deleteResult.status === "fulfilled") {
-            deleteResult.value
-              .json()
-              .then((data) => {
-                console.log("DELETE webhook response:", data);
+      // Call make webhook first
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: values }),
+      })
+        .then((makeResponse) => {
+          // Check if make webhook returned 200
+          if (makeResponse.status === 200) {
+            console.log("Make webhook successful:", makeResponse);
+            
+            // Only call delete webhook if make webhook returned 200
+            return fetch(`${API_URL}/api/webhook/player-progress`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
+              },
+              body: JSON.stringify(deleteData),
+            })
+              .then((deleteResponse) => {
+                if (deleteResponse.ok) {
+                  return deleteResponse.json().then((data) => {
+                    console.log("DELETE webhook response:", data);
+                    setCancelled(true);
+                  });
+                } else {
+                  console.warn("DELETE webhook returned non-OK status");
+                  // Still set cancelled to true since Make webhook succeeded
+                  setCancelled(true);
+                }
               })
               .catch((err) => {
                 console.warn("DELETE webhook error (non-blocking):", err);
+                // Still set cancelled to true since Make webhook succeeded
+                setCancelled(true);
               });
           } else {
-            console.warn(
-              "DELETE webhook failed (non-blocking):",
-              deleteResult.reason
+            // Make webhook did not return 200, don't call delete webhook
+            throw new Error(
+              `Make webhook returned status ${makeResponse.status} - Failed to cancel mission`
             );
           }
-
-          // Only check Make webhook for success/failure
-          if (makeResult.status === "fulfilled" && makeResult.value.ok) {
-            console.log("successful response", makeResult.value);
-            setCancelled(true);
-          } else {
-            const errorMsg =
-              makeResult.status === "fulfilled"
-                ? "Make webhook error"
-                : makeResult.reason?.message || "Unknown error";
-            console.error(errorMsg);
-          }
-        }
-      );
+        })
+        .catch((error) => {
+          // Error: make webhook failed or returned non-200
+          const errorMsg = error.message || "Unknown error";
+          console.error("Make webhook error:", errorMsg);
+          alert(`Error: ${errorMsg}`);
+        });
     },
   });
   console.log("Form Values:", formik.values);
