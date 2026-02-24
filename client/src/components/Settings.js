@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -9,10 +10,11 @@ function Settings() {
   const [settings, setSettings] = useState(null);
   const [error, setError] = useState("");
   const history = useHistory();
+  const subdomain = useSubdomain();
 
   const isLoggedIn = !!token;
 
-  const allActors = [
+  const allActorsApp = [
     "Victoria",
     "James",
     "Annie",
@@ -21,6 +23,14 @@ function Settings() {
     "Alex",
     "Prescott",
   ];
+
+  const allActorsSeattle = [
+    "SamplePrescott",
+    "SampleNick",
+  ];
+
+  // Get the appropriate actor list based on subdomain
+  const allActors = subdomain === "seattle" ? allActorsSeattle : allActorsApp;
 
   const handleLogin = () => {
     fetch(`${API_URL}/api/login`, {
@@ -47,26 +57,54 @@ function Settings() {
       fetch(`${API_URL}/api/settings`)
         .then((res) => res.json())
         .then((data) => {
-          // Initialize actorRoles if it doesn't exist
-          if (!data.actorRoles || typeof data.actorRoles !== "object") {
-            data.actorRoles = {};
+          // Determine which actorRoles key to use based on subdomain
+          const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+          const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
+          
+          // Initialize subdomain-specific actorRoles if it doesn't exist
+          if (!data[actorRolesKey] || typeof data[actorRolesKey] !== "object") {
+            data[actorRolesKey] = {};
           }
+          
           // Maintain backward compatibility: derive activeActors from actorRoles
-          if (!Array.isArray(data.activeActors)) {
-            data.activeActors = Object.keys(data.actorRoles).filter(
+          if (!Array.isArray(data[activeActorsKey])) {
+            data[activeActorsKey] = Object.keys(data[actorRolesKey] || {}).filter(
               (actor) =>
-                data.actorRoles[actor] && data.actorRoles[actor] !== "Off"
+                data[actorRolesKey][actor] && data[actorRolesKey][actor] !== "Off"
             );
           }
+          
+          // Also maintain backward compatibility with old actorRoles/activeActors keys
+          if (!data.actorRoles || typeof data.actorRoles !== "object") {
+            data.actorRoles = data[actorRolesKey] || {};
+          }
+          if (!Array.isArray(data.activeActors)) {
+            data.activeActors = data[activeActorsKey] || [];
+          }
+          
+          // Initialize subdomain-specific wardrobe
+          const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+          if (!data[wardrobeKey]) {
+            data[wardrobeKey] = data.wardrobe || "Jeans"; // Default to Jeans if not set
+          }
+          // Maintain backward compatibility with old wardrobe key
+          if (!data.wardrobe) {
+            data.wardrobe = data[wardrobeKey] || "Jeans";
+          }
+          
           setSettings(data);
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, subdomain]);
 
   const setActorRole = (actor, role) => {
     if (!settings) return;
 
-    const actorRoles = settings.actorRoles || {};
+    // Determine which actorRoles key to use based on subdomain
+    const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+    const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
+    
+    const actorRoles = settings[actorRolesKey] || {};
     const newActorRoles = { ...actorRoles };
 
     if (role === "Off" || role === null || role === undefined) {
@@ -77,16 +115,25 @@ function Settings() {
       newActorRoles[actor] = role;
     }
 
-    // Update activeActors for backward compatibility
+    // Update activeActors for the current subdomain
     const newActiveActors = Object.keys(newActorRoles).filter(
       (a) => newActorRoles[a] && newActorRoles[a] !== "Off"
     );
 
-    setSettings({
+    // Update settings with subdomain-specific data
+    const updatedSettings = {
       ...settings,
-      actorRoles: newActorRoles,
-      activeActors: newActiveActors,
-    });
+      [actorRolesKey]: newActorRoles,
+      [activeActorsKey]: newActiveActors,
+    };
+    
+    // Also maintain backward compatibility with old keys
+    if (subdomain === "app") {
+      updatedSettings.actorRoles = newActorRoles;
+      updatedSettings.activeActors = newActiveActors;
+    }
+
+    setSettings(updatedSettings);
   };
 
   const handleSave = () => {
@@ -108,23 +155,44 @@ function Settings() {
         fetch(`${API_URL}/api/settings`)
           .then((res) => res.json())
           .then((updatedData) => {
-            // Initialize actorRoles if it doesn't exist
-            if (
-              !updatedData.actorRoles ||
-              typeof updatedData.actorRoles !== "object"
-            ) {
-              updatedData.actorRoles = {};
+            // Determine which actorRoles key to use based on subdomain
+            const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+            const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
+            
+            // Initialize subdomain-specific actorRoles if it doesn't exist
+            if (!updatedData[actorRolesKey] || typeof updatedData[actorRolesKey] !== "object") {
+              updatedData[actorRolesKey] = {};
             }
+            
             // Maintain backward compatibility
-            if (!Array.isArray(updatedData.activeActors)) {
-              updatedData.activeActors = Object.keys(
-                updatedData.actorRoles
+            if (!Array.isArray(updatedData[activeActorsKey])) {
+              updatedData[activeActorsKey] = Object.keys(
+                updatedData[actorRolesKey] || {}
               ).filter(
                 (actor) =>
-                  updatedData.actorRoles[actor] &&
-                  updatedData.actorRoles[actor] !== "Off"
+                  updatedData[actorRolesKey][actor] &&
+                  updatedData[actorRolesKey][actor] !== "Off"
               );
             }
+            
+            // Also maintain backward compatibility with old keys
+            if (!updatedData.actorRoles || typeof updatedData.actorRoles !== "object") {
+              updatedData.actorRoles = updatedData[actorRolesKey] || {};
+            }
+            if (!Array.isArray(updatedData.activeActors)) {
+              updatedData.activeActors = updatedData[activeActorsKey] || [];
+            }
+            
+            // Initialize subdomain-specific wardrobe
+            const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+            if (!updatedData[wardrobeKey]) {
+              updatedData[wardrobeKey] = updatedData.wardrobe || "Jeans";
+            }
+            // Maintain backward compatibility with old wardrobe key
+            if (!updatedData.wardrobe) {
+              updatedData.wardrobe = updatedData[wardrobeKey] || "Jeans";
+            }
+            
             setSettings(updatedData);
           });
       })
@@ -159,9 +227,11 @@ function Settings() {
       <title>SETTINGS | Spies Among Us</title>
       <h1>Admin Panel</h1>
       <div>
-        <h2>Actor Roles:</h2>
+        <h2>Actor Roles ({subdomain}):</h2>
         {allActors.map((actor) => {
-          const currentRole = settings.actorRoles?.[actor] || "Off";
+          // Get the appropriate actorRoles key based on subdomain
+          const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+          const currentRole = settings[actorRolesKey]?.[actor] || settings.actorRoles?.[actor] || "Off";
           return (
             <div
               key={actor}
@@ -233,15 +303,26 @@ function Settings() {
         })}
       </div>
       <div>
-        <h2>Wardrobe:</h2>
+        <h2>Wardrobe ({subdomain}):</h2>
         <div>
           <label style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
             <input
               type="radio"
               name="wardrobe"
               value="Jeans"
-              checked={settings.wardrobe === "Jeans"}
-              onChange={() => setSettings({ ...settings, wardrobe: "Jeans" })}
+              checked={(subdomain === "seattle" ? settings.seattleWardrobe : settings.appWardrobe) === "Jeans" || (subdomain !== "seattle" && !settings.appWardrobe && settings.wardrobe === "Jeans")}
+              onChange={() => {
+                const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+                const updatedSettings = {
+                  ...settings,
+                  [wardrobeKey]: "Jeans",
+                };
+                // Maintain backward compatibility
+                if (subdomain === "app") {
+                  updatedSettings.wardrobe = "Jeans";
+                }
+                setSettings(updatedSettings);
+              }}
               style={{ width: "10vw", height: "10vw" }}
             />
             Jeans
@@ -251,8 +332,19 @@ function Settings() {
               type="radio"
               name="wardrobe"
               value="Shorts"
-              checked={settings.wardrobe === "Shorts"}
-              onChange={() => setSettings({ ...settings, wardrobe: "Shorts" })}
+              checked={(subdomain === "seattle" ? settings.seattleWardrobe : settings.appWardrobe) === "Shorts" || (subdomain !== "seattle" && !settings.appWardrobe && settings.wardrobe === "Shorts")}
+              onChange={() => {
+                const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+                const updatedSettings = {
+                  ...settings,
+                  [wardrobeKey]: "Shorts",
+                };
+                // Maintain backward compatibility
+                if (subdomain === "app") {
+                  updatedSettings.wardrobe = "Shorts";
+                }
+                setSettings(updatedSettings);
+              }}
               style={{ width: "10vw", height: "10vw" }}
             />
             Shorts

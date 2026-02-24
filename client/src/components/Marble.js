@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
+import { useSubdomain } from "./SubdomainProvider.js";
 import yellowMan from "../assets/pictures/stickfigureyellowwalk.png";
 
 function Marble() {
   const [settings, setSettings] = useState(null);
+  const subdomain = useSubdomain();
   const API_URL = process.env.REACT_APP_API_URL;
 
   const [selectedLetter, setSelectedLetter] = useState(null); // Store both value and ID
@@ -129,11 +131,16 @@ function Marble() {
       setPuzzleWords(savedPuzzleWords);
       setAvailableLetters(savedAvailableLetters);
       setSettings(savedSettings);
-      if (savedSettings.wardrobe === "Jeans") {
+      
+      // Get subdomain-specific wardrobe
+      const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+      const currentWardrobe = savedSettings[wardrobeKey] || savedSettings.wardrobe || "Jeans";
+      
+      if (currentWardrobe === "Jeans") {
         setInitialPuzzleWords(jeansInitialWords);
         setInitialAvailableLetters(jeansInitialLetters);
       }
-      if (savedSettings.wardrobe === "Shorts") {
+      if (currentWardrobe === "Shorts") {
         setInitialPuzzleWords(shortsInitialWords);
         setInitialAvailableLetters(shortsInitialLetters);
       }
@@ -163,20 +170,43 @@ function Marble() {
       fetch(`${API_URL}/api/settings`)
         .then((res) => res.json())
         .then((data) => {
-          if (!Array.isArray(data.activeActors)) {
-            data.activeActors = [];
+          // Determine which activeActors key to use based on subdomain
+          const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
+          
+          // Initialize subdomain-specific data if it doesn't exist
+          if (!Array.isArray(data[activeActorsKey])) {
+            data[activeActorsKey] = [];
           }
+          
+          // Maintain backward compatibility with old key
+          if (!Array.isArray(data.activeActors)) {
+            data.activeActors = data[activeActorsKey] || [];
+          }
+          
+          // Get subdomain-specific wardrobe
+          const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+          const currentWardrobe = data[wardrobeKey] || data.wardrobe || "Jeans";
+          
+          // Initialize subdomain-specific wardrobe if it doesn't exist
+          if (!data[wardrobeKey]) {
+            data[wardrobeKey] = data.wardrobe || "Jeans";
+          }
+          // Maintain backward compatibility
+          if (!data.wardrobe) {
+            data.wardrobe = data[wardrobeKey] || "Jeans";
+          }
+          
           setSettings(data);
 
           let words = {};
           let letters = [];
 
-          if (data.wardrobe === "Jeans") {
+          if (currentWardrobe === "Jeans") {
             words = jeansInitialWords;
             letters = jeansInitialLetters;
           }
 
-          if (data.wardrobe === "Shorts") {
+          if (currentWardrobe === "Shorts") {
             words = shortsInitialWords;
             letters = shortsInitialLetters;
           }
@@ -191,7 +221,14 @@ function Marble() {
           setIsInitialized(true);
         });
     }
-  }, [API_URL]);
+  }, [API_URL, subdomain]);
+
+  // Helper function to get current wardrobe based on subdomain
+  const getCurrentWardrobe = () => {
+    if (!settings) return "Jeans";
+    const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
+    return settings[wardrobeKey] || settings.wardrobe || "Jeans";
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -738,10 +775,10 @@ function Marble() {
 
               <div
                 className={
-                  (settings.wardrobe === "Jeans" &&
+                  (getCurrentWardrobe() === "Jeans" &&
                     puzzleWords.blue === "BLUE") ||
                   // || puzzleWords.jeans === "JEANS"
-                  (settings.wardrobe === "Shorts" &&
+                  (getCurrentWardrobe() === "Shorts" &&
                     puzzleWords.shorts === "SHORTS")
                     ? "marbleIsSolved"
                     : "marbleIs"
@@ -751,7 +788,7 @@ function Marble() {
               </div>
 
               {/* Render buttons for SHORTS */}
-              {settings.wardrobe === "Shorts" &&
+              {getCurrentWardrobe() === "Shorts" &&
                 puzzleWords.shorts.split("").map((char, index) => {
                   const isLockedLetter =
                     initialPuzzleWords.shorts[index] !== "_"; // Check if the letter was pre-provided
@@ -781,7 +818,7 @@ function Marble() {
                 })}
 
               {/* Render buttons for BLUE */}
-              {settings.wardrobe === "Jeans" &&
+              {getCurrentWardrobe() === "Jeans" &&
                 puzzleWords.blue.split("").map((char, index) => {
                   const isLockedLetter = initialPuzzleWords.blue[index] !== "_"; // Check if the letter was pre-provided
                   const wordIsSolved = puzzleWords.blue === "BLUE";
@@ -812,7 +849,7 @@ function Marble() {
               <br />
 
               {/* Render buttons for JEANS */}
-              {settings.wardrobe === "Jeans" &&
+              {getCurrentWardrobe() === "Jeans" &&
                 puzzleWords.jeans.split("").map((char, index) => {
                   const isLockedLetter =
                     initialPuzzleWords.jeans[index] !== "_"; // Check if the letter was pre-provided

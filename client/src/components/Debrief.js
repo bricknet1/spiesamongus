@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 import SocialFooter from "./SocialFooter.js";
 
@@ -28,6 +29,7 @@ function Debrief() {
   const [modalContent, setModalContent] = useState(null);
 
   const [settings, setSettings] = useState(null);
+  const subdomain = useSubdomain();
   const API_URL = process.env.REACT_APP_API_URL;
 
   const handleImageClick = (content) => {
@@ -49,12 +51,29 @@ function Debrief() {
     fetch(`${API_URL}/api/settings`)
       .then((res) => res.json())
       .then((data) => {
-        if (!Array.isArray(data.activeActors)) {
-          data.activeActors = [];
+        // Determine which activeActors key to use based on subdomain
+        const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
+        const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+        
+        // Initialize subdomain-specific data if it doesn't exist
+        if (!Array.isArray(data[activeActorsKey])) {
+          data[activeActorsKey] = [];
         }
+        if (!data[actorRolesKey] || typeof data[actorRolesKey] !== "object") {
+          data[actorRolesKey] = {};
+        }
+        
+        // Maintain backward compatibility with old keys
+        if (!Array.isArray(data.activeActors)) {
+          data.activeActors = data[activeActorsKey] || [];
+        }
+        if (!data.actorRoles || typeof data.actorRoles !== "object") {
+          data.actorRoles = data[actorRolesKey] || {};
+        }
+        
         setSettings(data);
       });
-  }, [API_URL]);
+  }, [API_URL, subdomain]);
 
   useEffect(() => {
     if (modalVisible) {
@@ -308,7 +327,9 @@ function Debrief() {
         };
 
         const getActorsByRole = (role) => {
-          const actorRoles = settings?.actorRoles || {};
+          // Determine which actorRoles key to use based on subdomain
+          const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+          const actorRoles = settings?.[actorRolesKey] || settings?.actorRoles || {};
           return Object.keys(actorRoles).filter(
             (actor) => actorRoles[actor] === role
           );
