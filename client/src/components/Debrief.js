@@ -598,7 +598,7 @@ function Debrief() {
             {modalContent === "SamplePrescott" && (
               <div>
               <img
-                src={prescottPicPic}
+                src={prescottPic}
                 className="debrief-headshot"
                 alt="Prescott Gadd"
               />
