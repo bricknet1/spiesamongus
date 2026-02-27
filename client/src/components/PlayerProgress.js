@@ -85,10 +85,24 @@ function PlayerProgress() {
       });
   }, [API_URL, token, subdomain]);
 
+  // Fetch data immediately on login, then auto-refresh every 20 seconds
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchProgressData();
+    if (!isLoggedIn) {
+      return; // Don't fetch or set up interval if not logged in
     }
+
+    // Fetch immediately on login or when dependencies change
+    fetchProgressData();
+
+    // Set up interval for auto-refresh every 20 seconds
+    const intervalId = setInterval(() => {
+      fetchProgressData();
+    }, 20000); // 20 seconds
+
+    // Cleanup: clear interval when component unmounts or user logs out
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [isLoggedIn, fetchProgressData]);
 
   const toggleGroup = (groupId) => {
@@ -292,14 +306,14 @@ function PlayerProgress() {
     >
       <title>Player Progress | Spies Among Us</title>
       <h1>Player Progress</h1>
-
+      Auto refreshes every 20 seconds
       <div style={{ marginBottom: "3vw" }}>
-        <button
+        <button 
           className="settingsPageButton"
           onClick={fetchProgressData}
           disabled={loading}
         >
-          {loading ? "Loading..." : "Refresh Data"}
+          {loading ? "Loading..." : "Force Refresh"}
         </button>
       </div>
 
