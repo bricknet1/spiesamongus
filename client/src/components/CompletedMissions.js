@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin from "./AdminLogin.js";
+import AdminNavigation from "./AdminNavigation.js";
 
 function CompletedMissions() {
   const subdomain = useSubdomain();
@@ -541,33 +542,7 @@ function CompletedMissions() {
         </div>
       )}
 
-      <br />
-      <br />
-      <button
-        className="settingsPageButton"
-        onClick={() => history.push("/settings")}
-        style={{ marginRight: "2vw" }}
-      >
-        Admin Settings
-      </button>
-      <button
-        className="settingsPageButton"
-        onClick={() => history.push("/playerprogress")}
-        style={{ marginRight: "2vw" }}
-      >
-        Active Missions
-      </button>
-      <br />
-      <br />
-      <button
-        className="settingsPageButton"
-        onClick={() => {
-          localStorage.removeItem("adminToken");
-          window.location.reload();
-        }}
-      >
-        Log Out
-      </button>
+      <AdminNavigation currentPage="completedmissions" />
     </div>
   );
 }

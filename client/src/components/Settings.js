@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin from "./AdminLogin.js";
+import AdminNavigation from "./AdminNavigation.js";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -319,33 +320,7 @@ function Settings() {
       <button onClick={handleSave} className="settingsPageButton">
         Save Changes
       </button>
-      <br />
-      <br />
-      <button
-        className="settingsPageButton"
-        onClick={() => history.push("/playerprogress")}
-      >
-        View Player Progress
-      </button>
-      <br />
-      <br />
-      <button
-        className="settingsPageButton"
-        onClick={() => history.push("/completedmissions")}
-      >
-        View Completed Missions
-      </button>
-      <br />
-      <br />
-      <button
-        className="settingsPageButton"
-        onClick={() => {
-          localStorage.removeItem("adminToken");
-          window.location.reload();
-        }}
-      >
-        Log Out
-      </button>
+      <AdminNavigation currentPage="settings" />
     </div>
   );
 }
