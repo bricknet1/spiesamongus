@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
+import AdminLogin from "./AdminLogin.js";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -171,20 +172,13 @@ function Settings() {
 
   if (!isLoggedIn) {
     return (
-      <div>
-        <h2>Admin Login</h2>
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={passwordInput}
-          onChange={(e) => setPasswordInput(e.target.value)}
-          style={{ fontSize: "10vw", width: "90vw" }}
-        />
-        <button onClick={handleLogin} className="settingsPageButton">
-          Login
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </div>
+      <AdminLogin
+        pageTitle="Settings"
+        passwordInput={passwordInput}
+        setPasswordInput={setPasswordInput}
+        onLogin={handleLogin}
+        error={error}
+      />
     );
   }
 
@@ -195,6 +189,9 @@ function Settings() {
       style={{ display: "inline-block", fontSize: "5vw", paddingLeft: "10vw" }}
     >
       <title>SETTINGS | Spies Among Us</title>
+      <h1 style={{ fontSize: "8vw", marginBottom: "2vw", color: "#F9DF39" }}>
+        {subdomain === "seattle" ? "SEATTLE" : "LOS ANGELES"}
+      </h1>
       <h1>Admin Panel</h1>
       <div>
         <h2>Actor Roles ({subdomain}):</h2>

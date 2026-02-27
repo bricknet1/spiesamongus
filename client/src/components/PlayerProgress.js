@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
+import AdminLogin from "./AdminLogin.js";
 
 function PlayerProgress() {
   const subdomain = useSubdomain();
@@ -269,26 +270,13 @@ function PlayerProgress() {
 
   if (!isLoggedIn) {
     return (
-      <div style={{ padding: "5vw" }}>
-        <title>Player Progress | Spies Among Us</title>
-        <h2>Admin Login</h2>
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={passwordInput}
-          onChange={(e) => setPasswordInput(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") handleLogin();
-          }}
-          style={{ fontSize: "10vw", width: "90vw", padding: "2vw" }}
-        />
-        <br />
-        <br />
-        <button onClick={handleLogin} className="settingsPageButton">
-          Login
-        </button>
-        {error && <p style={{ color: "red", fontSize: "5vw" }}>{error}</p>}
-      </div>
+      <AdminLogin
+        pageTitle="Player Progress"
+        passwordInput={passwordInput}
+        setPasswordInput={setPasswordInput}
+        onLogin={handleLogin}
+        error={error}
+      />
     );
   }
 
@@ -305,6 +293,9 @@ function PlayerProgress() {
       }}
     >
       <title>Player Progress | Spies Among Us</title>
+      <h1 style={{ fontSize: "8vw", marginBottom: "2vw", color: "#F9DF39" }}>
+        {subdomain === "seattle" ? "SEATTLE" : "LOS ANGELES"}
+      </h1>
       <h1>Player Progress</h1>
       Auto refreshes every 20 seconds
       <div style={{ marginBottom: "3vw" }}>

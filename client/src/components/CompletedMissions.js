@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
+import AdminLogin from "./AdminLogin.js";
 
 function CompletedMissions() {
   const subdomain = useSubdomain();
@@ -155,26 +156,13 @@ function CompletedMissions() {
 
   if (!isLoggedIn) {
     return (
-      <div style={{ padding: "5vw" }}>
-        <title>Completed Missions | Spies Among Us</title>
-        <h2>Admin Login</h2>
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={passwordInput}
-          onChange={(e) => setPasswordInput(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") handleLogin();
-          }}
-          style={{ fontSize: "10vw", width: "90vw", padding: "2vw" }}
-        />
-        <br />
-        <br />
-        <button onClick={handleLogin} className="settingsPageButton">
-          Login
-        </button>
-        {error && <p style={{ color: "red", fontSize: "5vw" }}>{error}</p>}
-      </div>
+      <AdminLogin
+        pageTitle="Completed Missions"
+        passwordInput={passwordInput}
+        setPasswordInput={setPasswordInput}
+        onLogin={handleLogin}
+        error={error}
+      />
     );
   }
 
@@ -191,6 +179,9 @@ function CompletedMissions() {
       }}
     >
       <title>Completed Missions | Spies Among Us</title>
+      <h1 style={{ fontSize: "8vw", marginBottom: "2vw", color: "#F9DF39" }}>
+        {subdomain === "seattle" ? "SEATTLE" : "LOS ANGELES"}
+      </h1>
       <h1>Completed Missions</h1>
 
       <div style={{ marginBottom: "3vw" }}>
