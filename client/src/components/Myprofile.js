@@ -253,7 +253,7 @@ function Myprofile() {
           <a style={{ color: "#f9df39" }} href="./myhistory" >
             here
           </a>{" "}
-          to review your past missions.
+          to review your past missions. Most of this information won't help you with today's mission, but we understand you like to reminisce.
         </div>
 
         <div className="greenBar">HR DATABASE</div>
