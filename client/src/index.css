@@ -323,6 +323,7 @@ strong {
   cursor: pointer;
   z-index: 1001;
   color: rgb(33, 23, 76);
+  border-radius: 7px;
 }
 
 .visited-pages-icon-desktop {
