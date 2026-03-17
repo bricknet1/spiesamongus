@@ -346,7 +346,7 @@ strong {
 .visited-pages-icon-hamburger {
   display: inline-block;
   position: relative;
-  top: -3px;
+  top: -1px;
 }
 
 /* Visited Pages Tooltip */
