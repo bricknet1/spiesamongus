@@ -125,7 +125,7 @@ function Opbc() {
               <br />
               <div className="videoContainer">
                 {/* <iframe className="video" src={opbcvideo} title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> */}
-                <video className="video" controls>
+                <video className="video" controls poster={opbcimage}>
                   <source src={opbcvideo} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
