@@ -658,6 +658,20 @@ input[type="checkbox"]:checked + .checkbox:before {
   font-weight: bold;
 }
 
+.searchButton {
+  color: white;
+  background-color: #ff3700;
+  width: 25vw;
+  height: 13vw;
+  font-family: "DIN Neuzeit Grotesk", sans-serif;
+  font-size: 7vw;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  text-align: center;
+}
+
 .wrongPassword {
   font-size: 10vw;
   text-align: center;

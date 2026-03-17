@@ -273,7 +273,7 @@ function Myprofile() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button type="submit" className="passwordButton">
+          <button type="submit" className="searchButton">
             Search
           </button>
         </form>
