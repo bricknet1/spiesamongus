@@ -342,6 +342,13 @@ strong {
   position: fixed !important;
 }
 
+/* Nudge hamburger icon up so it aligns with the close X */
+.visited-pages-icon-hamburger {
+  display: inline-block;
+  position: relative;
+  top: -3px;
+}
+
 /* Visited Pages Tooltip */
 .visited-pages-tooltip {
   position: fixed;

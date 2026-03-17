@@ -130,7 +130,9 @@ function VisitedPagesMenu() {
     <div>
       {/* Menu Button */}
       <button className={buttonClassName} onClick={toggleMenu}>
-        {isOpen ? "✖" : "☰"}
+        <span className={isOpen ? undefined : "visited-pages-icon-hamburger"}>
+          {isOpen ? "✖" : "☰"}
+        </span>
       </button>
 
       {/* Tooltip */}
