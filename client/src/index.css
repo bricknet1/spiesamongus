@@ -321,6 +321,7 @@ strong {
   /* background: #f9df39; */
   background: rgb(33, 23, 76);
   /* border: 1px solid #f9df39; */
+  border: none;
   cursor: pointer;
   z-index: 1001;
   /* color: rgb(33, 23, 76); */
