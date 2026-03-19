@@ -5,6 +5,7 @@ import marblePic from '../../assets/pictures/Marble Polaroid.png';
 import marbleAchievementPic from '../../assets/pictures/Notable Achievement Marble edited.jpg';
 import marbleSignalPic from '../../assets/pictures/MDS 11.20.23.jpg';
 import marblevideo from '../../assets/videos/Papyrus Shale Phone Call Video 3.29.24.mp4'
+import videoPic from "../../assets/pictures/PapyrusShalePhoneCallImagePreview.jpg";
 
 
 
@@ -41,7 +42,7 @@ function SearchMarble() {
       <div className='transcriptButton'>
         <div className="videoContainer">
           {/* <iframe className="video" src={opbcvideo} title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> */}
-          <video className="video" controls>
+          <video className="video" controls poster={videoPic}>
             <source src={marblevideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
