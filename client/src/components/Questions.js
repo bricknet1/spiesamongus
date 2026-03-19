@@ -341,7 +341,7 @@ function Questions() {
           <div className={ isMobile ? "questionsDropdownTextMobile" : "questionsDropdownTextDesktop" }>
             Located{" "}
             <a
-              href="./terms"
+              href="https://www.spiesamong.us/terms"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "rgb(255,55,0)" }}
@@ -379,7 +379,7 @@ function Questions() {
             with new shows that you can opt out of. We will never share or sell
             your data. Full privacy policy{" "}
             <a
-              href="./privacy"
+              href="https://www.spiesamong.us/privacy"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "rgb(255,55,0)" }}

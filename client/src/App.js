@@ -7,7 +7,7 @@ import Cancel from "./components/Cancel.js";
 import CompletedMissions from "./components/CompletedMissions.js";
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
-import GiftCards from "./components/GiftCards.js";
+// import GiftCards from "./components/GiftCards.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import Marble from "./components/Marble.js";
 import Mission from "./components/Mission.js";
 import Myhistory from "./components/Myhistory.js";
@@ -15,17 +15,17 @@ import Myprofile from "./components/Myprofile.js";
 import NotFound from "./components/NotFound.js";
 import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
-import Payment from "./components/Payment.js";
+// import Payment from "./components/Payment.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import PlayerProgress from "./components/PlayerProgress.js";
-import Privacy from "./components/Privacy.js";
-import Private from "./components/Private.js";
-import PrivateConfirmed from "./components/PrivateConfirmed.js";
+// import Privacy from "./components/Privacy.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
+// import Private from "./components/Private.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
+// import PrivateConfirmed from "./components/PrivateConfirmed.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 // import Start from "./components/Start.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
-import Reviews from "./components/Reviews.js";
+// import Reviews from "./components/Reviews.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import Settings from "./components/Settings.js";
-import Terms from "./components/Terms.js";
+// import Terms from "./components/Terms.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import TheMission from "./components/TheMission.js";
-import Tickets from "./components/Tickets.js";
+// import Tickets from "./components/Tickets.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import YourMission from "./components/YourMission.js";
 import YourUpdatedMission from "./components/YourUpdatedMission.js";
 
@@ -38,9 +38,6 @@ function App() {
         <Route path="/begin" exact>
           <Begin />
         </Route>
-        {/* <Route path="/start" exact>
-          <Begin />
-        </Route> */}
         <Route path="/confirmed" exact>
           <Confirmed />
         </Route>
@@ -96,30 +93,30 @@ function App() {
         <Route path="/" exact>
           <Begin />
         </Route>
-        <Route path="/privacy" exact>
+        {/* <Route path="/privacy" exact>
           <Privacy />
-        </Route>
-        <Route path="/terms" exact>
+        </Route> */}
+        {/* <Route path="/terms" exact>
           <Terms />
-        </Route>
-        <Route path="/payment" exact>
+        </Route> */}
+        {/* <Route path="/payment" exact>
           <Payment />
-        </Route>
-        <Route path="/private" exact>
+        </Route> */}
+        {/* <Route path="/private" exact>
           <Private />
-        </Route>
-        <Route path="/privateconfirmed" exact>
+        </Route> */}
+        {/* <Route path="/privateconfirmed" exact>
           <PrivateConfirmed />
-        </Route>
-        <Route path="/giftcards" exact>
+        </Route> */}
+        {/* <Route path="/giftcards" exact>
           <GiftCards />
-        </Route>
-        <Route path="/reviews" exact>
+        </Route> */}
+        {/* <Route path="/reviews" exact>
           <Reviews />
-        </Route>
-        <Route path="/tickets" exact>
+        </Route> */}
+        {/* <Route path="/tickets" exact>
           <Tickets />
-        </Route>
+        </Route> */}
 
         <Route path="*">
           <NotFound />

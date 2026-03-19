@@ -179,7 +179,7 @@ function Start() {
             <span className="checkboxLabel">
               I have read and agree to <br />
               the{" "}
-              <a href="./terms" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.spiesamong.us/terms" target="_blank" rel="noopener noreferrer">
                 terms and conditions
               </a>
               .
