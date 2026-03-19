@@ -12,6 +12,18 @@ function Opbc() {
   const [transcriptToggled, setTranscriptToggled] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Persist access across page refreshes.
+  // We intentionally store only a boolean flag (not the entered secret).
+  const OPBC_VERIFIED_KEY = "opbc_verified";
+
+  useEffect(() => {
+    const verified = localStorage.getItem(OPBC_VERIFIED_KEY);
+    if (verified === "1") {
+      // Match the existing "correct password" checks.
+      setSubmittedPassword("EGREGIOUS");
+    }
+  }, []);
+
   function handleSubmit(e) {
     e.preventDefault();
     const valueCaps = password.toUpperCase();
@@ -19,8 +31,11 @@ function Opbc() {
     setSubmittedPassword(valueCaps);
 
     if (valueCaps.includes("EGREGIOUS") || valueCaps.includes("EGREGOUS")) {
+      localStorage.setItem(OPBC_VERIFIED_KEY, "1");
       setIsAnimating(true);
       setPassword("Success!");
+    } else {
+      localStorage.removeItem(OPBC_VERIFIED_KEY);
     }
   }
 
