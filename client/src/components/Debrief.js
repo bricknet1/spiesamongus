@@ -128,8 +128,7 @@ function Debrief() {
       !<br />
       <br />
       If you did not have a great time, have feedback, or have an idea on how
-      to improve the mission, please tell us here. Please tell us about your
-      experience{" "}
+      to improve the mission, please tell us{" "}
       <a
         href="https://forms.gle/46bRLZ4QmdgKmGYW6"
         target="_blank"
@@ -290,9 +289,9 @@ function Debrief() {
       {fiveToggled === true && (
         <div style={{ marginTop: "20px" }}>
           {recsObject("IZAKAYA GAZEN", "https://maps.app.goo.gl/y2ArQaL7bTpSu3Vv7", "Huge menu, great sake list. Everything from sushi to shabu shabu to noodles.", "Signature Tofu Sampler")}
+          {recsObject("MEN OH TOKUSHIMA RAMEN", "https://maps.app.goo.gl/9Z8LxESvLfm597te9", "Super tasty pork bone broth cooked for 16 hours! Ask for free togarashi to sprinkle on top.", "Tokushima Ramen")}
           {recsObject("SHIN-SEN-GUMI HAKATA RAMEN", "https://maps.app.goo.gl/wHAwj2jXGbWjSH7P6", "Great ramen with lots of topping options", "Spicy Hakata Dandan Men Ramen")}
           {recsObject("BADMAASH", "https://maps.app.goo.gl/hcLXCQqZzFNmWeNV9", "Classic Indian menu spruced up with inventive fusion items", "Goan Pork Curry")}
-          {recsObject("RAKKAN RAMEN", "https://maps.app.goo.gl/S2jq33aQDnA8NxZy7", "Offers yummy Vegetarian & Vegan Ramen", "Garnet Ramen")}
         </div>
       )}
 
