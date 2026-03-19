@@ -319,7 +319,7 @@ strong {
   justify-content: center;
   line-height: 0;
   /* background: #f9df39; */
-  background: rgb(33, 23, 76);
+  background: transparent;
   /* border: 1px solid #f9df39; */
   border: none;
   cursor: pointer;
