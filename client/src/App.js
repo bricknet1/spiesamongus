@@ -7,7 +7,6 @@ import Cancel from "./components/Cancel.js";
 import CompletedMissions from "./components/CompletedMissions.js";
 import Confirmed from "./components/Confirmed.js";
 import Debrief from "./components/Debrief.js";
-// import GiftCards from "./components/GiftCards.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import Marble from "./components/Marble.js";
 import Mission from "./components/Mission.js";
 import Myhistory from "./components/Myhistory.js";
@@ -15,19 +14,21 @@ import Myprofile from "./components/Myprofile.js";
 import NotFound from "./components/NotFound.js";
 import ObeliskTerms from "./components/ObeliskTerms.js";
 import Opbc from "./components/Opbc.js";
-// import Payment from "./components/Payment.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 import PlayerProgress from "./components/PlayerProgress.js";
+import Settings from "./components/Settings.js";
+import TheMission from "./components/TheMission.js";
+import YourMission from "./components/YourMission.js";
+import YourUpdatedMission from "./components/YourUpdatedMission.js";
+
+// import GiftCards from "./components/GiftCards.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
+// import Payment from "./components/Payment.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 // import Privacy from "./components/Privacy.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 // import Private from "./components/Private.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 // import PrivateConfirmed from "./components/PrivateConfirmed.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 // import Start from "./components/Start.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
 // import Reviews from "./components/Reviews.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
-import Settings from "./components/Settings.js";
 // import Terms from "./components/Terms.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
-import TheMission from "./components/TheMission.js";
 // import Tickets from "./components/Tickets.js"; THIS HAS BEEN INTENTIONALLY DEPRECATED
-import YourMission from "./components/YourMission.js";
-import YourUpdatedMission from "./components/YourUpdatedMission.js";
 
 function App() {
   return (

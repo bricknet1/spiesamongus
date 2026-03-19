@@ -169,6 +169,31 @@ def update_settings():
     save_settings(data)
     return jsonify({"status": "success", "data": data})
 
+@app.route('/api/settings', methods=['DELETE'])
+def delete_all_data():
+    """
+    Admin endpoint: completely clear stored data.
+    Clears ONLY `settings` (does not modify `player_progress`).
+    """
+    if not check_auth():
+        return jsonify({"error": "Unauthorized"}), 401
+
+    try:
+        # Ensure schema exists (helps if the DB file was recreated/reset externally).
+        init_db()
+
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+
+        c.execute("DELETE FROM settings")
+
+        conn.commit()
+        conn.close()
+
+        return jsonify({"status": "success", "cleared": "settings"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 def generate_group_id(data):
     """Generate a unique group identifier based on player 1's phone number"""
     # Try player1_phone, phone, and player1 formats (for form data compatibility)

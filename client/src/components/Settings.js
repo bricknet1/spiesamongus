@@ -67,14 +67,38 @@ function Settings() {
           if (!data[actorRolesKey] || typeof data[actorRolesKey] !== "object") {
             data[actorRolesKey] = {};
           }
+
+          // Enforce uniqueness at load time (max 1 Marble, max 1 Handler)
+          const indexMap = new Map(allActors.map((a, i) => [a, i]));
+          const normalizeUniqueRole = (roleName) => {
+            const rolesObj = data[actorRolesKey] || {};
+            const actorsWithRole = Object.keys(rolesObj).filter(
+              (a) => rolesObj[a] === roleName
+            );
+            if (actorsWithRole.length <= 1) return;
+
+            // Keep the earliest actor in our UI ordering; turn the rest Off.
+            actorsWithRole.sort(
+              (a, b) =>
+                (indexMap.get(a) ?? Number.MAX_SAFE_INTEGER) -
+                (indexMap.get(b) ?? Number.MAX_SAFE_INTEGER)
+            );
+
+            actorsWithRole.slice(1).forEach((a) => {
+              delete rolesObj[a];
+            });
+
+            data[actorRolesKey] = rolesObj;
+          };
+
+          normalizeUniqueRole("Marble");
+          normalizeUniqueRole("Handler");
           
           // Derive activeActors from actorRoles
-          if (!Array.isArray(data[activeActorsKey])) {
-            data[activeActorsKey] = Object.keys(data[actorRolesKey] || {}).filter(
-              (actor) =>
-                data[actorRolesKey][actor] && data[actorRolesKey][actor] !== "Off"
-            );
-          }
+          data[activeActorsKey] = Object.keys(data[actorRolesKey] || {}).filter(
+            (actor) =>
+              data[actorRolesKey][actor] && data[actorRolesKey][actor] !== "Off"
+          );
           
           // Initialize subdomain-specific wardrobe
           const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
@@ -101,6 +125,15 @@ function Settings() {
       // Remove actor from roles if set to Off
       delete newActorRoles[actor];
     } else {
+      // Enforce uniqueness:
+      // - Only one actor can be assigned "Marble"
+      // - Only one actor can be assigned "Handler"
+      Object.keys(newActorRoles).forEach((a) => {
+        if (a !== actor && newActorRoles[a] === role) {
+          delete newActorRoles[a];
+        }
+      });
+
       // Set actor role
       newActorRoles[actor] = role;
     }
@@ -147,17 +180,39 @@ function Settings() {
             if (!updatedData[actorRolesKey] || typeof updatedData[actorRolesKey] !== "object") {
               updatedData[actorRolesKey] = {};
             }
+
+            // Enforce uniqueness after saving (max 1 Marble, max 1 Handler)
+            const indexMap = new Map(allActors.map((a, i) => [a, i]));
+            const normalizeUniqueRole = (roleName) => {
+              const rolesObj = updatedData[actorRolesKey] || {};
+              const actorsWithRole = Object.keys(rolesObj).filter(
+                (a) => rolesObj[a] === roleName
+              );
+              if (actorsWithRole.length <= 1) return;
+
+              actorsWithRole.sort(
+                (a, b) =>
+                  (indexMap.get(a) ?? Number.MAX_SAFE_INTEGER) -
+                  (indexMap.get(b) ?? Number.MAX_SAFE_INTEGER)
+              );
+
+              actorsWithRole.slice(1).forEach((a) => {
+                delete rolesObj[a];
+              });
+
+              updatedData[actorRolesKey] = rolesObj;
+            };
+
+            normalizeUniqueRole("Marble");
+            normalizeUniqueRole("Handler");
             
             // Derive activeActors from actorRoles
-            if (!Array.isArray(updatedData[activeActorsKey])) {
-              updatedData[activeActorsKey] = Object.keys(
-                updatedData[actorRolesKey] || {}
-              ).filter(
+            updatedData[activeActorsKey] = Object.keys(updatedData[actorRolesKey] || {})
+              .filter(
                 (actor) =>
                   updatedData[actorRolesKey][actor] &&
                   updatedData[actorRolesKey][actor] !== "Off"
               );
-            }
             
             // Initialize subdomain-specific wardrobe
             const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
