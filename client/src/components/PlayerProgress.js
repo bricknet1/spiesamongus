@@ -338,6 +338,7 @@ function PlayerProgress() {
           >
             {progressData.map((progress, index) => {
               const isExpanded = expandedGroups.has(progress.id);
+              const selfieThumbSrc = progress.selfie || progress.selfie_path;
               return (
                 <div
                   key={progress.id}
@@ -361,13 +362,35 @@ function PlayerProgress() {
                       alignItems: "center",
                     }}
                   >
-                    <span>
-                      {progress.player1_name || "N/A"} -{" "}
-                      {progress.number_of_players || "N/A"} Players
-                      {progress.current_act && (
-                        <span style={{ fontSize: "4vw", marginLeft: "2vw" }}>
-                          | {mapActValue(progress.current_act)}
-                        </span>
+                    <span style={{ display: "flex", alignItems: "center", gap: "2vw" }}>
+                      <span>
+                        {progress.player1_name || "N/A"} -{" "}
+                        {progress.number_of_players || "N/A"} Players
+                        {progress.current_act && (
+                          <span style={{ fontSize: "4vw", marginLeft: "2vw" }}>
+                            | {mapActValue(progress.current_act)}
+                          </span>
+                        )}
+                      </span>
+                      {!isExpanded && selfieThumbSrc && (
+                        <img
+                          src={selfieThumbSrc}
+                          alt="Team Selfie thumbnail"
+                          style={{
+                            width: "10vw",
+                            height: "10vw",
+                            objectFit: "cover",
+                            borderRadius: "0.5vw",
+                            cursor: "pointer",
+                            border: "1px solid #444",
+                            flexShrink: 0,
+                            transform: "translateX(-1vw)",
+                          }}
+                          // onClick={(e) => {
+                          //   e.stopPropagation();
+                          //   window.open(selfieThumbSrc, "_blank");
+                          // }}
+                        />
                       )}
                     </span>
                     <span style={{ fontSize: "4vw" }}>
