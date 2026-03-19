@@ -318,11 +318,13 @@ strong {
   align-items: center;
   justify-content: center;
   line-height: 0;
-  background: #f9df39;
-  border: 1px solid #f9df39;
+  /* background: #f9df39; */
+  background: rgb(33, 23, 76);
+  /* border: 1px solid #f9df39; */
   cursor: pointer;
   z-index: 1001;
-  color: rgb(33, 23, 76);
+  /* color: rgb(33, 23, 76); */
+  color: #f9df39;
   border-radius: 7px;
 }
 
