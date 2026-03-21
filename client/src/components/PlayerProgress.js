@@ -360,18 +360,37 @@ function PlayerProgress() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
+                      gap: "2vw",
                     }}
                   >
-                    <span style={{ display: "flex", alignItems: "center", gap: "2vw" }}>
+                    <div
+                      style={{
+                        flex: 1,
+                        minWidth: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: "0.5vw",
+                      }}
+                    >
                       <span>
                         {progress.player1_name || "N/A"} -{" "}
                         {progress.number_of_players || "N/A"} Players
-                        {progress.current_act && (
-                          <span style={{ fontSize: "4vw", marginLeft: "2vw" }}>
-                            | {mapActValue(progress.current_act)}
-                          </span>
-                        )}
                       </span>
+                      {progress.current_act && (
+                        <span style={{ fontSize: "4vw" }}>
+                          {mapActValue(progress.current_act)}
+                        </span>
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "2vw",
+                        flexShrink: 0,
+                      }}
+                    >
                       {!isExpanded && selfieThumbSrc && (
                         <img
                           src={selfieThumbSrc}
@@ -384,7 +403,6 @@ function PlayerProgress() {
                             cursor: "pointer",
                             border: "1px solid #444",
                             flexShrink: 0,
-                            transform: "translateX(-1vw)",
                           }}
                           // onClick={(e) => {
                           //   e.stopPropagation();
@@ -392,10 +410,10 @@ function PlayerProgress() {
                           // }}
                         />
                       )}
-                    </span>
-                    <span style={{ fontSize: "4vw" }}>
-                      {isExpanded ? "▼" : "▶"}
-                    </span>
+                      <span style={{ fontSize: "4vw", lineHeight: 1 }}>
+                        {isExpanded ? "▼" : "▶"}
+                      </span>
+                    </div>
                   </div>
 
                   {isExpanded && (
