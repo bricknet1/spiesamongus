@@ -431,6 +431,45 @@ function Marble() {
           Agent Marble is ...
         </div>
 
+        {areAllWordsSolved() ? (
+          <div className="marbleInstructions">SUCCESS!</div>
+        ) : null}
+
+        {areAllWordsSolved() ? (
+          <div
+            className="marbleCompletionMessage"
+            style={{
+              border: isBorderVisible
+                ? "2px solid red"
+                : "2px solid transparent", // Apply border conditionally
+              padding: "10px", // Optional: Adjust spacing for better appearance
+            }}
+          >
+            NOW TEXT PAPYRUS
+            <br />
+            "READY FOR ACTION"
+          </div>
+        ) : (
+          <div className="lettersContainer">
+            {availableLetters.map((item, index) => (
+              <button
+                key={`${item.id}-${item.letter}-${index}`}
+                value={item.letter}
+                data-id={item.id}
+                onClick={handleLetterSelect}
+                className="marbleButton"
+                style={{
+                  backgroundColor:
+                    selectedLetter?.id === item.id ? "#FF3700" : "white",
+                  color: selectedLetter?.id === item.id ? "white" : "black",
+                }}
+              >
+                {item.letter}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="puzzleContainer">
           <div className="marbleUpperFlex">
             <div className="swanNecklaceContainer">
@@ -883,7 +922,7 @@ function Marble() {
               <img src={yellowMan} className="yellowMan" alt="walking man" />
               {isFirstLetterPlaced ? null : (
                 <div className="marblePuzzleInstructions">
-                  Tap a letter below, then tap the space where it belongs
+                  Tap a letter above, then tap the space where it belongs
                 </div>
               )}
             </div>
@@ -898,45 +937,6 @@ function Marble() {
             Tap a letter below and then tap the space where it belongs above!
           </div>
         )} */}
-
-          {areAllWordsSolved() ? (
-            <div className="marbleInstructions">SUCCESS!</div>
-          ) : null}
-
-          {areAllWordsSolved() ? (
-            <div
-              className="marbleCompletionMessage"
-              style={{
-                border: isBorderVisible
-                  ? "2px solid red"
-                  : "2px solid transparent", // Apply border conditionally
-                padding: "10px", // Optional: Adjust spacing for better appearance
-              }}
-            >
-              NOW TEXT PAPYRUS
-              <br />
-              "READY FOR ACTION"
-            </div>
-          ) : (
-            <div className="lettersContainer">
-              {availableLetters.map((item, index) => (
-                <button
-                  key={`${item.id}-${item.letter}-${index}`}
-                  value={item.letter}
-                  data-id={item.id}
-                  onClick={handleLetterSelect}
-                  className="marbleButton"
-                  style={{
-                    backgroundColor:
-                      selectedLetter?.id === item.id ? "#FF3700" : "white",
-                    color: selectedLetter?.id === item.id ? "white" : "black",
-                  }}
-                >
-                  {item.letter}
-                </button>
-              ))}
-            </div>
-          )}
 
           <br />
 

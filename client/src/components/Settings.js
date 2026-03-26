@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
@@ -11,7 +10,6 @@ function Settings() {
   const [passwordInput, setPasswordInput] = useState("");
   const [settings, setSettings] = useState(null);
   const [error, setError] = useState("");
-  const history = useHistory();
   const subdomain = useSubdomain();
 
   const isLoggedIn = !!token;

@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from "react";
-import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
@@ -13,7 +12,6 @@ function CompletedMissions() {
   const [loading, setLoading] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState(new Set());
   const [deletingTeam, setDeletingTeam] = useState(null);
-  const history = useHistory();
 
   const isLoggedIn = !!token;
 
