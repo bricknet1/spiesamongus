@@ -1,5 +1,13 @@
 import { useSubdomain } from "./SubdomainProvider.js";
 
+/** Body for POST /api/login — server picks password + token by site. */
+export function adminLoginPayload(password, subdomain) {
+  return JSON.stringify({
+    password,
+    subdomain: subdomain === "seattle" ? "seattle" : "app",
+  });
+}
+
 function AdminLogin({ pageTitle, passwordInput, setPasswordInput, onLogin, error }) {
   const subdomain = useSubdomain();
   const locationName = subdomain === "seattle" ? "Seattle" : "Los Angeles";

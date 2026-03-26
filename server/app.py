@@ -22,11 +22,16 @@ CORS(app, origins=["http://localhost:3000", "https://spiesamongus.onrender.com",
 
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 AUTH_TOKEN = os.getenv("AUTH_TOKEN")
+# Optional: separate Seattle admin login (defaults to app credentials if unset)
+ADMIN_PASSWORD_SEATTLE = os.getenv("ADMIN_PASSWORD_SEATTLE") or ADMIN_PASSWORD
+AUTH_TOKEN_SEATTLE = os.getenv("AUTH_TOKEN_SEATTLE") or AUTH_TOKEN
 
 if not ADMIN_PASSWORD:
     raise ValueError("ADMIN_PASSWORD environment variable must be set")
 if not AUTH_TOKEN:
     raise ValueError("AUTH_TOKEN environment variable must be set")
+
+_ADMIN_TOKENS = frozenset({AUTH_TOKEN, AUTH_TOKEN_SEATTLE})
 
 DB_PATH = 'settings.db'
 
@@ -42,12 +47,12 @@ def check_auth():
     
     # Debug logging
     if debug:
-        print(f"DEBUG: Auth check - token received: '{token}', AUTH_TOKEN: '{AUTH_TOKEN}', match: {token == AUTH_TOKEN}")
+        print(f"DEBUG: Auth check - token received: '{token}', valid: {token in _ADMIN_TOKENS}")
         print(f"DEBUG: Query params: {dict(request.args)}")
         print(f"DEBUG: Auth header: '{auth_header}'")
     
     # Return True only if token matches and is not empty
-    return bool(token) and token == AUTH_TOKEN
+    return bool(token) and token in _ADMIN_TOKENS
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -139,8 +144,14 @@ def login():
     if len(failed_attempts[ip]) >= MAX_ATTEMPTS:
         return jsonify({"error": "Too many attempts. Try again later."}), 429
 
-    data = request.get_json()
-    if data.get('password') == ADMIN_PASSWORD:
+    data = request.get_json() or {}
+    password = data.get("password")
+    site = data.get("subdomain") or "app"
+
+    if site == "seattle":
+        if password == ADMIN_PASSWORD_SEATTLE:
+            return jsonify({"token": AUTH_TOKEN_SEATTLE})
+    elif password == ADMIN_PASSWORD:
         return jsonify({"token": AUTH_TOKEN})
 
     failed_attempts[ip].append(now)
@@ -156,7 +167,7 @@ def get_settings():
     
     # If a token is provided (either in header or query), validate it
     token = header_token or query_token
-    if token and token != AUTH_TOKEN:
+    if token and token not in _ADMIN_TOKENS:
         return jsonify({"error": "Unauthorized"}), 401
     
     return jsonify(load_settings())

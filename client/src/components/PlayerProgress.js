@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
-import AdminLogin from "./AdminLogin.js";
+import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
 
 function PlayerProgress() {
@@ -23,7 +23,7 @@ function PlayerProgress() {
     fetch(`${API_URL}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: passwordInput }),
+      body: adminLoginPayload(passwordInput, subdomain),
     })
       .then((res) => {
         if (!res.ok) throw new Error("Login failed");
