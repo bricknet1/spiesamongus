@@ -148,7 +148,7 @@ function Begin() {
     validationSchema: formSchema,
     validateOnChange: false,
     validateOnBlur: true,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("Submitted values:", values);
 
       // Transform form data to match API format
@@ -175,64 +175,66 @@ function Begin() {
         subdomain: subdomain,
       };
 
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const API_URL =
+        process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
       // Determine webhook URL based on subdomain
-      const webhookUrl = subdomain === "seattle" 
-        ? "https://hook.us2.make.com/fdu9p6lsanzdmm7ux212l2jdg2o12nns"
-        : "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6";
+      const webhookUrl =
+        subdomain === "seattle"
+          ? "https://hook.us2.make.com/fdu9p6lsanzdmm7ux212l2jdg2o12nns"
+          : "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6";
 
-      // Call make webhook first
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: values }),
-      })
-        .then((makeResponse) => {
-          // Check if make webhook returned 200
-          if (makeResponse.status === 200) {
-            console.log("Make webhook successful:", makeResponse);
-            
-            // Only call API webhook if make webhook returned 200
-            return fetch(`${API_URL}/api/webhook/player-progress`, {
+      try {
+        // Call make webhook first
+        const makeResponse = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: values }),
+        });
+
+        // Check if make webhook returned 200
+        if (makeResponse.status !== 200) {
+          throw new Error(
+            `Make webhook returned status ${makeResponse.status} - A mission with this phone number is already in progress, please cancel that mission before trying to create a new one.`
+          );
+        }
+
+        console.log("Make webhook successful:", makeResponse);
+
+        // Only call API webhook if make webhook returned 200
+        try {
+          const apiResponse = await fetch(
+            `${API_URL}/api/webhook/player-progress`,
+            {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                ...(AUTH_TOKEN && { Authorization: `Bearer ${AUTH_TOKEN}` }),
+                ...(AUTH_TOKEN && {
+                  Authorization: `Bearer ${AUTH_TOKEN}`,
+                }),
               },
               body: JSON.stringify(apiData),
-            })
-              .then((apiResponse) => {
-                return apiResponse.json().then((data) => {
-                  console.log("API webhook response:", data);
-                  return { makeResponse, apiResponse: data };
-                });
-              })
-              .catch((err) => {
-                console.warn("API webhook error (non-blocking):", err);
-                return { makeResponse, apiResponse: null };
-              });
-          } else {
-            // Make webhook did not return 200, don't call API webhook
-            throw new Error(
-              `Make webhook returned status ${makeResponse.status} - A mission with this phone number is already in progress, please cancel that mission before trying to create a new one.`
-            );
-          }
-        })
-        .then((results) => {
-          // Success: make webhook returned 200 (and API webhook was called)
-          console.log("successful response", results.makeResponse);
-          history.push("/confirmed");
-        })
-        .catch((error) => {
-          // Error: make webhook failed or returned non-200
-          const errorMsg = error.message || "Unknown error";
-          console.error("Make webhook error:", errorMsg);
-          alert(`Error: ${errorMsg}`);
-        });
+            }
+          );
+
+          const data = await apiResponse.json();
+          console.log("API webhook response:", data);
+        } catch (err) {
+          // Keep the mission signup moving even if the API webhook fails.
+          console.warn("API webhook error (non-blocking):", err);
+        }
+
+        // Success: make webhook returned 200 (and API webhook was called)
+        history.push("/confirmed");
+      } catch (error) {
+        // Error: make webhook failed or returned non-200
+        const errorMsg = error?.message || "Unknown error";
+        console.error("Make webhook error:", errorMsg);
+        alert(`Error: ${errorMsg}`);
+      }
     },
   });
   console.log("Form Values:", formik.values);
@@ -566,7 +568,12 @@ function Begin() {
 
         <br />
         <br />
-        <input type="submit" value="Begin Mission" className="submitButton" />
+        <input
+          type="submit"
+          value={formik.isSubmitting ? "Submitted!" : "Begin Mission"}
+          className="submitButton"
+          disabled={formik.isSubmitting}
+        />
         {/* {error&& <h3 style={{color:'#ff3700'}}> {error}</h3>} */}
       </form>
     </div>
