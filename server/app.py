@@ -75,6 +75,10 @@ def init_db():
             player3_phone TEXT,
             player4_name TEXT,
             player4_phone TEXT,
+            player5_name TEXT,
+            player5_phone TEXT,
+            player6_name TEXT,
+            player6_phone TEXT,
             number_of_players TEXT,
             start_time TEXT,
             current_act TEXT,
@@ -85,22 +89,14 @@ def init_db():
             special_event TEXT,
             selfie_path TEXT,
             nostairs INTEGER DEFAULT 0,
+            subdomain TEXT,
             last_updated TEXT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     ''')
-    # Add nostairs column if it doesn't exist (for existing databases)
-    try:
-        c.execute('ALTER TABLE player_progress ADD COLUMN nostairs INTEGER DEFAULT 0')
-    except sqlite3.OperationalError:
-        # Column already exists, ignore
-        pass
-    # Add subdomain column if it doesn't exist (for existing databases)
-    try:
-        c.execute('ALTER TABLE player_progress ADD COLUMN subdomain TEXT')
-    except sqlite3.OperationalError:
-        # Column already exists, ignore
-        pass
+    # If player_progress already exists from an older schema, CREATE TABLE IF NOT EXISTS
+    # will not update it. Remove settings.db once, or: DROP TABLE player_progress;
+    # then restart so this full schema is applied (destroys stored missions).
     conn.commit()
     conn.close()
 
@@ -314,9 +310,10 @@ def webhook_player_progress():
             INSERT INTO player_progress (
                 group_id, player1_name, player1_phone, player2_name, player2_phone,
                 player3_name, player3_phone, player4_name, player4_phone,
+                player5_name, player5_phone, player6_name, player6_phone,
                 number_of_players, start_time, current_act, texts, end_path,
                 selfie, marbleselfie, special_event, selfie_path, nostairs, subdomain, last_updated, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             group_id,
             data.get('player1_name', ''),
@@ -327,6 +324,10 @@ def webhook_player_progress():
             data.get('player3_phone', ''),
             data.get('player4_name', ''),
             data.get('player4_phone', ''),
+            data.get('player5_name', ''),
+            data.get('player5_phone', ''),
+            data.get('player6_name', ''),
+            data.get('player6_phone', ''),
             data.get('number_of_players', ''),
             start_time,
             data.get('current_act', ''),
@@ -406,7 +407,8 @@ def update_player_progress():
                     c.execute('''
                         SELECT group_id, texts FROM player_progress
                         WHERE player1_phone = ? OR player2_phone = ? OR player3_phone = ? OR player4_phone = ?
-                    ''', (phone, phone, phone, phone))
+                           OR player5_phone = ? OR player6_phone = ?
+                    ''', (phone, phone, phone, phone, phone, phone))
                     group = c.fetchone()
                     
                     if group:
@@ -490,6 +492,7 @@ def update_player_progress():
         updatable_fields = [
             'player1_name', 'player1_phone', 'player2_name', 'player2_phone',
             'player3_name', 'player3_phone', 'player4_name', 'player4_phone',
+            'player5_name', 'player5_phone', 'player6_name', 'player6_phone',
             'number_of_players', 'start_time', 'current_act', 'texts',
             'end_path', 'selfie', 'marbleselfie', 'special_event', 'selfie_path', 'nostairs', 'subdomain'
         ]
@@ -499,7 +502,7 @@ def update_player_progress():
         # Map 'phone' to 'player1_phone' (preferred format)
         if 'phone' in data and 'player1_phone' not in data:
             field_mapping['player1_phone'] = data['phone']
-        for i in range(1, 5):
+        for i in range(1, 7):
             if f'player{i}' in data and f'player{i}_phone' not in data:
                 field_mapping[f'player{i}_phone'] = data[f'player{i}']
         
@@ -643,7 +646,8 @@ def delete_player_progress():
                 c.execute('''
                     SELECT group_id FROM player_progress
                     WHERE player1_phone = ? OR player2_phone = ? OR player3_phone = ? OR player4_phone = ?
-                ''', (single_phone, single_phone, single_phone, single_phone))
+                       OR player5_phone = ? OR player6_phone = ?
+                ''', (single_phone, single_phone, single_phone, single_phone, single_phone, single_phone))
                 group = c.fetchone()
                 
                 if group:
@@ -679,6 +683,7 @@ def get_player_progress():
         c.execute('''
             SELECT id, group_id, player1_name, player1_phone, player2_name, player2_phone,
                    player3_name, player3_phone, player4_name, player4_phone,
+                   player5_name, player5_phone, player6_name, player6_phone,
                    number_of_players, start_time, current_act, texts, end_path,
                    selfie, marbleselfie, special_event, selfie_path, nostairs, subdomain,
                    last_updated, created_at
@@ -692,14 +697,14 @@ def get_player_progress():
         for row in rows:
             # Parse texts JSON string back to array
             texts_data = []
-            if row[13]:  # texts column
+            if row[17]:  # texts column
                 try:
-                    texts_data = json.loads(row[13])
+                    texts_data = json.loads(row[17])
                 except:
                     texts_data = []
             
             # Convert nostairs from SQLite integer (0/1) to boolean
-            nostairs_value = bool(row[19]) if row[19] is not None else False
+            nostairs_value = bool(row[23]) if row[23] is not None else False
             
             progress_list.append({
                 "id": row[0],
@@ -712,19 +717,23 @@ def get_player_progress():
                 "player3_phone": row[7],
                 "player4_name": row[8],
                 "player4_phone": row[9],
-                "number_of_players": row[10],
-                "start_time": row[11],
-                "current_act": row[12],
+                "player5_name": row[10],
+                "player5_phone": row[11],
+                "player6_name": row[12],
+                "player6_phone": row[13],
+                "number_of_players": row[14],
+                "start_time": row[15],
+                "current_act": row[16],
                 "texts": texts_data,
-                "end_path": row[14],
-                "selfie": row[15],
-                "marbleselfie": row[16],
-                "special_event": row[17],
-                "selfie_path": row[18],
+                "end_path": row[18],
+                "selfie": row[19],
+                "marbleselfie": row[20],
+                "special_event": row[21],
+                "selfie_path": row[22],
                 "nostairs": nostairs_value,
-                "subdomain": row[20],
-                "last_updated": row[21],
-                "created_at": row[22]
+                "subdomain": row[24],
+                "last_updated": row[25],
+                "created_at": row[26]
             })
         
         # Always return JSON
