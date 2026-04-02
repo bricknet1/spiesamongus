@@ -315,6 +315,22 @@ function CompletedMissions() {
                             {progress.player4_phone || "N/A"})
                           </div>
                         )}
+                        {progress.player5_name && (
+                          <div
+                            style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
+                          >
+                            <strong>Player 5:</strong> {progress.player5_name} (
+                            {progress.player5_phone || "N/A"})
+                          </div>
+                        )}
+                        {progress.player6_name && (
+                          <div
+                            style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
+                          >
+                            <strong>Player 6:</strong> {progress.player6_name} (
+                            {progress.player6_phone || "N/A"})
+                          </div>
+                        )}
                       </div>
 
                       {/* Game Progress */}

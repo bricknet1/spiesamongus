@@ -236,6 +236,10 @@ function PlayerProgress() {
                   phone3: extractPhoneDigits(progress.player3_phone),
                   name4: progress.player4_name || "",
                   phone4: extractPhoneDigits(progress.player4_phone),
+                  name5: progress.player5_name || "",
+                  phone5: extractPhoneDigits(progress.player5_phone),
+                  name6: progress.player6_name || "",
+                  phone6: extractPhoneDigits(progress.player6_phone),
                   numberofplayers: String(progress.number_of_players || "1"),
                   act: mapActValue(progress.current_act),
                   nostairs: progress.nostairs || false, // Use stored value from database
@@ -470,6 +474,22 @@ function PlayerProgress() {
                           >
                             <strong>Player 4:</strong> {progress.player4_name} (
                             {progress.player4_phone || "N/A"})
+                          </div>
+                        )}
+                        {progress.player5_name && (
+                          <div
+                            style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
+                          >
+                            <strong>Player 5:</strong> {progress.player5_name} (
+                            {progress.player5_phone || "N/A"})
+                          </div>
+                        )}
+                        {progress.player6_name && (
+                          <div
+                            style={{ fontSize: "4vw", marginBottom: "0.5vw" }}
+                          >
+                            <strong>Player 6:</strong> {progress.player6_name} (
+                            {progress.player6_phone || "N/A"})
                           </div>
                         )}
                       </div>
