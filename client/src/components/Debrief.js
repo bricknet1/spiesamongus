@@ -718,11 +718,19 @@ function Debrief() {
         <br />
         Molly Anderson
         <br />
+        Emily Bell
+        <br />
         Benjamin Berk
         <br />
         Brian Biancardi
         <br />
+        David Bjånes
+        <br />
+        Eric Braband
+        <br />
         Serena Bright
+        <br />
+        Jonathan Cloughsey
         <br />
         Becky Cumberland
         <br />
@@ -733,6 +741,8 @@ function Debrief() {
         Rachel Donley
         <br />
         Valerie Gansel
+        <br />
+        Dustin Giallanza
         <br />
         Alex Haney
         <br />
@@ -748,6 +758,8 @@ function Debrief() {
         <br />
         Tim Lamphier
         <br />
+        Jes McBride
+        <br />
         Phil Meister
         <br />
         Geremy Mumenthaler
@@ -759,6 +771,8 @@ function Debrief() {
         Jordan Nomura
         <br />
         Erin Rein
+        <br />
+        Chelsea Richer
         <br />
         James Ross
         <br />
@@ -772,11 +786,17 @@ function Debrief() {
         <br />
         Christine Shedd-Thompson
         <br />
+        Mary Beth Smith
+        <br />
         Jen Staben
         <br />
         Victoria Strange
         <br />
         Meaghan Strickland
+        <br />
+        Corey Topkis
+        <br />
+        Jake Topkis
         <br />
         Nina Zhao
       </div>
