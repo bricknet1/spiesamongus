@@ -300,8 +300,8 @@ function Bypass() {
         ? "https://hook.us2.make.com/fdu9p6lsanzdmm7ux212l2jdg2o12nns"
         : "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6";
 
-      // Call make webhook first
-      fetch(webhookUrl, {
+      // Call make webhook first (return promise so Formik keeps isSubmitting true until done)
+      return fetch(webhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -771,7 +771,12 @@ function Bypass() {
 
         <br />
         <br />
-        <input type="submit" value="Begin Mission" className="submitButton" />
+        <input
+          type="submit"
+          value={formik.isSubmitting ? "Submitted!" : "Begin Mission"}
+          className="submitButton"
+          disabled={formik.isSubmitting}
+        />
       </form>
     </div>
   );
