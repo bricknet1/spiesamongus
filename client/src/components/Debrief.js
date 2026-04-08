@@ -661,6 +661,19 @@ function Debrief() {
       <div className="debrief-names">Prescott Gadd</div>
       <br />
       <br />
+      <div className="debrief-titles">Senior Developer</div>
+      <div className="debrief-names">
+        <a
+          href="https://www.linkedin.com/in/nickjohnson-losangeles/"
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: "white" }}
+        >
+          Nick Johnson
+        </a>
+      </div>
+      <br />
+      <br />
       <div className="debrief-titles">Operations by</div>
       <div className="debrief-names">Jen Staben</div>
       <br />
@@ -674,19 +687,6 @@ function Debrief() {
           style={{ color: "white" }}
         >
           Curtiss Calleo
-        </a>
-      </div>
-      <br />
-      <br />
-      <div className="debrief-titles">Senior Developer</div>
-      <div className="debrief-names">
-        <a
-          href="https://www.linkedin.com/in/nickjohnson-losangeles/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          Nick Johnson
         </a>
       </div>
       <br />
