@@ -44,7 +44,7 @@ function SocialFooter() {
           style={iconStyle}
         ></img>
       </a>
-      <div>2025 Interactive Escapes</div>
+      <div>2026 Interactive Escapes</div>
     </div>
   );
 }
