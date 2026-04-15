@@ -4,6 +4,19 @@ import VisitedPagesMenu from "./VisitedPagesMenu.js";
 import { useSubdomain } from "./SubdomainProvider.js";
 import yellowMan from "../assets/pictures/stickfigureyellowwalk.png";
 
+/** Merge saved pool with wardrobe initial order; used slots stay as { letter: null, id }. */
+function normalizeAvailableLetters(saved, initial) {
+  if (!initial || initial.length === 0) return [];
+  const byId = new Map((saved || []).map((s) => [s.id, s]));
+  return initial.map((init) => {
+    const found = byId.get(init.id);
+    if (found && found.letter != null && found.letter !== "") {
+      return { letter: found.letter, id: init.id };
+    }
+    return { letter: null, id: init.id };
+  });
+}
+
 function Marble() {
   const [settings, setSettings] = useState(null);
   const subdomain = useSubdomain();
@@ -131,24 +144,34 @@ function Marble() {
     if (savedPuzzleWords && savedAvailableLetters) {
       console.log("Setting words from localStorage...");
       setPuzzleWords(savedPuzzleWords);
-      setAvailableLetters(savedAvailableLetters);
       setSettings(savedSettings);
       
       // Get subdomain-specific wardrobe
       const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
       const currentWardrobe = (savedSettings && savedSettings[wardrobeKey]) ? savedSettings[wardrobeKey] : "Jeans";
       
+      let initialLettersForPool = jeansInitialLetters;
       if (currentWardrobe === "Jeans") {
         setInitialPuzzleWords(jeansInitialWords);
         setInitialAvailableLetters(jeansInitialLetters);
+        initialLettersForPool = jeansInitialLetters;
       } else if (currentWardrobe === "Shorts") {
         setInitialPuzzleWords(shortsInitialWords);
         setInitialAvailableLetters(shortsInitialLetters);
+        initialLettersForPool = shortsInitialLetters;
       } else {
         // Default to Jeans if wardrobe is not set or invalid
         setInitialPuzzleWords(jeansInitialWords);
         setInitialAvailableLetters(jeansInitialLetters);
+        initialLettersForPool = jeansInitialLetters;
       }
+
+      const normalizedLetters = normalizeAvailableLetters(
+        savedAvailableLetters,
+        initialLettersForPool
+      );
+      setAvailableLetters(normalizedLetters);
+
       if (
         savedAvailableLetters !== jeansInitialLetters &&
         savedAvailableLetters !== shortsInitialLetters
@@ -248,6 +271,7 @@ function Marble() {
   function handleLetterSelect(e) {
     e.preventDefault();
     const { value, dataset } = e.target;
+    if (!value) return;
     const id = parseInt(dataset.id, 10);
     setSelectedLetter({ letter: value, id }); // Track the letter and its ID
   }
@@ -277,9 +301,11 @@ function Marble() {
         };
       });
 
-      // Remove the selected letter from available letters
+      // Leave an empty slot where the letter was (fixed pool layout)
       setAvailableLetters((prevLetters) =>
-        prevLetters.filter((item) => item.id !== selectedLetter.id)
+        prevLetters.map((item) =>
+          item.id === selectedLetter.id ? { ...item, letter: null } : item
+        )
       );
 
       setSelectedLetter(null); // Clear the selected letter
@@ -308,20 +334,28 @@ function Marble() {
         "_" +
         currentWord.slice(wordIndex + 1);
 
-      // Add the removed letter back to available letters with a unique ID
+      // Restore the letter into its original pool slot (empty slot with matching id)
       setAvailableLetters((prevLetters) => {
-        const usedIds = new Set(prevLetters.map((l) => l.id)); // Track used IDs
+        const usedIds = new Set(
+          prevLetters
+            .filter((slot) => slot.letter != null && slot.letter !== "")
+            .map((slot) => slot.id)
+        );
 
         const match = initialAvailableLetters.find(
-          (l) => l.letter === letterToRemove && !usedIds.has(l.id) // Ensure unique ID
+          (initSlot) =>
+            initSlot.letter === letterToRemove && !usedIds.has(initSlot.id)
         );
 
         if (match) {
-          usedIds.add(match.id); // Mark the ID as used
-          return [...prevLetters, match]; // Add the matched letter back
+          return prevLetters.map((item) =>
+            item.id === match.id
+              ? { letter: letterToRemove, id: match.id }
+              : item
+          );
         }
 
-        return prevLetters; // No matching ID found
+        return prevLetters;
       });
 
       return {
@@ -451,22 +485,39 @@ function Marble() {
           </div>
         ) : (
           <div className="lettersContainer">
-            {availableLetters.map((item, index) => (
-              <button
-                key={`${item.id}-${item.letter}-${index}`}
-                value={item.letter}
-                data-id={item.id}
-                onClick={handleLetterSelect}
-                className="marbleButton"
-                style={{
-                  backgroundColor:
-                    selectedLetter?.id === item.id ? "#FF3700" : "white",
-                  color: selectedLetter?.id === item.id ? "white" : "black",
-                }}
-              >
-                {item.letter}
-              </button>
-            ))}
+            {availableLetters.map((item, index) =>
+              item.letter == null || item.letter === "" ? (
+                <button
+                  key={`${item.id}-empty-${index}`}
+                  type="button"
+                  disabled
+                  className="marbleButton"
+                  aria-hidden={true}
+                  style={{
+                    visibility: "hidden",
+                    pointerEvents: "none",
+                  }}
+                >
+                  {"\u00A0"}
+                </button>
+              ) : (
+                <button
+                  key={`${item.id}-${item.letter}-${index}`}
+                  type="button"
+                  value={item.letter}
+                  data-id={item.id}
+                  onClick={handleLetterSelect}
+                  className="marbleButton"
+                  style={{
+                    backgroundColor:
+                      selectedLetter?.id === item.id ? "#FF3700" : "white",
+                    color: selectedLetter?.id === item.id ? "white" : "black",
+                  }}
+                >
+                  {item.letter}
+                </button>
+              )
+            )}
           </div>
         )}
 
