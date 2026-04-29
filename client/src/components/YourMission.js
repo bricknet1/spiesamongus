@@ -7,8 +7,10 @@ import VCF from "../assets/Agent Papyrus Contact.vcf";
 
 import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 function YourMission() {
+  const subdomain = useSubdomain();
   return (
     <div>
       <div className="pageContent">
