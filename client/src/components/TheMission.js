@@ -2,13 +2,18 @@ import marblePic from "../assets/pictures/Marble Polaroid.png";
 import mallPic from "../assets/pictures/Undercover shoppers.jpg";
 import phonePic from "../assets/pictures/Phone ringing no bg.png";
 import pathPic from "../assets/pictures/Bell-Tower-Directions.gif";
+import seattlePathPic1 from "../assets/pictures/Arrow 1.jpg";
+import seattlePathPic2 from "../assets/pictures/Arrow 2.jpg";
+import seattlePathPic3 from "../assets/pictures/Arrow 3.jpg";
 
 import VCF from "../assets/Agent Papyrus Contact.vcf";
 
 import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
+import { useSubdomain } from "./SubdomainProvider.js";
 
 function TheMission() {
+  const subdomain = useSubdomain();
   return (
     <div>
       <div className="pageContent">
@@ -111,19 +116,36 @@ function TheMission() {
           <div className="orangeLine" />
           <br />
           <br />
-          <span className="mission-emphasis">6. TO BEGIN,</span> cross the
-          street and walk to the{" "}
-          <span className="mission-emphasis">RED BELL TOWER</span>.
-          <div className="ovalPicWrapperVert">
-            <img src={pathPic} className="ovalPicVert" alt="The path forward" />
-          </div>
-          <br />
-          <br />
-          <span className="mission-emphasis">
-            7. Once you are there, tell your partner to text{" "}
-            <span style={{ color: "#f9DF39" }}>READY FOR DANGER</span> to Agent
-            Papyrus.
-          </span>
+          {subdomain === "seattle" ? (
+            <>
+              <span className="mission-emphasis">6. TO BEGIN, follow these three arrows until you arrive at a small outdoor patio.</span>
+              <div className="ovalPicWrapperVertTall">
+                <img src={seattlePathPic1} className="ovalPicVertTall" alt="A sign with an arrow pointing to the left" />
+              </div>
+              <div className="ovalPicWrapperVert">
+                <img src={seattlePathPic2} className="ovalPicVert" alt="A sign with an arrow pointing to the right" />
+              </div>
+              <div className="ovalPicWrapperVertTall">
+                <img src={seattlePathPic3} className="ovalPicVertTall" alt="A sign with an arrow pointing to the left" />
+              </div>
+              <br />
+              <span className="mission-emphasis">
+                7. Once you are there, tell your partner to text <span style={{ color: "#f9DF39" }}>the color of the giant pig</span> to Agent Papyrus.
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="mission-emphasis">6. TO BEGIN,</span> cross the street and walk to the <span className="mission-emphasis">RED BELL TOWER</span>.
+              <div className="ovalPicWrapperVert">
+                <img src={pathPic} className="ovalPicVert" alt="The path forward" />
+              </div>
+              <br />
+              <br />
+              <span className="mission-emphasis">
+                7. Once you are there, tell your partner to text <span style={{ color: "#f9DF39" }}>READY FOR DANGER</span> to Agent Papyrus.
+              </span>
+            </>
+          )}
         </div>
       </div>
       <LeslieFooter unfixed={true} />
