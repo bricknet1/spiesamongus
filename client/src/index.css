@@ -135,6 +135,26 @@ strong {
   transform: translateY(0vw) translateX(0vw);
 }
 
+.ovalPicWrapperVertTall {
+  width: 70vw;
+  height: 130vw;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #f9df39 2.5vw solid;
+  margin: 0 auto;
+  margin-top: 5vw;
+}
+
+.ovalPicVertTall {
+  width: auto;
+  height: 140vw;
+  transform: translateY(0vw) translateX(0vw);
+}
+
+
 /* LESLIE FOOTER */
 
 .leslieFooter {

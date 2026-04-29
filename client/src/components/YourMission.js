@@ -2,6 +2,9 @@ import marblePic from "../assets/pictures/Marble Polaroid.png";
 import mallPic from "../assets/pictures/Undercover shoppers.jpg";
 import phonePic from "../assets/pictures/Phone ringing no bg.png";
 import pathPic from "../assets/pictures/Bell-Tower-Directions.gif";
+import seattlePathPic1 from "../assets/pictures/Arrow 1.jpg";
+import seattlePathPic2 from "../assets/pictures/Arrow 2.jpg";
+import seattlePathPic3 from "../assets/pictures/Arrow 3.jpg";
 
 import VCF from "../assets/Agent Papyrus Contact.vcf";
 
@@ -113,29 +116,60 @@ function YourMission() {
           <div className="orangeLine" />
           <br />
           <br />
-          <span className="mission-emphasis">6. TO BEGIN,</span> cross the
-          street and walk to the{" "}
-          <span className="mission-emphasis">RED BELL TOWER</span>.
-          <div className="ovalPicWrapperVert">
-            <img src={pathPic} className="ovalPicVert" alt="The path forward" />
-          </div>
-          <br />
-          <br />
-          <span className="mission-emphasis">
-            7. Once you are there, ask your partner what SECRET MESSAGE you need
-            to text to:
-            <br />
-            <br />
-          </span>
-          <div style={{ fontSize: "10vw", textAlign: "center" }}>
-            <a
-              target="_parent"
-              href="sms:+18776641821"
-              style={{ color: "#f9DF39" }}
-            >
-              <u>Agent Papyrus</u>
-            </a>
-          </div>
+          {subdomain === "seattle" ? (
+            <>
+              <span className="mission-emphasis">6. TO BEGIN, follow these three arrows until you arrive at a small outdoor patio.</span>
+              <div className="ovalPicWrapperVertTall">
+                <img src={seattlePathPic1} className="ovalPicVertTall" alt="A sign with an arrow pointing to the left" />
+              </div>
+              <div className="ovalPicWrapperVert">
+                <img src={seattlePathPic2} className="ovalPicVert" alt="A sign with an arrow pointing to the right" />
+              </div>
+              <div className="ovalPicWrapperVertTall">
+                <img src={seattlePathPic3} className="ovalPicVertTall" alt="A sign with an arrow pointing to the left" />
+              </div>
+              <br />
+              <span className="mission-emphasis">
+                7. Once you are there, ask your partner what SECRET MESSAGE you need
+                to text to:
+                <br />
+                <br />
+              </span>
+              <div style={{ fontSize: "10vw", textAlign: "center" }}>
+                <a
+                  target="_parent"
+                  href="sms:+18332443007"
+                  style={{ color: "#f9DF39" }}
+                >
+                  <u>Agent Papyrus</u>
+                </a>
+              </div>
+            </>
+          ) : (
+            <>
+              <span className="mission-emphasis">6. TO BEGIN,</span> cross the street and walk to the <span className="mission-emphasis">RED BELL TOWER</span>.
+              <div className="ovalPicWrapperVert">
+                <img src={pathPic} className="ovalPicVert" alt="The path forward" />
+              </div>
+              <br />
+              <br />
+              <span className="mission-emphasis">
+                7. Once you are there, ask your partner what SECRET MESSAGE you need
+                to text to:
+                <br />
+                <br />
+              </span>
+              <div style={{ fontSize: "10vw", textAlign: "center" }}>
+                <a
+                  target="_parent"
+                  href="sms:+18776641821"
+                  style={{ color: "#f9DF39" }}
+                >
+                  <u>Agent Papyrus</u>
+                </a>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <LeslieFooter unfixed={true} />
