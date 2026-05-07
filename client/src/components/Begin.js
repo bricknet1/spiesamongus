@@ -1,12 +1,25 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js"; //SEATTLE TEST
 
 function Begin() {
   const history = useHistory();
   const subdomain = useSubdomain(); //SEATTLE TEST
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const [specialStatusForMake, setSpecialStatusForMake] = useState(false);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/settings`)
+      .then((res) => (res.ok ? res.json() : Promise.resolve({})))
+      .then((data) => {
+        setSpecialStatusForMake(data.specialEvent === true);
+      })
+      .catch(() => {
+        setSpecialStatusForMake(false);
+      });
+  }, [API_URL]);
 
   const formSchema = yup.object().shape({
     firstName: yup.string().required("Enter a first name"),
@@ -288,8 +301,6 @@ function Begin() {
         subdomain: subdomain,
       };
 
-      const API_URL =
-        process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
       // Determine webhook URL based on subdomain
@@ -305,7 +316,12 @@ function Begin() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ data: values }),
+          body: JSON.stringify({
+            data: {
+              ...values,
+              specialstatus: specialStatusForMake,
+            },
+          }),
         });
 
         // Check if make webhook returned 200

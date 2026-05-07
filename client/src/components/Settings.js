@@ -103,7 +103,11 @@ function Settings() {
           if (!data[wardrobeKey]) {
             data[wardrobeKey] = "Jeans"; // Default to Jeans if not set
           }
-          
+
+          if (typeof data.specialEvent !== "boolean") {
+            data.specialEvent = false;
+          }
+
           setSettings(data);
         });
     }
@@ -217,7 +221,11 @@ function Settings() {
             if (!updatedData[wardrobeKey]) {
               updatedData[wardrobeKey] = "Jeans";
             }
-            
+
+            if (typeof updatedData.specialEvent !== "boolean") {
+              updatedData.specialEvent = false;
+            }
+
             setSettings(updatedData);
           });
       })
@@ -363,6 +371,34 @@ function Settings() {
             Shorts
           </label>
         </div>
+      </div>
+      <div>
+        <h2>Special Event:</h2>
+        <label style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
+          <input
+            type="checkbox"
+            checked={!!settings.specialEvent}
+            onChange={(e) => {
+              setSettings({
+                ...settings,
+                specialEvent: e.target.checked,
+              });
+            }}
+          />
+          <span
+            className="checkbox"
+            style={{
+              width: "10vw",
+              height: "10vw",
+              minWidth: "10vw",
+              minHeight: "10vw",
+              verticalAlign: "middle",
+              top: 0,
+              marginRight: "2vw",
+            }}
+          />
+          Special Event
+        </label>
       </div>
       {settings.lastUpdated && (
         <div style={{ marginTop: "2vw", fontSize: "4vw", color: "#888" }}>

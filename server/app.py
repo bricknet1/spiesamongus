@@ -18,7 +18,7 @@ debug = os.getenv("FLASK_DEBUG", "false").lower() == "true"
 port = int(os.environ.get("PORT", 5000))
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000", "https://spiesamongus.onrender.com", "https://www.spiesamong.us", "https://app.spiesamong.us", "https://www.app.spiesamong.us", "https://nickjohnson.work", "https://www.nickjohnson.work", "https://seattle.spiesamong.us"])
+CORS(app, origins=["http://localhost:3000", "https://spiesamongus.onrender.com", "https://www.spiesamong.us", "https://app.spiesamong.us", "https://www.app.spiesamong.us", "https://nickjohnson.work", "https://www.nickjohnson.work", "https://seattle.spiesamong.us", "http://app.localhost:3000", "http://seattle.localhost:3000"])
 
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 AUTH_TOKEN = os.getenv("AUTH_TOKEN")
