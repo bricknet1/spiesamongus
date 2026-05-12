@@ -1103,6 +1103,26 @@ o .termsUL {
   /* transform: translateY(0vw) translateX(0vw); */
 }
 
+.updatedMission-map-wrapper-seattle {
+  width: 85vw;
+  height: 140vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #f9df39 2.5vw solid;
+  margin: 0 auto;
+  margin-top: 5vw;
+  margin-bottom: 10vw;
+  border-radius: 30px;
+}
+
+.updatedMission-map-seattle {
+  width: 85vw;
+  /* height: 60vw; */
+  /* transform: translateY(0vw) translateX(0vw); */
+}
+
 /* QUESTIONS CONTENT */
 
 .questionsDropdownTextMobile {

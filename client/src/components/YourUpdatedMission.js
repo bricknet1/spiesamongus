@@ -1,10 +1,14 @@
 import mapPic from "../assets/pictures/MarblePath3.12.25.gif";
+import seattleMapPic from "../assets/pictures/MarblePath 4.28.26.gif";
 import leftArrow from "../assets/pictures/Left Arrow cropped.png";
 
 import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
 
+import { useSubdomain } from "./SubdomainProvider.js";
+
 function YourUpdatedMission() {
+  const subdomain = useSubdomain();
   return (
     <div>
       <div className="pageContent">
@@ -23,28 +27,42 @@ function YourUpdatedMission() {
           <span className="mission-emphasis">WE ACTIVATED</span> the tracking
           chip Marble is unwittingly carrying. With this knowledge we have
           traced{" "}
-          <span className="mission-emphasis">
-            the path Marble is continuously{" "}
-            <span style={{ color: "#FF3700" }}>walking in a loop in RED.</span>
-          </span>
-          <br />
-          <br />
-          We recommend:
-          <br />
-          1. Take a left <img src={leftArrow} alt="left arrow" /> out of Hashimoto Plaza and walk
-          in the opposite direction of Marble, to increase your chances of
-          finding them.
-          <br />
-          <span className="mission-emphasis">OR</span>
-          <br />
-          2. Pick a <span className="mission-emphasis">secluded spot</span> to
-          stake out and wait for Marble to approach. Avoid areas with big crowds
-          to make it easier!
+          {subdomain === "seattle" ? (
+            <>
+              <span className="mission-emphasis">the path Marble is continuously walking{" "}</span> in 
+              <span className="mission-emphasis" style={{ color: "#FF3700" }}>{" "}RED.</span>
+              <br />
+              <br />
+              We recommend:
+              <br />
+              Pick a <span className="mission-emphasis">spot</span> to stake out on Pike Place and wait for Marble to approach. Avoid areas with big crowds to make it easier!
+            </>
+          ) : (
+            <>
+              the path Marble is continuously{" "}
+              <span className="mission-emphasis">
+                <span style={{ color: "#FF3700" }}>walking in a loop in RED.</span>
+              </span>
+              <br />
+              <br />
+              We recommend:
+              <br />
+              1. Take a left <img src={leftArrow} alt="left arrow" /> out of Hashimoto Plaza and walk
+              in the opposite direction of Marble, to increase your chances of
+              finding them.
+              <br />
+              <span className="mission-emphasis">OR</span>
+              <br />
+              2. Pick a <span className="mission-emphasis">secluded spot</span> to
+              stake out and wait for Marble to approach. Avoid areas with big crowds
+              to make it easier!
+            </>
+          )}
         </div>
         <br />
 
-        <div className="updatedMission-map-wrapper">
-          <img src={mapPic} className="updatedMission-map" alt="Agent Marble" />
+        <div className={subdomain === "seattle" ? "updatedMission-map-wrapper-seattle" : "updatedMission-map-wrapper"}>
+          <img src={subdomain === "seattle" ? seattleMapPic : mapPic} className={subdomain === "seattle" ? "updatedMission-map-seattle" : "updatedMission-map"} alt="Agent Marble" />
         </div>
 
         <div className="orangeBar">YOUR UPDATED MISSION</div>
@@ -68,7 +86,7 @@ function YourUpdatedMission() {
           <br />
           <div style={{ textAlign: "center" }}>Say:</div>
           <span className="mission-emphasis" style={{ color: "#F9DF39" }}>
-            <i>"Sorry, do you know how to get to Pershing Square?"</i>
+            <i>"Sorry, do you know how to get {subdomain === "seattle" ? "to the Space Needle" : "to Pershing Square"}?"</i>
           </span>
           <br />
           <br />
