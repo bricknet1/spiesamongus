@@ -7,6 +7,7 @@ import seattlePathPic2 from "../assets/pictures/Arrow 2.jpg";
 import seattlePathPic3 from "../assets/pictures/Arrow 3.jpg";
 
 import VCF from "../assets/Agent Papyrus Contact.vcf";
+import VCFSeattle from "../assets/Agent Papyrus Seattle.vcf";
 
 import LeslieFooter from "./LeslieFooter.js";
 import VisitedPagesMenu from "./VisitedPagesMenu.js";
@@ -91,10 +92,10 @@ function Mission() {
             4.{" "}
             <u>
               <a
-                href={VCF}
+                href={subdomain === "seattle" ? VCFSeattle : VCF}
                 target="_blank"
                 rel="noreferrer"
-                download="Agent Papyrus Contact.vcf"
+                download={subdomain === "seattle" ? "Agent Papyrus Seattle.vcf" : "Agent Papyrus Contact.vcf"}
                 style={{ color: "white" }}
               >
                 DOWNLOAD THIS CONTACT FILE TO YOUR PHONE
