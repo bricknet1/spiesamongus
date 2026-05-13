@@ -17,6 +17,231 @@ function normalizeAvailableLetters(saved, initial) {
   });
 }
 
+/** App subdomain — four fixed configs (jeans / shorts × no Seattle word). */
+const marbleAppJeansWords = {
+  swan: "_W__",
+  necklace: "__C__AC_",
+  marble: "M___LE",
+  danger: "D____R",
+  signal: "S____L",
+  vui: "V__",
+  ve: "V_",
+  cup: "__P",
+  blue: "___E",
+  jeans: "J__NS",
+  black: "_____",
+  hat: "_AT",
+};
+const marbleAppShortsWords = {
+  swan: "_W__",
+  necklace: "__C__AC_",
+  marble: "M___LE",
+  danger: "D____R",
+  signal: "S____L",
+  vui: "V__",
+  ve: "V_",
+  cup: "__P",
+  shorts: "S__R__",
+  black: "_____",
+  hat: "_AT",
+};
+const marbleAppJeansLetters = [
+  { letter: "R", id: 0 },
+  { letter: "E", id: 1 },
+  { letter: "U", id: 2 },
+  { letter: "G", id: 3 },
+  { letter: "E", id: 4 },
+  { letter: "N", id: 5 },
+  { letter: "K", id: 6 },
+  { letter: "U", id: 7 },
+  { letter: "L", id: 8 },
+  { letter: "A", id: 9 },
+  { letter: "E", id: 10 },
+  { letter: "A", id: 11 },
+  { letter: "S", id: 12 },
+  { letter: "N", id: 13 },
+  { letter: "A", id: 14 },
+  { letter: "B", id: 15 },
+  { letter: "I", id: 16 },
+  { letter: "E", id: 17 },
+  { letter: "K", id: 18 },
+  { letter: "U", id: 19 },
+  { letter: "A", id: 20 },
+  { letter: "G", id: 21 },
+  { letter: "B", id: 22 },
+  { letter: "N", id: 23 },
+  { letter: "H", id: 24 },
+  { letter: "B", id: 25 },
+  { letter: "A", id: 26 },
+  { letter: "C", id: 27 },
+  { letter: "I", id: 28 },
+  { letter: "A", id: 29 },
+  { letter: "L", id: 30 },
+  { letter: "C", id: 31 },
+  { letter: "N", id: 32 },
+  { letter: "E", id: 33 },
+  { letter: "L", id: 34 },
+];
+const marbleAppShortsLetters = [
+  { letter: "R", id: 0 },
+  { letter: "E", id: 1 },
+  { letter: "U", id: 2 },
+  { letter: "G", id: 3 },
+  { letter: "E", id: 4 },
+  { letter: "N", id: 5 },
+  { letter: "K", id: 6 },
+  { letter: "U", id: 7 },
+  { letter: "L", id: 8 },
+  { letter: "A", id: 9 },
+  { letter: "E", id: 10 },
+  { letter: "A", id: 11 },
+  { letter: "S", id: 12 },
+  { letter: "N", id: 13 },
+  { letter: "A", id: 14 },
+  { letter: "B", id: 15 },
+  { letter: "I", id: 16 },
+  { letter: "E", id: 17 },
+  { letter: "K", id: 18 },
+  { letter: "H", id: 19 },
+  { letter: "A", id: 20 },
+  { letter: "G", id: 21 },
+  { letter: "B", id: 22 },
+  { letter: "N", id: 23 },
+  { letter: "H", id: 24 },
+  { letter: "O", id: 25 },
+  { letter: "A", id: 26 },
+  { letter: "C", id: 27 },
+  { letter: "I", id: 28 },
+  { letter: "T", id: 29 },
+  { letter: "L", id: 30 },
+  { letter: "C", id: 31 },
+  { letter: "N", id: 32 },
+  { letter: "S", id: 33 },
+];
+
+/** Seattle subdomain — VUI+VE replaced by starbucks word; explicit letter pools. */
+const marbleSeattleJeansWords = {
+  swan: "_W__",
+  necklace: "__C__AC_",
+  marble: "M___LE",
+  danger: "D____R",
+  signal: "S____L",
+  starbucks: "_-B_C__",
+  cup: "__P",
+  blue: "___E",
+  jeans: "J__NS",
+  black: "_____",
+  hat: "_AT",
+};
+const marbleSeattleShortsWords = {
+  swan: "_W__",
+  necklace: "__C__AC_",
+  marble: "M___LE",
+  danger: "D____R",
+  signal: "S____L",
+  starbucks: "_-B_C__",
+  cup: "__P",
+  shorts: "S__R__",
+  black: "_____",
+  hat: "_AT",
+};
+const marbleSeattleJeansLetters = [
+  { letter: "R", id: 0 },
+  { letter: "G", id: 1 },
+  { letter: "E", id: 2 },
+  { letter: "N", id: 3 },
+  { letter: "K", id: 4 },
+  { letter: "U", id: 5 },
+  { letter: "L", id: 6 },
+  { letter: "A", id: 7 },
+  { letter: "E", id: 8 },
+  { letter: "A", id: 9 },
+  { letter: "U", id: 10 },
+  { letter: "S", id: 11 },
+  { letter: "N", id: 12 },
+  { letter: "A", id: 13 },
+  { letter: "B", id: 14 },
+  { letter: "E", id: 15 },
+  { letter: "K", id: 16 },
+  { letter: "U", id: 17 },
+  { letter: "A", id: 18 },
+  { letter: "G", id: 19 },
+  { letter: "B", id: 20 },
+  { letter: "K", id: 21 },
+  { letter: "N", id: 22 },
+  { letter: "H", id: 23 },
+  { letter: "B", id: 24 },
+  { letter: "A", id: 25 },
+  { letter: "★", id: 26 },
+  { letter: "C", id: 27 },
+  { letter: "I", id: 28 },
+  { letter: "A", id: 29 },
+  { letter: "L", id: 30 },
+  { letter: "C", id: 31 },
+  { letter: "S", id: 32 },
+  { letter: "N", id: 33 },
+  { letter: "E", id: 34 },
+  { letter: "L", id: 35 },
+];
+const marbleSeattleShortsLetters = [
+  { letter: "R", id: 0 },
+  { letter: "G", id: 1 },
+  { letter: "E", id: 2 },
+  { letter: "N", id: 3 },
+  { letter: "K", id: 4 },
+  { letter: "U", id: 5 },
+  { letter: "L", id: 6 },
+  { letter: "A", id: 7 },
+  { letter: "K", id: 8 },
+  { letter: "E", id: 9 },
+  { letter: "A", id: 10 },
+  { letter: "S", id: 11 },
+  { letter: "N", id: 12 },
+  { letter: "A", id: 13 },
+  { letter: "B", id: 14 },
+  { letter: "★", id: 15 },
+  { letter: "E", id: 16 },
+  { letter: "K", id: 17 },
+  { letter: "H", id: 18 },
+  { letter: "A", id: 19 },
+  { letter: "G", id: 20 },
+  { letter: "B", id: 21 },
+  { letter: "N", id: 22 },
+  { letter: "U", id: 23 },
+  { letter: "H", id: 24 },
+  { letter: "O", id: 25 },
+  { letter: "A", id: 26 },
+  { letter: "C", id: 27 },
+  { letter: "S", id: 28 },
+  { letter: "I", id: 29 },
+  { letter: "T", id: 30 },
+  { letter: "L", id: 31 },
+  { letter: "C", id: 32 },
+  { letter: "N", id: 33 },
+  { letter: "S", id: 34 },
+];
+
+const marbleInitialLetterPoolsBySubdomain = {
+  seattle: [marbleSeattleJeansLetters, marbleSeattleShortsLetters],
+  app: [marbleAppJeansLetters, marbleAppShortsLetters],
+};
+const marbleInitialWordSetsBySubdomain = {
+  seattle: [marbleSeattleJeansWords, marbleSeattleShortsWords],
+  app: [marbleAppJeansWords, marbleAppShortsWords],
+};
+
+function getMarbleInitialPuzzle(subdomain, wardrobe) {
+  const jeans = wardrobe !== "Shorts";
+  if (subdomain === "seattle") {
+    return jeans
+      ? { words: marbleSeattleJeansWords, letters: marbleSeattleJeansLetters }
+      : { words: marbleSeattleShortsWords, letters: marbleSeattleShortsLetters };
+  }
+  return jeans
+    ? { words: marbleAppJeansWords, letters: marbleAppJeansLetters }
+    : { words: marbleAppShortsWords, letters: marbleAppShortsLetters };
+}
+
 function Marble() {
   const [settings, setSettings] = useState(null);
   const subdomain = useSubdomain();
@@ -40,108 +265,15 @@ function Marble() {
     const savedAvailableLetters = savedAvailableLettersStr ? JSON.parse(savedAvailableLettersStr) : null;
     const savedSettings = savedSettingsStr ? JSON.parse(savedSettingsStr) : null;
 
-    const jeansInitialWords = {
-      swan: "_W__",
-      necklace: "__C__AC_",
-      marble: "M___LE",
-      danger: "D____R",
-      signal: "S____L",
-      vui: "V__",
-      ve: "V_",
-      cup: "__P",
-      blue: "___E",
-      jeans: "J__NS",
-      black: "_____",
-      hat: "_AT",
-    };
-    const shortsInitialWords = {
-      swan: "_W__",
-      necklace: "__C__AC_",
-      marble: "M___LE",
-      danger: "D____R",
-      signal: "S____L",
-      vui: "V__",
-      ve: "V_",
-      cup: "__P",
-      shorts: "S__R__",
-      black: "_____",
-      hat: "_AT",
-    };
-    const jeansInitialLetters = [
-      { letter: "R", id: 0 },
-      { letter: "E", id: 1 },
-      { letter: "U", id: 2 },
-      { letter: "G", id: 3 },
-      { letter: "E", id: 4 },
-      { letter: "N", id: 5 },
-      { letter: "K", id: 6 },
-      { letter: "U", id: 7 },
-      { letter: "L", id: 8 },
-      { letter: "A", id: 9 },
-      { letter: "E", id: 10 },
-      { letter: "A", id: 11 },
-      { letter: "S", id: 12 },
-      { letter: "N", id: 13 },
-      { letter: "A", id: 14 },
-      { letter: "B", id: 15 },
-      { letter: "I", id: 16 },
-      { letter: "E", id: 17 },
-      { letter: "K", id: 18 },
-      { letter: "U", id: 19 },
-      { letter: "A", id: 20 },
-      { letter: "G", id: 21 },
-      { letter: "B", id: 22 },
-      { letter: "N", id: 23 },
-      { letter: "H", id: 24 },
-      { letter: "B", id: 25 },
-      { letter: "A", id: 26 },
-      { letter: "C", id: 27 },
-      { letter: "I", id: 28 },
-      { letter: "A", id: 29 },
-      { letter: "L", id: 30 },
-      { letter: "C", id: 31 },
-      { letter: "N", id: 32 },
-      { letter: "E", id: 33 },
-      { letter: "L", id: 34 },
-    ];
-    const shortsInitialLetters = [
-      { letter: "R", id: 0 },
-      { letter: "E", id: 1 },
-      { letter: "U", id: 2 },
-      { letter: "G", id: 3 },
-      { letter: "E", id: 4 },
-      { letter: "N", id: 5 },
-      { letter: "K", id: 6 },
-      { letter: "U", id: 7 },
-      { letter: "L", id: 8 },
-      { letter: "A", id: 9 },
-      { letter: "E", id: 10 },
-      { letter: "A", id: 11 },
-      { letter: "S", id: 12 },
-      { letter: "N", id: 13 },
-      { letter: "A", id: 14 },
-      { letter: "B", id: 15 },
-      { letter: "I", id: 16 },
-      { letter: "E", id: 17 },
-      { letter: "K", id: 18 },
-      { letter: "H", id: 19 },
-      { letter: "A", id: 20 },
-      { letter: "G", id: 21 },
-      { letter: "B", id: 22 },
-      { letter: "N", id: 23 },
-      { letter: "H", id: 24 },
-      { letter: "O", id: 25 },
-      { letter: "A", id: 26 },
-      { letter: "C", id: 27 },
-      { letter: "I", id: 28 },
-      { letter: "T", id: 29 },
-      { letter: "L", id: 30 },
-      { letter: "C", id: 31 },
-      { letter: "N", id: 32 },
-      { letter: "S", id: 33 },
-    ];
+    const subKey = subdomain === "seattle" ? "seattle" : "app";
+    let useSaved =
+      savedPuzzleWords &&
+      savedAvailableLetters &&
+      (subdomain === "seattle"
+        ? "starbucks" in savedPuzzleWords && !("vui" in savedPuzzleWords)
+        : "vui" in savedPuzzleWords && "ve" in savedPuzzleWords && !("starbucks" in savedPuzzleWords));
 
-    if (savedPuzzleWords && savedAvailableLetters) {
+    if (useSaved) {
       console.log("Setting words from localStorage...");
       setPuzzleWords(savedPuzzleWords);
       setSettings(savedSettings);
@@ -149,33 +281,23 @@ function Marble() {
       // Get subdomain-specific wardrobe
       const wardrobeKey = subdomain === "seattle" ? "seattleWardrobe" : "appWardrobe";
       const currentWardrobe = (savedSettings && savedSettings[wardrobeKey]) ? savedSettings[wardrobeKey] : "Jeans";
-      
-      let initialLettersForPool = jeansInitialLetters;
-      if (currentWardrobe === "Jeans") {
-        setInitialPuzzleWords(jeansInitialWords);
-        setInitialAvailableLetters(jeansInitialLetters);
-        initialLettersForPool = jeansInitialLetters;
-      } else if (currentWardrobe === "Shorts") {
-        setInitialPuzzleWords(shortsInitialWords);
-        setInitialAvailableLetters(shortsInitialLetters);
-        initialLettersForPool = shortsInitialLetters;
-      } else {
-        // Default to Jeans if wardrobe is not set or invalid
-        setInitialPuzzleWords(jeansInitialWords);
-        setInitialAvailableLetters(jeansInitialLetters);
-        initialLettersForPool = jeansInitialLetters;
-      }
+
+      const { words: initialWords, letters: initialLetters } =
+        getMarbleInitialPuzzle(subdomain, currentWardrobe);
+      setInitialPuzzleWords(initialWords);
+      setInitialAvailableLetters(initialLetters);
 
       const normalizedLetters = normalizeAvailableLetters(
         savedAvailableLetters,
-        initialLettersForPool
+        initialLetters
       );
       setAvailableLetters(normalizedLetters);
 
-      if (
-        savedAvailableLetters !== jeansInitialLetters &&
-        savedAvailableLetters !== shortsInitialLetters
-      ) {
+      const letterPoolsMatchSaved = (pools) =>
+        pools.some(
+          (pool) => JSON.stringify(pool) === JSON.stringify(savedAvailableLetters)
+        );
+      if (!letterPoolsMatchSaved(marbleInitialLetterPoolsBySubdomain[subKey])) {
         setIsFirstLetterPlaced(true);
       }
 
@@ -186,8 +308,9 @@ function Marble() {
         return keys1.every((key) => obj1[key] === obj2[key]);
       };
       if (
-        objectsAreEqual(savedPuzzleWords, jeansInitialWords) ||
-        objectsAreEqual(savedPuzzleWords, shortsInitialWords)
+        marbleInitialWordSetsBySubdomain[subKey].some((set) =>
+          objectsAreEqual(savedPuzzleWords, set)
+        )
       ) {
         setIsFirstLetterPlaced(false);
       }
@@ -218,18 +341,7 @@ function Marble() {
           
           setSettings(data);
 
-          let words = {};
-          let letters = [];
-
-          if (currentWardrobe === "Jeans") {
-            words = jeansInitialWords;
-            letters = jeansInitialLetters;
-          }
-
-          if (currentWardrobe === "Shorts") {
-            words = shortsInitialWords;
-            letters = shortsInitialLetters;
-          }
+          const { words, letters } = getMarbleInitialPuzzle(subdomain, currentWardrobe);
 
           setPuzzleWords(words);
           setAvailableLetters(letters);
@@ -421,9 +533,10 @@ function Marble() {
   // }
 
   function areAllWordsSolved() {
-    return Object.entries(puzzleWords).every(
-      ([word, value]) => value === word.toUpperCase()
-    );
+    return Object.entries(puzzleWords).every(([word, value]) => {
+      if (word === "starbucks") return value === "★-BUCKS";
+      return value === word.toUpperCase();
+    });
   }
 
   // TEMPORARY
@@ -768,7 +881,11 @@ function Marble() {
 
               <div
                 className={
-                  puzzleWords.vui === "VUI"
+                  subdomain === "seattle"
+                    ? puzzleWords.starbucks === "★-BUCKS"
+                      ? "marbleIsSolved"
+                      : "marbleIs"
+                    : puzzleWords.vui === "VUI"
                     ? // || puzzleWords.ve === "VE"
                       // || puzzleWords.cup === "CUP"
                       "marbleIsSolved"
@@ -778,59 +895,95 @@ function Marble() {
                 ...holding a...
               </div>
 
-              {/* Render buttons for VUI */}
-              {puzzleWords.vui.split("").map((char, index) => {
-                const isLockedLetter = initialPuzzleWords.vui[index] !== "_"; // Check if the letter was pre-provided
-                const wordIsSolved = puzzleWords.vui === "VUI";
-                return (
-                  <button
-                    key={`vui-${index}`}
-                    data-word="vui"
-                    data-index={index}
-                    onClick={
-                      char === "_" ? handleLetterPlacement : handleLetterRemoval
-                    }
-                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                    className={
-                      wordIsSolved
-                        ? "solvedWordLetter" // Highest priority when word is solved
-                        : isLockedLetter
-                        ? "lockedLetter" // Pre-provided letters
-                        : "marbleButton" // Default for user-interactable letters
-                    }
-                  >
-                    {char === "_" ? "\u00A0" : char}
-                  </button>
-                );
-              })}
+              {subdomain === "seattle" ? (
+                <>
+                  {(puzzleWords.starbucks ?? initialPuzzleWords.starbucks ?? "")
+                    .split("")
+                    .map((char, index) => {
+                    const isLockedLetter =
+                      initialPuzzleWords.starbucks[index] !== "_";
+                    const wordIsSolved = puzzleWords.starbucks === "★-BUCKS";
+                    return (
+                      <button
+                        key={`starbucks-${index}`}
+                        data-word="starbucks"
+                        data-index={index}
+                        onClick={
+                          char === "_"
+                            ? handleLetterPlacement
+                            : handleLetterRemoval
+                        }
+                        disabled={isLockedLetter || wordIsSolved}
+                        className={
+                          wordIsSolved
+                            ? "solvedWordLetter"
+                            : isLockedLetter
+                            ? "lockedLetter"
+                            : "marbleButton"
+                        }
+                      >
+                        {char === "_" ? "\u00A0" : char}
+                      </button>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {/* Render buttons for VUI */}
+                  {puzzleWords.vui.split("").map((char, index) => {
+                    const isLockedLetter = initialPuzzleWords.vui[index] !== "_"; // Check if the letter was pre-provided
+                    const wordIsSolved = puzzleWords.vui === "VUI";
+                    return (
+                      <button
+                        key={`vui-${index}`}
+                        data-word="vui"
+                        data-index={index}
+                        onClick={
+                          char === "_" ? handleLetterPlacement : handleLetterRemoval
+                        }
+                        disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                        className={
+                          wordIsSolved
+                            ? "solvedWordLetter" // Highest priority when word is solved
+                            : isLockedLetter
+                            ? "lockedLetter" // Pre-provided letters
+                            : "marbleButton" // Default for user-interactable letters
+                        }
+                      >
+                        {char === "_" ? "\u00A0" : char}
+                      </button>
+                    );
+                  })}
 
-              <button className="lockedLetter"></button>
+                  <button className="lockedLetter"></button>
 
-              {/* Render buttons for VE */}
-              {puzzleWords.ve.split("").map((char, index) => {
-                const isLockedLetter = initialPuzzleWords.ve[index] !== "_"; // Check if the letter was pre-provided
-                const wordIsSolved = puzzleWords.ve === "VE";
-                return (
-                  <button
-                    key={`ve-${index}`}
-                    data-word="ve"
-                    data-index={index}
-                    onClick={
-                      char === "_" ? handleLetterPlacement : handleLetterRemoval
-                    }
-                    disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
-                    className={
-                      wordIsSolved
-                        ? "solvedWordLetter" // Highest priority when word is solved
-                        : isLockedLetter
-                        ? "lockedLetter" // Pre-provided letters
-                        : "marbleButton" // Default for user-interactable letters
-                    }
-                  >
-                    {char === "_" ? "\u00A0" : char}
-                  </button>
-                );
-              })}
+                  {/* Render buttons for VE */}
+                  {puzzleWords.ve.split("").map((char, index) => {
+                    const isLockedLetter = initialPuzzleWords.ve[index] !== "_"; // Check if the letter was pre-provided
+                    const wordIsSolved = puzzleWords.ve === "VE";
+                    return (
+                      <button
+                        key={`ve-${index}`}
+                        data-word="ve"
+                        data-index={index}
+                        onClick={
+                          char === "_" ? handleLetterPlacement : handleLetterRemoval
+                        }
+                        disabled={isLockedLetter || wordIsSolved} // Prevent interaction for locked letters
+                        className={
+                          wordIsSolved
+                            ? "solvedWordLetter" // Highest priority when word is solved
+                            : isLockedLetter
+                            ? "lockedLetter" // Pre-provided letters
+                            : "marbleButton" // Default for user-interactable letters
+                        }
+                      >
+                        {char === "_" ? "\u00A0" : char}
+                      </button>
+                    );
+                  })}
+                </>
+              )}
 
               <br />
 

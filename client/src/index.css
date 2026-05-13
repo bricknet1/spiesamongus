@@ -1409,7 +1409,7 @@ o .termsUL {
 .marblePuzzleInstructions {
   position: absolute; /* Position relative to the container */
   top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
+  left: calc(50% + 8px); /* Slightly right of center over the yellow man */
   transform: translate(-50%, -50%); /* Adjust for perfect centering */
   color: white; /* Text color */
   background-color: rgba(
