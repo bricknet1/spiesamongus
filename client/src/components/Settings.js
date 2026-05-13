@@ -104,9 +104,15 @@ function Settings() {
             data[wardrobeKey] = "Jeans"; // Default to Jeans if not set
           }
 
-          if (typeof data.specialEvent !== "boolean") {
-            data.specialEvent = false;
+          if (typeof data.specialEventSeattle !== "boolean") {
+            data.specialEventSeattle =
+              typeof data.specialEvent === "boolean" ? data.specialEvent : false;
           }
+          if (typeof data.specialEventApp !== "boolean") {
+            data.specialEventApp =
+              typeof data.specialEvent === "boolean" ? data.specialEvent : false;
+          }
+          delete data.specialEvent;
 
           setSettings(data);
         });
@@ -222,9 +228,19 @@ function Settings() {
               updatedData[wardrobeKey] = "Jeans";
             }
 
-            if (typeof updatedData.specialEvent !== "boolean") {
-              updatedData.specialEvent = false;
+            if (typeof updatedData.specialEventSeattle !== "boolean") {
+              updatedData.specialEventSeattle =
+                typeof updatedData.specialEvent === "boolean"
+                  ? updatedData.specialEvent
+                  : false;
             }
+            if (typeof updatedData.specialEventApp !== "boolean") {
+              updatedData.specialEventApp =
+                typeof updatedData.specialEvent === "boolean"
+                  ? updatedData.specialEvent
+                  : false;
+            }
+            delete updatedData.specialEvent;
 
             setSettings(updatedData);
           });
@@ -373,15 +389,25 @@ function Settings() {
         </div>
       </div>
       <div>
-        <h2>Special Event:</h2>
+        <h2>Special Event ({subdomain}):</h2>
         <label style={{ display: "block", fontSize: "10vw", padding: "1vw" }}>
           <input
             type="checkbox"
-            checked={!!settings.specialEvent}
+            checked={
+              !!settings[
+                subdomain === "seattle"
+                  ? "specialEventSeattle"
+                  : "specialEventApp"
+              ]
+            }
             onChange={(e) => {
+              const specialEventKey =
+                subdomain === "seattle"
+                  ? "specialEventSeattle"
+                  : "specialEventApp";
               setSettings({
                 ...settings,
-                specialEvent: e.target.checked,
+                [specialEventKey]: e.target.checked,
               });
             }}
           />

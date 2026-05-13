@@ -16,12 +16,18 @@ function Bypass() {
     fetch(`${API_URL}/api/settings`)
       .then((res) => (res.ok ? res.json() : Promise.resolve({})))
       .then((data) => {
-        setSpecialStatusForMake(data.specialEvent === true);
+        const key =
+          subdomain === "seattle" ? "specialEventSeattle" : "specialEventApp";
+        const siteFlag =
+          typeof data[key] === "boolean"
+            ? data[key]
+            : data.specialEvent === true;
+        setSpecialStatusForMake(siteFlag === true);
       })
       .catch(() => {
         setSpecialStatusForMake(false);
       });
-  }, [API_URL]);
+  }, [API_URL, subdomain]);
 
   const formSchema = yup.object().shape({
     firstName: yup.string().required("Enter a first name"),
