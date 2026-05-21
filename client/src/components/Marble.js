@@ -242,6 +242,51 @@ function getMarbleInitialPuzzle(subdomain, wardrobe) {
     : { words: marbleAppShortsWords, letters: marbleAppShortsLetters };
 }
 
+function marbleSavedStateMatchesSubdomain(savedPuzzleWords, subdomain) {
+  if (!savedPuzzleWords) return false;
+  return subdomain === "seattle"
+    ? "starbucks" in savedPuzzleWords && !("vui" in savedPuzzleWords)
+    : "vui" in savedPuzzleWords &&
+        "ve" in savedPuzzleWords &&
+        !("starbucks" in savedPuzzleWords);
+}
+
+function getMarbleStorageKeys(subdomain) {
+  const suffix = subdomain === "seattle" ? "seattle" : "app";
+  return {
+    puzzleWords: `puzzleWords:${suffix}`,
+    availableLetters: `availableLetters:${suffix}`,
+  };
+}
+
+function loadMarbleSavedState(subdomain) {
+  const keys = getMarbleStorageKeys(subdomain);
+  let puzzleWordsStr = localStorage.getItem(keys.puzzleWords);
+  let availableLettersStr = localStorage.getItem(keys.availableLetters);
+
+  if (!puzzleWordsStr || !availableLettersStr) {
+    const legacyWordsStr = localStorage.getItem("puzzleWords");
+    const legacyLettersStr = localStorage.getItem("availableLetters");
+    if (legacyWordsStr && legacyLettersStr) {
+      const legacyWords = JSON.parse(legacyWordsStr);
+      if (marbleSavedStateMatchesSubdomain(legacyWords, subdomain)) {
+        puzzleWordsStr = legacyWordsStr;
+        availableLettersStr = legacyLettersStr;
+        localStorage.setItem(keys.puzzleWords, legacyWordsStr);
+        localStorage.setItem(keys.availableLetters, legacyLettersStr);
+      }
+    }
+  }
+
+  return {
+    keys,
+    savedPuzzleWords: puzzleWordsStr ? JSON.parse(puzzleWordsStr) : null,
+    savedAvailableLetters: availableLettersStr
+      ? JSON.parse(availableLettersStr)
+      : null,
+  };
+}
+
 function Marble() {
   const [settings, setSettings] = useState(null);
   const subdomain = useSubdomain();
@@ -257,21 +302,16 @@ function Marble() {
   const [initialAvailableLetters, setInitialAvailableLetters] = useState([]);
 
   useEffect(() => {
-    const savedPuzzleWordsStr = localStorage.getItem("puzzleWords");
-    const savedAvailableLettersStr = localStorage.getItem("availableLetters");
+    const { keys: storageKeys, savedPuzzleWords, savedAvailableLetters } =
+      loadMarbleSavedState(subdomain);
     const savedSettingsStr = localStorage.getItem("settings");
-    
-    const savedPuzzleWords = savedPuzzleWordsStr ? JSON.parse(savedPuzzleWordsStr) : null;
-    const savedAvailableLetters = savedAvailableLettersStr ? JSON.parse(savedAvailableLettersStr) : null;
     const savedSettings = savedSettingsStr ? JSON.parse(savedSettingsStr) : null;
 
     const subKey = subdomain === "seattle" ? "seattle" : "app";
     let useSaved =
       savedPuzzleWords &&
       savedAvailableLetters &&
-      (subdomain === "seattle"
-        ? "starbucks" in savedPuzzleWords && !("vui" in savedPuzzleWords)
-        : "vui" in savedPuzzleWords && "ve" in savedPuzzleWords && !("starbucks" in savedPuzzleWords));
+      marbleSavedStateMatchesSubdomain(savedPuzzleWords, subdomain);
 
     if (useSaved) {
       console.log("Setting words from localStorage...");
@@ -345,8 +385,11 @@ function Marble() {
 
           setPuzzleWords(words);
           setAvailableLetters(letters);
-          localStorage.setItem("puzzleWords", JSON.stringify(words));
-          localStorage.setItem("availableLetters", JSON.stringify(letters));
+          localStorage.setItem(storageKeys.puzzleWords, JSON.stringify(words));
+          localStorage.setItem(
+            storageKeys.availableLetters,
+            JSON.stringify(letters)
+          );
           localStorage.setItem("settings", JSON.stringify(data));
           setInitialPuzzleWords(words);
           setInitialAvailableLetters(letters);
@@ -372,13 +415,12 @@ function Marble() {
 
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem("puzzleWords", JSON.stringify(puzzleWords));
-      localStorage.setItem(
-        "availableLetters",
-        JSON.stringify(availableLetters)
-      );
+      const { puzzleWords: puzzleKey, availableLetters: lettersKey } =
+        getMarbleStorageKeys(subdomain);
+      localStorage.setItem(puzzleKey, JSON.stringify(puzzleWords));
+      localStorage.setItem(lettersKey, JSON.stringify(availableLetters));
     }
-  }, [puzzleWords, availableLetters, isInitialized]);
+  }, [puzzleWords, availableLetters, isInitialized, subdomain]);
 
   function handleLetterSelect(e) {
     e.preventDefault();
