@@ -3,6 +3,31 @@ import { useFormik } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
+import ResponsiveSelect from "./ResponsiveSelect.js";
+
+const ACT_OPTIONS_APP = [
+  "Act 1 (Mission Start)",
+  "Act 2 (Papyrus Call)",
+  "Act 4 (Hashimoto)",
+  "Act 5 (Marble Search)",
+  "Act 6 (Friendship Knot)",
+  "Act 7 (Obelisk)",
+  "Act 7 (Sweat Yoga)",
+  "Act 8 (Marble)",
+  "Act 10 (Papyrus)",
+];
+
+const ACT_OPTIONS_SEATTLE = [
+  "Act 1 (Mission Start)",
+  "Act 2 (Lonely Siren)",
+  "Act 3 (Selfie Request / Marble Puzzle)",
+  "Act 4 (Marble Search)",
+  "Act 5 (Gum Wall)",
+  "Act 6 (Cafe Campagne / Marble Selfie)",
+  "Act 7 (Inn at the Market)",
+  "Act 8 (Marble)",
+  "Act 10 (Papyrus)",
+];
 
 function Bypass() {
   const history = useHistory();
@@ -733,25 +758,15 @@ function Bypass() {
         <br />
         <label htmlFor="act">(Leave at 1 if starting from beginning)</label>
         <br />
-        <select
+        <ResponsiveSelect
           name="act"
           id="act"
-          className="formField"
           value={formik.values.act}
           onChange={formik.handleChange}
-        >
-          <option value="Act 1 (Mission Start)">Act 1 (Mission Start)</option>
-          <option value="Act 2 (Papyrus Call)">Act 2 (Papyrus Call)</option>
-          <option value="Act 4 (Hashimoto)">Act 4 (Hashimoto)</option>
-          <option value="Act 5 (Marble Search)">Act 5 (Marble Search)</option>
-          <option value="Act 6 (Friendship Knot)">
-            Act 6 (Friendship Knot)
-          </option>
-          <option value="Act 7 (Obelisk)">Act 7 (Obelisk)</option>
-          <option value="Act 7 (Sweat Yoga)">Act 7 (Sweat Yoga)</option>
-          <option value="Act 8 (Marble)">Act 8 (Marble)</option>
-          <option value="Act 10 (Papyrus)">Act 10 (Papyrus)</option>
-        </select>
+          options={
+            subdomain === "seattle" ? ACT_OPTIONS_SEATTLE : ACT_OPTIONS_APP
+          }
+        />
         <br />
         <br />
 
