@@ -181,7 +181,7 @@ function PlayerProgress() {
 
     // Determine webhook URL based on subdomain
     const webhookUrl = subdomain === "seattle" 
-      ? "https://hook.us2.make.com/4lb7x7sjcvbdinx48qh10myw4ejxc3r6"
+      ? "https://hook.us2.make.com/2ewvli72lociajqsgkb2iw0owxuhrnnw"
       : "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op";
 
     // Prepare data for DELETE endpoint
