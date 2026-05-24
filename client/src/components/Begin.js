@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js"; //SEATTLE TEST
+import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 function Begin() {
   const history = useHistory();
@@ -309,11 +310,7 @@ function Begin() {
 
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-      // Determine webhook URL based on subdomain
-      const webhookUrl =
-        subdomain === "seattle"
-          ? "https://hook.us2.make.com/zweduuziv6owv5i6seen5uijkn8fzu96"
-          : "https://hook.us1.make.com/b3ulba23rs4f3pbsj99b7ck4623uyzv6";
+      const webhookUrl = getMakeWebhookUrl("begin", subdomain);
 
       try {
         // Call make webhook first

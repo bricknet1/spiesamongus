@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
+import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 function PlayerProgress() {
   const subdomain = useSubdomain();
@@ -179,10 +180,7 @@ function PlayerProgress() {
     const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-    // Determine webhook URL based on subdomain
-    const webhookUrl = subdomain === "seattle" 
-      ? "https://hook.us2.make.com/2ewvli72lociajqsgkb2iw0owxuhrnnw"
-      : "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op";
+    const webhookUrl = getMakeWebhookUrl("cancel", subdomain);
 
     // Prepare data for DELETE endpoint
     const deleteData = {

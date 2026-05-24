@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState, useRef } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
+import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 function Cancel() {
   const [cancelled, setCancelled] = useState(false);
@@ -34,10 +35,7 @@ function Cancel() {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-      // Determine webhook URL based on subdomain
-      const webhookUrl = subdomain === "seattle" 
-        ? "https://hook.us2.make.com/2ewvli72lociajqsgkb2iw0owxuhrnnw"
-        : "https://hook.us1.make.com/7v75ikxoeoo61lykx6776cv3au0fc5op";
+      const webhookUrl = getMakeWebhookUrl("cancel", subdomain);
 
       // Prepare data for DELETE endpoint
       const deleteData = {

@@ -22,4 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# deprecated components (no longer used)
+/src/components/deprecated
+
 .env
