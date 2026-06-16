@@ -2,8 +2,21 @@ import { useEffect, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
+import { notifyActorRolesChange } from "../config/makeWebhooks.js";
 
 const API_URL = process.env.REACT_APP_API_URL;
+
+const ALL_ACTORS_APP = [
+  "Victoria",
+  "James",
+  "Annie",
+  "Daria",
+  "Jeff",
+  "Alex",
+  "Prescott",
+];
+
+const ALL_ACTORS_SEATTLE = ["SamplePrescott", "SampleJeff"];
 
 function Settings() {
   const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
@@ -14,23 +27,12 @@ function Settings() {
 
   const isLoggedIn = !!token;
 
-  const allActorsApp = [
-    "Victoria",
-    "James",
-    "Annie",
-    "Daria",
-    "Jeff",
-    "Alex",
-    "Prescott",
-  ];
+  const actorRolesKey =
+    subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
+  const activeActorsKey =
+    subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
 
-  const allActorsSeattle = [
-    "SamplePrescott",
-    "SampleJeff",
-  ];
-
-  // Get the appropriate actor list based on subdomain
-  const allActors = subdomain === "seattle" ? allActorsSeattle : allActorsApp;
+  const allActors = subdomain === "seattle" ? ALL_ACTORS_SEATTLE : ALL_ACTORS_APP;
 
   const handleLogin = () => {
     fetch(`${API_URL}/api/login`, {
@@ -57,10 +59,6 @@ function Settings() {
       fetch(`${API_URL}/api/settings`)
         .then((res) => res.json())
         .then((data) => {
-          // Determine which actorRoles key to use based on subdomain
-          const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
-          const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
-          
           // Initialize subdomain-specific actorRoles if it doesn't exist
           if (!data[actorRolesKey] || typeof data[actorRolesKey] !== "object") {
             data[actorRolesKey] = {};
@@ -117,15 +115,11 @@ function Settings() {
           setSettings(data);
         });
     }
-  }, [isLoggedIn, subdomain]);
+  }, [isLoggedIn, subdomain, actorRolesKey, activeActorsKey, allActors]);
 
   const setActorRole = (actor, role) => {
     if (!settings) return;
 
-    // Determine which actorRoles key to use based on subdomain
-    const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
-    const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
-    
     const actorRoles = settings[actorRolesKey] || {};
     const newActorRoles = { ...actorRoles };
 
@@ -175,15 +169,16 @@ function Settings() {
         if (res.ok) alert("Save successful");
         return res.json();
       })
-      .then((data) => {
+      .then(() => {
+        notifyActorRolesChange(settings[actorRolesKey] || {}, subdomain).catch(
+          (err) => console.error("Actor roles webhook failed:", err)
+        );
+      })
+      .then(() => {
         // Refresh settings to get the updated timestamp
         fetch(`${API_URL}/api/settings`)
           .then((res) => res.json())
           .then((updatedData) => {
-            // Determine which actorRoles key to use based on subdomain
-            const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
-            const activeActorsKey = subdomain === "seattle" ? "activeActorsSeattle" : "activeActorsApp";
-            
             // Initialize subdomain-specific actorRoles if it doesn't exist
             if (!updatedData[actorRolesKey] || typeof updatedData[actorRolesKey] !== "object") {
               updatedData[actorRolesKey] = {};
@@ -274,8 +269,6 @@ function Settings() {
       <div>
         <h2>Actor Roles ({subdomain}):</h2>
         {allActors.map((actor) => {
-          // Get the appropriate actorRoles key based on subdomain
-          const actorRolesKey = subdomain === "seattle" ? "actorRolesSeattle" : "actorRolesApp";
           const currentRole = settings[actorRolesKey]?.[actor] || "Off";
           return (
             <div
