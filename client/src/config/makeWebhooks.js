@@ -11,7 +11,7 @@ export const MAKE_WEBHOOKS = {
   },
   actorRoles: {
     app: "https://hook.us1.make.com/4mhbii583tfjy1hawy3e1cm6b7vbcdf7",
-    seattle: null,
+    seattle: "https://hook.us2.make.com/mn4dy1oz715lxowe9si1utly8kvjgdon",
   },
 };
 

@@ -17,6 +17,8 @@ import prescottPic from "../assets/pictures/actors/Prescott Gadd Headshot.jpg";
 import prescottPolaroid from "../assets/pictures/actors/Prescott Gadd polaroid.png";
 import alexPic from "../assets/pictures/actors/AlexFelderHeadshot.jfif";
 import alexPolaroid from "../assets/pictures/actors/Alex Felder Polaroid.png";
+import samPic from "../assets/pictures/actors/sam celeste headshot.jpg";
+import samPolaroid from "../assets/pictures/actors/Sam Celeste Polaroid.png";
 
 function Debrief() {
   const [oneToggled, setOneToggled] = useState(false);
@@ -315,6 +317,7 @@ function Debrief() {
           Jeff: jeffPolaroid,
           Alex: alexPolaroid,
           Prescott: prescottPolaroid,
+          Sam: samPolaroid,
           SampleJeff: jeffPolaroid,
           SamplePrescott: prescottPolaroid,
         };
@@ -577,6 +580,19 @@ function Debrief() {
                   here
                 </a>
                 .
+              </div>
+              </div>
+            )}
+
+            {modalContent === "Sam" && (
+              <div>
+              <img
+                src={samPic}
+                className="debrief-headshot"
+                alt="Sam Celeste"
+              />
+              <div className="debrief-bio">
+                Sam Celeste is an immersive designer & performer who can be found running live events of all shades across Los Angeles & beyond. Catch him stealing souls as a demon, driving hard bargains as a mobster, or playing cowboy music in caves. If he's not causing trouble in character, he's usually hiding in the bushes looking for rare animals to photograph. Find him on Instagram @sam.the.celestial to check out his critter pics, get ideas for your next game or party, and be lectured on the virtues of judicious documentation.
               </div>
               </div>
             )}

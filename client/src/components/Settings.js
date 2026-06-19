@@ -14,6 +14,7 @@ const ALL_ACTORS_APP = [
   "Jeff",
   "Alex",
   "Prescott",
+  "Sam",
 ];
 
 const ALL_ACTORS_SEATTLE = ["SamplePrescott", "SampleJeff"];
