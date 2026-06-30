@@ -939,35 +939,50 @@ function Marble() {
 
               {subdomain === "seattle" ? (
                 <>
-                  {(puzzleWords.starbucks ?? initialPuzzleWords.starbucks ?? "")
-                    .split("")
-                    .map((char, index) => {
-                    const isLockedLetter =
-                      initialPuzzleWords.starbucks[index] !== "_";
-                    const wordIsSolved = puzzleWords.starbucks === "★-BUCKS";
-                    return (
-                      <button
-                        key={`starbucks-${index}`}
-                        data-word="starbucks"
-                        data-index={index}
-                        onClick={
-                          char === "_"
-                            ? handleLetterPlacement
-                            : handleLetterRemoval
-                        }
-                        disabled={isLockedLetter || wordIsSolved}
-                        className={
-                          wordIsSolved
-                            ? "solvedWordLetter"
-                            : isLockedLetter
-                            ? "lockedLetter"
-                            : "marbleButton"
-                        }
-                      >
-                        {char === "_" ? "\u00A0" : char}
-                      </button>
+                  {(() => {
+                    const starbucksValue =
+                      puzzleWords.starbucks ??
+                      initialPuzzleWords.starbucks ??
+                      "";
+                    const wordIsSolved = starbucksValue === "★-BUCKS";
+                    const displayWord = wordIsSolved
+                      ? "STARBUCKS"
+                      : starbucksValue;
+
+                    const letters = displayWord.split("").map((char, index) => {
+                      const isLockedLetter =
+                        !wordIsSolved &&
+                        initialPuzzleWords.starbucks[index] !== "_";
+                      return (
+                        <button
+                          key={`starbucks-${index}`}
+                          data-word="starbucks"
+                          data-index={index}
+                          onClick={
+                            char === "_"
+                              ? handleLetterPlacement
+                              : handleLetterRemoval
+                          }
+                          disabled={isLockedLetter || wordIsSolved}
+                          className={
+                            wordIsSolved
+                              ? "solvedStarbucksLetter"
+                              : isLockedLetter
+                              ? "lockedLetter"
+                              : "marbleButton"
+                          }
+                        >
+                          {char === "_" ? "\u00A0" : char}
+                        </button>
+                      );
+                    });
+
+                    return wordIsSolved ? (
+                      <span className="solvedStarbucksWord">{letters}</span>
+                    ) : (
+                      letters
                     );
-                  })}
+                  })()}
                 </>
               ) : (
                 <>

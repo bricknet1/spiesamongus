@@ -1421,6 +1421,26 @@ o .termsUL {
   padding: 0;
 }
 
+.solvedStarbucksWord {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.solvedStarbucksLetter {
+  border: none;
+  display: inline-block;
+  width: 4.8vw;
+  height: 7vw;
+  font-size: 4.5vw;
+  color: #f9df39;
+  cursor: not-allowed;
+  background-color: transparent;
+  animation: growShrink 2s ease;
+  transition: background-color 0.5s ease, color 0.5s ease, width 2s ease;
+  padding: 0;
+  margin: 0;
+}
+
 .resetButtonContainer {
   width: 40vw;
   display: block;
