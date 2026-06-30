@@ -2,9 +2,8 @@ import marblePic from "../assets/pictures/Marble Polaroid.png";
 import mallPic from "../assets/pictures/Undercover shoppers.jpg";
 import phonePic from "../assets/pictures/Phone ringing no bg.png";
 import pathPic from "../assets/pictures/Bell-Tower-Directions.gif";
-import seattlePathPic1 from "../assets/pictures/Arrow 1.jpg";
-import seattlePathPic2 from "../assets/pictures/Arrow 2.jpg";
-import seattlePathPic3 from "../assets/pictures/Arrow 3.jpg";
+import seattlePathPic from "../assets/pictures/Hallway.jpg";
+
 
 import VCF from "../assets/Agent Papyrus Contact.vcf";
 import VCFSeattle from "../assets/Agent Papyrus Seattle.vcf";
@@ -107,15 +106,9 @@ function Mission() {
           <img src={phonePic} className="missionPhonePic" alt="Telephone" />
           {subdomain === "seattle" ? (
             <>
-              <span className="mission-emphasis">5. TO BEGIN, follow these three arrows until you arrive at a small outdoor patio.</span>
-              <div className="ovalPicWrapperVertTall">
-                <img src={seattlePathPic1} className="ovalPicVertTall" alt="A sign with an arrow pointing to the left" />
-              </div>
+              <span className="mission-emphasis">5. TO BEGIN, walk down this hallway (stick to the left at the fork) until you are in an outdoor patio.</span>
               <div className="ovalPicWrapperVert">
-                <img src={seattlePathPic2} className="ovalPicVert" alt="A sign with an arrow pointing to the right" />
-              </div>
-              <div className="ovalPicWrapperVertTall">
-                <img src={seattlePathPic3} className="ovalPicVertTall" alt="A sign with an arrow pointing to the left" />
+                <img src={seattlePathPic} className="ovalPicVertTall" alt="A hallway near a neon sign that says Crepe de France" />
               </div>
               <br />
               <span className="mission-emphasis">
