@@ -1,5 +1,24 @@
 /** Make.com webhook URLs — single source of truth for mission begin/cancel flows. */
 
+const MAKE_API_KEY = process.env.REACT_APP_MAKE_API_KEY || "";
+
+/** Headers for Make.com custom webhook requests (includes optional X-Make-ApiKey auth). */
+export function buildMakeWebhookHeaders() {
+  return {
+    "Content-Type": "application/json",
+    ...(MAKE_API_KEY && { "X-Make-ApiKey": MAKE_API_KEY }),
+  };
+}
+
+/** POST to a Make.com webhook with shared auth headers. */
+export function callMakeWebhook(webhookUrl, body) {
+  return fetch(webhookUrl, {
+    method: "POST",
+    headers: buildMakeWebhookHeaders(),
+    body: JSON.stringify(body),
+  });
+}
+
 export const MAKE_WEBHOOKS = {
   begin: {
     seattle: "https://hook.us2.make.com/zweduuziv6owv5i6seen5uijkn8fzu96",
@@ -48,9 +67,5 @@ export function notifyActorRolesChange(actorRoles, subdomain) {
   if (!webhookUrl) return Promise.resolve();
 
   const payload = buildActorRolesWebhookPayload(actorRoles);
-  return fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  return callMakeWebhook(webhookUrl, payload);
 }

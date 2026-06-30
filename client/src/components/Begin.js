@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js"; //SEATTLE TEST
-import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 function Begin() {
   const history = useHistory();
@@ -314,17 +314,11 @@ function Begin() {
 
       try {
         // Call make webhook first
-        const makeResponse = await fetch(webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const makeResponse = await callMakeWebhook(webhookUrl, {
+          data: {
+            ...values,
+            specialstatus: specialStatusForMake,
           },
-          body: JSON.stringify({
-            data: {
-              ...values,
-              specialstatus: specialStatusForMake,
-            },
-          }),
         });
 
         // Check if make webhook returned 200

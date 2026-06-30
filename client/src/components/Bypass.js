@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
 import ResponsiveSelect from "./ResponsiveSelect.js";
-import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 const ACT_OPTIONS_APP = [
   "Act 1 (Mission Start)",
@@ -342,17 +342,11 @@ function Bypass() {
       const webhookUrl = getMakeWebhookUrl("begin", subdomain);
 
       // Call make webhook first (return promise so Formik keeps isSubmitting true until done)
-      return fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      return callMakeWebhook(webhookUrl, {
+        data: {
+          ...values,
+          specialstatus: specialStatusForMake,
         },
-        body: JSON.stringify({
-          data: {
-            ...values,
-            specialstatus: specialStatusForMake,
-          },
-        }),
       })
         .then((makeResponse) => {
           // Check if make webhook returned 200

@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState, useRef } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
-import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 function Cancel() {
   const [cancelled, setCancelled] = useState(false);
@@ -43,13 +43,7 @@ function Cancel() {
       };
 
       // Call make webhook first
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: values }),
-      })
+      callMakeWebhook(webhookUrl, { data: values })
         .then((makeResponse) => {
           // Check if make webhook returned 200
           if (makeResponse.status === 200) {

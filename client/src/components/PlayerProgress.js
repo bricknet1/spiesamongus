@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
-import { getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
 
 function PlayerProgress() {
   const subdomain = useSubdomain();
@@ -188,13 +188,7 @@ function PlayerProgress() {
     };
 
     // Call make webhook first
-    fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data: { phone: phoneForMake } }),
-    })
+    callMakeWebhook(webhookUrl, { data: { phone: phoneForMake } })
       .then((makeResponse) => {
         // Check if make webhook returned 200
         if (makeResponse.status === 200) {
