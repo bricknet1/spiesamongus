@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
 import ResponsiveSelect from "./ResponsiveSelect.js";
-import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook } from "../config/makeWebhooks.js";
 
 const ACT_OPTIONS_APP = [
   "Act 1 (Mission Start)",
@@ -339,10 +339,8 @@ function Bypass() {
 
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-      const webhookUrl = getMakeWebhookUrl("begin", subdomain);
-
       // Call make webhook first (return promise so Formik keeps isSubmitting true until done)
-      return callMakeWebhook(webhookUrl, {
+      return callMakeWebhook("begin", subdomain, {
         data: {
           ...values,
           specialstatus: specialStatusForMake,

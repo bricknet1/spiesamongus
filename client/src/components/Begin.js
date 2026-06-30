@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSubdomain } from "./SubdomainProvider.js"; //SEATTLE TEST
-import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook } from "../config/makeWebhooks.js";
 
 function Begin() {
   const history = useHistory();
@@ -310,11 +310,9 @@ function Begin() {
 
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-      const webhookUrl = getMakeWebhookUrl("begin", subdomain);
-
       try {
         // Call make webhook first
-        const makeResponse = await callMakeWebhook(webhookUrl, {
+        const makeResponse = await callMakeWebhook("begin", subdomain, {
           data: {
             ...values,
             specialstatus: specialStatusForMake,

@@ -171,7 +171,7 @@ function Settings() {
         return res.json();
       })
       .then(() => {
-        notifyActorRolesChange(settings[actorRolesKey] || {}, subdomain).catch(
+        notifyActorRolesChange(settings[actorRolesKey] || {}, subdomain, token).catch(
           (err) => console.error("Actor roles webhook failed:", err)
         );
       })

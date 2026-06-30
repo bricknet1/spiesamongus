@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState, useRef } from "react";
 import { useSubdomain } from "./SubdomainProvider.js";
-import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook } from "../config/makeWebhooks.js";
 
 function Cancel() {
   const [cancelled, setCancelled] = useState(false);
@@ -35,15 +35,12 @@ function Cancel() {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
       const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-      const webhookUrl = getMakeWebhookUrl("cancel", subdomain);
-
-      // Prepare data for DELETE endpoint
       const deleteData = {
         phone: formatPhone(values.phone),
       };
 
       // Call make webhook first
-      callMakeWebhook(webhookUrl, { data: values })
+      callMakeWebhook("cancel", subdomain, { data: values })
         .then((makeResponse) => {
           // Check if make webhook returned 200
           if (makeResponse.status === 200) {

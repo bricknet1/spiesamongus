@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSubdomain } from "./SubdomainProvider.js";
 import AdminLogin, { adminLoginPayload } from "./AdminLogin.js";
 import AdminNavigation from "./AdminNavigation.js";
-import { callMakeWebhook, getMakeWebhookUrl } from "../config/makeWebhooks.js";
+import { callMakeWebhook } from "../config/makeWebhooks.js";
 
 function PlayerProgress() {
   const subdomain = useSubdomain();
@@ -180,15 +180,12 @@ function PlayerProgress() {
     const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN || "";
 
-    const webhookUrl = getMakeWebhookUrl("cancel", subdomain);
-
-    // Prepare data for DELETE endpoint
     const deleteData = {
       phone: formatPhone(progress.player1_phone),
     };
 
     // Call make webhook first
-    callMakeWebhook(webhookUrl, { data: { phone: phoneForMake } })
+    callMakeWebhook("cancel", subdomain, { data: { phone: phoneForMake } })
       .then((makeResponse) => {
         // Check if make webhook returned 200
         if (makeResponse.status === 200) {

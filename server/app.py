@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from time import time
 import sqlite3
@@ -6,6 +6,7 @@ import json
 import os
 from datetime import datetime
 import pytz
+import requests
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,6 +31,23 @@ if not ADMIN_PASSWORD:
     raise ValueError("ADMIN_PASSWORD environment variable must be set")
 if not AUTH_TOKEN:
     raise ValueError("AUTH_TOKEN environment variable must be set")
+
+MAKE_API_KEY = os.getenv("MAKE_API_KEY", "")
+MAKE_WEBHOOKS = {
+    "begin": {
+        "app": os.getenv("MAKE_WEBHOOK_BEGIN_APP", ""),
+        "seattle": os.getenv("MAKE_WEBHOOK_BEGIN_SEATTLE", ""),
+    },
+    "cancel": {
+        "app": os.getenv("MAKE_WEBHOOK_CANCEL_APP", ""),
+        "seattle": os.getenv("MAKE_WEBHOOK_CANCEL_SEATTLE", ""),
+    },
+    "actorRoles": {
+        "app": os.getenv("MAKE_WEBHOOK_ACTOR_ROLES_APP", ""),
+        "seattle": os.getenv("MAKE_WEBHOOK_ACTOR_ROLES_SEATTLE", ""),
+    },
+}
+_MAKE_ACTIONS = frozenset(MAKE_WEBHOOKS.keys())
 
 _ADMIN_TOKENS = frozenset({AUTH_TOKEN, AUTH_TOKEN_SEATTLE})
 
@@ -175,6 +193,48 @@ def update_settings():
     data = request.get_json()
     save_settings(data)
     return jsonify({"status": "success", "data": data})
+
+@app.route('/api/make/<action>', methods=['POST'])
+def proxy_make_webhook(action):
+    """Forward requests to Make.com webhooks with server-side API key auth."""
+    if action not in _MAKE_ACTIONS:
+        return jsonify({"error": "Unknown action"}), 404
+
+    if action == "actorRoles" and not check_auth():
+        return jsonify({"error": "Unauthorized"}), 401
+
+    subdomain = request.args.get("subdomain", "app")
+    region = "seattle" if subdomain == "seattle" else "app"
+    webhook_url = MAKE_WEBHOOKS.get(action, {}).get(region)
+
+    if not webhook_url:
+        return jsonify({"error": "Webhook not configured"}), 503
+    if not MAKE_API_KEY:
+        return jsonify({"error": "Make API key not configured"}), 503
+
+    headers = {
+        "Content-Type": "application/json",
+        "X-Make-ApiKey": MAKE_API_KEY,
+    }
+    payload = request.get_json(silent=True)
+
+    try:
+        make_response = requests.post(
+            webhook_url,
+            headers=headers,
+            json=payload,
+            timeout=30,
+        )
+    except requests.RequestException as exc:
+        if debug:
+            print(f"DEBUG: Make proxy error for {action}/{region}: {exc}")
+        return jsonify({"error": "Failed to reach Make webhook"}), 502
+
+    return Response(
+        make_response.content,
+        status=make_response.status_code,
+        content_type=make_response.headers.get("Content-Type", "text/plain"),
+    )
 
 @app.route('/api/settings', methods=['DELETE'])
 def delete_all_data():
